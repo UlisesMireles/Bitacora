@@ -242,4 +242,4 @@ bitacora.client/ClientApp/.vscode
 bitacora.client/obj/
 Bitacora.Server/obj/
 Bitacora.Server/bin/
-.vs\Bitacora\
+.vs/Bitacora/
