@@ -1,1 +1,2 @@
 C:\Proyectos\Bitacora\Bitacora\bitacora.client\obj\Debug\bitacora.client.esproj.CoreCompileInputs.cache
+C:\Users\misael.hernandez\Desktop\Bitacora repo mig\Bitacora\bitacora.client\obj\Debug\bitacora.client.esproj.CoreCompileInputs.cache
