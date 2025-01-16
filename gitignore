@@ -241,5 +241,6 @@ bitacora.client/ClientApp/.vscode/launch.json
 bitacora.client/ClientApp/.vscode
 bitacora.client/obj/
 Bitacora.Server/obj/
+Bitacora.Server/obj/Debug/
 Bitacora.Server/bin/Debug/
 .vs/Bitacora/
