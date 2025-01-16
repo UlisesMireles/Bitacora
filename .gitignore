@@ -239,3 +239,6 @@ bitacora.client/ClientApp/src/app/classes/Procesa.js.map
 bitacora.client/wwwroot/AvisosImagenes
 bitacora.client/ClientApp/.vscode/launch.json
 bitacora.client/ClientApp/.vscode
+
+bitacora.client/obj/
+Bitacora.Server/obj/
