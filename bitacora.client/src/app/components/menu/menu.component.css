@@ -1,0 +1,38 @@
+.container-fluid.bit{
+    margin:0px;
+    padding: 0px
+}
+.historial{
+    background-color: #fff;
+}
+h1 {
+    margin-bottom: 0rem;
+    color:white;
+}
+
+.titulobitacora{
+    background-color: #0e3e62;
+    text-align:center;
+}
+
+::ng-deep .mat-tab-header{
+    background-color: #0e3e62!important;
+}
+
+::ng-deep div .mat-ink-bar{
+    height: 4px;
+}
+::ng-deep div .mat-tab-body-wrapper{
+    padding-top: 10px;
+}
+
+.bitpad{
+    padding: 1% 0%;
+}
+.padtop{
+    padding-top: 1%;
+    padding-right: 0%;
+}
+.sinpad{
+    padding: 0px;
+}

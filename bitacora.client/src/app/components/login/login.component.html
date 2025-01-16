@@ -1,0 +1,55 @@
+<main>
+  <div class="imagenFondo" style="width: 100%; ">
+    <div style="background-color: gray;height: 10px;"> </div>
+    <div class="container logincard" style=" width: 100%;">
+      <div class="row " id="pwd-container">
+        <div class="col-md-4"></div>
+        <div class="col-md-4">
+          <section class="login-form resultados">
+            <div class="logo-bitacora"></div>
+            <form [formGroup]="loginForm" (ngSubmit)="onSubmit()" class="text-center border border-light" role="login">
+
+              <h5 style=" line-height:1.1;text-align: center;color: #7F7F7F;font-weight: bold;font-size: 14px;margin-top: 10px;margin-bottom: 10px;font-family: sans-serif;">Acceso al Sistema</h5>
+
+
+              <div class="input-group" style="padding-top: 20px; padding-bottom: 6px;">
+                <div class="input-group-prepend">
+                  <span class="input-group-text" id="basic-addon1"><i class="fa fa-user" style="font-size: 20px;"></i></span>
+
+                </div>
+                <input #user type="text" class="form-control" formControlName="username" placeholder="usuario" style="font-family: sans-serif;height: 35px;font-size: 14px;font-weight: 500">
+              </div>
+              <div class="input-group" style="padding-top: 6px; padding-bottom: 40px;">
+                <div class="input-group-prepend">
+                  <span class="input-group-text" id="basic-addon1"><i class="fa fa-lock" style="font-size: 20px;"></i></span>
+
+                </div>
+                <input #pass type="password" class="form-control" formControlName="password" placeholder="contraseña" style="font-family: sans-serif;height: 35px;font-size: 14px;font-weight: 500">
+              </div>
+
+
+              <div class="input-group">
+                <button class="btn btn-success form-control" style="font-family: sans-serif;height: 35px;font-size: 14px;font-weight: 500;">Iniciar Sesión</button>
+              </div>
+
+              <div class="col-12" align="center" style="padding:2%;">
+                <a (click)="abrirForm()" style="font-family: sans-serif;font-size:14px;color: #2f8ce6; cursor: pointer;">¿Olvidaste tu contraseña?</a>
+              </div>
+
+              <div *ngIf="showErrorMessage" style="padding-top: 10px;">
+                <p class="error">{{errorLogin}}</p>
+              </div>
+
+            </form>
+          </section>
+          <div style="text-align: center">
+            <h6 style="margin-top: 11px;margin-bottom: 10px;font-family: sans-serif;font-size: 12px;font-weight: 500;line-height: 1.1;color:black">Para un mejor rendimiento usa: <img src="assets/icons/chrome.png" title="Google Chrome" alt="chrome" width="30px"></h6>
+          </div>
+
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+</main>

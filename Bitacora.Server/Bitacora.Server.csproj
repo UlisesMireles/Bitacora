@@ -16,10 +16,20 @@
     <PackageReference Include="Swashbuckle.AspNetCore" Version="6.4.0" />
   </ItemGroup>
 
-  <ItemGroup>
-    <ProjectReference Include="..\bitacora.client\bitacora.client.esproj">
-      <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
-    </ProjectReference>
-  </ItemGroup>
+	<ItemGroup>
+		<PackageReference Include="AutoMapper" Version="12.0.1" />
+		<PackageReference Include="DotNetCore.NPOI" Version="1.2.3" />
+		<PackageReference Include="EPPlus" Version="4.5.3.2" />
+		<PackageReference Include="log4net" Version="3.0.3" />
+		<PackageReference Include="Microsoft.AspNetCore.Razor.Language" Version="6.0.36" />
+		<PackageReference Include="Microsoft.AspNetCore.SpaServices" Version="3.1.32" />
+		<PackageReference Include="Microsoft.AspNetCore.SpaServices.Extensions" Version="8.0.11" />
+		<PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="8.0.7" />
+		<ProjectReference Include="..\bitacora.client\bitacora.client.esproj">
+			<ReferenceOutputAssembly>false</ReferenceOutputAssembly>
+		</ProjectReference>
+		<ProjectReference Include="..\BitacoraLogic\BitacoraLogic.csproj" />
+		<ProjectReference Include="..\BitacoraModels\BitacoraModels.csproj" />
+	</ItemGroup>
 
 </Project>
