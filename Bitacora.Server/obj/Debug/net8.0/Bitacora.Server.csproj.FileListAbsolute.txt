@@ -33,3 +33,43 @@ C:\Proyectos\Bitacora\Bitacora\Bitacora.Server\obj\Debug\net8.0\refint\Bitacora.
 C:\Proyectos\Bitacora\Bitacora\Bitacora.Server\obj\Debug\net8.0\Bitacora.Server.pdb
 C:\Proyectos\Bitacora\Bitacora\Bitacora.Server\obj\Debug\net8.0\Bitacora.Server.genruntimeconfig.cache
 C:\Proyectos\Bitacora\Bitacora\Bitacora.Server\obj\Debug\net8.0\ref\Bitacora.Server.dll
+C:\Users\misael.hernandez\Desktop\Bitacora repo mig\Bitacora\Bitacora.Server\bin\Debug\net8.0\appsettings.Development.json
+C:\Users\misael.hernandez\Desktop\Bitacora repo mig\Bitacora\Bitacora.Server\bin\Debug\net8.0\appsettings.json
+C:\Users\misael.hernandez\Desktop\Bitacora repo mig\Bitacora\Bitacora.Server\bin\Debug\net8.0\spa.proxy.json
+C:\Users\misael.hernandez\Desktop\Bitacora repo mig\Bitacora\Bitacora.Server\bin\Debug\net8.0\Bitacora.Server.staticwebassets.endpoints.json
+C:\Users\misael.hernandez\Desktop\Bitacora repo mig\Bitacora\Bitacora.Server\bin\Debug\net8.0\Bitacora.Server.exe
+C:\Users\misael.hernandez\Desktop\Bitacora repo mig\Bitacora\Bitacora.Server\bin\Debug\net8.0\Bitacora.Server.deps.json
+C:\Users\misael.hernandez\Desktop\Bitacora repo mig\Bitacora\Bitacora.Server\bin\Debug\net8.0\Bitacora.Server.runtimeconfig.json
+C:\Users\misael.hernandez\Desktop\Bitacora repo mig\Bitacora\Bitacora.Server\bin\Debug\net8.0\Bitacora.Server.dll
+C:\Users\misael.hernandez\Desktop\Bitacora repo mig\Bitacora\Bitacora.Server\bin\Debug\net8.0\Bitacora.Server.pdb
+C:\Users\misael.hernandez\Desktop\Bitacora repo mig\Bitacora\Bitacora.Server\bin\Debug\net8.0\Microsoft.AspNetCore.SpaProxy.dll
+C:\Users\misael.hernandez\Desktop\Bitacora repo mig\Bitacora\Bitacora.Server\bin\Debug\net8.0\Microsoft.OpenApi.dll
+C:\Users\misael.hernandez\Desktop\Bitacora repo mig\Bitacora\Bitacora.Server\bin\Debug\net8.0\Swashbuckle.AspNetCore.Swagger.dll
+C:\Users\misael.hernandez\Desktop\Bitacora repo mig\Bitacora\Bitacora.Server\bin\Debug\net8.0\Swashbuckle.AspNetCore.SwaggerGen.dll
+C:\Users\misael.hernandez\Desktop\Bitacora repo mig\Bitacora\Bitacora.Server\bin\Debug\net8.0\Swashbuckle.AspNetCore.SwaggerUI.dll
+C:\Users\misael.hernandez\Desktop\Bitacora repo mig\Bitacora\Bitacora.Server\obj\Debug\net8.0\Bitacora.Server.csproj.AssemblyReference.cache
+C:\Users\misael.hernandez\Desktop\Bitacora repo mig\Bitacora\Bitacora.Server\obj\Debug\net8.0\spa.proxy.json
+C:\Users\misael.hernandez\Desktop\Bitacora repo mig\Bitacora\Bitacora.Server\obj\Debug\net8.0\Bitacora.Server.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\misael.hernandez\Desktop\Bitacora repo mig\Bitacora\Bitacora.Server\obj\Debug\net8.0\Bitacora.Server.AssemblyInfoInputs.cache
+C:\Users\misael.hernandez\Desktop\Bitacora repo mig\Bitacora\Bitacora.Server\obj\Debug\net8.0\Bitacora.Server.AssemblyInfo.cs
+C:\Users\misael.hernandez\Desktop\Bitacora repo mig\Bitacora\Bitacora.Server\obj\Debug\net8.0\Bitacora.Server.csproj.CoreCompileInputs.cache
+C:\Users\misael.hernandez\Desktop\Bitacora repo mig\Bitacora\Bitacora.Server\obj\Debug\net8.0\Bitacora.Server.MvcApplicationPartsAssemblyInfo.cs
+C:\Users\misael.hernandez\Desktop\Bitacora repo mig\Bitacora\Bitacora.Server\obj\Debug\net8.0\Bitacora.Server.MvcApplicationPartsAssemblyInfo.cache
+C:\Users\misael.hernandez\Desktop\Bitacora repo mig\Bitacora\Bitacora.Server\obj\Debug\net8.0\Bitacora.Server.sourcelink.json
+C:\Users\misael.hernandez\Desktop\Bitacora repo mig\Bitacora\Bitacora.Server\obj\Debug\net8.0\scopedcss\bundle\Bitacora.Server.styles.css
+C:\Users\misael.hernandez\Desktop\Bitacora repo mig\Bitacora\Bitacora.Server\obj\Debug\net8.0\staticwebassets.build.json
+C:\Users\misael.hernandez\Desktop\Bitacora repo mig\Bitacora\Bitacora.Server\obj\Debug\net8.0\staticwebassets.development.json
+C:\Users\misael.hernandez\Desktop\Bitacora repo mig\Bitacora\Bitacora.Server\obj\Debug\net8.0\staticwebassets.build.endpoints.json
+C:\Users\misael.hernandez\Desktop\Bitacora repo mig\Bitacora\Bitacora.Server\obj\Debug\net8.0\staticwebassets\msbuild.Bitacora.Server.Microsoft.AspNetCore.StaticWebAssets.props
+C:\Users\misael.hernandez\Desktop\Bitacora repo mig\Bitacora\Bitacora.Server\obj\Debug\net8.0\staticwebassets\msbuild.Bitacora.Server.Microsoft.AspNetCore.StaticWebAssetEndpoints.props
+C:\Users\misael.hernandez\Desktop\Bitacora repo mig\Bitacora\Bitacora.Server\obj\Debug\net8.0\staticwebassets\msbuild.build.Bitacora.Server.props
+C:\Users\misael.hernandez\Desktop\Bitacora repo mig\Bitacora\Bitacora.Server\obj\Debug\net8.0\staticwebassets\msbuild.buildMultiTargeting.Bitacora.Server.props
+C:\Users\misael.hernandez\Desktop\Bitacora repo mig\Bitacora\Bitacora.Server\obj\Debug\net8.0\staticwebassets\msbuild.buildTransitive.Bitacora.Server.props
+C:\Users\misael.hernandez\Desktop\Bitacora repo mig\Bitacora\Bitacora.Server\obj\Debug\net8.0\staticwebassets.pack.json
+C:\Users\misael.hernandez\Desktop\Bitacora repo mig\Bitacora\Bitacora.Server\obj\Debug\net8.0\staticwebassets.upToDateCheck.txt
+C:\Users\misael.hernandez\Desktop\Bitacora repo mig\Bitacora\Bitacora.Server\obj\Debug\net8.0\Bitacora.4F2D7D2D.Up2Date
+C:\Users\misael.hernandez\Desktop\Bitacora repo mig\Bitacora\Bitacora.Server\obj\Debug\net8.0\Bitacora.Server.dll
+C:\Users\misael.hernandez\Desktop\Bitacora repo mig\Bitacora\Bitacora.Server\obj\Debug\net8.0\refint\Bitacora.Server.dll
+C:\Users\misael.hernandez\Desktop\Bitacora repo mig\Bitacora\Bitacora.Server\obj\Debug\net8.0\Bitacora.Server.pdb
+C:\Users\misael.hernandez\Desktop\Bitacora repo mig\Bitacora\Bitacora.Server\obj\Debug\net8.0\Bitacora.Server.genruntimeconfig.cache
+C:\Users\misael.hernandez\Desktop\Bitacora repo mig\Bitacora\Bitacora.Server\obj\Debug\net8.0\ref\Bitacora.Server.dll

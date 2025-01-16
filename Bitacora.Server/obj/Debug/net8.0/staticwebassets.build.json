@@ -1,13 +1,13 @@
 {
   "Version": 1,
-  "Hash": "9Dkd0fVZwZJsDLHpsY6TjHeMUribCcgFYnqjgEt/X5Y=",
+  "Hash": "EzdLKakU3g56UAN7QTAsgUIy7REYvKFp8RkmxVCPBUY=",
   "Source": "Bitacora.Server",
   "BasePath": "_content/Bitacora.Server",
   "Mode": "Default",
   "ManifestType": "Build",
   "ReferencedProjectsConfiguration": [
     {
-      "Identity": "C:\\Proyectos\\Bitacora\\Bitacora\\bitacora.client\\bitacora.client.esproj",
+      "Identity": "C:\\Users\\misael.hernandez\\Desktop\\Bitacora repo mig\\Bitacora\\bitacora.client\\bitacora.client.esproj",
       "Version": 2,
       "Source": "bitacora.client",
       "GetPublishAssetsTargets": "GetCurrentProjectPublishStaticWebAssetItems",
@@ -19,5 +19,6 @@
     }
   ],
   "DiscoveryPatterns": [],
-  "Assets": []
+  "Assets": [],
+  "Endpoints": []
 }
