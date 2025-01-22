@@ -94,109 +94,111 @@ export class LoginComponent implements OnInit {
       return;
     }
     this.authenticationService.login(this.loginForm.get('username')?.value, this.loginForm.get('password')?.value)
-      .subscribe(data => {
-        this.cadena = data.idUser;
-        if (this.cadena) {
-          if (data.estatus == 1) {
-            if (data.password == 'True') {
-              if (data.temporal == 2) {
-                this.titulo = "Advertencia";
-                this.mensaje = "Se han enviado los pasos para recuperar tu contraseña, por favor revisa tu correo"
-                this.toastr.warning(this.mensaje, this.titulo);
-              }
-              if (data.temporal == 1) {
-                localStorage.setItem('idUs', data.idUser);
-                this.router.navigate(['/cambio-contraseña'])
-              }
-              else {
-                Globals.usuario = this.loginForm.get('username')?.value;
-                Globals.rolUser = data.rol;
-                Globals.imagen = 'data:image/jpeg;base64,' + data.foto;
-                Globals.imagenVista = data.foto;
-                if (Globals.permisos.length > 0) {
-                  //console.log(Globals.permisos)
-                  const index = Globals.permisos.find((x: any) => x.nombrePantalla === "NOM 035") || 0 as number;
-                  if (index > -1) {
-                    //this.authenticationServiceNom035.postInfoParticipante(data.usuario)
-                    //  .then((resp: any) => {
-                    //    if (resp.aplicarExamen > 0) {//retorna al login
-                    //      this.toastr.error("Este usuario esta desactivado debido a que no tiene encuestas pendientes.", "Atención");
-                    //      setTimeout(() => {
-                    //        this.router.navigate(['/']);
-                    //      }, 3000);
-                    //    } else {
-                    //      this.router.navigate(['/nom035']);
-                    //    }
-                    //  });
-
-                  } else {
-                    this.router.navigate(['/bitacora/' + this.loginForm.get('username')?.value]);
-                  }
+      .subscribe({
+        next: (data: any) => {
+          this.cadena = data.idUser;
+          if (this.cadena) {
+            if (data.estatus == 1) {
+              if (data.password == 'True') {
+                if (data.temporal == 2) {
+                  this.titulo = "Advertencia";
+                  this.mensaje = "Se han enviado los pasos para recuperar tu contraseña, por favor revisa tu correo"
+                  this.toastr.warning(this.mensaje, this.titulo);
+                }
+                if (data.temporal == 1) {
+                  localStorage.setItem('idUs', data.idUser);
+                  this.router.navigate(['/cambio-contraseña'])
                 }
                 else {
-                  //console.log("no tiene ningun permiso")
-                  this.router.navigate(['/']);
-                  this.titulo = "Error";
-                  this.mensaje = "Este usuario no cuenta con permisos, por favor contacte con un administrador"
-                  this.toastr.error(this.mensaje, this.titulo);
+                  Globals.usuario = this.loginForm.get('username')?.value;
+                  Globals.rolUser = data.rol;
+                  Globals.imagen = 'data:image/jpeg;base64,' + data.foto;
+                  Globals.imagenVista = data.foto;
+                  if (Globals.permisos.length > 0) {
+                    //console.log(Globals.permisos)
+                    const index = Globals.permisos.find((x: any) => x.nombrePantalla === "NOM 035") || 0 as number;
+                    if (index > -1) {
+                      //this.authenticationServiceNom035.postInfoParticipante(data.usuario)
+                      //  .then((resp: any) => {
+                      //    if (resp.aplicarExamen > 0) {//retorna al login
+                      //      this.toastr.error("Este usuario esta desactivado debido a que no tiene encuestas pendientes.", "Atención");
+                      //      setTimeout(() => {
+                      //        this.router.navigate(['/']);
+                      //      }, 3000);
+                      //    } else {
+                      //      this.router.navigate(['/nom035']);
+                      //    }
+                      //  });
+
+                    } else {
+                      this.router.navigate(['/bitacora/' + this.loginForm.get('username')?.value]);
+                    }
+                  }
+                  else {
+                    //console.log("no tiene ningun permiso")
+                    this.router.navigate(['/']);
+                    this.titulo = "Error";
+                    this.mensaje = "Este usuario no cuenta con permisos, por favor contacte con un administrador"
+                    this.toastr.error(this.mensaje, this.titulo);
+
+                  }
 
                 }
 
               }
+              else if (data.password == 'False') {
+                this.showErrorMessage = true;
+                this.errorLogin = "Usuario o contraseña invalido, intenta de nuevo"
+              }
+              else if (data.password == null) {
+                //this.abrirForm();
+                var datos = { usuario: this.loginForm.get('username')?.value };
+                this.http.get<any>(this.baseUrl + "api/login/RecuperarContrasenia/{id?}", { params: datos }).subscribe(
+                  res => {
+                    //console.log(res);
+                    if (res == 0) {
+                      this.titulo = "Correo Enviado";
+                      this.mensaje = "Hemos enviado un correo con instrucciones para restablecer tu contraseña. Revisa tu bandeja de entrada."
+                      this.toastr.info(this.mensaje, this.titulo);
 
+                    }
+                    if (res == -1) {
+                      this.titulo = "Error";
+                      this.mensaje = "Ha ocurrido un error, verifica tus datos"
+                      this.toastr.error(this.mensaje, this.titulo);
+                    }
+                    if (res == -2) {
+                      this.titulo = "Error";
+                      this.mensaje = "Este usuario no cuenta con un correo, por favor contacte con un administrador"
+                      this.toastr.error(this.mensaje, this.titulo);
+                    }
+                  }, err => {
+                    //console.log(err);
+                  }
+                )
+
+              }
             }
-            else if (data.password == 'False') {
-              this.showErrorMessage = true;
-              this.errorLogin = "Usuario o contraseña invalido, intenta de nuevo"
-            }
-            else if (data.password == null) {
-              //this.abrirForm();
-              var datos = { usuario: this.loginForm.get('username')?.value };
-              this.http.get<any>(this.baseUrl + "api/login/RecuperarContrasenia/{id?}", { params: datos }).subscribe(
-                res => {
-                  //console.log(res);
-                  if (res == 0) {
-                    this.titulo = "Correo Enviado";
-                    this.mensaje = "Hemos enviado un correo con instrucciones para restablecer tu contraseña. Revisa tu bandeja de entrada."
-                    this.toastr.info(this.mensaje, this.titulo);
-
-                  }
-                  if (res == -1) {
-                    this.titulo = "Error";
-                    this.mensaje = "Ha ocurrido un error, verifica tus datos"
-                    this.toastr.error(this.mensaje, this.titulo);
-                  }
-                  if (res == -2) {
-                    this.titulo = "Error";
-                    this.mensaje = "Este usuario no cuenta con un correo, por favor contacte con un administrador"
-                    this.toastr.error(this.mensaje, this.titulo);
-                  }
-                }, err => {
-                  //console.log(err);
-                }
-              )
-
+            else if (data.estatus == 0) {
+              this.titulo = "Error";
+              this.mensaje = "Su usuario está inactivo, por favor contacte con un administrador"
+              this.toastr.error(this.mensaje, this.titulo);
             }
           }
-          else if (data.estatus == 0) {
+          else if (this.cadena < 0) {
             this.titulo = "Error";
-            this.mensaje = "Su usuario está inactivo, por favor contacte con un administrador"
+            this.mensaje = "Ocurrio un error, intentalo más tarde"
             this.toastr.error(this.mensaje, this.titulo);
+            //console.log(this.cadena)
           }
-        }
-        else if (this.cadena < 0) {
+        },
+        error: (err: Error) => {
           this.titulo = "Error";
           this.mensaje = "Ocurrio un error, intentalo más tarde"
           this.toastr.error(this.mensaje, this.titulo);
-          //console.log(this.cadena)
+          //console.log(error);
         }
-
-      }, error => {
-        this.titulo = "Error";
-        this.mensaje = "Ocurrio un error, intentalo más tarde"
-        this.toastr.error(this.mensaje, this.titulo);
-        //console.log(error);
-      })
+      });
   }
 
 
