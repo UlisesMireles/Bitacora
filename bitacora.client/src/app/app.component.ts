@@ -122,7 +122,6 @@ export class AppComponent implements OnInit {
           Globals.permisos = JSON.parse(perm);
         }
         for (const permiso of Globals.permisos) {
-          console.log(permiso);
           if (permiso['nombreMenu'] == "Bitácora") {
             this.bitacoraMenu = true;
           }

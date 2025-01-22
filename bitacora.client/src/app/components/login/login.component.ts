@@ -9,6 +9,9 @@ import { ToastrService } from 'ngx-toastr';
 import { MatDialog } from '@angular/material/dialog';
 //import { Nom035Service } from 'src/app/services/nom035.service';
 import { Globals } from '../../services/globals';
+import { Nom035Service } from '../../services/nom035.service';
+
+declare let $: any;
 
 @Component({
   selector: 'app-login',
@@ -32,7 +35,7 @@ export class LoginComponent implements OnInit {
   }
   constructor(public dialog: MatDialog, private toastr: ToastrService, private formBuilder: FormBuilder, private route: ActivatedRoute,
     private router: Router, private authenticationService: AuthenticationService, private userIdle: UserIdleService,
-    private http: HttpClient, @Inject("BASE_URL") private baseUrl: string) {
+    private http: HttpClient, @Inject("BASE_URL") private baseUrl: string,private authenticationServiceNom035:Nom035Service) {
     if (this.authenticationService.currentUserValue) {
       this.authenticationService.logout();
 
@@ -47,22 +50,22 @@ export class LoginComponent implements OnInit {
     var hei = window.innerHeight;
     var wid = window.innerWidth;
 
-    //if (hei >= 658) {
-    //  if (wid < 768) {
-    //    $(".log").css('padding', '45.5% 0%');
-    //  }
-    //  else {
-    //    $(".log").css('padding', '24.87% 0%');
-    //  }
-    //}
-    //else if (hei < 658) {
-    //  if (wid < 768) {
-    //    $(".log").css('padding', '22.8% 0%');
-    //  }
-    //  else {
-    //    $(".log").css('padding', '10.85% 0%');
-    //  }
-    //}
+    if (hei >= 658) {
+     if (wid < 768) {
+       $(".log").css('padding', '45.5% 0%');
+     }
+     else {
+       $(".log").css('padding', '24.87% 0%');
+     }
+    }
+    else if (hei < 658) {
+     if (wid < 768) {
+       $(".log").css('padding', '22.8% 0%');
+     }
+     else {
+       $(".log").css('padding', '10.85% 0%');
+     }
+    }
   }
   ngOnInit() {
     localStorage.removeItem("imagen");
@@ -118,17 +121,17 @@ export class LoginComponent implements OnInit {
                     //console.log(Globals.permisos)
                     const index = Globals.permisos.find((x: any) => x.nombrePantalla === "NOM 035") || 0 as number;
                     if (index > -1) {
-                      //this.authenticationServiceNom035.postInfoParticipante(data.usuario)
-                      //  .then((resp: any) => {
-                      //    if (resp.aplicarExamen > 0) {//retorna al login
-                      //      this.toastr.error("Este usuario esta desactivado debido a que no tiene encuestas pendientes.", "Atención");
-                      //      setTimeout(() => {
-                      //        this.router.navigate(['/']);
-                      //      }, 3000);
-                      //    } else {
-                      //      this.router.navigate(['/nom035']);
-                      //    }
-                      //  });
+                      this.authenticationServiceNom035.postInfoParticipante(data.usuario)
+                       .subscribe((resp: any) => {
+                         if (resp.aplicarExamen > 0) {//retorna al login
+                           this.toastr.error("Este usuario esta desactivado debido a que no tiene encuestas pendientes.", "Atención");
+                           setTimeout(() => {
+                             this.router.navigate(['/']);
+                           }, 3000);
+                         } else {
+                           this.router.navigate(['/nom035']);
+                         }
+                       });
 
                     } else {
                       this.router.navigate(['/bitacora/' + this.loginForm.get('username')?.value]);
