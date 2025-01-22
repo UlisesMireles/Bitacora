@@ -1,0 +1,18 @@
+<h3>Datos Unidad de Negocios</h3>
+<div mat-dialog-content>
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>Unidad de Negocios</th>
+                <th>Horas</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let reg of dataArray">
+                <td>{{reg.unidad}}</td>
+                <td>{{reg.horas}}</td>
+            </tr>
+        </tbody>
+        
+    </table>
+</div>

@@ -1,0 +1,1301 @@
+<div class="container-fluid bit opc myOverride" style="background-color: #EAEAEA;">
+  <div class="col-md-12 divContainer">
+    <div class="col-md-12" style="width:96% !important;margin:auto;">
+      <h1 style="margin-top:10px;" class="textotituloCabecera pull-left">Reporte {{tipoReporte}}</h1>
+      <div class="pull-right" style="padding-top: 28px;">
+        <div class="col-12 col-md-12" style="padding: 0px ; text-align:right">
+          <button *ngIf="cabecera" mat-button matTooltip="Limpiar" class="btn-icon1" (click)="limpiar()">
+            <mat-icon class="material-icons">autorenew</mat-icon>
+          </button>
+          &nbsp;
+          <button *ngIf="!participacion && !resultNom35" mat-button matTooltip="Exportar" class="btn-icon1"
+            (click)="exportar()">
+            <mat-icon class="material-icons">launch</mat-icon>
+          </button>
+          &nbsp;
+          <button *ngIf="!participacion && (detallado ||  semanal) && mostrarFiltro" mat-button
+            matTooltip="Ocultar filtros" class="btn-icon1" (click)="ocultarFiltros()">
+            <mat-icon class="material-icons">zoom_out</mat-icon>
+          </button>
+          <button *ngIf="!participacion && (detallado ||  semanal) && !mostrarFiltro" mat-button
+            matTooltip="Ocultar filtros" class="btn-icon1" (click)="mostrarFiltros()">
+            <mat-icon class="material-icons">zoom_in</mat-icon>
+          </button>
+        </div>
+      </div>
+    </div>
+    <br [ngStyle]="{'display':resultNom35 ? 'none' : 'inline' }"><br
+      [ngStyle]="{'display':resultNom35 ? 'none' : 'inline' }"><br
+      [ngStyle]="{'display':resultNom35 ? 'none' : 'inline' }">
+
+
+    <div class="divFiltros" *ngIf="cabecera">
+      <thead>
+        <tr>
+          <th class="cabecerasCatalogos">Fecha Inicio</th>
+          <th class="cabecerasCatalogos">Fecha Fin</th>
+          <th class="cabecerasCatalogos" *ngIf="persona">Usuario</th>
+          <th class="cabecerasCatalogos" *ngIf="distribucion || proyecto">Cliente</th>
+          <th style="padding-left: 20px;" *ngIf="!persona">Unidad de Negocio Proyecto</th>
+          <th class="cabecerasCatalogos" *ngIf="persona">Unidad de Negocio Persona</th>
+          <th class="cabecerasCatalogos" *ngIf="!persona">Área de Negocio</th>
+          <th style="padding-left: 20px;" *ngIf="detallado || distribucion">Unidad de Negocio Usuario</th>
+          <th class="cabecerasCatalogos" *ngIf="semanal">Usuario</th>
+        </tr>
+
+        <tr>
+          <th class="lo">
+            <div class="col-lg-12 col-md-12 col-sm-12 col-6">
+
+              <div class="col-12 opc fechasEle">
+                <mat-form-field class="w-100 opc hide-datepicker-icon" appearance="outline" [floatLabel]="'always'">
+                  <!-- <mat-label class="inlab">DD/MM/AAAA</mat-label> -->
+                  <input class="inlab fechaCont" matInput [matDatepicker]="picker" (focus)="picker.open()" (click)="picker.open()"
+                    [(ngModel)]="fechaInicio" readonly (dateChange)="getDatosReporte()">
+                  <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                  <mat-datepicker #picker></mat-datepicker>
+                </mat-form-field>
+              </div>
+            </div>
+          </th>
+          <th class="lo">
+            <div class="col-lg-12 col-md-12 col-sm-12 col-6">
+
+              <div class="col-12 opc fechasEle">
+                <mat-form-field class="col-md-12 opc hide-datepicker-icon" appearance="outline" [floatLabel]="'always'">
+                  <!-- <mat-label class="inlab">DD/MM/AAAA</mat-label> -->
+                  <input class="inlab fechaCont" matInput [matDatepicker]="pickerFin" (focus)="pickerFin.open()"
+                    (click)="pickerFin.open()" [(ngModel)]="fechaFin" readonly (dateChange)="getDatosReporte()">
+                  <mat-datepicker-toggle matSuffix [for]="pickerFin"></mat-datepicker-toggle>
+                  <mat-datepicker #pickerFin></mat-datepicker>
+                </mat-form-field>
+              </div>
+            </div>
+          </th>
+          <th *ngIf="persona" class="lo">
+            <div class="col-lg-12 col-md-12 col-sm-12 col-6">
+
+              <div class="col-12 opc ">
+                <form class="example-form">
+                  <mat-form-field class="col-md-12 opc">
+                    <mat-select #usuariof [formControl]="usuarioCtrl" class="inlab col-12"
+                      (keyup)="abrirSelect('usuario',$event)" (selectionChange)="getDatosReporte()"
+                      [(ngModel)]="usuarioSeleccionado">
+                      <mat-option>
+                        <ngx-mat-select-search [placeholderLabel]="'Buscar usuario'" [formControl]="filtroUsuario"
+                          [noEntriesFoundLabel]="'No se encontró ningún usuario con este nombre'"></ngx-mat-select-search>
+                      </mat-option>
+                      <mat-option [value]="-1" title="Selecciona un usuario...">
+                        Selecciona un usuario...
+                      </mat-option>
+                      <mat-option *ngFor="let usuario of UsuariosFiltrados | async"
+                        [value]="usuario.idUsr">{{usuario.usuario}}</mat-option>
+                    </mat-select>
+                  </mat-form-field>
+                </form>
+              </div>
+            </div>
+          </th>
+          <th *ngIf="distribucion || proyecto" class="lo">
+            <div style="padding-left: 18px; padding-right: 11px;" class="col-lg-12 col-md-12 col-sm-12 col-6">
+
+              <div class="col-12" style="padding-left: 0px;">
+                <select #cliente class="form-control-sm custom-select-sm opc col-12" [(ngModel)]="clienteSeleccionado"
+                  (change)="getDatosReporte()">
+                  <option [value]="-1">TODOS</option>
+                  <option *ngFor="let cliente of clientes" [value]="cliente.id">{{cliente.nombre}}</option>
+                </select>
+              </div>
+            </div>
+          </th>
+          <th class="lo">
+            <div style="padding-left: 18px; padding-right: 11px;" class="col-lg-12 col-md-12 col-sm-12 col-6">
+
+              <div class="col-12" style="padding-left: 0px;">
+                <select #unidadNeg class="form-control-sm custom-select-sm opc col-12" [(ngModel)]="unidadSeleccionada"
+                  (change)="selUnidad($event); getDatosReporte()">
+                  <option [value]="-1">TODAS</option>
+                  <option *ngFor="let unidad of unidadesNegocio" [value]="unidad.id">{{unidad.nombre}}</option>
+                </select>
+              </div>
+            </div>
+          </th>
+          <th *ngIf="!persona" class="lo">
+            <div *ngIf="!persona" style="padding-left: 9px;" class="col-lg-12 col-md-12 col-sm-12 col-6">
+
+              <div class="col-12">
+                <select #areaNeg class="form-control-sm custom-select-sm opc col-12 " [(ngModel)]="areaSeleccionada"
+                  (change)="selArea($event);getDatosReporte()">
+                  <option [value]="0">TODAS</option>
+                  <option *ngFor="let area of areasUnidades" [value]="area.id">{{area.nombre}}</option>
+                </select>
+              </div>
+            </div>
+          </th>
+
+          <th *ngIf="detallado || distribucion" class="lo">
+            <div style="padding-left: 18px;" class="col-lg-12 col-md-12 col-sm-12 col-6">
+
+              <div class="col-12" style="padding-left: 0px;">
+                <select id="unidadNegocioSel" class="form-control-sm custom-select-sm opc col-12"
+                  [(ngModel)]="UnidadUsuarioSeleccionada" (change)="getDatosReporte()">
+                  <option value="0">TODAS</option>
+                  <option *ngFor="let unidad of unidadesNegocio" [value]="unidad.id">{{unidad.nombre}}</option>
+                </select>
+              </div>
+            </div>
+          </th>
+
+          <th *ngIf="semanal" class="lo">
+            <div style="padding: 0;" class="col-md-12 col-12 col-lg-12">
+              <div style="padding: 0;padding-right: 23px; padding-left: 26px;" class="col-12">
+                <select class="form-control-sm opc custom-select-sm col-12" [(ngModel)]="usuarioSeleccionado"
+                  (change)="selUser($event);getDatosReporte()">
+                  <option value="0">TODOS</option>
+                  <option *ngFor="let usuario of usuariosFiltro" [value]="usuario.idUsr">{{usuario.usuario}}</option>
+                </select>
+              </div>
+            </div>
+          </th>
+        </tr>
+        <br>
+        <tr *ngIf="tipoReporte !== 'de Distribución'">
+          <th class="cabecerasCatalogos" *ngIf="usuarioCampo && !semanal">Usuario</th>
+          <th class="cabecerasCatalogos" *ngIf="proyectoCampo">Proyecto</th>
+          <th style="padding-left: 20px;" *ngIf="fase">Etapa</th>
+          <th class="cabecerasCatalogos" *ngIf="fase">Actividad</th>
+        </tr>
+        <tr *ngIf="tipoReporte !== 'de Distribución'">
+          <th class="lo">
+            <div *ngIf="usuarioCampo && !semanal" style="padding: 0;" class="col-md-12 col-12 col-lg-12">
+              <div style="padding: 0;padding-right: 23px; padding-left: 26px;" class="col-12">
+                <select class="form-control-sm opc custom-select-sm col-12" [(ngModel)]="usuarioSeleccionado"
+                  (change)="selUser($event);getDatosReporte()">
+                  <option value="0">TODOS</option>
+                  <option *ngFor="let usuario of usuariosFiltro" [value]="usuario.idUsr">{{usuario.usuario}}</option>
+                </select>
+              </div>
+            </div>
+          </th>
+          <th class="lo">
+            <div *ngIf="proyectoCampo" style="padding: 0;" class="col-md-12 col-12 col-lg-12">
+              <div class="col-12" style="padding: 0; padding-right: 23px; padding-left: 26px;">
+                <select class="form-control-sm opc custom-select-sm col-12" [(ngModel)]="proyectoSeleccionado"
+                  (change)="selProyecto($event);getDatosReporte()">
+                  <option value="0">TODOS</option>
+                  <option *ngFor="let pro of proyectosFiltro" [value]="pro.idProyecto">{{pro.proyecto}}</option>
+                </select>
+              </div>
+            </div>
+          </th>
+          <th class="lo">
+            <div *ngIf="fase" style="padding: 0 5px; padding-right: 9px;" class="col-lg-12 col-md-12 col-sm-12 col-6">
+
+              <div class="col-12">
+                <select id="etapaSel" class="form-control-sm opc custom-select-sm col-12"
+                  [(ngModel)]="etapaSeleccionada" (change)="selEtapa($event);getDatosReporte()">
+                  <option value="0">TODAS</option>
+                  <option *ngFor="let etapa of etapasFiltro" [value]="etapa.idEtapa">{{etapa.etapa}}</option>
+
+                </select>
+              </div>
+            </div>
+          </th>
+          <th class="lo">
+            <div *ngIf="fase" style="padding-right: 14px; padding-left: 10px;"
+              class="col-lg-12 col-md-12 col-sm-12 col-6">
+
+              <div class="col-12">
+                <select id="actividadSel" class="form-control-sm opc custom-select-sm col-12"
+                  [(ngModel)]="actividadSeleccionada" (change)="selActividad($event);getDatosReporte()">
+                  <option value="0">TODAS</option>
+                  <option *ngFor="let actividad of actividadesFiltro" [value]="actividad.idActividad">
+                    {{actividad.activadad}}
+                  </option>
+
+                </select>
+              </div>
+            </div>
+          </th>
+
+        </tr>
+        <br>
+      </thead>
+    </div>
+    <div class="col-12 text-right" style="padding: 1px 0px;">
+      <div class="row pull-left" style="align-items: center; width:56%!important;padding-left: 3%;">
+        <label class="labeltext" style="padding-right: 10px; font-weight: bold;">Mostrar </label>
+        <select style="padding-right: 1px" #regPorPagina class="form-control custom-select-sm col-md-1 col-4"
+          (change)="getDatosReporteSize(regPorPagina.value)">
+          <option value="10">10</option>
+          <option value="20">20</option>
+          <option value="30">30</option>
+          <option value="50">50</option>
+        </select>
+        <label class="labeltext" style="padding-left: 10px; font-weight: bold; "> registros por página</label>
+
+      </div>
+      <div class="row pull-right" style="width: 44%; margin-top:5px;">
+
+        <div *ngIf="config.totalItems" class="col-lg-12 col-sm-6 col-xs-6"
+          style="background-color: #eaeaea; height:35px;padding-top: 0px !important;">
+          <div class="row form-group text-right" style="margin-bottom: 0px;margin-top: 0px;height: 20px;">
+            <label class="labeltext" style="font-weight: 700;margin-top: 5px!important">{{config.totalItems}} Registros
+              en {{config.totalPages}} {{pagina}} </label>
+            <pagination-controls class="pagination-sm top-pg der" (pageChange)="pageChanged($event)" previousLabel=""
+              nextLabel=""></pagination-controls>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="table responsive divTablas">
+      <table matSort (matSortChange)="sortData($event)" *ngIf="distribucion"
+        class="table  table-hover table-bordered cellspacing">
+        <thead>
+          <tr>
+            <th mat-sort-header="clienteDistribucionSort" class="clienth">Cliente</th>
+            <th mat-sort-header="nombreDistribucionSort" class="nombreProh">Nombre del proyecto</th>
+            <th mat-sort-header="unidadDistribucionSort" class="unidadh">Unidad de Negocio</th>
+            <th mat-sort-header="areaDistribucionSort" class="unidadh">Área de Negocio</th>
+            <th mat-sort-header="actividadDistribucionSort" class="unidadh">Actividad Extraordinaria</th>
+            <th class="unidadh" *ngFor="let usuario of usuarios">{{usuario.usuario}}</th>
+            <th class="unidadh">
+              Total
+            </th>
+
+
+          </tr>
+
+        </thead>
+
+        <tbody class="tablabody">
+          <tr *ngIf="sinRegistros">
+            <td colspan="8" style="text-align:center">No se encontraron registros</td>
+          </tr>
+
+          <tr *ngFor="let dato of datosDistribucion">
+            <td class="clienth">{{dato.cliente}}</td>
+            <td class="nombreProh">{{dato.proyecto}}</td>
+            <td class="unidadh">{{dato.unidad}}</td>
+            <td class="unidadh">{{dato.area}}</td>
+            <td class="unidadh">{{dato.actividad}}</td>
+            <td class="unidadh" *ngFor="let usuario of dato.usuarios">{{usuario.horas}}</td>
+            <td class="unidadh">{{dato.totalHoras}}</td>
+
+          </tr>
+          <tr *ngIf="!sinRegistros" style="background-color:#e0e0e094;">
+            <td class="clienth"></td>
+            <td class="nombreProh"></td>
+            <td class="unidadh"></td>
+            <td class="unidadh"></td>
+            <td class="unidadh">Total Operaciones</td>
+            <td class="unidadh" *ngFor="let user of usuariosTotalOperaciones">{{user.horas}}</td>
+            <td class="unidadh" style="background-color: #d8d8d8;">{{horasTotalesOperaciones}}</td>
+          </tr>
+          <tr *ngIf="!sinRegistros" style="background-color:#e0e0e094;">
+            <td class="clienth"></td>
+            <td class="nombreProh"></td>
+            <td class="unidadh"></td>
+            <td class="unidadh"></td>
+            <td class="unidadh">Tiempos muertos</td>
+            <td class="unidadh" *ngFor="let user of usuariosTiemposMuertos">{{user.horas}}</td>
+            <td class="unidadh" style="background-color: #d8d8d8;">{{horasTotalesTiemposMuertos}}</td>
+          </tr>
+          <tr *ngIf="!sinRegistros" style="background-color:#e0e0e094;">
+            <td class="clienth"></td>
+            <td class="nombreProh"></td>
+            <td class="unidadh"></td>
+            <td class="unidadh"></td>
+            <td class="unidadh">Total </td>
+            <td class="unidadh" *ngFor="let user of usuariosTotal">{{user.horas}}</td>
+            <td class="unidadh" style="background-color: #d8d8d8;">{{horasTotales}}</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <table matSort (matSortChange)="sortData($event)" *ngIf="detallado"
+        class="table table-striped  cellspacing dataTable">
+        <thead>
+          <tr>
+            <th mat-sort-header="fechaDetalladoSort" class="reng">Fecha</th>
+            <th style="width: 7%;" mat-sort-header="duracionDetalladoSort" class="reng">Duración</th>
+            <th mat-sort-header="usuarioDetalladoSort" class="reng">Usuario</th>
+            <th mat-sort-header="fechaRegDetalladoSort" class="reng">Unidad Usuario</th>
+            <th mat-sort-header="unidadDetalladoSort" class="reng">Unidad Proyecto</th>
+            <th mat-sort-header="areaDetalladoSort" class="reng">Área</th>
+            <th mat-sort-header="proyectoDetalladoSort" class="reng">Proyecto</th>
+            <th mat-sort-header="actividadDetalladoSort" class="reng">Actividad</th>
+            <th mat-sort-header="detalleDetalladoSort" style="width: 17%;" class="det">Detalle</th>
+            <th mat-sort-header="etapaDetalladoSort" class="reng">Etapa</th>
+            <th mat-sort-header="fechaRegDetalladoRegSort" class="reng">Fecha Registro</th>
+
+          </tr>
+        </thead>
+
+        <tbody class="tablabody">
+          <tr *ngIf="sinRegistros">
+            <td colspan="15" style="text-align:center">No se encontraron registros</td>
+          </tr>
+          <tr *ngFor="let detalle of reporteDetallado">
+            <td class="reng">{{detalle.fecha}}</td>
+            <td style="width: 7%;" class="reng">{{detalle.horas}}</td>
+            <td class="reng">{{detalle.usuario}}</td>
+            <td class="reng">{{detalle.unidadUsuario}}</td>
+            <td class="reng">{{detalle.unidad}}</td>
+            <td class="reng">{{detalle.area}}</td>
+            <td class="reng">{{detalle.proyecto}}</td>
+            <td class="reng">{{detalle.actividad}}</td>
+            <td style="width: 17%;" class="det">{{detalle.detalle}}</td>
+            <td class="reng">{{detalle.etapa}}</td>
+            <td class="reng">{{detalle.fechaRegistro}}</td>
+
+          </tr>
+        </tbody>
+      </table>
+      <table matSort (matSortChange)="sortData($event)" *ngIf="persona"
+        class="table table-striped cellspacing dataTable">
+        <thead>
+          <tr>
+
+            <th mat-sort-header="usuarioPersonaSort">Usuario</th>
+            <th mat-sort-header="unidadPersonaSort">Unidad de Negocio</th>
+            <th mat-sort-header="horasPersonaSort">Horas</th>
+            <th style="text-align: center;">Detalle</th>
+
+          </tr>
+        </thead>
+
+        <tbody class="tablabody">
+          <tr *ngIf="sinRegistros">
+            <td colspan="7" style="text-align:center">No se encontraron registros</td>
+          </tr>
+
+          <tr *ngFor="let persona of reportePersona">
+
+            <td style="width: 25%;" [ngStyle]="{'color':persona.estatus == 0 ? 'red' : 'black' }">{{persona.usuario}}
+            </td>
+            <td style="width: 25%;">{{persona.unidad}}</td>
+            <td style="width: 25%;">{{persona.horas}}</td>
+            <td *ngIf="persona.horas > 0" style="text-align:center !important; width: 25%;">
+              <mat-icon style="cursor: pointer;" (click)="abrirDetallePersona(persona.idUser, persona.usuario)"
+                matSuffix>remove_red_eye</mat-icon>
+            </td>
+            <td *ngIf="persona.horas == 0" style="text-align:center;">
+              <mat-icon style="cursor: not-allowed;color: #ccc;" matSuffix>remove_red_eye</mat-icon>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+      <table matSort (matSortChange)="sortData($event)" *ngIf="proyecto"
+        class="table table-striped cellspacing dataTable">
+        <thead>
+          <tr>
+            <th mat-sort-header="clienteProyectoSort" class="reng">Cliente</th>
+            <th mat-sort-header="proyectoProyectoSort" class="det">Proyecto</th>
+            <th mat-sort-header="unidadProyectoSort" class="reng">Unidad</th>
+            <th mat-sort-header="areaProyectoSort" class="reng">Área</th>
+            <th mat-sort-header="actividadProyectoSort" class="det">Actividad Extraordinaria</th>
+            <th mat-sort-header="horasProyectoSort" class="reng">Horas</th>
+            <th style="text-align: center !important; padding-left: 0 !important;" class="eye">UN</th>
+            <th style="text-align: center !important; padding-left: 0 !important;" class="eye">P</th>
+            <th style="text-align: center !important; padding-left: 0 !important;" class="eye">S</th>
+          </tr>
+        </thead>
+
+        <tbody class="tablabody">
+          <tr *ngIf="sinRegistros">
+            <td colspan="7" style="text-align:center">No se encontraron registros</td>
+          </tr>
+
+
+          <tr *ngFor="let proProyecto of reporteProyecto">
+            <td class="reng">{{proProyecto.cliente}}</td>
+            <td class="det">{{proProyecto.proyecto}}</td>
+            <td class="reng">{{proProyecto.unidad}}</td>
+            <td class="reng">{{proProyecto.area}}</td>
+            <td class="det">{{proProyecto.actividad}}</td>
+            <td class="reng">{{proProyecto.horas}}</td>
+            <td *ngIf="!proProyecto.actExt" class="eye">
+              <mat-icon (click)="abrirTabla(proProyecto.unidadesHora)" matSuffix>remove_red_eye</mat-icon>
+            </td>
+            <td *ngIf="proProyecto.actExt" class="eye">
+              <mat-icon matSuffix style="color:lightgray">remove_red_eye</mat-icon>
+            </td>
+            <td *ngIf="!proProyecto.actExt && proProyecto.horas != 0" title="Personas" class="eye">
+              <mat-icon (click)="abrirDetalleHoras(proProyecto.idProyecto, proProyecto.proyecto)"
+                matSuffix>content_paste</mat-icon>
+            </td>
+            <td *ngIf="proProyecto.actExt && proProyecto.horas == 0" class="eye">
+              <mat-icon matSuffix style="color:lightgray">content_paste</mat-icon>
+            </td>
+            <td *ngIf="proProyecto.actExt && proProyecto.horas != 0" class="eye">
+              <mat-icon matSuffix style="color:lightgray">content_paste</mat-icon>
+            </td>
+            <td *ngIf="!proProyecto.actExt && proProyecto.horas != 0" title="Semana" class="eye">
+              <mat-icon (click)="abrirDetalleHorasSemanal(proProyecto.idProyecto, proProyecto.proyecto)"
+                matSuffix>date_range</mat-icon>
+            </td>
+            <td *ngIf="proProyecto.actExt && proProyecto.horas == 0" class="eye">
+              <mat-icon matSuffix style="color:lightgray">date_range</mat-icon>
+            </td>
+            <td *ngIf="proProyecto.actExt && proProyecto.horas != 0" class="eye">
+              <mat-icon matSuffix style="color:lightgray">date_range</mat-icon>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+      <table matSort (matSortChange)="sortData($event)" *ngIf="semanal"
+        class="table table-striped  cellspacing dataTable">
+        <thead>
+          <tr>
+            <th mat-sort-header="usuarioSemanalSort" class="reng">Usuario</th>
+            <th mat-sort-header="proyectoSemanalSort" class="det">Proyecto</th>
+            <th mat-sort-header="unidadSemanalSort" class="reng">Unidad</th>
+            <th mat-sort-header="areaSemanalSort" class="reng">Área</th>
+            <th mat-sort-header="actividadSemanalSort" class="det">Actividad</th>
+            <th mat-sort-header="horasSemanalSort" class="reng">Horas</th>
+
+          </tr>
+        </thead>
+
+        <tbody class="tablabody">
+          <tr *ngIf="sinRegistros">
+            <td colspan="7" style="text-align:center">No se encontraron registros</td>
+          </tr>
+
+          <tr *ngFor="let reg of reporteSemanalTotal">
+            <td class="reng">{{reg.usuario}}</td>
+            <td class="det">{{reg.proyecto}}</td>
+            <td class="reng">{{reg.unidad}}</td>
+            <td class="reng">{{reg.area}}</td>
+            <td class="det">{{reg.actividad}}</td>
+            <td class="reng">{{reg.horas}}</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <div class="row">
+        <div style="padding:0;" class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+          <table *ngIf="ejecutivo" class="table responsive dataTable ">
+            <thead style="margin-bottom: 0px;width: 100% !important;">
+              <tr>
+                <th style="width: 55% !important;padding-left:30px;" class="reng tablaEjecutivo">Horas asignadas a</th>
+                <th style="width: 15% !important;" class="det tablaEjecutivo">Horas</th>
+                <th style="width: 15% !important;padding-left: 15px !important;" class="det tablaEjecutivo">%</th>
+              </tr>
+            </thead>
+
+            <tbody class="tablabody">
+              <tr *ngIf="sinRegistros">
+                <td colspan="7" style="text-align:center">No se encontraron registros</td>
+              </tr>
+
+              <tr class="rowEjecutivo" *ngFor="let reg of reporteEjecutivo">
+                <td style="border: 0; margin-left: 0px !important;width: 60% !important;" class="reng tablaEjecutivo">
+                  {{reg.proyecto}}</td>
+                <td style="border: 0;width: 15% !important;margin-left: -10px;" class="det tablaEjecutivo">{{reg.horas}}
+                </td>
+                <td style="border: 0;width: 15% !important;" class="det tablaEjecutivo">{{reg.porcentaje}} %</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div *ngIf="ejecutivo" class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+          <h5 class="horasTotalesEjecutivo">Total de horas <b>{{horasTotalesEjecutivo}}</b> </h5>
+          <div id="chartContainer">
+            <canvas id="chartEjecutivo" style="display: inline;" width="600" height="300"></canvas>
+          </div>
+        </div>
+      </div>
+
+      <div *ngIf="participacion" align="center">
+        <h4 class="textotitulo">Total de participantes en la encuesta Norma 035</h4>
+        <br>
+
+        <div class="col-lg-6 col-md-10 col-sm-12 col-xs-12">
+          <h5 class="textoGraficos">Total de participantes <b>{{encuestadosTotales}}</b> </h5><br>
+          <canvas id="myChart" style="display: inline;" width="600" height="300"></canvas>
+
+        </div>
+      </div>
+
+      <table *ngIf="resultNom35" class="fuenteTablasResultados table pull-left cellspacing dataTable"
+        style="width: 26%;">
+        <thead>
+          <tr>
+            <th style="width: 11%;" class="reng">Nombre</th>
+            <th style="width: 3%" class="reng">Puntos</th>
+            <th style="width: 1%" class="reng"></th>
+            <th style="width: 5%" class="reng">Calificación</th>
+          </tr>
+        </thead>
+        <tbody class="tablaResultTotales tablabody">
+          <tr *ngIf="sinRegistros">
+            <td colspan="15" style="text-align:center">No se encontraron registros</td>
+          </tr>
+          <tr style="cursor: pointer;" *ngFor="let resultNom35 of reporteresultNom35"
+            (click)="getResultadoEncuestaPorEmpleado(resultNom35.idempleado,resultNom35.empleado,resultNom35.puntos,resultNom35.desCal,true )">
+            <td style="width: 15%;" class="reng td_Result_Totales_Cabecera">{{resultNom35.empleado}} </td>
+            <td style="width: 5%" class="reng td_Result_Totales_Cabecera">{{resultNom35.puntos}}</td>
+            <td style="width: 1%" class="reng "></td>
+            <td [class.nulo]="resultNom35.desCal === 'Nulo o despreciable'" [class.bajo]="resultNom35.desCal === 'Bajo'"
+              [class.medio]="resultNom35.desCal === 'Medio'" [class.alto]="resultNom35.desCal === 'Alto'"
+              [class.muyAlto]="resultNom35.desCal === 'Muy alto'" style="width: 5%"
+              class="reng td_Result_Calif_Cabecera">
+              {{resultNom35.desCal}}
+            </td>
+          </tr>
+        </tbody>
+
+      </table>
+
+      <div *ngIf="resultNom35">
+        <div class="pull-right divResultadoCabecera">
+
+          <mat-icon *ngIf="encuestaPorEmpresa" matTooltip="Niveles de Riesgo" (click)="getMostrarPor('Niveles')"
+            class="inputNombreRes pull-right" style="text-align: end; font-size: 34px!important;
+         margin-right: 50px; margin-left: 17px;">assessment</mat-icon>
+          <span *ngIf="!encuestaPorEmpresa && resultNom35" class="inputNombreRes">Nombre del empleado</span>
+          <input *ngIf="!encuestaPorEmpresa && resultNom35" type="text" class="inputNombreRes" disabled
+            value="{{resEmpleado}}">
+          <mat-icon matTooltip="Graficos" *ngIf="encuestaPorEmpresa" (click)="getMostrarPor('graficos')"
+            class="inputNombreRes pull-right" style="text-align: end; font-size: 34px!important;"> pie_chart</mat-icon>
+          <mat-icon style="cursor: pointer;
+         margin: 9px 74px 0px 0px;
+         font-size: 34px!important;" matTooltip="Empresa" class=" pull-right"
+            *ngIf="resultNom35 && encuestaPorEmpleado" (click)="getMostrarPor('empresa')"> business</mat-icon>
+        </div>
+
+        <div *ngIf="encuestaPorEmpleado && resultNom35">
+          <table style="width: 72%;" id="tableResultEmpleado" [class.fuenteTablasResultadosResize]="resizeResultNom035"
+            [class.fuenteTablasResultados]="!resizeResultNom035"
+            class=" table table-striped pull-right cellspacing dataTable">
+            <thead>
+              <tr>
+                <th class="reng renglonEncabezadoInicio colorEncabezado">Resultado Final</th>
+                <th class="reng renglonEncabezadoMin colorEncabezado">Preguntas</th>
+                <th matTooltip="Rango de Puntos" class="reng renglonEncabezadoMin colorEncabezado">Rango Pts</th>
+                <th class="reng renglonEncabezadoMin colorEncabezado">Resultado</th>
+                <th matTooltip="Nulo o despreciable" class="reng renglonEncabezadoMin nulo">Nulo...</th>
+                <th class="reng renglonEncabezadoMin bajo">Bajo</th>
+                <th class="reng renglonEncabezadoMin medio">Medio</th>
+                <th class="reng renglonEncabezadoMin alto">Alto</th>
+                <th class="reng renglonEncabezadoMin muyAlto">Muy alto</th>
+                <th class="reng renglonEncabezadoFinal colorEncabezado">Calificación</th>
+              </tr>
+            </thead>
+            <tbody class="tablabody" style="height: 72%;">
+              <tr *ngIf="sinRegistros">
+                <td colspan="15" style="text-align:center">No se encontraron registros</td>
+              </tr>
+              <tr>
+                <td class="reng renglonResultadosInicio">Resultado Final</td>
+                <td class="reng renglonResultadosMin">46</td>
+                <td class="reng renglonResultadosMin">0-184</td>
+                <td class="reng renglonResultadosMin">{{resPuntos}}</td>
+                <td class="reng renglonResultadosMin">0-19</td>
+                <td class="reng renglonResultadosMin">20-44</td>
+                <td class="reng renglonResultadosMin">45-69</td>
+                <td class="reng renglonResultadosMin">70-89</td>
+                <td class="reng renglonResultadosMin">90+</td>
+                <td class="reng renglonResultadosFinal" [class.nulo]="resDesCal === 'Nulo o despreciable'"
+                  [class.bajo]="resDesCal === 'Bajo'" [class.medio]="resDesCal === 'Medio'"
+                  [class.alto]="resDesCal === 'Alto'" [class.muyAlto]="resDesCal === 'Muy alto'">
+                  {{resDesCal}}
+                </td>
+              </tr>
+            </tbody>
+
+          </table>
+          <table style="width: 72%;" id="tableResultEmpleadoCat"
+            [class.fuenteTablasResultadosResize]="resizeResultNom035"
+            [class.fuenteTablasResultados]="!resizeResultNom035"
+            class=" table table-striped pull-right cellspacing dataTable">
+            <thead>
+              <tr>
+                <th class="reng renglonEncabezadoInicio colorEncabezado">Categoria</th>
+                <th class="reng renglonEncabezadoMin colorEncabezado">Preguntas</th>
+                <th matTooltip="Rango de Puntos" class="reng renglonEncabezadoMin colorEncabezado">Rango Pts</th>
+                <th matTooltip="Pts Categoria" class="reng renglonEncabezadoMin colorEncabezado">Pts Cat</th>
+                <th matTooltip="Nulo o despreciable" class="reng renglonEncabezadoMin nulo">Nulo...</th>
+                <th class="reng renglonEncabezadoMin bajo">Bajo</th>
+                <th class="reng renglonEncabezadoMin medio">Medio</th>
+                <th class="reng renglonEncabezadoMin alto">Alto</th>
+                <th class="reng renglonEncabezadoMin muyAlto">Muy alto</th>
+                <th class="reng renglonEncabezadoFinal colorEncabezado">Calificación</th>
+              </tr>
+            </thead>
+            <tbody class="tablabody" style="height: 72%;">
+              <tr *ngIf="sinRegistros">
+                <td colspan="15" style="text-align:center">No se encontraron registros</td>
+              </tr>
+              <tr *ngFor="let categoriaEmpleado of reporteresultCategoriaEmpleado ">
+                <td class="reng renglonResultadosInicio">{{categoriaEmpleado.categoria}}</td>
+                <td class="reng renglonResultadosMin">{{categoriaEmpleado.numPreguntas}}</td>
+                <td class="reng renglonResultadosMin">{{categoriaEmpleado.rangoPreguntas}}</td>
+                <td class="reng renglonResultadosMin">{{categoriaEmpleado.puntos}}</td>
+                <td class="reng renglonResultadosMin">{{categoriaEmpleado.nullDespreciableCadena}}</td>
+                <td class="reng renglonResultadosMin">{{categoriaEmpleado.bajoCadena}}</td>
+                <td class="reng renglonResultadosMin">{{categoriaEmpleado.medioCadena}}</td>
+                <td class="reng renglonResultadosMin">{{categoriaEmpleado.altoCadena}}</td>
+                <td class="reng renglonResultadosMin">{{categoriaEmpleado.muyAltoCadena}}</td>
+                <td [class.nulo]="categoriaEmpleado.desCal === 'Nulo o despreciable'"
+                  [class.bajo]="categoriaEmpleado.desCal === 'Bajo'"
+                  [class.medio]="categoriaEmpleado.desCal === 'Medio'"
+                  [class.alto]="categoriaEmpleado.desCal === 'Alto'"
+                  [class.muyAlto]="categoriaEmpleado.desCal === 'Muy alto'" class="reng renglonResultadosFinal">
+                  {{categoriaEmpleado.desCal}}
+                </td>
+              </tr>
+            </tbody>
+
+          </table>
+
+          <table style="width: 72%;" id="tableResultEmpleadoDom"
+            [class.fuenteTablasResultadosResize]="resizeResultNom035"
+            [class.fuenteTablasResultados]="!resizeResultNom035"
+            class=" table table-striped pull-right cellspacing dataTable">
+            <thead>
+              <tr>
+                <th class="reng renglonEncabezadoInicio colorEncabezado">Dominio</th>
+                <th class="reng renglonEncabezadoMin colorEncabezado">Preguntas</th>
+                <th matTooltip="Rango de Puntos" class="reng renglonEncabezadoMin colorEncabezado">Rango Pts</th>
+                <th matTooltip="Pts Categoria" class="reng renglonEncabezadoMin colorEncabezado">Pts Cat</th>
+                <th matTooltip="Nulo o despreciable" class="reng renglonEncabezadoMin nulo">Nulo...</th>
+                <th class="reng renglonEncabezadoMin bajo">Bajo</th>
+                <th class="reng renglonEncabezadoMin medio">Medio</th>
+                <th class="reng renglonEncabezadoMin alto">Alto</th>
+                <th class="reng renglonEncabezadoMin muyAlto">Muy alto</th>
+                <th class="reng renglonEncabezadoFinal colorEncabezado">Calificación</th>
+              </tr>
+            </thead>
+            <tbody class="tablabody" style="height: 72%;">
+              <tr *ngIf="sinRegistros">
+                <td colspan="15" style="text-align:center">No se encontraron registros</td>
+              </tr>
+              <tr *ngFor="let dominioEmpleado of reporteresultDominioEmpleado ">
+                <td class="reng renglonResultadosInicio">{{dominioEmpleado.dominio}}</td>
+                <td class="reng renglonResultadosMin">{{dominioEmpleado.numPreguntas}}</td>
+                <td class="reng renglonResultadosMin">{{dominioEmpleado.rangoPreguntas}}</td>
+                <td class="reng renglonResultadosMin">{{dominioEmpleado.puntos}}</td>
+                <td class="reng renglonResultadosMin">{{dominioEmpleado.nullDespreciableCadena}}</td>
+                <td class="reng renglonResultadosMin">{{dominioEmpleado.bajoCadena}}</td>
+                <td class="reng renglonResultadosMin">{{dominioEmpleado.medioCadena}}</td>
+                <td class="reng renglonResultadosMin">{{dominioEmpleado.altoCadena}}</td>
+                <td class="reng renglonResultadosMin">{{dominioEmpleado.muyAltoCadena}}</td>
+                <td [class.nulo]="dominioEmpleado.desCal === 'Nulo o despreciable'"
+                  [class.bajo]="dominioEmpleado.desCal === 'Bajo'" [class.medio]="dominioEmpleado.desCal === 'Medio'"
+                  [class.alto]="dominioEmpleado.desCal === 'Alto'"
+                  [class.muyAlto]="dominioEmpleado.desCal === 'Muy alto'" class="reng renglonResultadosFinal">
+                  {{dominioEmpleado.desCal}}
+                </td>
+              </tr>
+            </tbody>
+
+          </table>
+        </div>
+        <div *ngIf="encuestaPorEmpresa">
+
+          <table style="width: 72%;" id="tableResultEmpresa" [class.fuenteTablasResultadosResize]="resizeResultNom035"
+            [class.fuenteTablasResultados]="!resizeResultNom035"
+            class="table table-striped pull-right cellspacing dataTable">
+            <thead>
+              <tr>
+                <th class="reng renglonEncabezadoInicioEmp colorEncabezado">Resultado Final</th>
+                <th matTooltip="Numero de Personas" class="reng colorEncabezado renglonEncabezadoMed">Num. Personas</th>
+                <th matTooltip="Nulo o despreciable" class="reng nulo renglonEncabezadoMed">Nulo...</th>
+                <th class="reng bajo renglonEncabezadoMed">Bajo</th>
+                <th class="reng medio renglonEncabezadoMed">Medio</th>
+                <th class="reng alto renglonEncabezadoMed">Alto</th>
+                <th class="reng muyAlto renglonEncabezadoMed">Muy alto</th>
+                <th class="reng colorEncabezado renglonEncabezadoFinal">Calificación</th>
+              </tr>
+            </thead>
+            <tbody class="tablabody" style="height: 72%;">
+              <tr *ngIf="sinRegistros">
+                <td colspan="15" style="text-align:center">No se encontraron registros</td>
+              </tr>
+              <tr *ngFor="let totalesEmpresa of reporteresultTotalesEmpresa">
+                <td class="reng renglonResultadosInicio">Resultado Final</td>
+                <td class="reng renglonResultadosMed">{{totalesEmpresa.numPreguntas}}</td>
+                <td class="reng renglonResultadosMed">{{totalesEmpresa.nullDespreciable}}</td>
+                <td class="reng renglonResultadosMed">{{totalesEmpresa.bajo}}</td>
+                <td class="reng renglonResultadosMed">{{totalesEmpresa.medio}}</td>
+                <td class="reng renglonResultadosMed">{{totalesEmpresa.alto}}</td>
+                <td class="reng renglonResultadosMed">{{totalesEmpresa.muyAlto}}</td>
+                <td [class.nulo]="totalesEmpresa.desCal === 'Nulo o despreciable'"
+                  [class.bajo]="totalesEmpresa.desCal === 'Bajo'" [class.medio]="totalesEmpresa.desCal === 'Medio'"
+                  [class.alto]="totalesEmpresa.desCal === 'Alto'" [class.muyAlto]="totalesEmpresa.desCal === 'Muy alto'"
+                  class="reng renglonResultadosFinal">
+                  {{totalesEmpresa.desCal}}
+                </td>
+              </tr>
+            </tbody>
+          </table>
+
+          <table style="width: 72%;" id="tableResultEmpresaCat"
+            [class.fuenteTablasResultadosResize]="resizeResultNom035"
+            [class.fuenteTablasResultados]="!resizeResultNom035"
+            class="table table-striped pull-right cellspacing dataTable">
+            <thead>
+              <tr>
+                <th class="reng colorEncabezado renglonEncabezadoInicioEmp">Categoria</th>
+                <th matTooltip="Numero de Personas" class="reng colorEncabezado renglonEncabezadoMed">Num. Personas</th>
+                <th matTooltip="Nulo o despreciable " class="reng nulo renglonEncabezadoMed">Nulo...</th>
+                <th class="reng bajo renglonEncabezadoMed">Bajo</th>
+                <th class="reng medio renglonEncabezadoMed">Medio</th>
+                <th class="reng alto renglonEncabezadoMed">Alto</th>
+                <th class="reng muyAlto renglonEncabezadoMed">Muy alto</th>
+                <th class="reng colorEncabezado renglonEncabezadoFinal">Calificación</th>
+              </tr>
+            </thead>
+            <tbody class="tablabody" style="height: 72%;">
+              <tr *ngIf="sinRegistros">
+                <td colspan="15" style="text-align:center">No se encontraron registros</td>
+              </tr>
+              <tr *ngFor="let categoriaEmpresa of reporteresultCategoriaEmpresa  ">
+                <td class="reng renglonResultadosInicio">{{categoriaEmpresa.categoria}}</td>
+                <td class="reng renglonResultadosMed">{{categoriaEmpresa.numPreguntas}}</td>
+                <td class="reng renglonResultadosMed">{{categoriaEmpresa.nullDespreciable}}</td>
+                <td class="reng renglonResultadosMed">{{categoriaEmpresa.bajo}}</td>
+                <td class="reng renglonResultadosMed">{{categoriaEmpresa.medio}}</td>
+                <td class="reng renglonResultadosMed">{{categoriaEmpresa.alto}}</td>
+                <td class="reng renglonResultadosMed">{{categoriaEmpresa.muyAlto}}</td>
+                <td [class.nulo]="categoriaEmpresa.desCal === 'Nulo o despreciable'"
+                  [class.bajo]="categoriaEmpresa.desCal === 'Bajo'" [class.medio]="categoriaEmpresa.desCal === 'Medio'"
+                  [class.alto]="categoriaEmpresa.desCal === 'Alto'"
+                  [class.muyAlto]="categoriaEmpresa.desCal === 'Muy alto'" class="reng renglonResultadosFinal">
+                  {{categoriaEmpresa.desCal}}
+                </td>
+              </tr>
+            </tbody>
+          </table>
+
+          <table style="width: 72%;" id="tableResultEmpresaDom"
+            [class.fuenteTablasResultadosResize]="resizeResultNom035"
+            [class.fuenteTablasResultados]="!resizeResultNom035"
+            class="table table-striped pull-right cellspacing dataTable">
+            <thead>
+              <tr>
+                <th class="reng colorEncabezado renglonEncabezadoInicioEmp">Dominio</th>
+                <th matTooltip="Numero de Personas" class="reng colorEncabezado renglonEncabezadoMed">Num. Personas</th>
+                <th matTooltip="Nulo o despreciable " class="reng nulo renglonEncabezadoMed">Nulo...</th>
+                <th class="reng bajo renglonEncabezadoMed">Bajo</th>
+                <th class="reng medio renglonEncabezadoMed">Medio</th>
+                <th class="reng alto renglonEncabezadoMed">Alto</th>
+                <th class="reng muyAlto renglonEncabezadoMed">Muy alto</th>
+                <th class="reng colorEncabezado renglonEncabezadoFinal">Calificación</th>
+              </tr>
+            </thead>
+            <tbody class="tablabody" style="height: 72%;">
+              <tr *ngIf="sinRegistros">
+                <td colspan="15" style="text-align:center">No se encontraron registros</td>
+              </tr>
+              <tr *ngFor="let dominioEmpresa of reporteresultDominioEmpresa ">
+                <td class="reng renglonResultadosInicio">{{dominioEmpresa.dominio}}</td>
+                <td class="reng renglonResultadosMed">{{dominioEmpresa.numPreguntas}}</td>
+                <td class="reng renglonResultadosMed">{{dominioEmpresa.nullDespreciable}}</td>
+                <td class="reng renglonResultadosMed">{{dominioEmpresa.bajo}}</td>
+                <td class="reng renglonResultadosMed">{{dominioEmpresa.medio}}</td>
+                <td class="reng renglonResultadosMed">{{dominioEmpresa.alto}}</td>
+                <td class="reng renglonResultadosMed">{{dominioEmpresa.muyAlto}}</td>
+                <td [class.nulo]="dominioEmpresa.desCal === 'Nulo o despreciable'"
+                  [class.bajo]="dominioEmpresa.desCal === 'Bajo'" [class.medio]="dominioEmpresa.desCal === 'Medio'"
+                  [class.alto]="dominioEmpresa.desCal === 'Alto'" [class.muyAlto]="dominioEmpresa.desCal === 'Muy alto'"
+                  class="reng renglonResultadosFinal">
+                  {{dominioEmpresa.desCal}}
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <span class="inputNombreRes pull-left leyendas" style=" text-align: left; width: 219px;"
+          *ngIf="encuestaPorEmpresa || resultNom35 || encuestaPorEmpleado">Reporte actualizado al: 15/09/2020</span>
+      </div>
+      <div *ngIf="config.totalItems">
+        <table style="background-color: #EAEAEA; box-shadow: 0 0px 0px 0px #EAEAEA!important;">
+          <tr role="row">
+            <td colspan="7">
+              <div class="row" style="font-family: 'Raleway', sans-serif; justify-content: center;">
+                <pagination-controls class="my-pagination" (pageChange)="pageChanged($event)" previousLabel=""
+                  nextLabel=""></pagination-controls>
+              </div>
+              <div class="row" style="font-family: 'Raleway', sans-serif; justify-content: center;">
+                <label style="padding-left: 15px;" class="labeltext">{{config.totalItems}} Registros en
+                  {{config.totalPages}} {{pagina}} </label>
+              </div>
+            </td>
+          </tr>
+        </table>
+
+      </div>
+    </div>
+  </div>
+
+
+  <!-- <div class="modal fade" id="modalDetallePersona" role="dialog"
+    style="margin-top: 60px; padding-right: 289px!important;" data-keyboard="false">
+    <div class="modal-dialog modal-md">
+      <div class="modal-content" style="width: 600px; ">
+        <div style="padding: 16px 0;" class="modal-header">
+          <img src="assets/icons/header-modal.png" style="width:100%;height:8px">
+        </div>
+        <div style="padding-top: 0 !important;" class="modal-body">
+          <h4 class="modal-title text-center" style="font-size: 16px;"><b>Detalle de registro</b></h4>
+          <div>
+            <div class="col-lg-12 col-md-12 col-sm-12">
+              <div class="row">
+
+                <div class="col-lg-12 col-md-12 col-sm-12">
+                  <div class="table-responsive">
+
+                    <table class="table table-striped  cellspacing dataTable">
+                      <thead>
+                        <tr>
+                          <th style="width:20% !important;" class="reng">Fecha</th>
+                          <th class="reng">Unidad</th>
+                          <th class="reng">Área</th>
+                          <th class="reng">Duración</th>
+                          <th class="reng">Detalle</th>
+                        </tr>
+                      </thead>
+
+                      <tbody class="tablabody">
+                        <tr *ngIf="sinRegistros">
+                          <td *ngIf="sinRegistros" style="text-align:center">No se encontraron registros</td>
+                        </tr>
+                        <tr *ngFor="let item of resultDetallePersona | paginate: config">
+                          <td>{{item.fecha}}</td>
+                          <td>{{item.unidad}}</td>
+                          <td>{{item.area}}</td>
+                          <td>{{item.horas}}</td>
+                          <td>{{item.detalle}}</td>
+                        </tr>
+                      </tbody>
+                    </table>
+                    <div class="pull-right">
+                      <div class="col-md-12 col-12" style="text-align:right;padding: 0;">
+                        <button id="btnCancelar" class="btn btn-cancel" style="width: 100px;"
+                          data-dismiss="modal">Cerrar</button>&nbsp;
+                      </div>
+                    </div>
+
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="row" style="text-align: center; margin-bottom: 10px;">
+
+            </div>
+          </div>
+        </div>
+        <div class="modal-footer" style="display: none;">
+          <div class="pull-right" style="padding: 16px;">
+            <div class="col-md-12 col-12" style="text-align:right; padding-bottom: 2%; padding-top:10px">
+              <button id="btnCancelar" class="btn btn-cancel" style="width: 100px;"
+                data-dismiss="modal">Cancelar</button>&nbsp;
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div> -->
+
+
+
+
+  <!-- Modal para encuestados -->
+  <!-- Modal para encuestados -->
+  <div class="modal fade" id="modalEncuestados" role="dialog" style="margin-top: 60px; padding-right: 289px!important;"
+    data-backdrop="static" data-keyboard="false">
+    <div class="modal-dialog modal-md">
+      <div class="modal-content" style="width: 900px; ">
+        <div style="padding: 16px 0;" class="modal-header">
+          <img src="assets/icons/header-modal.png" style="width:100%;height:8px">
+        </div>
+        <div style="padding-top: 0 !important;" class="modal-body">
+          <h4 class="modal-title text-center" style="font-size: 16px;"><b>Reporte de participación</b></h4>
+          <div>
+            <div class="col-lg-12 col-md-12 col-sm-12">
+              <div class="row">
+                <div class="panel panel-default">
+                  <div class="panel-heading" style="padding: 10px;">
+                    <h4 class="titulo" style="margin: 0px; font-size: 16px;">
+                      Personal que ya realizó la encuesta
+                    </h4>
+                  </div>
+                  <div class="panel-body">
+                    <div class="col-lg-12 col-md-12 col-sm-12">
+                      <div class="table-responsive">
+
+                        <table class="table table-striped  cellspacing dataTable">
+                          <thead>
+                            <tr>
+                              <th style="width:20% !important;" class="reng">Fecha</th>
+                              <th class="reng">Nombre</th>
+                              <th class="reng">Email</th>
+
+                            </tr>
+                          </thead>
+
+                          <tbody class="tablabody">
+                            <tr *ngIf="sinRegistros">
+                              <td colspan="15" style="text-align:center">No se encontraron registros</td>
+                            </tr>
+                            <tr *ngFor="let encuesta of reporteEncuestados">
+                              <td style="width:20% !important;" class="reng">{{encuesta.fecha}}</td>
+                              <td class="reng">
+                                {{encuesta.apellidoPat}}&nbsp;{{encuesta.aperllidoMat}},&nbsp;{{encuesta.nombre}}</td>
+                              <td class="reng">{{encuesta.email}}</td>
+
+                            </tr>
+                          </tbody>
+                        </table>
+                        <div class="pull-right">
+                          <div class="col-md-12 col-12" style="text-align:right;padding: 0;">
+                            <button id="btnCancelar" class="btn btn-cancel" style="width: 100px;"
+                              data-dismiss="modal">Cerrar</button>&nbsp;
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="row" style="text-align: center; margin-bottom: 10px;">
+
+            </div>
+          </div>
+        </div>
+        <div class="modal-footer" style="display: none;">
+          <div class="pull-right" style="padding: 16px;">
+            <div class="col-md-12 col-12" style="text-align:right; padding-bottom: 2%; padding-top:10px">
+              <button id="btnCancelar" class="btn btn-cancel" style="width: 100px;"
+                data-dismiss="modal">Cancelar</button>&nbsp;
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="modal fade" id="modalNoEncuestados" role="dialog"
+    style="margin-top: 60px; padding-right: 289px!important;" data-backdrop="static" data-keyboard="false">
+    <div class="modal-dialog modal-md">
+      <div class="modal-content" style="width: 800px; ">
+        <div style="padding: 16px 0;" class="modal-header">
+          <img src="assets/icons/header-modal.png" style="width:100%;height:8px">
+        </div>
+        <div style="padding-top: 0 !important;padding-bottom: 0 !important;" class="modal-body">
+          <h4 class="modal-title text-center" style="font-size: 16px;"><b>Reporte de participación</b></h4>
+          <div>
+            <div class="col-lg-12 col-md-12 col-sm-12">
+              <div class="row">
+                <div class="panel panel-default">
+                  <div class="panel-heading" style="padding: 10px;">
+                    <h4 class="titulo" style="margin: 0px; font-size: 16px;">
+                      Personal que no ha realizado la encuesta
+                    </h4>
+                  </div>
+                  <div class="panel-body">
+                    <div class="col-lg-12 col-md-12 col-sm-12">
+                      <div class="table-responsive">
+
+                        <table class="table table-striped  cellspacing dataTable">
+                          <thead>
+                            <tr>
+                              <th style="width:30% !important;" class="reng">Nombre</th>
+                              <th style="width:30% !important;" class="reng">Email</th>
+                              <th style="width:15% !important; text-align: center; " class="cicon">Recordatorio</th>
+                            </tr>
+                          </thead>
+
+                          <tbody class="tablabody">
+                            <tr *ngIf="sinRegistros">
+                              <td colspan="15" style="text-align:center">No se encontraron registros</td>
+                            </tr>
+                            <tr *ngFor="let encuesta of reporteNoEncuestados">
+                              <td style="width:30% !important;" class="reng">
+                                {{encuesta.apellidoPat}}&nbsp;{{encuesta.aperllidoMat}},&nbsp;{{encuesta.nombre}}</td>
+                              <td style="width:30% !important;" class="reng">{{encuesta.email}}</td>
+                              <td style="width:15% !important; padding-bottom:0em !important; text-align: center;"
+                                class="cicon">
+                                <mat-icon matTooltip="Enviar recordatorio" class="buttonIcon"
+                                  *ngIf="encuesta.recordatorio == 1"
+                                  (click)="enviarRecordatorio(encuesta.id,encuesta.email)"> email</mat-icon>
+                                <mat-icon matTooltip="Habilitado dentro de 24 horas" class="buttonIconInactivo"
+                                  *ngIf="encuesta.recordatorio == 0"> email</mat-icon>
+
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                        <div class="pull-right">
+                          <div class="col-md-12 col-12" style="text-align:right;padding: 0;">
+                            <button id="btnCancelar" class="btn btn-cancel" style="width: 100px;"
+                              data-dismiss="modal">Cerrar</button>&nbsp;
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="row" style="text-align: center; margin-bottom: 10px;">
+
+            </div>
+          </div>
+        </div>
+        <div class="modal-footer" style="display: none;">
+
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="modal fade" id="modalGraficas" role="dialog" style="margin-top: 30px; padding-right: 289px!important;"
+    data-backdrop="static" data-keyboard="false">
+    <div class="modal-dialog modal-md">
+      <div class="modal-content" style="width: 1030px; ">
+        <div style="padding: 10px 0;" class="modal-header">
+          <img src="assets/icons/header-modal.png" style="width:100%;height:8px">
+        </div>
+        <div style="padding-top: 0 !important;" class="modal-body">
+
+          <div>
+            <div class="col-lg-12 col-md-12 col-sm-12">
+              <div class="row">
+                <div class="panel panel-default" style="padding-left: 34px;">
+                  <div class="panel-heading" style="padding: 10px;">
+                    <h4 class="titulo" style="margin: 0px; font-size: 16px;">
+                      {{tituloGrafico}}
+                    </h4>
+                  </div>
+                  <div align="center" style="width: 1125px;" class="panel-body" id="divGraficos">
+                    <div class="col-lg-10 col-md-12 col-sm-12">
+                      <div id="divContenedorGrafica" class="table-responsive">
+
+                        <canvas *ngIf="charTotales" id="chartTotales" style="display: inline;"></canvas>
+                        <table *ngIf="charCategorias">
+                          <thead>
+                          </thead>
+                          <tbody class="tBodyChart">
+                            <tr>
+                              <td *ngIf="charAmbiente">
+                                <mat-icon matTooltip="Regresar" (click)="getMostrarPor('charCategorias')"
+                                  style="cursor: pointer; padding-left: 10px; font-size: 23px!important;"
+                                  *ngIf="regresar">arrow_back_ios</mat-icon>
+                                <span class="tituloGraficaCat" [class.pull-right]="regresar"
+                                  [class.tituloGraficaCatMax]="regresar">Ambiente de trabajo</span>
+                                <canvas (click)="setOcultarChartCategorias('Ambiente')" id="charCategoriaAmbiente"
+                                  style="display: inline;"></canvas>
+                              </td>
+                              <td *ngIf="charFactores">
+                                <mat-icon matTooltip="Regresar" (click)="getMostrarPor('charCategorias')"
+                                  style="cursor: pointer; padding-left: 10px; font-size: 23px!important;"
+                                  *ngIf="regresar" class="">arrow_back_ios</mat-icon>
+                                <span class="tituloGraficaCat" [class.pull-right]="regresar"
+                                  [class.tituloGraficaCatMax]="regresar">Factores propios de la actividad</span>
+                                <canvas (click)="setOcultarChartCategorias('Factores')" id="charCategoriaFactores"
+                                  style="display: inline;"></canvas>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td *ngIf="charLiderazgo">
+                                <mat-icon matTooltip="Regresar" (click)="getMostrarPor('charCategorias')"
+                                  style="cursor: pointer; padding-left: 10px; font-size: 23px!important;"
+                                  *ngIf="regresar" class="">arrow_back_ios</mat-icon>
+                                <span class="tituloGraficaCat" [class.pull-right]="regresar"
+                                  [class.tituloGraficaCatMax]="regresar"> Liderazgo y relaciones en el trabajo</span>
+                                <canvas (click)="setOcultarChartCategorias('Liderazgo')" id="charCategoriaOrganizacion"
+                                  style="display: inline;"></canvas>
+                              </td>
+                              <td *ngIf="charOrganizacion">
+                                <mat-icon matTooltip="Regresar" (click)="getMostrarPor('charCategorias')"
+                                  style="cursor: pointer; padding-left: 10px; font-size: 23px!important;"
+                                  *ngIf="regresar" class="">arrow_back_ios</mat-icon>
+                                <span class="tituloGraficaCat" [class.pull-right]="regresar"
+                                  [class.tituloGraficaCatMax]="regresar"> Organización del tiempo de trabajo</span>
+                                <canvas (click)="setOcultarChartCategorias('Organización')" id="charCategoriaLiderazgo"
+                                  style="display: inline;"></canvas>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                        <select *ngIf="charDominio" style="width: 301px;"
+                          class="pull-right form-control-sm opc custom-select-sm col-12"
+                          (change)="graficaDominio($event)">
+                          <option value="Carga de trabajo">Carga de trabajo</option>
+                          <option *ngFor="let dominios of dominioFiltro" [value]="dominios.dominio">{{dominios.dominio}}
+                          </option>
+                        </select>
+                        <canvas *ngIf="charDominio" #charDominio id="charDominio" style="display: inline;"></canvas>
+                        <div class="pull-right">
+                          <div class="col-md-12 col-12" style="text-align:right;padding: 0;">
+                            <button id="btnCancelar" class="btn btn-cancel" style="width: 100px;"
+                              data-dismiss="modal">Cerrar</button>&nbsp;
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div style="margin-top: -22px; margin-left: 24px;" class="pull-left">
+              <div class="col-md-12 col-12" style="text-align:right;">
+                <span class="opGraficos" [class.leyendas]="charTotales" [ngClass]="{opcionesGrafico: hoverTotal}"
+                  (mouseover)="hoverTotal = true" (mouseleave)="hoverTotal = false"
+                  (click)="getMostrarPor('charTotales')">Total</span><span>/</span><span class="opGraficos"
+                  [class.leyendas]="charCategorias" (click)="getMostrarPor('charCategorias')"
+                  [ngClass]="{opcionesGrafico: hoverCat}" (mouseover)="hoverCat = true"
+                  (mouseleave)="hoverCat = false">Por Categoria</span><span [class.leyendas]="charDominio"
+                  (click)="getMostrarPor('charDominio')" class="opGraficos" [ngClass]="{opcionesGrafico: hoverDom}"
+                  (mouseover)="hoverDom = true" (mouseleave)="hoverDom = false">/Por Dominio</span>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="modal-footer" style="display: none;">
+
+          <div class="pull-right" style="padding: 16px;">
+            <div class="col-md-12 col-12" style="text-align:right; padding-bottom: 2%; padding-top:10px">
+              <button id="btnCancelar" class="btn btn-cancel" style="width: 100px;"
+                data-dismiss="modal">Cancelar</button>&nbsp;
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="modal fade" id="modalAcciones" role="dialog" style="margin-top: 30px; padding-right: 289px!important;"
+    data-backdrop="static" data-keyboard="false">
+    <div class="modal-dialog modal-md">
+      <div class="modal-content" style="width: 1073px; ">
+        <div style="padding: 10px 0;" class="modal-header">
+          <img src="assets/icons/header-modal.png" style="width:100%;height:8px">
+        </div>
+        <div style="padding-top: 0 !important;" class="modal-body">
+
+          <div>
+            <div class="col-lg-12 col-md-12 col-sm-12">
+              <div class="row">
+                <div class="panel panel-default" style="padding-left: 34px;">
+                  <div class="panel-heading" style="padding: 10px;">
+                    <h4 class="titulo" style="margin: 0px; font-size: 16px;">
+                      {{tituloGrafico}}
+                    </h4>
+                  </div>
+                  <div style="width: 1125px;" class="panel-body">
+                    <div class="col-lg-10 col-md-12 col-sm-12">
+                      <div class="table-responsive">
+                        <table class="fuenteTablasResultados table table-striped  cellspacing dataTable">
+                          <thead>
+                            <tr>
+                              <th style="width:4% !important;" class="reng">Nivel de Riesgo</th>
+                              <th style="width:30% !important;" class="reng">Necesidad de Acción </th>
+                            </tr>
+                          </thead>
+
+                          <tbody class="tBodyChart">
+                            <tr>
+                              <td style="width:4% !important;" class="reng muyAlto">
+                                Muy Alto
+                              </td>
+                              <td style="width:30% !important;" class="reng">
+                                Se requiere realizar el análisis de cada categoría y dominio para establecer las
+                                acciones de intervención apropiadas, mediante un Programa de intervención que deberá
+                                incluir evaluaciones especificas1, y contemplar campañas de sensibilización, revisar la
+                                política de prevención de riesgos psicosociales y programas para la prevención de los
+                                factores de riesgo psicosocial, la promoción de un entorno organizacional favorable y la
+                                prevención de la violencia laboral, así como reforzar su aplicación y difusión.
+                              </td>
+                            </tr>
+                            <tr>
+                              <td style="width:4% !important;" class="reng alto">
+                                Alto
+                              </td>
+                              <td style="width:30% !important;" class="reng">
+                                Se requiere realizar un análisis de cada categoría y dominio, de manera que se puedan
+                                determinar las acciones de intervención apropiadas a través de un Programa de
+                                intervención, que podrá incluir una evaluación específica1 y deberá incluir una campaña
+                                de sensibilización, revisar la política de prevención de riesgos psicosociales y
+                                programas para la prevención de los factores de riesgo psicosocial, la promoción de un
+                                entorno organizacional favorable y la prevención de la violencia laboral, así como
+                                reforzar su aplicación y difusión.
+                              </td>
+                            </tr>
+                            <tr>
+                              <td style="width:4% !important;" class="reng medio">
+                                Medio
+                              </td>
+                              <td style="width:30% !important;" class="reng">
+                                Se requiere revisar la política de prevención de riesgos psicosociales y programas para
+                                la prevención de los factores de riesgo psicosocial, la promoción de un entorno
+                                organizacional favorable y la prevención de la violencia laboral, así como reforzar su
+                                aplicación y difusión, mediante un Programa de intervención.
+                              </td>
+                            </tr>
+                            <tr>
+                              <td style="width:4% !important;" class="reng bajo">
+                                Bajo
+                              </td>
+                              <td style="width:30% !important;" class="reng">
+                                Es necesario una mayor difusión de la política de prevención de riesgos psicosociales y
+                                programas para: la prevención de los factores de riesgo psicosocial, la promoción de un
+                                entorno organizacional favorable y la prevención de la violencia laboral.
+                              </td>
+                            </tr>
+                            <tr>
+                              <td style="width:4% !important;" class="reng nulo">
+                                Nulo
+                              </td>
+                              <td style="width:30% !important;" class="reng">
+                                El riesgo resulta despreciable por lo que no se requieren medidas adicionales.
+                              </td>
+                            </tr>
+                          </tbody>
+
+                        </table>
+
+                        <div class="pull-right">
+                          <div class="col-md-12 col-12" style="text-align:right;padding: 0; margin-top: 10px;">
+                            <button id="btnCancelar" class="btn btn-cancel" style="width: 100px; "
+                              data-dismiss="modal">Cerrar</button>&nbsp;
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="row" style="text-align: center; margin-bottom: 10px;">
+            </div>
+          </div>
+        </div>
+        <div class="modal-footer" style="display: none;">
+
+          <div class="pull-right" style="padding: 16px;">
+            <div class="col-md-12 col-12" style="text-align:right; padding-bottom: 2%; padding-top:10px">
+              <button id="btnCancelar" class="btn btn-cancel" style="width: 100px;"
+                data-dismiss="modal">Cancelar</button>&nbsp;
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>

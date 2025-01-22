@@ -9,16 +9,18 @@ using System.IO;
 using Bitacora.Helpers;
 using AutoMapper;
 using Newtonsoft.Json;
+using Microsoft.AspNetCore.Cors;
 
 namespace Bitacora.Controllers
 {
+    [EnableCors("AllowSpecificOrigins")]
     [Route("api/[controller]")]
     [ApiController]
-    public class ReportesController
+    public class ReportesController : ControllerBase
     {
         ReportesLogic _reportesLogic = new ReportesLogic();
 
-        [HttpPost("[action]/{id}")]
+        [HttpPost("[action]")]
         public object ConsultaDistribucion(DatosReporte datos)
         {
             var lista = _reportesLogic.ConsultaDistribucion(datos);
@@ -223,7 +225,7 @@ namespace Bitacora.Controllers
             //    await stream.CopyToAsync(memory);    
             //}
             memory.Position = 0;
-            var stream = File.OpenRead(file);
+            var stream = System.IO.File.OpenRead(file);
             return new FileStreamResult(stream, "application/octet-stream");
             //return  File(memory, "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",fileName);
             

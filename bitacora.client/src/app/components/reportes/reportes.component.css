@@ -1,0 +1,540 @@
+.bit{
+    padding-top: 15px;
+}
+
+.izq{
+    padding-left: 50px;
+}
+th.bb{
+ width: 25%
+}
+.row{
+    margin:0px;
+}
+.spad{
+    padding: 0px;
+}
+::ng-deep .myOverride .mat-form-field-suffix {
+   
+    display: none!important;
+}
+
+.hide-datepicker-icon mat-datepicker-toggle {
+    display: none !important;    
+}
+
+.tamComp matformfieldnotchedoutline{
+    max-height: 31px !important;
+}
+
+::ng-deep .mat-form-field-hide-placeholder .mat-form-field-wrapper .mat-form-field-underline .mat-form-field-ripple{
+    background-color:black;
+}
+::ng-deep div .ng-invalid .mat-form-field-should-float .mat-focused{
+    color:black !important;
+}
+::ng-deep .mat-form-field.mat-focused .mat-form-field-ripple{background-color:black !important}
+::ng-deep .mat-form-field-appearance-legacy .mat-form-field-underline {
+    background-color: black;
+}
+
+::ng-deep .mat-input-element {
+    caret-color: #777777;
+}
+/* ::ng-deep .mat-select-panel {
+    background: #fff;
+}
+::ng-deep span .ng-star-inserted {
+    color: #000;
+} */
+
+a{
+    color: #007bff!important;
+}
+.clear{
+    height: 20px;
+    background-color: #eaeaea;
+}
+a:hover{
+    text-decoration-line: underline!important;
+}
+.contenedor{
+    height: 100%;
+    background-color: #eaeaea;
+    width: 100%;
+    text-align: center;
+}
+.myOverride .btn-icon1{
+    background-color: #2EA6FF;
+    color: #fff;
+    border-radius: 4px;
+    border-color: #999999;
+    text-transform: capitalize;
+    text-align: center;
+    font-weight: bold;
+    height: 30px;
+    width: 30px;
+    line-height: 22px;
+    right: 0px!important;
+    padding: 5px 10px 10px 10px !important;
+    vertical-align: middle;
+    font-size: 13px;
+    min-width: auto!important;
+    cursor:pointer;
+}
+
+.divFiltros{
+    font-size: 12px!important;
+    background-color: white;
+    padding-left: 10px;
+    padding-top: 10px;
+    margin-bottom: 27px;
+    width: 96%;
+    margin: auto;
+    box-shadow: 0 1px 3px 0px #666;
+    font-weight: bold!important;
+}
+
+.divTablas{
+    background-color: white;
+    width: 96%;
+    margin: auto;
+    font-size: 10pt !important;
+    color: #000 !important;
+}
+.filtro{
+    width: 25%;
+}
+
+::ng-deep .myOverride .mat-icon{
+    height:18px !important;
+    width:18px !important;
+    font-size:18px !important;
+    position: relative;
+    top: -1px;
+    display: inline-block;
+    font-weight: 400;
+    line-height: 1;
+    -webkit-font-smoothing: antialiased;
+    right: 4px;
+}
+.btn-cancel {
+    background-color: #CCCCCC;
+    font-size: 13px;
+    color: #fff;
+    border-radius: 0;
+    border-color: #CCCCCC;
+    text-transform: uppercase;
+    font-weight: bold;
+    width: 100px;;
+}
+
+.btn-cancel:hover, .btn-cancel:active, .btn-cancel:active:hover, .btn-cancel:focus {
+    background-color: #AFAFAF;
+    border-color: #AFAFAF;
+    box-shadow: 2px 2px 4px #ddd;
+}
+.myOverride .btn-icon1:hover {
+    background-color: #0090E8;
+    border-color: #0090E8;
+    box-shadow: 2px 2px 4px #ddd;
+    color: white;
+}
+
+.modal-header{
+    border-bottom: none;
+}
+@media (min-width: 768px) {
+    .container {
+        width: 750px;
+    }
+}
+
+@media (min-width: 992px) {
+    .container {
+        width: 970px;
+    }
+}
+
+@media (min-width: 1200px) {
+    .container {
+        /*width: 1440px;*/
+        width: 95%;
+        padding-left: 3%;
+    }
+}
+
+@media (min-width: 1400px) {
+    .container {
+        width: 95%;
+        padding-left: 1%;
+        /*width: 1170px;*/
+    }
+}
+/* tbody {
+    display:block;
+    height:323px;
+    overflow-y: auto;
+    overflow-x: hidden;
+    font-size: 11px;
+}
+thead, tbody tr {
+    display:table;
+    width:100%;
+    table-layout:fixed;
+} */
+::ng-deep thead tr{
+    color: #303030;
+    padding-left: 16px;
+}
+.opc{
+    padding: 0px 5px;    
+}
+.table th, .table td {
+    padding: 0.35rem;
+    font-size: 10.2pt;
+    color: #000;
+}
+/* .outter-table{
+    overflow-x: scroll;
+    overflow-y: scroll;
+    width: 100%;
+    height: 310px;
+} */
+
+::ng-deep .myOverride span .mat-datepicker-toggle-default-icon.ng-star-inserted {
+    color: #000 !important;
+}
+
+::ng-deep div .ng-invalid .mat-form-field-should-float .mat-focused{
+    color:#000 !important;
+}
+::ng-deep .mat-form-field-hide-placeholder .mat-form-field-wrapper .mat-form-field-underline .mat-form-field-ripple{
+    background-color:green;
+}
+::ng-deep .myOverride .mat-form-field-infix input{
+    color:#103D66!important;
+}
+::ng-deep span .ng-star-inserted{
+    color:#000;    
+}
+
+
+tbody {
+    display:block;
+    height:375px;
+    overflow-y: auto;
+    overflow-x: hidden;
+    font-size: 10px;
+}
+
+thead, tbody tr {
+    display:table;
+    width:100%;
+    table-layout:fixed;/* even columns width , fix width of table too*/
+    
+}
+thead {
+    width:calc( 100% - 1.2em ); /*calc( 100% - 1.2em ) scrollbar is average 1em/16px width, remove it from thead width */
+}
+table {
+    width:100%;
+    
+}
+.horasTotalesEjecutivo{
+    margin-top:10px;
+    margin-left:10px;
+    margin-bottom:30px;
+}
+.tablaEjecutivo{
+    font-size: 20px !important;
+    height: 35px;
+}
+.rowEjecutivo{
+    border: 1px solid #222;
+    margin: 10px 20px !important;
+    width: 95% !important;
+}
+
+.clienth{
+    width: 150px;
+}
+.nombreProh{
+    width: 250px;
+}
+.unidadh{
+    width:100px;
+}
+.table{
+    overflow-x: auto;
+    margin-bottom: 0.7px;
+    box-shadow: 0 1px 3px 0px #666;
+}
+::ng-deep .mat-dialog-content {
+    display: block;
+    margin: 0 -24px;
+    padding: 0 24px;
+    max-height: 60vh !important;
+    overflow: auto;
+    -webkit-overflow-scrolling: touch;
+}
+.eye{
+    width: 60px;
+    cursor: pointer;
+}
+::ng-deep .mat-dialog-container{
+    background:white;
+    color:black
+}
+::ng-deep .mat-calendar-body-selected {
+    background-color: #fff;
+    color: green;
+}
+
+::ng-deep .mat-sort-header-indicator {
+    color: black;
+}
+::ng-deep .mat-sort-header-stem {
+    color: black;
+}
+footer {
+    background: #103D70;
+    color: #ffffff;
+    position: relative!important;
+    
+    width: 100%;
+    border-top: 2px solid #ffffff;
+}
+::ng-deep .modal-backdrop {
+    position: relative!important;
+    padding-right: 289px!important;
+}
+.textoGraficos{
+
+    font-size: 20px;
+    width: 281px;
+}
+.textotitulo{
+    font-size: 23px;
+    font-weight: 800;
+    text-shadow: #00000085  0em 0.19em 0.18em;
+}
+.textotituloCabecera{
+    font-size: 21px!important;
+    font-weight: 700!important;
+    color: #092740!important;
+    margin: 0!important;
+    line-height: 30px!important;
+    padding-top: 26px;
+    
+}
+.cabecerasCatalogos{
+    padding-left: 26px;
+}
+::ng-deep .buttonIcon{
+    height:21px !important;
+    width:21px !important;
+    font-size:20px !important;
+    cursor: pointer;
+}
+::ng-deep .buttonIconInactivo{
+    height:21px !important;
+    width:21px !important;
+    font-size:20px !important;
+    cursor: not-allowed;
+    color: #B0BEC5;
+}
+::ng-deep .myOverride .mat-form-field-appearance-legacy .mat-form-field-underline {
+    height: 0px!important;
+}
+::ng-deep .myOverride .mat-form-field-infix{
+    border: 1px solid #ccc;
+}
+::ng-deep .myOverride span .mat-datepicker-toggle-default-icon.ng-star-inserted {
+    color: #eaeaea00 !important;
+}
+::ng-deep .myOverride .mat-datepicker-toggle-default-icon .mat-datepicker-toggle{
+display: none;
+}
+::ng-deep .myOverride .mat-form-field-infix input {
+    color: black!important;
+    font-family: 'Raleway', sans-serif!important;
+}
+::ng-deep .myOverride input.mat-input-element {
+    padding-left: 11px!important;
+    height: 17px!important;
+    font-size: 14px;
+}
+::ng-deep .myOverride .form-control-sm{
+    border: 1px solid #ccc;
+}
+::ng-deep .myOverride .mat-form-field-wrapper{
+    height: 1px!important;
+}
+.renglonEncabezadoInicio{
+    text-align: center;
+    width: 18.6%;
+    font-size: 25px;
+}
+.renglonResultadosInicio{
+    text-align: left;
+    width: 17.2%;
+}
+
+.renglonEncabezadoMin{
+    text-align: center;
+    width: 4.4%;
+}
+
+.renglonResultadosMin{
+    text-align: center;
+    width:  4%;
+}
+
+.renglonEncabezadoFinal{
+    text-align: center;
+    width: 10%;
+}
+.renglonResultadosFinal{
+    text-align: center;
+    width: 9.1%;
+}
+
+.renglonEncabezadoMed{
+    text-align: center;
+    width: 6.5%;
+}
+
+.renglonResultadosMed{
+    text-align: center;
+    width:  6%;
+}
+.renglonEncabezadoInicioEmp{
+    text-align: center;
+    width: 18.5%;
+}
+.inputNombreRes{
+        margin: 2px 25px 7px;
+        width: 36%;
+        cursor: pointer;
+        margin: 11px 5px 0px 5px;
+}
+.labelTituloRes{
+   margin-left: 25px;
+}
+.opGraficos{
+    cursor: pointer;
+}
+.nulo{
+    background-color: rgba(0, 176, 240, 1);
+}
+.bajo{
+    background-color: rgba(146, 208, 80, 1);
+}
+.medio{
+    background-color: rgba(255, 255, 0, 1);
+}
+.alto{
+    background-color: rgba(255, 192, 0, 1);
+}
+.muyAlto{
+    background-color: rgba(255, 0, 0, 1);
+}
+.colorEncabezado{
+    background-color: #103D66;
+    color:#EAEAEA!important;
+}
+.td_Result_Totales_Cabecera{
+    border-bottom: 2px solid black;
+}
+.td_Result_Calif_Cabecera{
+    border-left: 2px solid black;
+    border-right: 2px solid black;
+    border-bottom: 2px solid black;
+}
+.tituloGraficaCat{
+    font-weight: bold;
+}
+.tituloGraficaCatMax{
+    font-size: 16px!important;
+}
+.tBodyChart{
+    height: auto;
+}
+::ng-deep .tablaResultTotales{
+    /*height: 460px!important;*/
+    font-size: 11px!important;
+}
+
+::ng-deep .fuenteTablasResultados th, .fuenteTablasResultados td {
+    font-size: 11px!important;
+    border-top: 0px solid #dee2e6!important;
+}
+.fuenteTablasResultados thead {
+    width:100%;
+}
+.fuenteTablasResultados{
+    margin-right: 10px;
+}
+
+::ng-deep .fuenteTablasResultadosResize th, .fuenteTablasResultadosResize td {
+    font-size: 9px!important;
+    border-top: 0px solid #dee2e6!important;
+}
+.fuenteTablasResultadosResize thead {
+    width:100%;
+}
+.fuenteTablasResultadosResize{
+    margin-right: 10px;
+}
+option{
+   text-transform: uppercase; 
+}
+.leyendas{
+    font-weight: bold;
+    color: #092740;
+}
+.divResultadoCabecera{
+    width: 73%;
+    height: 44px;
+
+}
+.opcionesGrafico{
+    color: #007bff;
+    font-size: 16px;
+    font-weight: bold;
+}
+::ng-deep iconEmpresa{
+    cursor: pointer;
+    margin: 9px 74px 0px 0px;
+    font-size: 34px!important;
+}
+@media only screen and (max-width: 767px) {
+    .reng{
+        width: 80px;
+    }
+    .det{
+        width: 120px;
+    }
+
+}
+
+.fechasEle {
+    max-height: 30px !important;
+}
+
+.fechaCont {
+    padding: 6px 12px;
+}
+
+.mat-datepicker-toggle {
+    color: #CCCCCC!important; 
+  }
+  
+  .mat-form-field-appearance-outline .mat-form-field-outline {
+    color: #CCCCCC !important;
+  }
+  
+  .mat-form-field-appearance-outline.mat-focused .mat-form-field-outline-thick {
+    color: #CCCCCC !important;
+  }

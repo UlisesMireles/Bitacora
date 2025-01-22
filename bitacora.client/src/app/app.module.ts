@@ -30,14 +30,14 @@ import { AppComponent } from './app.component';
 import { MenuComponent } from './components/menu/menu.component';
 //import { RegistrosCalendarioComponent } from './components/registros-calendario/registros-calendario.component';
 //import { CatalogosComponent, ModalCambioEstatus, ModalReestablecerContrasenia, ModalEliminarRol } from './components/catalogos/catalogos.component';
-//import { ReportesComponent } from './components/reportes/reportes.component';
+import { ReportesComponent } from './components/reportes/reportes.component';
 //import { AvanceRealComponent } from './components/avance-real/avance-real.component';
 //import { CambiocontraseniaComponent } from './components/cambiocontrasenia/cambiocontrasenia.component';
 //import { TokenContraseniaComponent } from './components/token-contrasenia/token-contrasenia.component';
 //import { FiltroPipe } from './pipes/filtro.pipe';
-//import {DialogTable} from './components/reportes/reportes.component';
-//import {DialogTable2} from './components/reportes/reportes.component';
-//import {DialogTable3} from './components/reportes/reportes.component';
+import {DialogTable} from './components/reportes/reportes.component';
+import {DialogTable2} from './components/reportes/reportes.component';
+import {DialogTable3} from './components/reportes/reportes.component';
 //import { AgregarUsuarioComponent } from './components/agregar-usuario/agregar-usuario.component';
 //import { FiltroBitacoraPipe } from './pipes/filtro-bitacora.pipe';
 //import {MatCheckboxModule} from '@angular/material/checkbox';
@@ -65,7 +65,11 @@ export function getBaseUrl() {
   declarations: [
     AppComponent,
     LoginComponent,
-    MenuComponent
+    MenuComponent,
+    ReportesComponent,
+    DialogTable,
+    DialogTable2,
+    DialogTable3
   ],
   imports: [
     BrowserModule, HttpClientModule,
