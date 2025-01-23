@@ -111,5 +111,9 @@ div.fechasEle>mat-form-field>div.mat-mdc-text-field-wrapper>div.mat-mdc-form-fie
 div.fechasEle>mat-form-field>div.mat-mdc-text-field-wrapper>div.mat-mdc-form-field-flex>div.mdc-notched-outline>div.mat-mdc-notch-piece{
   border-color: #CCC !important;
   border-radius: 4px;
-
 }
+
+div.fechasEle>mat-form-field>div.mat-mdc-text-field-wrapper>div.mat-mdc-form-field-flex>div.mat-mdc-form-field-infix>input.fechaCont{
+  color: black !important;
+}
+

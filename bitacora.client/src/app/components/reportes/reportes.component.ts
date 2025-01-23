@@ -967,7 +967,7 @@ export class ReportesComponent implements OnInit {
     this.datosReporte = { idUser: idUsuario, idUnidad: this.unidadSeleccionada, idArea: this.areaSeleccionada, fechaIni: this.lunesRepo, fechaFin: this.domingoRepo, IdUnidadUsuario: this.UnidadUsuarioSeleccionada };
     //var datos = {idUser:idUsuario, idUnidad:this.unidad.toString(), idArea:this.areaSeleccionada.toString()};
     var datos = { datos: this.datosReporte }
-    this.http.post<any>(this.baseUrl + "api/Reportes/ConsultaClientesDistribucion/{id?}", this.datosReporte).subscribe(
+    this.serviceReportes.getConsultaClientesDistribucion(this.datosReporte).subscribe(
       res => {
         this.clientes = res.clientes;
         //console.log(this.unidadesNegocio)
@@ -981,7 +981,7 @@ export class ReportesComponent implements OnInit {
     this.datosReporte = { idUser: idUsuario, idUnidad: this.unidadSeleccionada, idArea: this.areaSeleccionada, fechaIni: this.lunesRepo, fechaFin: this.domingoRepo };
     //var datos = {idUser:idUsuario, idUnidad:this.unidad.toString(), idArea:this.areaSeleccionada.toString()};
     var datos = { datos: this.datosReporte }
-    this.http.post<any>(this.baseUrl + "api/Reportes/ConsultaClientesPorProyecto/{id?}", this.datosReporte).subscribe(
+    this.serviceReportes.getConsultaClientesPorProyecto(this.datosReporte).subscribe(
       res => {
         this.clientes = res.clientes;
         //console.log(this.unidadesNegocio)
@@ -1224,7 +1224,7 @@ export class ReportesComponent implements OnInit {
       fechaIni: this.lunesRepo, fechaFin: this.domingoRepo, idActividad: this.actividadSeleccionada, idUnidadusuario: this.UnidadUsuarioSeleccionada
     };
     //console.log(this.datosReporte)
-    this.http.post<any>(this.baseUrl + "api/Reportes/ConsultaDetallado/?pageSize=" + this.config.itemsPerPage + "&pageIndex=" + this.config.currentPage, this.datosReporte).subscribe(
+    this.serviceReportes.getConsultaDetallado(this.datosReporte,this.config.itemsPerPage, this.config.currentPage).subscribe(
       res => {
         //console.log(res)
         this.reporteDetallado = res.detallado
@@ -1328,7 +1328,7 @@ export class ReportesComponent implements OnInit {
     var idUsuario = parseInt(localStorage.getItem('currentUser')!);
     this.datosReporte = { idUser: idUsuario, idUnidad: this.unidadSeleccionada, idArea: this.areaSeleccionada, fechaIni: this.lunesRepo, fechaFin: this.domingoRepo, IdUserFiltro: 0 };
 
-    this.http.post<any>(this.baseUrl + "api/Reportes/ConsultaPersonas/{id?}", this.datosReporte).subscribe(
+    this.serviceReportes.getConsultaPersonas(this.datosReporte).subscribe(
       res => {
         this.reportePersona = res.personas;
         //console.log(res)
@@ -1701,7 +1701,7 @@ export class ReportesComponent implements OnInit {
     // console.log(this.reporteProyectosProc)
     var idUsuario = parseInt(localStorage.getItem('currentUser')!);
     this.datosReporte = { idUser: idUsuario, idUnidad: this.unidadSeleccionada, idArea: this.areaSeleccionada, fechaIni: this.lunesRepo, fechaFin: this.domingoRepo, IdCliente: this.clienteSeleccionado };
-    this.http.post<any>(this.baseUrl + "api/Reportes/ConsultaProyectos/{id?}", this.datosReporte).subscribe(res => {
+    this.serviceReportes.getConsultaProyectos(this.datosReporte).subscribe(res => {
       //console.log(res);
       for (let i = 0; i < this.reporteProyectosProc.length; i++) {
         if (this.reporteProyectosProc[i].unidadesHora) {
@@ -1840,7 +1840,7 @@ export class ReportesComponent implements OnInit {
     this.datosReporte = { idUser: idUsuario, fechaIni: this.lunesRepo, fechaFin: this.domingoRepo };
     console.log(this.datosReporte);
     this.nombreUsuario = usuario;
-    this.http.post<any>(this.baseUrl + "api/Reportes/ConsultaDetalleUsuario/{id?}", this.datosReporte).subscribe(res => {
+    this.serviceReportes.getConsultaDetalleUsuario(this.datosReporte).subscribe(res => {
       //console.log(res);
       //console.log(this.datosReporte)
       this.resultDetallePersona = res.lista;
@@ -1913,7 +1913,7 @@ export class ReportesComponent implements OnInit {
     this.datosReporte = { IdProyecto: idProyecto, fechaIni: this.lunesRepo, fechaFin: this.domingoRepo };
     console.log(this.datosReporte);
 
-    this.http.post<any>(this.baseUrl + "api/Reportes/ConsultaPersonas_RegistroPorProyecto/{id?}", this.datosReporte).subscribe(res => {
+    this.serviceReportes.getConsultaPersonas_RegistroPorProyecto(this.datosReporte).subscribe(res => {
       console.log(res);
       //console.log(this.datosReporte)
       this.resultDetallePersona = res.lista;
@@ -1954,7 +1954,7 @@ export class ReportesComponent implements OnInit {
     this.spinner.show();
     this.datosReporte = { IdProyecto: idProyecto, fechaIni: this.lunesRepo, fechaFin: this.domingoRepo };
 
-    this.http.post<any>(this.baseUrl + "api/Reportes/ConsultaPersonas_RegistroPorProyectoSemanal/{id?}", this.datosReporte).subscribe(res => {
+    this.serviceReportes.getConsultaPersonas_RegistroPorProyectoSemanal(this.datosReporte).subscribe(res => {
       console.log(res);
       //console.log(this.datosReporte)
       this.resultDetallePersona = res.lista;
@@ -1995,7 +1995,7 @@ export class ReportesComponent implements OnInit {
     var idUsuario = parseInt(localStorage.getItem('currentUser')!);
     //console.log(this.usuarioSeleccionado);
     this.datosReporte = { idUser: idUsuario, idUnidad: this.unidadSeleccionada, idArea: this.areaSeleccionada, fechaIni: this.lunesRepo, fechaFin: this.domingoRepo, idUserFiltro: this.usuarioSeleccionado };
-    this.http.post<any>(this.baseUrl + "api/Reportes/ConsultaSemanal/{id?}", this.datosReporte).subscribe(res => {
+    this.serviceReportes.getConsultaSemanal(this.datosReporte).subscribe(res => {
       //console.log(res);
       //console.log(this.datosReporte)
       //console.log(res.direc)
@@ -2041,7 +2041,7 @@ export class ReportesComponent implements OnInit {
     var idUsuario = parseInt(localStorage.getItem('currentUser')!);
     this.datosReporte = { idUser: idUsuario, idUnidad: this.unidadSeleccionada, idArea: this.areaSeleccionada, fechaIni: this.lunesRepo, fechaFin: this.domingoRepo };
     console.log(this.datosReporte);
-    this.http.post<any>(this.baseUrl + "api/Reportes/ConsultaEjecutivo/{id?}", this.datosReporte).subscribe(res => {
+    this.serviceReportes.getConsultaEjecutivo(this.datosReporte).subscribe(res => {
       //console.log(res);
       //console.log(this.datosReporte)
       this.reporteEjecutivo = res.ejecutivo;
@@ -2184,12 +2184,13 @@ export class ReportesComponent implements OnInit {
   }
 
   exportar() {
-    this.spinner.show();
+    //this.spinner.show();
+    console.log("entra")
     const requestOptions: Object = {
       responseType: 'text'
     }
     if (this.distribucion == true) {
-      this.http.get<any>(this.baseUrl + "api/Reportes/ExportaReporteDistribucion/{id?}", requestOptions).subscribe(
+      this.serviceReportes.exportarReporteDistribucion(requestOptions).subscribe(
         res => {
           //console.log(res)
 
@@ -2199,10 +2200,10 @@ export class ReportesComponent implements OnInit {
           this.spinner.hide();
           //console.log(err)
         }
-      )
+      );
     }
     if (this.detallado) {
-      this.http.get<any>(this.baseUrl + "api/Reportes/ExportaReporteDetallado/{id?}", requestOptions).subscribe(
+      this.serviceReportes.exportarReporteDetallado(requestOptions).subscribe(
         res => {
           //console.log(res)
 
@@ -2215,7 +2216,7 @@ export class ReportesComponent implements OnInit {
       )
     }
     if (this.persona) {
-      this.http.get<any>(this.baseUrl + "api/Reportes/ExportaReportePersonas/{id?}", requestOptions).subscribe(
+      this.serviceReportes.exportarReportePersona(requestOptions).subscribe(
         res => {
           //console.log(res)
 
@@ -2228,7 +2229,7 @@ export class ReportesComponent implements OnInit {
       )
     }
     if (this.proyecto) {
-      this.http.get<any>(this.baseUrl + "api/Reportes/ExportaReporteProyectos/{id?}", requestOptions).subscribe(
+      this.serviceReportes.exportarReporteProyectos(requestOptions).subscribe(
         res => {
           //console.log(res)
 
@@ -2242,7 +2243,7 @@ export class ReportesComponent implements OnInit {
       )
     }
     if (this.semanal) {
-      this.http.get<any>(this.baseUrl + "api/Reportes/ExportaReporteSemanal/{id?}", requestOptions).subscribe(
+      this.serviceReportes.exportarReporteSemanal(requestOptions).subscribe(
         res => {
           //console.log(res)
 
@@ -2257,7 +2258,7 @@ export class ReportesComponent implements OnInit {
     }
 
     if (this.ejecutivo) {
-      this.http.get<any>(this.baseUrl + "api/Reportes/ExportaReporteEjecutivo/{id?}", requestOptions).subscribe(
+      this.serviceReportes.exportarReporteEjecutivo(requestOptions).subscribe(
         res => {
           //console.log(res)
           this.downloadFile(res);
@@ -2288,9 +2289,8 @@ export class ReportesComponent implements OnInit {
 
   getUsuarios(unidad: any) {
     this.usuariosFiltro = [];
-    var datos = { idUnidad: unidad.toString() }
-    this.http.get<any>(this.baseUrl + "api/Reportes/ConsultaUsuarios/{id?}", { params: datos })
-      .subscribe(res => {
+    var datos = { idUnidad: unidad.toString() }    
+      this.serviceReportes.getConsultaUsuarios(datos).subscribe(res => {
         this.usuariosFiltro = res;
       }, err => { }//console.log(err)
       );
@@ -2298,9 +2298,8 @@ export class ReportesComponent implements OnInit {
 
   getUsuariosSemanal(unidad: any) {
     this.usuariosFiltro = [];
-    var datos = { idUnidad: unidad.toString() }
-    this.http.get<any>(this.baseUrl + "api/Reportes/ConsultaUsuariosSemanal/{id?}", { params: datos })
-      .subscribe(res => {
+    var datos = { idUnidad: unidad.toString() }    
+      this.serviceReportes.getConsultaUsuariosSemanal(datos).subscribe(res => {
         this.usuariosFiltro = res;
       }, err => { }//console.log(err)
       );
@@ -2312,8 +2311,7 @@ export class ReportesComponent implements OnInit {
     var idUsuario = parseInt(localStorage.getItem('currentUser')!);
     this.datosReporte = { idUser: idUsuario, idUnidad: this.unidadSeleccionada, idArea: this.areaSeleccionada, fechaIni: this.lunesRepo, fechaFin: this.domingoRepo, IdUserFiltro: this.usuarioSeleccionado };
 
-    return this.http.get<any>(this.baseUrl + "api/Reportes/ConsultaUsuariosPersona/{id?}")
-      .subscribe(res => {
+    return this.serviceReportes.getConsultaUsuariosPersona().subscribe(res => {
         for (let index = 0; index < res.usuarios.length; index++) {
           this.usuarios.push(res.usuarios[index]);
           this.UsuariosFiltrados.next(this.usuarios.slice());
@@ -2327,7 +2325,7 @@ export class ReportesComponent implements OnInit {
   getUsuariosPersonas(unidad: any) {
     this.usuariosFiltro = [];
     var datos = { idUnidad: unidad.toString() }
-    this.http.get<any>(this.baseUrl + "api/Reportes/ConsultaUsuariosPersona/{id?}", { params: datos })
+    this.serviceReportes.getConsultaUsuariosPersona()
       .subscribe(res => {
         this.usuariosFiltro = res;
       }, err => { }//console.log(err)
@@ -2338,7 +2336,7 @@ export class ReportesComponent implements OnInit {
     var datosP = { idUser: this.idUsuario, idUnidad: unidad, idArea: this.areaSeleccionada, idUserFiltro: this.usuarioSeleccionado };
     var datos = { idUser: this.usuarioSeleccionado.toString(), idUnidad: unidad.toString(), idArea: this.areaSeleccionada.toString() };
 
-    this.http.post<any>(this.baseUrl + "api/Reportes/ConsultaListaProyectos/{id?}", datosP)
+    this.serviceReportes.getConsultaListaProyectos(datosP)
       .subscribe(res => {//console.log(res)
         this.proyectosFiltro = res;
         this.proyectosFiltroOriginal = res;
@@ -2352,7 +2350,7 @@ export class ReportesComponent implements OnInit {
 
   getActividades(unidad: any) {
     var datosP = { idUser: this.idUsuario, idUnidad: unidad, idArea: this.areaSeleccionada, idProyecto: this.proyectoSeleccionado, idUserFiltro: this.usuarioSeleccionado, idActividad: this.actividadSeleccionada, idEtapa: this.etapaSeleccionada };
-    this.http.post<any>(this.baseUrl + "api/Reportes/ConsultaActividades/{id?}", datosP)
+    this.serviceReportes.getConsultaActividades(datosP)
       .subscribe(res => {//console.log(res)
         this.actividadesFiltro = res;
       }, err =>//console.log(err)
@@ -2361,7 +2359,7 @@ export class ReportesComponent implements OnInit {
 
   getEtapas(unidad: any) {
     var datosP = { idUser: this.idUsuario, idUnidad: unidad, idArea: this.areaSeleccionada, idProyecto: this.proyectoSeleccionado, idUserFiltro: this.usuarioSeleccionado, idActividad: this.actividadSeleccionada, idEtapa: this.etapaSeleccionada };
-    this.http.post<any>(this.baseUrl + "api/Reportes/ConsultaEtapas/{id?}", datosP)
+    this.serviceReportes.getConsultaEtapas(datosP)
       .subscribe(res => {//console.log(res)
         this.etapasFiltro = res;
       }, err =>//console.log(err)
@@ -3671,7 +3669,7 @@ export class DialogTable3 {
   constructor(
     public dialogRef: MatDialogRef<DialogTable3>,
     @Inject(MAT_DIALOG_DATA) public data: DialogData,
-    private http: HttpClient, @Inject("BASE_URL") private baseUrl: string, private spinner: NgxSpinnerService,
+    private serviceReportes:ReportesService, @Inject("BASE_URL") private baseUrl: string, private spinner: NgxSpinnerService,
     public dialog: MatDialog
   ) {
     const dialogR = this.dialogRef
@@ -3695,7 +3693,7 @@ export class DialogTable3 {
     let newDate2 = new Date(fechaFin);
     this.datosReporte = { IdProyecto: _idProyecto, fechaIni: newDate1, fechaFin: newDate2 };
 
-    this.http.post<any>(this.baseUrl + "api/Reportes/ConsultaPersonas_RegistroPorProyecto/{id?}", this.datosReporte).subscribe(res => {
+    this.serviceReportes.getConsultaPersonas_RegistroPorProyecto(this.datosReporte).subscribe(res => {
       //console.log(this.datosReporte)
       this.UsuariosRegistros = res.lista;
 

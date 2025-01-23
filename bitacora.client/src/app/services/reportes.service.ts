@@ -40,4 +40,92 @@ export class ReportesService {
   getConsultaDistribucion(datosReporte:any):Observable<any>{
     return this.http.post<any>(this.baseUrl + "api/Reportes/ConsultaDistribucion/",datosReporte);
   }
+
+  exportarReporteDistribucion(requestOptions:Object):Observable<any>{
+    return this.http.get<any>(this.baseUrl + "api/Reportes/ExportaReporteDistribucion", requestOptions);
+  }
+
+  getConsultaDetallado(datosReporte:any,itemsPerPage: number, currentPage:any):Observable<any>{
+    return this.http.post<any>(this.baseUrl + "api/Reportes/ConsultaDetallado/?pageSize=" + itemsPerPage + "&pageIndex=" + currentPage, datosReporte);
+  }
+
+  exportarReporteDetallado(requestOptions:Object):Observable<any>{
+    return  this.http.get<any>(this.baseUrl + "api/Reportes/ExportaReporteDetallado/", requestOptions);
+  }
+
+  getConsultaPersonas(datosReporte:any):Observable<any>{
+    return this.http.post<any>(this.baseUrl + "api/Reportes/ConsultaPersonas/", datosReporte);
+  }
+
+  exportarReportePersona(requestOptions:Object):Observable<any>{
+    return  this.http.get<any>(this.baseUrl + "api/Reportes/ExportaReportePersonas/", requestOptions);
+  }
+
+  getConsultaDetalleUsuario(datosReporte:any):Observable<any>{
+    return this.http.post<any>(this.baseUrl + "api/Reportes/ConsultaDetalleUsuario/", datosReporte);
+  }
+
+  getConsultaPersonas_RegistroPorProyecto(datosReporte:any):Observable<any>{
+    return this.http.post<any>(this.baseUrl + "api/Reportes/ConsultaPersonas_RegistroPorProyecto/", datosReporte);
+  }
+
+  getConsultaPersonas_RegistroPorProyectoSemanal(datosReporte:any):Observable<any>{
+    return this.http.post<any>(this.baseUrl + "api/Reportes/ConsultaPersonas_RegistroPorProyectoSemanal/", datosReporte);
+  }
+
+  getConsultaProyectos(datosReporte:any):Observable<any>{
+    return this.http.post<any>(this.baseUrl + "api/Reportes/ConsultaProyectos/", datosReporte);
+  }
+
+  exportarReporteProyectos(requestOptions:Object):Observable<any>{
+    return  this.http.get<any>(this.baseUrl + "api/Reportes/ExportaReporteProyectos/", requestOptions);
+  }
+
+  getConsultaSemanal(datosReporte:any):Observable<any>{
+    return this.http.post<any>(this.baseUrl + "api/Reportes/ConsultaSemanal/", datosReporte);
+  }
+
+  exportarReporteSemanal(requestOptions:Object):Observable<any>{
+    return this.http.get<any>(this.baseUrl + "api/Reportes/ExportaReporteSemanal/", requestOptions);
+  }
+
+  getConsultaUsuarios(datos:any):Observable<any>{
+    return this.http.get<any>(this.baseUrl + "api/Reportes/ConsultaUsuarios/", { params: datos });
+  }
+
+  getConsultaUsuariosSemanal(datos:any):Observable<any>{
+    return this.http.get<any>(this.baseUrl + "api/Reportes/ConsultaUsuariosSemanal/", { params: datos });
+  }
+
+  getConsultaUsuariosPersona():Observable<any>{
+    return this.http.get<any>(this.baseUrl + "api/Reportes/ConsultaUsuariosPersona/");
+  }
+
+  getConsultaListaProyectos(datosReporte:any):Observable<any>{
+    return this.http.post<any>(this.baseUrl + "api/Reportes/ConsultaListaProyectos/", datosReporte);
+  }
+
+  getConsultaActividades(datosReporte:any):Observable<any>{
+    return this.http.post<any>(this.baseUrl + "api/Reportes/ConsultaActividades/", datosReporte);
+  }
+
+  getConsultaEtapas(datosReporte:any):Observable<any>{
+    return this.http.post<any>(this.baseUrl + "api/Reportes/ConsultaEtapas/", datosReporte);
+  }
+
+  getConsultaEjecutivo(datosReporte:any):Observable<any>{
+    return this.http.post<any>(this.baseUrl + "api/Reportes/ConsultaEjecutivo/", datosReporte);
+  }
+
+  exportarReporteEjecutivo(requestOptions:Object):Observable<any>{
+    return this.http.get<any>(this.baseUrl + "api/Reportes/ExportaReporteEjecutivo/", requestOptions);
+  }
+
+  getConsultaClientesDistribucion(datosReporte:any):Observable<any>{
+    return this.http.post<any>(this.baseUrl + "api/Reportes/ConsultaClientesDistribucion/", datosReporte);
+  }
+
+  getConsultaClientesPorProyecto(datosReporte:any):Observable<any>{
+    return this.http.post<any>(this.baseUrl + "api/Reportes/ConsultaClientesPorProyecto/", datosReporte);
+  }
 }
