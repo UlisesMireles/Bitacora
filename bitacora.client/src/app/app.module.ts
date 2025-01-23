@@ -28,22 +28,22 @@ import { NgxPaginationModule } from 'ngx-pagination';
 import { ToastNoAnimationModule } from 'ngx-toastr';
 import { AppComponent } from './app.component';
 import { MenuComponent } from './components/menu/menu.component';
-//import { RegistrosCalendarioComponent } from './components/registros-calendario/registros-calendario.component';
+import { RegistrosCalendarioComponent } from './components/registros-calendario/registros-calendario.component';
 //import { CatalogosComponent, ModalCambioEstatus, ModalReestablecerContrasenia, ModalEliminarRol } from './components/catalogos/catalogos.component';
 //import { ReportesComponent } from './components/reportes/reportes.component';
 //import { AvanceRealComponent } from './components/avance-real/avance-real.component';
-//import { CambiocontraseniaComponent } from './components/cambiocontrasenia/cambiocontrasenia.component';
+import { CambiocontraseniaComponent } from './components/cambiocontrasenia/cambiocontrasenia.component';
 //import { TokenContraseniaComponent } from './components/token-contrasenia/token-contrasenia.component';
 //import { FiltroPipe } from './pipes/filtro.pipe';
 //import {DialogTable} from './components/reportes/reportes.component';
 //import {DialogTable2} from './components/reportes/reportes.component';
 //import {DialogTable3} from './components/reportes/reportes.component';
 //import { AgregarUsuarioComponent } from './components/agregar-usuario/agregar-usuario.component';
-//import { FiltroBitacoraPipe } from './pipes/filtro-bitacora.pipe';
+import { FiltroBitacoraPipe } from '../../src/app/pipes/filtro-bitacora.pipe';
 //import {MatCheckboxModule} from '@angular/material/checkbox';
 //import { FiltroProyectosPipe } from './pipes/filtro-proyectos.pipe';
 //import { AuthGuardBitacora } from './guards/AuthGuardBitacora';
-//import { PermisosComponent } from './components/permisos/permisos.component';
+import { PermisosComponent } from './components/permisos/permisos.component';
 //import { AuthGuardCatalogos } from './guards/AuthGuardCatalogos';
 //import { AuthGuardReportes } from './guards/AuthGuardReportes';
 //import { AuthGuardAvanceReal } from './guards/AuthGuardAvanceReal';
@@ -57,6 +57,7 @@ import { MatAutocompleteModule} from '@angular/material/autocomplete';
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { LoginComponent } from './components/login/login.component';
+import { AuthGuardPermisos } from './guards/AuthGuardPermisos';
 export function getBaseUrl() {
   return document.getElementsByTagName('base')[0].href;
 }
@@ -65,7 +66,11 @@ export function getBaseUrl() {
   declarations: [
     AppComponent,
     LoginComponent,
-    MenuComponent
+    MenuComponent,
+    CambiocontraseniaComponent,
+    PermisosComponent,
+    RegistrosCalendarioComponent,
+    FiltroBitacoraPipe
   ],
   imports: [
     BrowserModule, HttpClientModule,
@@ -109,12 +114,12 @@ export function getBaseUrl() {
     })
   ],
   providers: [
-    { provide: 'BASE_URL', useFactory: getBaseUrl, deps: [] },
+    { provide: 'BASE_URL', useFactory: getBaseUrl, deps: [] },AuthGuardPermisos,
     provideAnimationsAsync()
   ],
   //entryComponents: [DialogTable, DialogTable2, DialogTable3, CatalogosComponent, AgregarUsuarioComponent, Modal, OlvidasteContraseniaComponent, ModalCambioEstatus, ModalReestablecerContrasenia, ModalEliminarRol],
   //providers: [{ provide: 'BASE_URL', useFactory: getBaseUrl, deps: [] }, AuthGuardBitacora, AuthGuardCatalogos, AuthGuardReportes, AuthGuardAvanceReal, AuthGuardAvanceReal, AuthGuardPermisos, AuthGuard],
-
+ 
   bootstrap: [AppComponent]
 })
 export class AppModule { }

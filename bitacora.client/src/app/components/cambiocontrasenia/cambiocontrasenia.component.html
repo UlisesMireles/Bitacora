@@ -1,0 +1,23 @@
+<div class="container">
+  <div style="padding: 10% 0%">
+    <div class="col-md-5 mx-auto card">
+      <form [formGroup]="contForm" class="text-center border border-light p-5">
+        <div>
+          <h3>Cambia tu contraseña</h3>
+          <p>Las contraseñas deben contener entre 4 y 10 caracteres</p>
+        </div>
+        <div>
+
+          <input #pass type="password" class="form-control mb-4" formControlName="pass" placeholder="Contraseña" maxlength="10" (keyup)="tamPass(pass.value)">
+          <input #passConf type="password" class="form-control mb-4" formControlName="confpass" maxlength="10" placeholder="Confirmar Contraseña">
+
+        </div>
+
+        <div *ngIf="showErrorMessage">
+          <p class="error">Las contraseñas no coinciden</p>
+        </div>
+        <button class="btn btn-success my-4 btncolor" (click)="verificar()">Entrar</button>
+      </form>
+    </div>
+  </div>
+</div>
