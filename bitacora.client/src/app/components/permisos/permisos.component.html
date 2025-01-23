@@ -1,0 +1,167 @@
+<div style="font-family: Raleway, sans-serif;" class="container-fluid bit">
+    <h3 style="text-align: left;">Administración de Permisos</h3>
+    <div class="container">
+        <div class="row">
+            <!-- <div class="table responsive outter-table col-8">
+                <table class="table table-hover fixed_header col-7 offset-3 bordes">
+                    <thead>
+                        <tr>
+                            <th>Usuario</th>
+                        </tr>
+                    </thead>
+                    <tbody  style="text-align: center;">
+                        <tr >us1</tr>
+                        <tr >us1</tr>
+                        <tr >us1</tr>
+                        <tr >us1</tr>
+                        <tr >us1</tr>
+                        <tr >us1</tr>
+                        <tr >us1</tr>
+                        <tr >us1</tr>
+                        <tr >us1</tr>
+                        <tr >us1</tr>
+                        <tr >us1</tr>
+                       
+                    </tbody>
+                </table>
+            </div> -->
+            <div class="col-12 row">
+
+                <div class="container col">
+                    <div class="row align-items-center mb-4" style="margin-left: 162px;">
+                        <!--<label class="labelC" for="">Nombre</label>-->
+                        <label class="labelC col-auto" for="">Nombre</label>
+                        <!--<input type="text" [(ngModel)]="nombre" class="form-control mb-4 input-sm col-6" placeholder="Nombre" maxlength="25" [disabled]="editar">-->
+                        <input type="text" style="margin-left: 15px;" [(ngModel)]="nombre" class="form-control input-small" placeholder="Nombre" maxlength="25" [disabled]="editar">
+                    </div>
+                    <div class="row align-items-center mb-4" style="margin-left: 174px;">
+                        <!--<label class="labelC" for="">Descripción</label>-->
+                        <label class="form-label col-auto" for="">Descripción</label>
+                        <!--<input type="text" [(ngModel)]="desc" class="form-control mb-4 input-sm col-6" placeholder="Descripción">-->
+                        <input type="text" [(ngModel)]="desc" class="form-control input-small" placeholder="Descripción">
+                    </div>
+
+                </div>
+                <div class="col-lg-3 row">
+                    <div class="mb-3" *ngIf="editar">
+                        <!--<label class="labelC">Estatus</label>-->
+                        <label class="form-label">Estatus</label>
+                        <!--<select [(ngModel)]="estatus" id="" class="input-sm form-control mb-4">-->
+                        <select [(ngModel)]="estatus" id="" class="form-select">
+                        <option value="Activo">Activo</option>
+                        <option value="Inactivo">Inactivo</option>
+                    </select>
+                    </div>
+                    <!--<div style="padding-left: 10px; padding-top: 30px;">-->
+                    <div class="d-flex align-items-center" style="padding-left: 10px;">
+                        <button (click)="guardarRol()" class="btn btn-primary">Guardar</button>
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+        <!-- 
+       <div class="row" style="padding-bottom: 20px;">
+            <div class="col-4 offset-1">
+                <h5>Pantallas</h5>
+                <div class="col-12 contenedores bordes">
+                    <div><a class="col-12">Bitácora</a></div>
+                    <div><a class="col-12">Avance Real</a></div>
+                    <div><a class="col-12">Reportes</a></div>
+                    <ul >
+                        <li>Distribución</li>
+                        <li>Detallado</li>
+                        <li>Persona</li>
+                        <li>Proyectos</li>
+                        <li>Semanal</li>
+                    </ul>
+                    <div><a class="col-12">Catálogos</a></div>
+                    <ul >
+                        <li>Clientes</li>
+                        <li>Proyecto</li>
+                        <li>Sistemas</li>
+                        <li>Usuarios</li>
+                        <li>Unidad de Negocio</li>
+                        <li>Áreas de UN</li>
+                        <li>Etapas</li>
+                        <li>Actividades</li>
+                        <li>Roles</li>
+                    </ul>
+                    
+                </div>
+                
+            </div>
+            <div class="col-3 contBotones text-center align-self-lg-center">
+                <button class="btn btn-primary">>></button> <br>
+                <button class="btn btn-primary"><<</button>
+            </div>
+            <div class="col-4">
+                <h5>Permisos</h5>
+                <div class="col-12 contenedores bordes">
+                    <div><a class="col-12">Bitácora</a></div>
+                    <div><a class="col-12">Avance Real</a></div>
+                    <div><a class="col-12">Reportes</a></div>
+                    
+                    <ul >
+                        <li>Distribución</li>
+                        <li>Detallado</li>
+                        <li>Persona</li>
+                        <li>Proyectos</li>
+                        <li>Semanal</li>
+                    </ul>
+                    <a >Catálogos</a>
+                    <ul >
+                        <li>Clientes</li>
+                        <li>Proyecto</li>
+                        <li>Sistemas</li>
+                        <li>Usuarios</li>
+                        <li>Unidad de Negocio</li>
+                        <li>Áreas de UN</li>
+                        <li>Etapas</li>
+                        <li>Actividades</li>
+                        <li>Roles</li>
+                    </ul>
+                    
+                </div>
+            </div>
+        </div>  -->
+
+        <!-- Julieta -->
+        <div class="row" style="padding-bottom: 20px;">
+            <div class="col-lg-4 offset-lg-1 pantallasC">
+                <select name="from" id="optgroup" class="form-control" size="16" multiple="multiple">
+                        <option *ngFor="let pantSinM of pantallasSinMenu" class="{{pantSinM.nombrePantalla}}" id="{{pantSinM.nombrePantalla}}" value="{{pantSinM.idPantalla}}" >{{pantSinM.nombrePantalla}}</option>
+                        
+                        <optgroup  *ngIf="!reporteIzquierdoVacio" label="Reportes" class="reportesGroup" >
+                            <option *ngFor="let reporte of pantallasReporte" class="{{reporte.nombrePantalla}}" id="{{reporte.nombrePantalla}}" value="{{reporte.idPantalla}}">{{reporte.nombrePantalla}}</option>
+
+                        </optgroup>
+                        <optgroup *ngIf="!catalogoIzquierdoVacio" label="Catálogos">
+                            <option *ngFor="let catalogo of pantallasCatalogo" class="{{catalogo.nombrePantalla}}" id="{{catalogo.nombrePantalla}}" value="{{catalogo.idPantalla}}">{{catalogo.nombrePantalla}}</option>
+
+                        </optgroup>
+                    </select>
+            </div>
+            <!--<div class="col-3 contBotones text-center align-self-lg-center">-->
+            <div class="col-lg-2 contBotones d-flex flex-column justify-content-center">
+                <button type="button" id="optgroup_rightAll" class="btn btn-block btn-primary ">>></button>
+                <button type="button" id="optgroup_leftAll" class="btn btn-block btn-primary "><<</button>
+            </div>
+
+            <div class="col-lg-4 pantallasC">
+                <select name="to" id="optgroup_to" class="form-control" size="16" multiple="multiple">
+                        <option *ngFor="let pantSinM of pantallasSinMenuSel" class="{{pantSinM.nombrePantalla}}" id="{{pantSinM.nombrePantalla}}" value="{{pantSinM.idPantalla}}" >{{pantSinM.nombrePantalla}}</option>
+                        
+                        <optgroup *ngIf="!reporteDerechoVacio"  label="Reportes" class="reportesGroup" >
+                            <option *ngFor="let reporte of pantallasReporteSel" class="{{reporte.nombrePantalla}}" id="{{reporte.nombrePantalla}}" value="{{reporte.idPantalla}}">{{reporte.nombrePantalla}}</option>
+                        </optgroup>
+                        <optgroup *ngIf="!catalogoDerechoVacio" label="Catálogos">
+                            <option *ngFor="let catalogo of pantallasCatalogoSel" class="{{catalogo.nombrePantalla}}" id="{{catalogo.nombrePantalla}}" value="{{catalogo.idPantalla}}">{{catalogo.nombrePantalla}}</option>
+                          </optgroup>
+                    </select>
+            </div>
+        </div>
+
+    </div>
+</div>
