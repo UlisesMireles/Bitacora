@@ -1,0 +1,64 @@
+.tablas {
+    border: 1px solid grey;
+    padding: 5px;
+}
+
+.columnaRespusta {
+    width: 10%;
+    text-align: center;
+}
+
+.tituloCategoria {
+    color: blue;
+    font-weight: 500;
+    border: 1px solid grey;
+}
+
+td {
+    padding: 5px;
+    border: 1px solid grey;
+}
+
+.div_botones {
+    text-align: center;
+}
+
+.p-subtitulos {
+    margin-bottom: 4px;
+    font-weight: 500;
+}
+
+.p-list {
+    margin-bottom: 2px;
+    margin-left: 10px;
+}
+
+.p-parrafo {
+    margin-bottom: 5px;
+}
+
+.btn-size {
+    width: 160px;
+    ;
+}
+tr:nth-child(even) { 
+    background-color: #E7E6E6; 
+} 
+::ng-deep .mat-progress-bar-buffer {
+    background-color: white;
+}
+::ng-deep .mat-progress-bar-fill::after {
+    
+    background-color: #0E3E62;
+}
+.titulos{
+    color: #1204D2;
+    font-size: 15.7px;
+    font-weight: 600;
+   
+}
+.vinetas{
+    color: red;
+    font-size: 15px;
+    font-weight: bold;
+}

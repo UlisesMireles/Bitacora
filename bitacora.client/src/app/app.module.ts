@@ -33,13 +33,13 @@ import { RegistrosCalendarioComponent } from './components/registros-calendario/
 //import { ReportesComponent } from './components/reportes/reportes.component';
 //import { AvanceRealComponent } from './components/avance-real/avance-real.component';
 import { CambiocontraseniaComponent } from './components/cambiocontrasenia/cambiocontrasenia.component';
-//import { TokenContraseniaComponent } from './components/token-contrasenia/token-contrasenia.component';
+import { TokenContraseniaComponent } from './components/token-contrasenia/token-contrasenia.component';
 //import { FiltroPipe } from './pipes/filtro.pipe';
 //import {DialogTable} from './components/reportes/reportes.component';
 //import {DialogTable2} from './components/reportes/reportes.component';
 //import {DialogTable3} from './components/reportes/reportes.component';
 //import { AgregarUsuarioComponent } from './components/agregar-usuario/agregar-usuario.component';
-import { FiltroBitacoraPipe } from '../../src/app/pipes/filtro-bitacora.pipe';
+//import { FiltroBitacoraPipe } from '../../src/app/pipes/filtro-bitacora.pipe';
 //import {MatCheckboxModule} from '@angular/material/checkbox';
 //import { FiltroProyectosPipe } from './pipes/filtro-proyectos.pipe';
 //import { AuthGuardBitacora } from './guards/AuthGuardBitacora';
@@ -49,8 +49,8 @@ import { PermisosComponent } from './components/permisos/permisos.component';
 //import { AuthGuardAvanceReal } from './guards/AuthGuardAvanceReal';
 //import { AuthGuardPermisos } from './guards/AuthGuardPermisos';
 //import { OlvidasteContraseniaComponent } from './components/olvidaste-contrasenia/olvidaste-contrasenia.component';
-//import { Nom035Component } from './components/nom035/nom035.component';
-//import { AuthGuard } from './guards/AuthGuard';
+import { Nom035Component } from './components/nom035/nom035.component';
+import { AuthGuard } from './guards/AuthGuard';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { MatAutocompleteModule} from '@angular/material/autocomplete';
@@ -70,7 +70,8 @@ export function getBaseUrl() {
     CambiocontraseniaComponent,
     PermisosComponent,
     RegistrosCalendarioComponent,
-    FiltroBitacoraPipe
+    TokenContraseniaComponent,
+    Nom035Component
   ],
   imports: [
     BrowserModule, HttpClientModule,
@@ -114,7 +115,7 @@ export function getBaseUrl() {
     })
   ],
   providers: [
-    { provide: 'BASE_URL', useFactory: getBaseUrl, deps: [] },AuthGuardPermisos,
+    { provide: 'BASE_URL', useFactory: getBaseUrl, deps: [] },AuthGuardPermisos, AuthGuard,
     provideAnimationsAsync()
   ],
   //entryComponents: [DialogTable, DialogTable2, DialogTable3, CatalogosComponent, AgregarUsuarioComponent, Modal, OlvidasteContraseniaComponent, ModalCambioEstatus, ModalReestablecerContrasenia, ModalEliminarRol],
