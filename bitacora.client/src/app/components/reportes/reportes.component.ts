@@ -178,6 +178,7 @@ export class ReportesComponent implements OnInit {
   canvas: any;
   ctx: any;
   myChart: any;
+  chartParticipaciones:any;
   chartEjecutivo: any;
   encuestadosTotales: number = 0;
   porcentajeParticipacion = 0.00;
@@ -2423,8 +2424,18 @@ export class ReportesComponent implements OnInit {
     this.porcentajeParticipacion = (this.registrosParticipacion * 100) / this.encuestadosTotales;
     this.porcentajeNoParticipacion = (this.registrosNoParticipacion * 100) / this.encuestadosTotales;
 
-    const canvas = document.getElementById('myChart') as HTMLCanvasElement;
-    if (!canvas) return;
+    const chartContainer = document.getElementById("chartContainerParticipaciones");
+    if (!chartContainer) return;
+
+    if (this.chartParticipaciones) {
+      this.chartParticipaciones.destroy();
+    }
+
+    // // chartContainer.innerHTML = '&nbsp;';
+    chartContainer.innerHTML = '<canvas id="chartParticipaciones"></canvas>';
+
+    this.canvas = document.getElementById('chartParticipaciones') as HTMLCanvasElement;
+    if (!this.canvas) return;
 
     this.ctx = this.canvas.getContext('2d');
     if (!this.ctx) return;
@@ -2518,7 +2529,7 @@ export class ReportesComponent implements OnInit {
       this.chartEjecutivo.destroy();
     }
 
-    chartContainer.innerHTML = '&nbsp;';
+    // chartContainer.innerHTML = '&nbsp;';
     chartContainer.innerHTML = '<canvas id="chartEjecutivo"></canvas>';
 
     this.canvas = document.getElementById('chartEjecutivo') as HTMLCanvasElement;
@@ -2595,7 +2606,7 @@ export class ReportesComponent implements OnInit {
   }
 
   getParticipantes(): void {
-    this.http.post<any>(this.baseUrl + "api/Nom035/InformacionEncuestas/", {}).subscribe(
+    this.serviceReportes.getInformacionEncuestas().subscribe(
       res => {
 
         this.registrosParticipacion = res.encuestados;

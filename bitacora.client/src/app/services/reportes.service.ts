@@ -128,4 +128,8 @@ export class ReportesService {
   getConsultaClientesPorProyecto(datosReporte:any):Observable<any>{
     return this.http.post<any>(this.baseUrl + "api/Reportes/ConsultaClientesPorProyecto/", datosReporte);
   }
+
+  getInformacionEncuestas():Observable<any>{
+    return this.http.post<any>(this.baseUrl + "api/Nom035/InformacionEncuestas/", {});
+  }
 }
