@@ -2282,7 +2282,7 @@ export class ReportesComponent implements OnInit {
 
   downloadFile(archivo: any) {
     var blob = this.descargaService.downloadFile(archivo).subscribe(res => {
-
+      console.log(res);
       saveAs(res, archivo);
     }, err => {
       this.titulo = "Error";

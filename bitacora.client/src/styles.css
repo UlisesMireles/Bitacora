@@ -90,12 +90,43 @@ div.fechasEle>mat-form-field>div.mat-mdc-text-field-wrapper>div.mat-mdc-form-fie
   padding-bottom: 0 !important;
 }
 
+div.fechasEle>mat-form-field>div.mat-mdc-text-field-wrapper>div.mat-mdc-form-field-flex>div.mdc-notched-outline>div.mat-mdc-notch-piece.mdc-notched-outline__leading {
+    display: none !important;
+}
+
 div.fechasEle>mat-form-field>div.mat-mdc-text-field-wrapper>div.mat-mdc-form-field-flex>div.mdc-notched-outline>div.mat-mdc-notch-piece{
   border-color: #CCC !important;
   border-radius: 4px;
+  border-left: 1px solid #ccc !important;
 }
 
 div.fechasEle>mat-form-field>div.mat-mdc-text-field-wrapper>div.mat-mdc-form-field-flex>div.mat-mdc-form-field-infix>input.fechaCont{
   color: black !important;
 }
+
+/***/
+form.usuarioSelect>mat-form-field>div.mat-mdc-text-field-wrapper{
+    max-height: 30px !important;
+  }
+  
+  form.usuarioSelect>mat-form-field>div.mat-mdc-text-field-wrapper>div.mat-mdc-form-field-flex>div.mat-mdc-form-field-infix{
+    padding-top: 0 !important;
+    padding-bottom: 0 !important;
+  }
+  
+  form.usuarioSelect>mat-form-field>div.mat-mdc-text-field-wrapper>div.mat-mdc-form-field-flex>div.mdc-notched-outline>div.mat-mdc-notch-piece.mdc-notched-outline__leading {
+      display: none !important;
+  }
+  
+  form.usuarioSelect>mat-form-field>div.mat-mdc-text-field-wrapper>div.mat-mdc-form-field-flex>div.mdc-notched-outline>div.mat-mdc-notch-piece{
+    border-color: #CCC !important;
+    border-radius: 4px;
+    border-left: 1px solid #ccc !important;
+  }
+  
+  form.usuarioSelect>mat-form-field>div.mat-mdc-text-field-wrapper>div.mat-mdc-form-field-flex>div.mat-mdc-form-field-infix>input.fechaCont{
+    color: black !important;
+  }
+
+
 
