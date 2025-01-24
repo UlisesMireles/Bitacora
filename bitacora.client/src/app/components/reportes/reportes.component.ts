@@ -1,5 +1,5 @@
 import { Component, OnInit, HostListener, Inject, ChangeDetectorRef, ViewChild, ElementRef } from '@angular/core';
-import { DateAdapter, MAT_DATE_FORMATS } from '@angular/material/core';
+import { DateAdapter, MAT_DATE_FORMATS, MAT_DATE_LOCALE } from '@angular/material/core';
 import { Globals } from '../../services/globals';
 import { MAT_DIALOG_DATA, MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { NgxSpinnerService } from 'ngx-spinner';
@@ -10,17 +10,12 @@ import { HttpClient } from '@angular/common/http';
 import { ReportesService } from '../../services/reportes.service';
 import { DescargaService } from '../../services/descarga.service';
 import moment from 'moment';
-// import { HttpClient } from '@angular/common/http';
-// import {Sort} from '@angular/material/sort';
-// import { ReportesService } from 'src/app/services/reportes.service';
-// import * as moment from 'moment';
 //import { DateAdapter, MAT_DATE_FORMATS, MatDialogRef, MAT_DIALOG_DATA, MatDialog, MatSelectChange, MatSelect  } from '@angular/material';
 // import { AppDateAdapter, APP_DATE_FORMATS } from '../form-bitacora/format-datepicker';
-// import { ToastrService } from 'ngx-toastr';
 import { saveAs } from 'file-saver';
-// import { NgxSpinnerService } from 'ngx-spinner';
 // import { AuthenticationService } from 'src/app/services/authentication.service';
-import { Chart, ChartEvent } from 'chart.js';
+import { Chart, ChartType, registerables, ChartConfiguration, ChartEvent } from 'chart.js';
+import ChartDataLabels from 'chartjs-plugin-datalabels';
 import 'chartjs-plugin-datalabels';
 import { MatSelect } from '@angular/material/select';
 import { Observable, ReplaySubject, Subject, takeUntil } from 'rxjs';
@@ -28,11 +23,8 @@ import { Sort } from '@angular/material/sort';
 import { UnidadesNegocio } from '../../models/UnidadesNegicio';
 import { FormControl } from '@angular/forms';
 import { User } from '../../models/user';
-// import {FormControl} from '@angular/forms';
-// import {Observable, ReplaySubject, Subject} from 'rxjs';
-// import {map, startWith, takeUntil} from 'rxjs/operators';
-// import { User } from 'src/app/models/user';
 import jQuery from 'jquery';
+import { APP_DATE_FORMATS, AppDateAdapter } from './datepicker-format';
 const $ = jQuery;
 
 export interface DialogData {
@@ -50,6 +42,10 @@ export interface Usuario {
   templateUrl: './reportes.component.html',
   styleUrls: ['./reportes.component.css'],
   standalone: false,
+  providers:[
+    { provide: DateAdapter, useClass: AppDateAdapter },
+    { provide: MAT_DATE_FORMATS, useValue: APP_DATE_FORMATS}
+  ]
 })
 export class ReportesComponent implements OnInit {
   movil: any;
@@ -371,6 +367,9 @@ export class ReportesComponent implements OnInit {
     private cdRef: ChangeDetectorRef, private activatedRoute: ActivatedRoute, private router: Router, private http: HttpClient,
     // @Inject("BASE_URL") private baseUrl: string, 
     private serviceReportes: ReportesService, private descargaService: DescargaService) {
+
+      Chart.register(...registerables);
+      Chart.register(ChartDataLabels);
 
     const params = this.activatedRoute.snapshot.params;
     this.config = {
@@ -1280,7 +1279,7 @@ export class ReportesComponent implements OnInit {
     var idUsuario = parseInt(localStorage.getItem('currentUser')!);
     this.datosReporte = { idUser: idUsuario, idUnidad: this.unidadSeleccionada, idArea: this.areaSeleccionada, fechaIni: this.lunesRepo, fechaFin: this.domingoRepo, IdUserFiltro: this.usuarioSeleccionado };
 
-    this.http.post<any>(this.baseUrl + "api/Reportes/ConsultaPersonas/{id?}", this.datosReporte).subscribe(
+    this.serviceReportes.getConsultaPersonas(this.datosReporte).subscribe(
       res => {
         this.reportePersona = res.personas;
         //console.log(res)
@@ -2515,6 +2514,10 @@ export class ReportesComponent implements OnInit {
     const chartContainer = document.getElementById("chartContainer");
     if (!chartContainer) return;
 
+    if (this.chartEjecutivo) {
+      this.chartEjecutivo.destroy();
+    }
+
     chartContainer.innerHTML = '&nbsp;';
     chartContainer.innerHTML = '<canvas id="chartEjecutivo"></canvas>';
 
@@ -2524,7 +2527,7 @@ export class ReportesComponent implements OnInit {
     this.ctx = this.canvas.getContext('2d');
     if (!this.ctx) return;
 
-    let myChart = new Chart(this.ctx, {
+    this.chartEjecutivo = new Chart(this.ctx, {
       type: 'pie',
       data: {
         labels: [

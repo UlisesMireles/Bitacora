@@ -532,3 +532,8 @@ option{
 tbody.tablabody > tr > td {
     text-align: left;
 }
+
+::ng-deep .mat-mdc-text-field-wrapper {
+    height: 3em !important;
+    background: transparent !important;
+  } 

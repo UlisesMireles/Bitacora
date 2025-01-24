@@ -6,7 +6,6 @@ using Microsoft.AspNetCore.Cors;
 
 namespace Bitacora.Controllers
 {
-    [EnableCors("AllowSpecificOrigins")]
     [Route("api/[controller]")]
     [ApiController]
     public class ReportesController : ControllerBase
