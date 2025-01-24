@@ -25,7 +25,8 @@ import { FormControl } from '@angular/forms';
 import { User } from '../../models/user';
 import jQuery from 'jquery';
 import { APP_DATE_FORMATS, AppDateAdapter } from './datepicker-format';
-const $ = jQuery;
+import { Nom035Service } from '../../services/nom035.service';
+declare var $: any;
 
 export interface DialogData {
   unidadNeg: string,
@@ -35,6 +36,12 @@ export interface DialogData {
 export interface Usuario {
   pos: number,
   usuario: string
+}
+
+declare global {
+  interface JQuery {
+    modal(action: 'show' | 'hide' | 'toggle'): JQuery;
+  }
 }
 
 @Component({
@@ -367,7 +374,7 @@ export class ReportesComponent implements OnInit {
   constructor(public dialog: MatDialog, private spinner: NgxSpinnerService, private toastr: ToastrService, private authenticationService: AuthenticationService,
     private cdRef: ChangeDetectorRef, private activatedRoute: ActivatedRoute, private router: Router, private http: HttpClient,
     // @Inject("BASE_URL") private baseUrl: string, 
-    private serviceReportes: ReportesService, private descargaService: DescargaService) {
+    private serviceReportes: ReportesService, private descargaService: DescargaService, private nom35Service: Nom035Service) {
 
       Chart.register(...registerables);
       Chart.register(ChartDataLabels);
@@ -2606,7 +2613,7 @@ export class ReportesComponent implements OnInit {
   }
 
   getParticipantes(): void {
-    this.serviceReportes.getInformacionEncuestas().subscribe(
+    this.nom35Service.getInformacionEncuestas().subscribe(
       res => {
 
         this.registrosParticipacion = res.encuestados;
@@ -2653,7 +2660,7 @@ export class ReportesComponent implements OnInit {
     var empleado;
     var puntos;
     var desCal;
-    this.http.post<any>(this.baseUrl + "api/Nom035/ConsultaResultadosEncuestas/", {}).subscribe(
+    this.nom35Service.getResultadoEncuesta().subscribe(
       res => {
         this.reporteresultNom35 = res.objeto
         this.registrosTabresultNom35 = this.reporteresultNom35.length;
@@ -2718,7 +2725,7 @@ export class ReportesComponent implements OnInit {
   getResultadoEncuestaPorEmpresa() {
     this.spinner.show();
     this.reporteresultTotalesEmpresa = [];
-    this.http.post<any>(this.baseUrl + "api/Nom035/ConsultaResultadosEncuestasTotales/", {}).subscribe(
+    this.nom35Service.getResultadoEncuestaPorEmpresa().subscribe(
       res => {
         this.reporteresultTotalesEmpresa = res.objeto
         this.registrosTabTotalesEmpresa = this.reporteresultTotalesEmpresa.length;
@@ -2744,7 +2751,7 @@ export class ReportesComponent implements OnInit {
 
   getResultadoEncuestaCatPorEmpresa() {
     this.reporteresultCategoriaEmpresa = [];
-    this.http.post<any>(this.baseUrl + "api/Nom035/ConResultEncuestasCategoriaPorEmpresa/", {}).subscribe(
+    this.nom35Service.getResultadoEncuestaCatPorEmpresa().subscribe(
       res => {
         this.reporteresultCategoriaEmpresa = res.objeto
         this.registrosTabCategoriaEmpresa = this.reporteresultCategoriaEmpresa.length;
@@ -2764,7 +2771,7 @@ export class ReportesComponent implements OnInit {
 
   getResultadoEncuestaDomPorEmpresa() {
     this.reporteresultDominioEmpresa = [];
-    this.http.post<any>(this.baseUrl + "api/Nom035/ConResultEncuestasDominioPorEmpresa/", {}).subscribe(
+    this.nom35Service.getResultadoEncuestaDomPorEmpresa().subscribe(
       res => {
         this.reporteresultDominioEmpresa = res.objeto
         this.registrosTabDominioEmpresa = this.reporteresultDominioEmpresa.length;
