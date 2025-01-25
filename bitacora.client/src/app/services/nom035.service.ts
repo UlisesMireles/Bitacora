@@ -36,4 +36,20 @@ export class Nom035Service {
     getResultadoEncuestaDomPorEmpresa(): Observable<any> {
         return this.http.post<any>(this.baseUrl + "api/Nom035/ConResultEncuestasDominioPorEmpresa/", {});
     }
+
+    getNoEncuestados(): Observable<any> {
+        return this.http.post<any>(this.baseUrl + "api/Nom035/consultaNoEncuestados/", {});
+    }
+
+    getEncuestasCategoriaPorEmpleado(idEmpleado:any): Observable<any> {
+        return this.http.post<any>(this.baseUrl + "api/Nom035/ConResultEncuestasCategoriaPorEmpleado/", { "Idempleado": idEmpleado });
+    }
+
+    getEncuestasDominioPorEmpleado(idEmpleado:any): Observable<any> {
+        return this.http.post<any>(this.baseUrl + "api/Nom035/ConResultEncuestasDominioPorEmpleado/", { "Idempleado": idEmpleado });
+    }
+
+    getConsultaEncuestadoso(): Observable<any> {
+        return this.http.post<any>(this.baseUrl + "api/Nom035/consultaEncuestados/", {});
+    }
 }

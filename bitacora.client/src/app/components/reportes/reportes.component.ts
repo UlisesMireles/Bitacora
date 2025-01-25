@@ -2375,7 +2375,7 @@ export class ReportesComponent implements OnInit {
   getEncuestados() {
     this.reporteEncuestados = [];
     //console.log(this.datosReporte)
-    this.http.post<any>(this.baseUrl + "api/Nom035/consultaEncuestados/", {}).subscribe(
+    this.nom35Service.getConsultaEncuestadoso().subscribe(
       res => {
         //console.log(res)
         this.reporteEncuestados = res.encuestados
@@ -2403,7 +2403,7 @@ export class ReportesComponent implements OnInit {
   getNoEncuestados() {
     this.reporteNoEncuestados = [];
     //console.log(this.datosReporte)
-    this.http.post<any>(this.baseUrl + "api/Nom035/consultaNoEncuestados/", {}).subscribe(
+    this.nom35Service.getNoEncuestados().subscribe(
       res => {
         //console.log(res)
         this.reporteNoEncuestados = res.encuestados
@@ -2689,7 +2689,7 @@ export class ReportesComponent implements OnInit {
     this.resPuntos = puntos;
     this.resDesCal = desCal;
     this.reporteresultCategoriaEmpleado = [];
-    this.http.post<any>(this.baseUrl + "api/Nom035/ConResultEncuestasCategoriaPorEmpleado/", { "Idempleado": idEmpleado }).subscribe(
+    this.nom35Service.getEncuestasCategoriaPorEmpleado(idEmpleado).subscribe(
       res => {
         this.reporteresultCategoriaEmpleado = res.objeto
         this.registrosTabresultNom35 = this.reporteresultCategoriaEmpleado.length;
@@ -2708,7 +2708,7 @@ export class ReportesComponent implements OnInit {
 
   getResultadoEncuestaPorDomEmpleado(idEmpleado: any, esPorEmpelado: any) {
     this.reporteresultDominioEmpleado = [];
-    this.http.post<any>(this.baseUrl + "api/Nom035/ConResultEncuestasDominioPorEmpleado/", { "Idempleado": idEmpleado }).subscribe(
+    this.nom35Service.getEncuestasDominioPorEmpleado(idEmpleado).subscribe(
       res => {
         this.reporteresultDominioEmpleado = res.objeto
         this.registrosTabresultNom35 = this.reporteresultDominioEmpleado.length;

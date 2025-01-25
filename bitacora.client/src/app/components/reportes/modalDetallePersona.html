@@ -1,47 +1,49 @@
-<div style="position: relative;padding-right: 10px;" class="pull-right"><mat-icon style="cursor: pointer;" class="pull-right" (click)="cerrar()" >close</mat-icon></div>
+<div style="position: relative;padding-right: 10px;" class="pull-right"><mat-icon style="cursor: pointer;"
+    class="pull-right" (click)="cerrar()">close</mat-icon></div>
 <h4 class="modal-title text-center" style="font-size: 16px;"><b>Registros de {{dataArray[1]}}</b></h4>
-           <div>
-             <!-- Tabla Resumen Primeros Pagos -->
-             <div class="col-lg-12 col-md-12 col-sm-12">
-               <div class="row">
-                   
-                 <div class="col-lg-12 col-md-12 col-sm-12">
-                   <div style="overflow-x:hidden;overflow-y: scroll;height:45vh;width:100%;margin-top: 15px;border: 1px solid #eee;" class="table-responsive">
+<div>
+  <div class="col-lg-12 col-md-12 col-sm-12">
+    <div class="row">
 
-                     <table class="table table-striped cellspacing dataTable">
-                       <thead style="background-color: #fff;">
-                         <tr style="position: relative;">
-                           <th style="position:sticky; top:0;background-color: white;border:0px;" class="reng">Fecha</th>
-                           <th style="position:sticky; top:0;background-color: white;border:0px;" class="reng">Proyecto</th>
-                           <th style="position:sticky; top:0;background-color: white;border:0px;" class="reng">Unidad</th>
-                           <th style="position:sticky; top:0;background-color: white;border:0px;" class="reng">Área</th>
-                           <th style="position:sticky; top:0;background-color: white;border:0px;" class="reng">Duración</th>
-                           <th style="position:sticky; top:0;background-color: white;border:0px;; width:50%;" class="reng">Detalle</th>
-                         </tr>
-                       </thead>
+      <div class="col-lg-12 col-md-12 col-sm-12">
+        <div
+          style="overflow-x:hidden;overflow-y: scroll;height:45vh;width:100%;margin-top: 15px;border: 1px solid #eee;"
+          class="table-responsive">
 
-                       <tbody class="tablabody">
-                         <tr *ngFor="let item of dataArray[0]">
-                            <td>{{item.fecha}}</td>
-                            <td>{{item.proyecto}}</td>
-                            <td>{{item.unidad}}</td>
-                            <td>{{item.area}}</td>
-                            <td>{{item.horas}}</td>
-                            <td>{{item.detalle}}</td>
-                         </tr>
-                       </tbody>
-                     </table>
-   
-                   </div>
-                 </div>
-               </div>
-             </div>
-             <!-- Termina Tabla Resumen Primeros Pagos -->
-   
-             <div class="row" style="text-align: center; margin-bottom: 10px;">
-   
-             </div>
-           </div>
-           <script>
-               $('.table-responsive').animate({scrollTop:0}, 'slow');
-           </script>
+          <table class="table table-striped cellspacing dataTable">
+            <thead style="background-color: #fff;">
+              <tr style="position: relative;">
+                <th style="position:sticky; top:0;background-color: white;border:0px;" class="reng">Fechaaa</th>
+                <th style="position:sticky; top:0;background-color: white;border:0px;" class="reng">Proyecto</th>
+                <th style="position:sticky; top:0;background-color: white;border:0px;" class="reng">Unidad</th>
+                <th style="position:sticky; top:0;background-color: white;border:0px;" class="reng">Área</th>
+                <th style="position:sticky; top:0;background-color: white;border:0px;" class="reng">Duración</th>
+                <th style="position:sticky; top:0;background-color: white;border:0px;; width:50%;" class="reng">Detalle
+                </th>
+              </tr>
+            </thead>
+
+            <tbody class="tablabody">
+              <tr *ngFor="let item of dataArray[0]">
+                <td>{{item.fecha}}</td>
+                <td>{{item.proyecto}}</td>
+                <td>{{item.unidad}}</td>
+                <td>{{item.area}}</td>
+                <td>{{item.horas}}</td>
+                <td>{{item.detalle}}</td>
+              </tr>
+            </tbody>
+          </table>
+
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="row" style="text-align: center; margin-bottom: 10px;">
+
+  </div>
+</div>
+<!-- <script>
+  $('.table-responsive').animate({ scrollTop: 0 }, 'slow');
+</script> -->
