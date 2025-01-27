@@ -1,0 +1,23 @@
+<div class="container">
+    <div class="col-md-12" style="padding: 10% 0%">
+            <div class="col-md-6 offset-md-3 card">
+                    <form [formGroup]="contForm" class="text-center border border-light p-5">
+                        <div>
+                            <h4>Ingresa el token para cambiar contraseña</h4> 
+                        </div><br>
+                        <div>
+                            <input #user type="password" maxlength="6" class="form-control mb-4" formControlName="token"  placeholder="Token"> 
+                        </div>
+                        <div *ngIf="caducado" class="col-12" align="center" style="padding-top:10px;">
+                            <button  class="btn btn-warning" (click)="solicitarToken()">Solicitar nuevo token</button>
+                        </div>
+                        
+                        <button *ngIf="!caducado" class="btn btn-success my-4 btncolor" (click)="verificar()">Entrar</button>
+                        <div *ngIf="showErrorMessage">
+                            <p class="error">{{errorToken}}</p>
+                          </div>
+                    </form>
+                    
+                </div>
+    </div>
+</div>
