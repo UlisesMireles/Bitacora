@@ -1,0 +1,23 @@
+
+.error{
+    color:red;
+}
+
+footer {
+    background: #103D70;
+    color: #ffffff;
+    position: relative!important;
+
+    width: 100%;
+    border-top: 2px solid #ffffff;
+}
+.card {
+    color: black;
+    min-height: 20px;
+    padding: 0px;
+    margin-bottom: 0px;
+    background-color: #fbfbfb;
+    border: 1px solid #e3e3e3;
+    border-radius: 4px;
+    box-shadow: 0px 0px 5px #666;
+  }

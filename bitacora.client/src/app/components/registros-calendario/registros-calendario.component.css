@@ -1,0 +1,165 @@
+.registro{
+    font-size: 1em;
+}
+.fecha{
+    width: 7%;
+}
+.actividad{
+    width: 12%;
+}
+.fase{
+    width: 12%;
+}
+.duracion{
+    width: 8%;
+}
+.detalle{
+    width: 39%;
+}
+.proyecto{
+    width: 16%;
+}
+.iconos{
+    font-size: 10px;
+    cursor: pointer;
+}
+.table{
+
+    box-shadow: 0 1px 3px 0px #666;
+    background-color: white;
+}
+
+.table th,td{
+    padding: 0.4rem;
+}
+td{
+    font-size: 12px;
+}
+
+.table-striped tbody tr:nth-of-type(odd) {
+    background-color: #f9f9f9;
+}
+.text{
+    font-size: 14px;
+    text-align: left;
+    font-weight: bold;
+}
+.text-d{
+    font-size: 14px;
+    text-align: right;
+}
+.selreg{
+    padding:10px 15px;
+    height: 5%;
+}
+.labeltext{
+    margin-top: 0.2rem;
+    font-weight: bold;
+}
+
+tbody {
+    display:block;
+    height:570px;
+    overflow-y: auto;
+    overflow-x: hidden;
+    font-size: 10px;
+    
+}
+
+thead, tbody tr {
+    display:table;
+    width:100%;
+    table-layout:fixed;/* even columns width , fix width of table too*/
+}
+thead {
+    width: 100%;/* calc( 100% - 1.2em ) scrollbar is average 1em/16px width, remove it from thead width */
+}
+table {
+    width:100%;
+}
+
+::-webkit-scrollbar {
+    width: 5px;
+    }
+
+    ::-webkit-scrollbar-track {
+    box-shadow: inset 0 0 3px grey; 
+    border-radius: 10px;
+    }
+
+    ::-webkit-scrollbar-thumb {
+    background: darkgray; 
+    border-radius: 10px;
+    }
+
+    ::-webkit-scrollbar-thumb:hover {
+    background: black; 
+    }
+
+    .material-icons {
+    font-size: 17px;
+    line-height: 1;
+}
+    
+::ng-deep .clear_icon .mat-icon-button {
+ 
+    height: 37px!important;
+}
+footer {
+    background: #103D70;
+    color: #ffffff;
+    position: relative!important;
+    
+    width: 100%;
+    border-top: 2px solid #ffffff;
+}
+.row{
+    margin-left: 14px!important;
+}
+::ng-deep.ngx-pagination {
+    padding-left: 8px;
+    margin-left: 0;
+    margin-bottom: 0.5rem!important;
+}
+
+::ng-deep.der {
+    float: right!important;
+    font-size: 12px!important;
+}
+::ng-deep.derPag {
+    float: right!important;
+    font-size: 12px!important;
+}
+::ng-deep.paginas {
+    /* margin-top: 31px; */
+    padding: 0 0 0 0!important;
+    margin: 0px!important;
+    line-height: 20px!important;
+}
+::ng-deep .ngx-pagination .current {
+    background: #337ab7!important;
+    color: #fefefe!important;
+    cursor: default!important;
+}
+::ng-deep.my-pagination{
+    font-size: 12px!important;
+}
+::ng-deep .table .form-control-sm{
+    border: 0px solid #ccc;
+}
+::ng-deep .ngx-pagination a, .ngx-pagination button {
+   
+    border: 1px solid #ddd;
+    background-color: white;
+    color: #337ab7!important;
+    
+}
+::ng-deep .paginador{
+    margin-bottom: -4px;
+    margin-top: -18px;
+}
+
+::ng-deep button:focus {
+    outline: 0px dotted!important;
+    outline: 0px auto -webkit-focus-ring-color!important;
+}
