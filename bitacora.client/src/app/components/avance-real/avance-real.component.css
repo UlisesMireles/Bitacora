@@ -1,0 +1,164 @@
+.topp{
+    padding-top: 5px;
+}
+.opc {
+  padding: 0px 5px;
+  height: 30px;
+}
+.pad{
+    padding-bottom: 5px;
+    background-color: #fff;
+    width: 96%;
+    margin: auto;
+    box-shadow: 0 1px 3px 0px #666;
+}
+.textotituloCabecera {
+  font-size: 21px !important;
+  font-weight: 700 !important;
+  color: #092740 !important;
+  margin: 0 !important;
+  line-height: 30px !important;
+  padding-left: 30px;
+  padding-top: 10px;
+  text-align: left;
+}
+.proyecto{
+    width: 22%;
+}
+.avrealnuevo{
+    width: 17%;
+}
+.hr15{
+    width: 13%;
+}
+.avactual{
+    width: 13%;
+}
+.fecha{
+    width: 15%;
+}
+.unidad{
+    width: 15%;
+}
+.txtcnt{
+    text-align: center;
+}
+a{
+    color: #007bff!important;
+}
+a:hover{
+    text-decoration-line: underline!important;
+}
+::ng-deep span .ng-star-inserted{
+    color:green;    
+}
+.table-responsive {
+    overflow-x: auto;
+}
+tbody {
+    display:block;
+    height:323px;
+    overflow-y: auto;
+    overflow-x: hidden;
+    font-size: 11px;
+}
+thead, tbody tr {
+    display:table;
+    width:100%;
+    table-layout:fixed;/* even columns width , fix width of table too*/
+}
+.avinput{
+    width: 42px;
+}
+.table td{
+    padding: 0.25rem;
+    overflow-wrap: break-word;
+}
+.cabecerasCatalogos {
+  padding-left: 20px;
+  color: #666666;
+  text-align: left;
+}
+.table{
+    margin-bottom: 0px;
+}
+.table th {
+    padding: 0.45rem;
+}
+.divTablas{
+    background-color: white;
+    width: 96%;
+    margin: auto;
+    box-shadow: 0 1px 3px 0px #666;
+}
+.selreg{
+    position: relative;
+    top: -70px;
+}
+
+footer {
+    background: #103D70;
+    color: #ffffff;
+    position: relative!important;
+  
+    width: 100%;
+    border-top: 2px solid #ffffff;
+}
+
+@media only screen and (max-width: 767px) {
+    .proyecto{
+        width: 100px;
+    }
+    .avrealnuevo{
+        width: 100px;
+    }
+    .hr15{
+        width: 100px;
+    }
+    .avactual{
+        width: 100px;
+    }
+    .fecha{
+        width: 100px;
+    }
+    .unidad{
+        width: 100px;
+    }
+    .txtcnt{
+        width: 100px;
+        text-align: center;
+    }
+    .ngx-pagination {
+        margin-left: 0;
+        margin-bottom: 0;
+    }
+    
+}
+::ng-deep .ngx-pagination li {
+    -moz-user-select: none;
+    -webkit-user-select: none;
+    -ms-user-select: none;
+    margin-right: 0rem!important;
+    border-radius: 0;
+}
+::ng-deep .ngx-pagination a, .ngx-pagination button {
+
+    border: 1px solid #ddd;
+    background-color: white;
+    color: #337ab7!important;
+    
+}
+::ng-deep.ngx-pagination {
+    padding-left: 8px;
+    margin-left: 0;
+    margin-bottom: 0.5rem!important;
+}
+::ng-deep .ngx-pagination .current {
+   
+    background: #337ab7!important;
+    color: #fefefe!important;
+    cursor: default!important;
+}
+::ng-deep.my-pagination{
+    font-size: 12px!important;
+}

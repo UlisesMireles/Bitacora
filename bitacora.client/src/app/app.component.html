@@ -196,12 +196,12 @@
               <a *ngIf="bitacoraMenu==true" class="nav-item nav-link" (click)="bitacora(0)">
                 <mat-icon style="top: 7px!important; position: relative!important; font-size: 21px!important;" class="material-icons">description</mat-icon>
                 BITÁCORA<span class="sr-only">(current)</span></a>
-              
+
               <a *ngIf="avanceMenu" class="nav-item nav-link" (click)="avanceReal()">
-                <mat-icon style="top: 7px!important; position: relative!important; font-size: 21px!important;" class="material-icons">trending_up</mat-icon> 
+                <mat-icon style="top: 7px!important; position: relative!important; font-size: 21px!important;" class="material-icons">trending_up</mat-icon>
                 AVANCE REAL</a>
               <li *ngIf="reportesMenu" class="nav-item dropdown">
-                
+
                 <a style="padding-bottom: 16px;" class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
                   aria-haspopup="true" aria-expanded="false">
                   <mat-icon style="top: 7px!important; position: relative!important; font-size: 21px!important;" class="material-icons">assignment</mat-icon>
@@ -263,7 +263,7 @@
                   <div *ngIf="ejecutivo" class="dropdown-divider"></div>
                   <a *ngIf="ejecutivo" class="dropdown-item" (click)="reporte('ejecutivo')">Reporte Ejecutivo</a>
 
-                  
+
                   <div *ngIf="proyecto" class="dropdown-divider"></div>
                   <li *ngIf="participacion" class="subMenu dropdown">
                     <div *ngIf="proyecto" style="border-top: 0px solid #e9ecef!important;" class="dropdown-divider"></div>
@@ -292,13 +292,13 @@
                     <a *ngIf="resultNom35" class="dropdown-item" (click)="reporte('resultNom35')">Reporte Resultados NOM 035</a>
                   </div>
                 </li>
-               
+
                 </div>
               </li>
               <li *ngIf="catalogosMenu" class="nav-item dropdown">
                 <a style="padding-bottom: 16px;"  class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
                   aria-haspopup="true" aria-expanded="false">
-                  <mat-icon style="top: 7px!important; position: relative!important; font-size: 21px!important; height:21px !important; width:24px !important;"  class="material-icons">table_chart</mat-icon> 
+                  <mat-icon style="top: 7px!important; position: relative!important; font-size: 21px!important; height:21px !important; width:24px !important;"  class="material-icons">table_chart</mat-icon>
                   CATÁLOGOS
                 </a>
                 <div class="dropdown-menu" aria-labelledby="navbarDropdown"style="
@@ -408,14 +408,14 @@
           <mat-tab *ngIf="bitacoraMenu==true" class="col-md-3 " label="REGISTRO">
 
             <div *ngIf="pagina==0" class="container resize">
-              <!-- <form-bitacora></form-bitacora> -->
+               <form-bitacora></form-bitacora> 
             </div>
 
           </mat-tab>
           <mat-tab *ngIf="bitacoraMenu==true" class="col-md-3" label="HISTORIAL">
 
             <div *ngIf="pagina==1" class="container">
-              <!-- <form-bitacora></form-bitacora> -->
+               <form-bitacora></form-bitacora> 
             </div>
 
           </mat-tab>

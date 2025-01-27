@@ -6,7 +6,6 @@ import { Globals } from '../services/globals';
   standalone: false
 })
 export class FiltroBitacoraPipe implements PipeTransform {
-  
 
   transform(value: any,texto: any) :any{
     var resultFiltro = [];
