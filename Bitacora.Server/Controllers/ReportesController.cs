@@ -208,18 +208,12 @@ namespace Bitacora.Controllers
         [HttpGet("[action]/{fileName}")]
         public async Task<FileStreamResult> descarga(string fileName)
         {
-            var currentDirectory = System.IO.Directory.GetCurrentDirectory();
-            currentDirectory = currentDirectory + "\\Reportes";
+            var currentDirectory = System.AppDomain.CurrentDomain.BaseDirectory + @"\Reportes";
             var file = Path.Combine(currentDirectory, fileName);
             var memory = new MemoryStream();
-            //using (var stream = new FileStream(currentDirectory,FileMode.Open))
-            //{
-            //    await stream.CopyToAsync(memory);    
-            //}
             memory.Position = 0;
             var stream = System.IO.File.OpenRead(file);
             return new FileStreamResult(stream, "application/octet-stream");
-            //return  File(memory, "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",fileName);
         }
 
         [HttpPost("[action]")]
