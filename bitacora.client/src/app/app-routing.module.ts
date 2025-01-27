@@ -13,8 +13,8 @@ import { FormBitacoraComponent } from './components/form-bitacora/form-bitacora.
 
 const routes: Routes = [
   { path: '', component: LoginComponent, title: 'Bitácora' },
-  { path:'bitacora/:usuario',component:MenuComponent,canActivate:[true]},
-  { path: 'bitacora/:admin', component: MenuComponent, canActivate: [true] },
+  { path:'bitacora/:usuario',component:MenuComponent},
+  { path: 'bitacora/:admin', component: MenuComponent },
   { path: 'cambio-contraseña', component: CambiocontraseniaComponent },
   { path: 'administra-permisos', component: PermisosComponent, canActivate: [AuthGuardPermisos] },
   { path:'ingresa-token', component: TokenContraseniaComponent},
