@@ -538,3 +538,16 @@ tbody.tablabody > tr > td {
     height: 3em !important;
     background: transparent !important;
   } 
+
+.iconNom35 {
+    cursor: pointer;
+    text-align: end;
+    font-size: 30px !important;
+    width: 40px !important;
+    height: 40px !important;
+    margin: 1px;
+}
+
+div.modal-backdrop.fade.show{
+    display: none !important;
+}

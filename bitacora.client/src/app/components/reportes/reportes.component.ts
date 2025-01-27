@@ -26,7 +26,6 @@ import { User } from '../../models/user';
 import jQuery from 'jquery';
 import { APP_DATE_FORMATS, AppDateAdapter } from './datepicker-format';
 import { Nom035Service } from '../../services/nom035.service';
-declare var $: any;
 
 export interface DialogData {
   unidadNeg: string,
@@ -41,8 +40,15 @@ export interface Usuario {
 declare global {
   interface JQuery {
     modal(action: 'show' | 'hide' | 'toggle'): JQuery;
+    modal(options?: {
+      backdrop?: boolean | 'static';
+      keyboard?: boolean;
+      focus?: boolean;
+      show?: boolean;
+    }): JQuery;
   }
 }
+declare const $: JQueryStatic;
 
 @Component({
   selector: 'app-reportes',
@@ -375,6 +381,12 @@ export class ReportesComponent implements OnInit {
     private cdRef: ChangeDetectorRef, private activatedRoute: ActivatedRoute, private router: Router, private http: HttpClient,
     // @Inject("BASE_URL") private baseUrl: string, 
     private serviceReportes: ReportesService, private descargaService: DescargaService, private nom35Service: Nom035Service) {
+
+      document.addEventListener('hide.bs.modal', () => {
+        if (document.activeElement) {
+          (document.activeElement as HTMLElement).blur();
+        }
+      });
 
       Chart.register(...registerables);
       Chart.register(ChartDataLabels);
@@ -2032,6 +2044,10 @@ export class ReportesComponent implements OnInit {
       for (let i = 0; i < this.reporteSemanalActExt.length; i++) {
         this.reporteSemanalTotal.push(this.reporteSemanalActExt[i]);
       }
+
+      const distinctArray = [...new Set(this.reporteSemanalTotal.map((item:any) => JSON.stringify(item)))].map(item => JSON.parse(item));
+      this.reporteSemanalTotal = distinctArray;
+
       this.sortedData = this.reporteSemanalTotal.map(x => Object.assign({}, x));
       this.inicio = false;
       this.spinner.hide();
@@ -2048,8 +2064,12 @@ export class ReportesComponent implements OnInit {
     var idUsuario = parseInt(localStorage.getItem('currentUser')!);
     this.datosReporte = { idUser: idUsuario, idUnidad: this.unidadSeleccionada, idArea: this.areaSeleccionada, fechaIni: this.lunesRepo, fechaFin: this.domingoRepo };
     console.log(this.datosReporte);
+    if (this.datosReporte.fechaIni == undefined) {
+      console.log('2')
+      return;
+    }
     this.serviceReportes.getConsultaEjecutivo(this.datosReporte).subscribe(res => {
-      //console.log(res);
+      console.log(res);
       //console.log(this.datosReporte)
       this.reporteEjecutivo = res.ejecutivo;
       this.horasTotalesEjecutivo = res.total;
@@ -2579,6 +2599,7 @@ export class ReportesComponent implements OnInit {
             position: 'left',
             labels: {
               boxWidth: 45,
+              padding: 20,
               font: {
                 size: 15
               }
@@ -2602,7 +2623,16 @@ export class ReportesComponent implements OnInit {
               weight: 600
             }
           }
-        }
+        },
+        layout: {
+          padding: {
+            left: 50,   // Añade padding al contenedor del gráfico
+            right: 50,
+            top: 20,
+            bottom: 20
+          }
+        },
+        aspectRatio: 2,
       },
     });
   }
@@ -2840,7 +2870,6 @@ export class ReportesComponent implements OnInit {
     } else if (parametro == "Niveles") {
       this.tituloGrafico = "Criterios para toma de acciones";
       ($('#modalAcciones') as any).modal('show');
-      $("#modalAcciones").css("padding-right", "488px"); //612px
     } else if (parametro == "graficos") {
       this.charTotales = true;
       this.tituloGrafico = "Total de Entrevistas -  Final";

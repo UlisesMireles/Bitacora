@@ -157,3 +157,7 @@ mat-dialog-container{
     background: white;
     color: black;
 }
+
+div.modal-backdrop.fade.show{
+    display: none !important;
+}
