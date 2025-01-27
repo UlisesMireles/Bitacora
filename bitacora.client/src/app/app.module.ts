@@ -29,7 +29,6 @@ import { ToastNoAnimationModule } from 'ngx-toastr';
 import { AppComponent } from './app.component';
 import { MenuComponent } from './components/menu/menu.component';
 import { RegistrosCalendarioComponent } from './components/registros-calendario/registros-calendario.component';
-//import { FormBitacoraComponent } from './components/form-bitacora/form-bitacora.component';
 //import { CatalogosComponent, ModalCambioEstatus, ModalReestablecerContrasenia, ModalEliminarRol } from './components/catalogos/catalogos.component';
 //import { ReportesComponent } from './components/reportes/reportes.component';
 //import { AvanceRealComponent } from './components/avance-real/avance-real.component';
@@ -40,7 +39,7 @@ import { TokenContraseniaComponent } from './components/token-contrasenia/token-
 //import {DialogTable2} from './components/reportes/reportes.component';
 //import {DialogTable3} from './components/reportes/reportes.component';
 //import { AgregarUsuarioComponent } from './components/agregar-usuario/agregar-usuario.component';
-import { FiltroBitacoraPipe } from '../../src/app/pipes/filtro-bitacora.pipe';
+import { FiltroBitacoraPipe } from './pipes/filtro-bitacora.pipe';
 //import {MatCheckboxModule} from '@angular/material/checkbox';
 //import { FiltroProyectosPipe } from './pipes/filtro-proyectos.pipe';
 //import { AuthGuardBitacora } from './guards/AuthGuardBitacora';
@@ -58,15 +57,22 @@ import { MatAutocompleteModule} from '@angular/material/autocomplete';
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { LoginComponent } from './components/login/login.component';
+import { AvanceRealComponent } from './components/avance-real/avance-real.component'
+import { FormBitacoraComponent } from './components/form-bitacora/form-bitacora.component'
+import { ToastrModule } from 'ngx-toastr';
 import { AuthGuardPermisos } from './guards/AuthGuardPermisos';
 export function getBaseUrl() {
-  return document.getElementsByTagName('base')[0].href;
+  return 'https://localhost:7127/'
+  //return document.getElementsByTagName('base')[0].href;
 }
 
 @NgModule({
   declarations: [
     AppComponent,
     LoginComponent,
+    AvanceRealComponent,
+    FormBitacoraComponent,
+    RegistrosCalendarioComponent,
     MenuComponent,
     CambiocontraseniaComponent,
     PermisosComponent,
@@ -114,7 +120,12 @@ export function getBaseUrl() {
       // autoDismiss:false,
       // closeButton:true,
       // disableTimeOut:true,
-    })
+    }),
+    ToastrModule.forRoot({
+      timeOut: 3000, // Duración de la notificación en milisegundos
+      positionClass: 'toast-center-center', // Posición de las notificaciones
+      preventDuplicates: true, // Evita duplicados
+    }), // Configura Toastr
   ],
   providers: [
     { provide: 'BASE_URL', useFactory: getBaseUrl, deps: [] },AuthGuardPermisos, AuthGuard,
@@ -122,7 +133,7 @@ export function getBaseUrl() {
   ],
   //entryComponents: [DialogTable, DialogTable2, DialogTable3, CatalogosComponent, AgregarUsuarioComponent, Modal, OlvidasteContraseniaComponent, ModalCambioEstatus, ModalReestablecerContrasenia, ModalEliminarRol],
   //providers: [{ provide: 'BASE_URL', useFactory: getBaseUrl, deps: [] }, AuthGuardBitacora, AuthGuardCatalogos, AuthGuardReportes, AuthGuardAvanceReal, AuthGuardAvanceReal, AuthGuardPermisos, AuthGuard],
- 
+
   bootstrap: [AppComponent]
 })
 export class AppModule { }
