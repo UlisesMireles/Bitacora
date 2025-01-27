@@ -968,34 +968,44 @@ namespace BitacoraData
                                  join b in db.BitacoraH on u.Id equals b.IdUser
                                  join p in db.CatProyectos on b.IdProyecto equals p.Id
                                  where b.Fecha >= fechaInicio && b.Fecha < fechaFin && b.IdProyecto == idProyecto
-                                 select new RepDetalleProyecto
+                                 select new
                                  {
                                      IdUsr = b.IdUser,
                                      Usuario = u.Usuario,
                                      Proyecto = p.Nombre,
-                                     FechaInicio = fechaInicio.ToString("dd/MM/yyyy"),
-                                     FechaFin = fechaFin.ToString("dd/MM/yyyy"),
-                                     TotalHoras = (from tb in db.BitacoraH where tb.Fecha >= fechaInicio && tb.Fecha < fechaFin && tb.IdProyecto == idProyecto && tb.IdUser == u.Id select tb.Duracion).Sum(),
-                                     Registros = (from bi in db.BitacoraH
-                                                  join ui in db.CatUsuarios on bi.IdUser equals ui.Id
-                                                  join pi in db.CatProyectos on bi.IdProyecto equals pi.Id
-                                                  join ai in db.CatActividades on bi.IdActividad equals ai.Id
-                                                  where bi.Fecha >= fechaInicio && bi.Fecha < fechaFin && bi.IdProyecto == idProyecto && bi.IdUser == u.Id
-                                                  select new BItacoraInf
-                                                  {
-                                                      IdUsr = bi.IdUser,
-                                                      Usuario = ui.Usuario,
-                                                      Fecha = bi.Fecha,
-                                                      Activadad = ai.Nombre,
-                                                      Descripcion = bi.Descripcion,
-                                                      Etapa = bi.Fecha.ToString("dd/MM/yyyy"),
-                                                      Duracion = bi.Duracion
+                                     FechaInicio = fechaInicio,
+                                     FechaFin = fechaFin,
+                                     TotalHoras = (from tb in db.BitacoraH
+                                                   where tb.Fecha >= fechaInicio && tb.Fecha < fechaFin && tb.IdProyecto == idProyecto && tb.IdUser == u.Id
+                                                   select tb.Duracion).Sum()
+                                 }).ToList();
 
-                                                  }).ToList()
+                    listaUsuarios = lista.Select(item => new RepDetalleProyecto
+                    {
+                        IdUsr = item.IdUsr,
+                        Usuario = item.Usuario,
+                        Proyecto = item.Proyecto,
+                        FechaInicio = item.FechaInicio.ToString("dd/MM/yyyy"),
+                        FechaFin = item.FechaFin.ToString("dd/MM/yyyy"),
+                        TotalHoras = item.TotalHoras,
+                        Registros = (from bi in db.BitacoraH
+                                     join ui in db.CatUsuarios on bi.IdUser equals ui.Id
+                                     join pi in db.CatProyectos on bi.IdProyecto equals pi.Id
+                                     join ai in db.CatActividades on bi.IdActividad equals ai.Id
+                                     where bi.Fecha >= fechaInicio && bi.Fecha < fechaFin && bi.IdProyecto == idProyecto && bi.IdUser == item.IdUsr
+                                     select new BItacoraInf
+                                     {
+                                         IdUsr = bi.IdUser,
+                                         Usuario = ui.Usuario,
+                                         Fecha = bi.Fecha,
+                                         Activadad = ai.Nombre,
+                                         Descripcion = bi.Descripcion,
+                                         Etapa = bi.Fecha.ToString("dd/MM/yyyy"),
+                                         Duracion = bi.Duracion
+                                     }).ToList()
+                    }).ToList();
 
-                                 }).Distinct().ToList();
-
-                    listaUsuarios = lista
+                    listaUsuarios = listaUsuarios
                         .GroupBy(x => new { x.IdUsr, x.Usuario })
                         .Select(x => new RepDetalleProyecto
                         {
@@ -1006,17 +1016,17 @@ namespace BitacoraData
                             Proyecto = x.First().Proyecto,
                             TotalHoras = x.First().TotalHoras,
                             Registros = x.First().Registros
-                        }).ToList();
-
-                    listaUsuarios = listaUsuarios.OrderBy(x => x.Usuario).ToList();
+                        }).OrderBy(x => x.Usuario).ToList();
                 }
             }
             catch (Exception e)
             {
                 var error = e.Message;
             }
+
             return listaUsuarios;
         }
+
         public List<ReporteDetallado> ConsultaDetallado_UsuarioPorProyecto(int idUser, int idProyecto, DateTime fechaInicio, DateTime fechaFin)
         {
             List<ReporteDetallado> listaDetallado = new List<ReporteDetallado>();

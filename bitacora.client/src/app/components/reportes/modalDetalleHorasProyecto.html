@@ -1,106 +1,114 @@
 <style>
-    .mat-expansion-panel{
-        /* color: #000 !important; */
-        background-color: white !important;
-    }
-    /* .mat-content{
-        color: #000 !important;
-    }
-    .mat-expansion-indicator .ng-tns-c16-12 .ng-trigger .ng-trigger-indicatorRotate .ng-star-inserted{
-        color: #000 !important;
-    } */
-    .mat-expansion-panel-header{
-        height: 37px !important;
-    }
+  .mat-expansion-panel {
+    background-color: white !important;
+  }
+  .mat-expansion-panel-header {
+    height: 37px !important;
+  }
+  .table-responsive {
+    overflow-x: auto;
+    overflow-y: auto;
+    max-height: 26vh;
+    border: 1px solid #eee;
+  }
+  th, td {
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
+  }
+  th {
+    position: sticky;
+    top: 0;
+    background-color: white;
+    border: 0px;
+    font-weight: bold;
+  }
 </style>
-<div style="position: relative;padding-right: 10px;" class="pull-right"><mat-icon style="cursor: pointer;" class="pull-right" (click)="cerrar()" >close</mat-icon></div>
-<h3>({{dataArray[0][0].fechaInicio}} - {{dataArray[0][0].fechaFin}})  |  <b>{{dataArray[3]}}</b></h3>
-<div mat-dialog-content>
-     
-    <!-- <table *ngIf="data[1] == 'Personas'" class="table table-striped">
-        <thead>
-            <tr>
-                <th>Usuario</th>
-                <th>Horas Totales</th>
-            </tr>
-        </thead>
-    </table> -->
-    <mat-accordion *ngIf="dataArray[1] == 'Personas'"class="example-headers-align">
-        <mat-expansion-panel *ngFor="let reg of dataArray[0];let indexOfelement=index;" >
-            <mat-expansion-panel-header style="background-color: #2EA6FF;height: 30px !important;" >
-                <mat-panel-title  class="col-lg-6" style="font-size: 16px; font-weight: 500;">
-                    {{reg.usuario}}
-                </mat-panel-title>
-                <mat-panel-description class="col-lg-6" style="color: #fff;font-size: 16px; font-weight: 500;">
-                   {{reg.totalHoras}} hrs.
-                </mat-panel-description>
-            </mat-expansion-panel-header>
-            <div style="overflow-x:hidden;overflow-y: scroll;height:26vh;width:100%;margin-top: 15px;border: 1px solid #eee;" class="table-responsive">
-                <table class="table table-striped cellspacing dataTable">
-                    <thead style="background-color: #fff;">
-                        <tr style="position: relative;">
-                            <th style="position:sticky; top:0;background-color: white;border:0px;">Fecha</th>
-                            <th style="position:sticky; top:0;background-color: white;border:0px;">Actividad</th>
-                            <th style="position:sticky; top:0;background-color: white;border:0px;">Detalle</th>
-                            <th style="position:sticky; top:0;background-color: white;border:0px;">Horas</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr *ngFor="let registro of dataArray[0][indexOfelement].registros">
-                            <td>{{registro.etapa}}</td>
-                            <td>{{registro.activadad}}</td>
-                            <td>{{registro.descripcion}}</td>
-                            <td>{{registro.duracion}}</td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
-        </mat-expansion-panel>
-      </mat-accordion>
 
-      <mat-accordion *ngIf="dataArray[1] == 'Semanal'" class="example-headers-align">
-        <mat-expansion-panel *ngFor="let result of dataArray[0];let _index=index;" (opened)="abrirDetalle(dataArray[2], result.fechaInicioMoment, result.fechaFinMoment)">
-            <mat-expansion-panel-header style="background-color: #2EA6FF;height: 30px !important;" (onclick)="abrirDetalle(dataArray[2], dataArray[0][_index], dataArray[0][_index].fechaFin)">
-            <mat-panel-title class="col-lg-6" style="font-size: 16px; font-weight: 500;">
-                Semana {{result.fechaInicioString}} - {{result.fechaFinString}}
-              </mat-panel-title>
-              <mat-panel-description class="col-lg-6" style="color: #fff;font-size: 16px; font-weight: 500;">
-                {{result.totalHoras}} hrs.
-              </mat-panel-description>
-            </mat-expansion-panel-header>
-          <mat-expansion-panel *ngFor="let reg of UsuariosRegistros; let indexOfelement=index;">
-            <mat-expansion-panel-header style="background-color: #00acc1;height: 30px !important;">
-              <mat-panel-title class="col-lg-6" style="font-size: 16px; font-weight: 500;">
-                {{reg.usuario}}
-              </mat-panel-title>
-              <mat-panel-description class="col-lg-6" style="color: #fff;font-size: 16px; font-weight: 500;">
-                {{reg.totalHoras}} hrs.
-              </mat-panel-description>
-            </mat-expansion-panel-header>
-            <div style="overflow-x:hidden;overflow-y: scroll;height:26vh;width:100%;margin-top: 15px;border: 1px solid #eee;" class="table-responsive">
-              <table class="table table-striped cellspacing dataTable">
-                <thead style="background-color: #fff;">
-                  <tr style="position: relative;">
-                    <th style="position:sticky; top:0;background-color: white;border:0px;">Fecha</th>
-                    <th style="position:sticky; top:0;background-color: white;border:0px;">Actividad</th>
-                    <th style="position:sticky; top:0;background-color: white;border:0px;">Detalle</th>
-                    <th style="position:sticky; top:0;background-color: white;border:0px;">Horas</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr *ngFor="let registro of UsuariosRegistros[indexOfelement].registros">
-                    <td>{{registro.etapa}}</td>
-                    <td>{{registro.activadad}}</td>
-                    <td>{{registro.descripcion}}</td>
-                    <td>{{registro.duracion}}</td>
-                  </tr>
-                </tbody>
-              </table> 
-            </div>
-          </mat-expansion-panel>
-        </mat-expansion-panel>
-        </mat-accordion>
+<div style="display: flex; align-items: center; justify-content: space-between; padding-right: 10px;">  
+  <h3 mat-dialog-title style="color:black; margin: 0; font-size: 18px; text-align: left; flex: 1;">
+    ({{ dataArray[0][0].fechaInicio }} - {{ dataArray[0][0].fechaFin }}) | <b>{{ dataArray[3] }}</b>
+  </h3>
+  <mat-icon style="cursor: pointer;" (click)="cerrar()">close</mat-icon>
 </div>
-<script>
-    $('.table-responsive').animate({scrollTop:0}, 'slow');
-</script>
+
+<mat-dialog-content>
+  
+  <!-- Personas Section -->
+  <mat-accordion *ngIf="dataArray[1] == 'Personas'" class="example-headers-align">
+    <mat-expansion-panel *ngFor="let reg of dataArray[0]; let indexOfelement = index;">
+      <mat-expansion-panel-header style="background-color: #2EA6FF; height: 30px !important;">
+        <mat-panel-title class="col-lg-6" style="font-size: 16px; font-weight: 500;">
+          {{ reg.usuario }}
+        </mat-panel-title>
+        <mat-panel-description class="col-lg-6" style="color: #fff; font-size: 16px; font-weight: 500;">
+          {{ reg.totalHoras }} hrs.
+        </mat-panel-description>
+      </mat-expansion-panel-header>
+      <div class="table-responsive">
+        <table class="table table-striped">
+          <thead>
+            <tr>
+              <th>Fecha</th>
+              <th>Actividad</th>
+              <th>Detalle</th>
+              <th>Horas</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let registro of dataArray[0][indexOfelement].registros">
+              <td>{{ registro.etapa }}</td>
+              <td>{{ registro.activadad }}</td>
+              <td>{{ registro.descripcion }}</td>
+              <td>{{ registro.duracion }}</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </mat-expansion-panel>
+  </mat-accordion>
+
+  <!-- Semanal Section -->
+  <mat-accordion *ngIf="dataArray[1] == 'Semanal'" class="example-headers-align">
+    <mat-expansion-panel *ngFor="let result of dataArray[0]; let _index = index;" (opened)="abrirDetalle(dataArray[2], result.fechaInicioMoment, result.fechaFinMoment)">
+      <mat-expansion-panel-header style="background-color: #2EA6FF; height: 30px !important;">
+        <mat-panel-title class="col-lg-6" style="font-size: 16px; font-weight: 500;">
+          Semana {{ result.fechaInicioString }} - {{ result.fechaFinString }}
+        </mat-panel-title>
+        <mat-panel-description class="col-lg-6" style="color: #fff; font-size: 16px; font-weight: 500;">
+          {{ result.totalHoras }} hrs.
+        </mat-panel-description>
+      </mat-expansion-panel-header>
+      <mat-expansion-panel *ngFor="let reg of UsuariosRegistros; let indexOfelement = index;">
+        <mat-expansion-panel-header style="background-color: #00acc1; height: 30px !important;">
+          <mat-panel-title class="col-lg-6" style="font-size: 16px; font-weight: 500;">
+            {{ reg.usuario }}
+          </mat-panel-title>
+          <mat-panel-description class="col-lg-6" style="color: #fff; font-size: 16px; font-weight: 500;">
+            {{ reg.totalHoras }} hrs.
+          </mat-panel-description>
+        </mat-expansion-panel-header>
+        <div class="table-responsive">
+          <table class="table table-striped">
+            <thead>
+              <tr>
+                <th>Fecha</th>
+                <th>Actividad</th>
+                <th>Detalle</th>
+                <th>Horas</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let registro of UsuariosRegistros[indexOfelement].registros">
+                <td>{{ registro.etapa }}</td>
+                <td>{{ registro.activadad }}</td>
+                <td>{{ registro.descripcion }}</td>
+                <td>{{ registro.duracion }}</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </mat-expansion-panel>
+    </mat-expansion-panel>
+  </mat-accordion>
+</mat-dialog-content>

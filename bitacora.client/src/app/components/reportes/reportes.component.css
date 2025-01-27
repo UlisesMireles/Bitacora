@@ -278,6 +278,7 @@ table {
     max-height: 60vh !important;
     overflow: auto;
     -webkit-overflow-scrolling: touch;
+    background-color: white !important;
 }
 .eye{
     width: 60px;

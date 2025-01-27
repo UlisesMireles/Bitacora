@@ -1,18 +1,20 @@
-<h3>Datos Unidad de Negocios</h3>
-<div mat-dialog-content>
-    <table class="table table-striped">
-        <thead>
-            <tr>
-                <th>Unidad de Negocios</th>
-                <th>Horas</th>
-            </tr>
+<mat-dialog-content>
+    <h3 style="text-align: center; margin-bottom: 20px;">Datos Unidad de Negocios</h3>
+  
+    <div class="table-responsive" style="overflow-x: auto; max-height: 45vh; border: 1px solid #eee;">
+      <table class="table table-striped" style="table-layout: auto; width: 100%;">
+        <thead style="background-color: #f8f9fa;">
+          <tr>
+            <th style="position: sticky; top: 0; background-color: white;">Unidad de Negocios</th>
+            <th style="position: sticky; top: 0; background-color: white;">Horas</th>
+          </tr>
         </thead>
         <tbody>
-            <tr *ngFor="let reg of dataArray">
-                <td>{{reg.unidad}}</td>
-                <td>{{reg.horas}}</td>
-            </tr>
+          <tr *ngFor="let reg of dataArray">
+            <td>{{ reg.unidad }}</td>
+            <td>{{ reg.horas }}</td>
+          </tr>
         </tbody>
-        
-    </table>
-</div>
+      </table>
+    </div>
+  </mat-dialog-content>

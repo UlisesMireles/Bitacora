@@ -1834,7 +1834,7 @@ export class ReportesComponent implements OnInit {
     });
   }
   abrirTabla(datos: any) {
-    // console.log(datos)
+    console.log(datos)
     if (datos.length > 0) {
       const dialogRef = this.dialog.open(DialogTable, {
         width: '450px',
@@ -3659,6 +3659,7 @@ export class DialogTable2 {
     public dialogRef: MatDialogRef<DialogTable2>,
     @Inject(MAT_DIALOG_DATA) public data: DialogData
   ) {
+    console.log(data)
     const dialog = this.dialogRef
     dialog.afterOpened().subscribe(_ => {
       setTimeout(() => {
@@ -3693,6 +3694,7 @@ export class DialogTable3 {
     private serviceReportes:ReportesService, @Inject("BASE_URL") private baseUrl: string, private spinner: NgxSpinnerService,
     public dialog: MatDialog
   ) {
+    console.log(data)
     const dialogR = this.dialogRef
     dialogR.afterOpened().subscribe(_ => {
       setTimeout(() => {
