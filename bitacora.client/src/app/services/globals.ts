@@ -20,7 +20,7 @@ export var Globals = {
   usuarioEdicion: {},
   editarUsuario: false,
   editarRoles: false,
-  permisos: [],
+  permisos: [] ,
   url: '',
   pantallasSeleccionadas: [],
   cerrarSesion: false,
