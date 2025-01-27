@@ -1,6 +1,6 @@
 <table class="table table-striped cellspacing= dataTable" fixed-header>
     <tr>
-     
+
       <td class="row" style="padding-left: 25px; padding-bottom: 15px; padding-top: 15px; text-align: left;">
         <div class="col-sm-2 icon-container">
           <mat-icon class="custom-icon">search</mat-icon>
@@ -33,9 +33,9 @@
           </select>
         </div>
         <div class="col-sm-6"> <label class="labeltext" style="padding-left: 0px; text-align: left; "> registros por página</label></div>
-        
 
-        
+
+
       </div>
     </div>
     <div class="col-lg-7" style="text-align: right;">
@@ -88,10 +88,10 @@
         <pagination-controls (pageChange)="pageChanged($event)" previousLabel="" nextLabel=""></pagination-controls>
     </div>
     <div class="col-md-12" style="text-align: center;">
-        
+
             <label *ngIf="!filtroActivo" style="padding-left: 36px; font-weight: bold;">Mostrando {{rangoRegs}} de {{numRegistrosBitacora}} Registros </label>
             <label *ngIf="filtroActivo" style="padding-left: 36px; font-weight: bold;">Mostrando {{rangoRegsFiltro}} de {{numRegistrosFiltrados}} Registros </label>
-     
+
     </div>
 </div>
 

@@ -32,8 +32,8 @@ import { RegistrosCalendarioComponent } from './components/registros-calendario/
 //import { CatalogosComponent, ModalCambioEstatus, ModalReestablecerContrasenia, ModalEliminarRol } from './components/catalogos/catalogos.component';
 //import { ReportesComponent } from './components/reportes/reportes.component';
 //import { AvanceRealComponent } from './components/avance-real/avance-real.component';
-//import { CambiocontraseniaComponent } from './components/cambiocontrasenia/cambiocontrasenia.component';
-//import { TokenContraseniaComponent } from './components/token-contrasenia/token-contrasenia.component';
+import { CambiocontraseniaComponent } from './components/cambiocontrasenia/cambiocontrasenia.component';
+import { TokenContraseniaComponent } from './components/token-contrasenia/token-contrasenia.component';
 //import { FiltroPipe } from './pipes/filtro.pipe';
 //import {DialogTable} from './components/reportes/reportes.component';
 //import {DialogTable2} from './components/reportes/reportes.component';
@@ -43,14 +43,14 @@ import { FiltroBitacoraPipe } from './pipes/filtro-bitacora.pipe';
 //import {MatCheckboxModule} from '@angular/material/checkbox';
 //import { FiltroProyectosPipe } from './pipes/filtro-proyectos.pipe';
 //import { AuthGuardBitacora } from './guards/AuthGuardBitacora';
-//import { PermisosComponent } from './components/permisos/permisos.component';
+import { PermisosComponent } from './components/permisos/permisos.component';
 //import { AuthGuardCatalogos } from './guards/AuthGuardCatalogos';
 //import { AuthGuardReportes } from './guards/AuthGuardReportes';
 //import { AuthGuardAvanceReal } from './guards/AuthGuardAvanceReal';
 //import { AuthGuardPermisos } from './guards/AuthGuardPermisos';
 //import { OlvidasteContraseniaComponent } from './components/olvidaste-contrasenia/olvidaste-contrasenia.component';
-//import { Nom035Component } from './components/nom035/nom035.component';
-//import { AuthGuard } from './guards/AuthGuard';
+import { Nom035Component } from './components/nom035/nom035.component';
+import { AuthGuard } from './guards/AuthGuard';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { MatAutocompleteModule} from '@angular/material/autocomplete';
@@ -60,6 +60,7 @@ import { LoginComponent } from './components/login/login.component';
 import { AvanceRealComponent } from './components/avance-real/avance-real.component'
 import { FormBitacoraComponent } from './components/form-bitacora/form-bitacora.component'
 import { ToastrModule } from 'ngx-toastr';
+import { AuthGuardPermisos } from './guards/AuthGuardPermisos';
 export function getBaseUrl() {
   return 'https://localhost:7127/'
   //return document.getElementsByTagName('base')[0].href;
@@ -70,9 +71,14 @@ export function getBaseUrl() {
     AppComponent,
     LoginComponent,
     AvanceRealComponent,
-    MenuComponent,
     FormBitacoraComponent,
     RegistrosCalendarioComponent,
+    MenuComponent,
+    CambiocontraseniaComponent,
+    PermisosComponent,
+    RegistrosCalendarioComponent,
+    TokenContraseniaComponent,
+    Nom035Component,
     FiltroBitacoraPipe
   ],
   imports: [
@@ -122,7 +128,7 @@ export function getBaseUrl() {
     }), // Configura Toastr
   ],
   providers: [
-    { provide: 'BASE_URL', useFactory: getBaseUrl, deps: [] },
+    { provide: 'BASE_URL', useFactory: getBaseUrl, deps: [] },AuthGuardPermisos, AuthGuard,
     provideAnimationsAsync()
   ],
   //entryComponents: [DialogTable, DialogTable2, DialogTable3, CatalogosComponent, AgregarUsuarioComponent, Modal, OlvidasteContraseniaComponent, ModalCambioEstatus, ModalReestablecerContrasenia, ModalEliminarRol],

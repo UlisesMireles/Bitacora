@@ -1,17 +1,16 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
-
+import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { RegistrosCalendarioComponent } from './registros-calendario.component';
 
 describe('RegistrosCalendarioComponent', () => {
   let component: RegistrosCalendarioComponent;
   let fixture: ComponentFixture<RegistrosCalendarioComponent>;
 
-  beforeEach(async(() => {
+  beforeEach(async () => {
     TestBed.configureTestingModule({
-      declarations: [ RegistrosCalendarioComponent ]
+      declarations: [RegistrosCalendarioComponent]
     })
-    .compileComponents();
-  }));
+      .compileComponents();
+  });
 
   beforeEach(() => {
     fixture = TestBed.createComponent(RegistrosCalendarioComponent);

@@ -18,7 +18,7 @@ import $ from 'jquery';
 })
 @Injectable({providedIn:'root'})
 export class RegistrosCalendarioComponent implements OnInit {
- 
+
   @Output() datosForm: EventEmitter<any[]> =   new EventEmitter();
   idUsuario:number=0;
   regBitacora: number = 0;
@@ -49,7 +49,7 @@ export class RegistrosCalendarioComponent implements OnInit {
   @Input() numRegistrosBitacora:number =0;
   @Input() sumaHoras:number=0;
   constructor(private authenticationService:AuthenticationService,private cdRef:ChangeDetectorRef,private spinner: NgxSpinnerService,private router:Router, private bitacoraService:BitacoraService,private http:HttpClient, @Inject("BASE_URL") private baseUrl:string, private datePipe: DatePipe) {
-    
+
     this.router.routeReuseStrategy.shouldReuseRoute = function(){
       return false;
     }
@@ -113,7 +113,7 @@ export class RegistrosCalendarioComponent implements OnInit {
       $(".tablabody").height(hei - 387);
     }
   }
- 
+
   ngOnInit() {
     Globals.filtroBitacora=0;
     this.idUsuario = Number(localStorage.getItem("currentUser"));
@@ -126,8 +126,8 @@ export class RegistrosCalendarioComponent implements OnInit {
     }
   }
 
- 
-  
+
+
   cambioRPP(event: any){
     this.config.itemsPerPage = event;
     this.config.currentPage = 1;
@@ -148,7 +148,7 @@ export class RegistrosCalendarioComponent implements OnInit {
         this.rangoRegs = "1 a "+event;
       }
     }
-    
+
   }
   pageChanged(event: any){
     this.config.currentPage = event;
@@ -175,7 +175,7 @@ export class RegistrosCalendarioComponent implements OnInit {
         this.rangoRegs =(x-this.registrosPorPagina+1)+" a "+x;
       }
     }
-    
+
   }
    eliminar(id: any){
     this.bitacoraService.eliminarRegistro(id);

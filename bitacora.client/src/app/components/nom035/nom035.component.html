@@ -1,0 +1,2268 @@
+<div id="div_central" align="center" >
+
+    <div *ngIf="mostrardiv01">
+        <div id="div_botones" *ngIf="mostrarBtnsInicio" >
+            <br>
+            <br>
+            <h2>POLÍTICAS SOBRE LA NORMA 035</h2>
+            <p>Favor de leer la política sobre la NOM 035 y marcar la casilla</p>
+            
+            <div style="text-align:left;overflow-y:scroll;height:360px;border-bottom: black;border: 1px solid grey; padding: 8px;" class="col-lg-6 contenedor-politica">
+               
+                <tr >
+                    <br>
+                <p class="p-subtitulos">PROPÓSITO </p>
+                <p>La Política Organizacional tiene como propósito dar a conocer las obligaciones que tienen patrones y trabajadores para atender los factores de riesgo psicosocial y promover un entorno organizacional favorable, en beneficio de la salud
+                    de los trabajadores y de la productividad de nuestros centros de trabajo. El contenido de esta guía se encuentra completamente alineado a las obligaciones contenidas en la NOM-035-STPS-2018, FACTORES DE RIESGO PSICOSOCIAL EN EL TRABAJO
+                    –IDENTIFICACIÓN, ANÁLISIS Y PREVENCIÓN, publicada en el Diario Oficial de la Federación del 23 de octubre de 2018.</p>
+                <p class="p-subtitulos">ALCANCE</p>
+                <p>La Política Organizacional establece lineamientos para todos aquellos que laboran bajo la adscripción de esta empresa.</p>
+
+                <p class="p-subtitulos">DESCRIPCIÓN DE LA POLÍTICA</p>
+                <p class="p-parrafo">En Grupo Empresarial Eisei nos comprometemos a favorecer un Entorno Organizacional favorable que previene los factores psicosociales y de violencia laboral, de acuerdo con lo siguiente: </p>
+                <p class="p-list">a) Es de carácter obligatorio para toda nuestra empresa, la aplicación y actuación de la presente política.</p>
+                <p class="p-list">b) No toleramos actos o incidentes que propicien Factores de Riesgo Psicosocial o de Violencia Laboral.</p>
+                <p class="p-list">Aplicamos las medidas eficientes para promover un Entorno Organizacional Favorable a través de Programas de sana convivencia. </p>
+                <p class="p-list">d) Informamos, capacitamos y sensibilizamos a nuestros colaboradores sobre su Importancia dentro de nuestra empresa.</p>
+                <p style="margin-left: 10px;">e) Todos nuestros colaboradores apoyan en la difusión de las Políticas y Medidas de prevención adoptadas por la empresa. </p>
+                <p class="p-subtitulos">POLITICA DE SEGURIDAD EN EL CENTRO DE TRABAJO </p>
+                <p class="p-parrafo">Para Eisei Innovation son vitales la salud y seguridad de nuestros colaboradores dentro de nuestro ambiente de trabajo, así como la practica ecológica amigable, por lo que adoptamos los siguientes principios: </p>
+                <p class="p-list"> ➢ Proveer a los colaboradores condiciones de trabajo seguras, saludables a fin de prevenir enfermedades ocupacionales y todo tipo de accidentes.</p>
+                <p class="p-list"> ➢ Operar y mantener los equipos, instalaciones y procesos de manera segura. </p>
+                <p class="p-list">➢ Minimizar el impacto de nuestras actividades y productos en el medio ambiente.</p>
+                <p class="p-list">➢ Cumplir con las leyes, normas y reglamentos de seguridad, salud y medio ambiente. </p>
+                <p class="p-list">➢ Establecer mecanismos para inspección periódica, evaluación de riesgos y acciones preventivas y/o correctivas. Reafirmamos nuestro compromiso cuidado del medio ambiente, la seguridad y salud de todos quienes participan de nuestras actividades.</p>
+            </tr>    
+            <br>
+            </div>
+        
+            <br><br>
+            <div class="divPolitica">
+                <input [(ngModel)]="chkPoliticas" type="checkbox" name="aceptarPolitica" id="aceptarPolitica"><label style="margin-left:10px;font-size:medium;">Declaro que he leído y estoy de acuerdo con la política sobre la NOM 035 de Grupo Empresarial EISEI SA de CV</label>                <br>
+            </div>
+            <br>
+            <button class="btn btn-secondary btn-lg" style="width:200px;" (click)="btnSalir()">Cancelar</button> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            <button class="btn btn-primary btn-lg" style="width:200px;" (click)="empezarEncuesta()">Ir a la encuesta</button>
+        </div>
+    </div>
+    <div *ngIf="mostrardiv02" class="col-lg-12 col-md-12 col-sm-12">
+        <br>
+        <br>
+        <span class="titulos" style="font-size: 16px;">Guía de Referencia ll (entrada en vigor 23/10/2020)</span>
+        <br>
+        <br>
+        <span style="font-size: 14px; font-weight: bold;">CUESTIONARIO PARA IDENTIFICAR LOS FACTORES DE RIESGO PSICOSOCIAL EN LOS CENTROS DE TRABAJO</span>
+        <br>
+        <span style="font-size: 14px; font-weight: bold; color:#D20B24">La encuesta consta de 46 preguntas divididas en 8 bloques</span>
+        <br>
+        <br>
+        <div style="font-size: 12px;">
+            <table style="width: 64%;">
+                <tr>
+                    <td>
+                        <span>Nombre</span>
+                    </td>
+                    <td>
+                        <span>Apellido Paterno</span>
+                    </td>
+                    <td>
+                        <span>Apellido Materno</span>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <input disabled type="text" value="{{nombre}}" />
+                    </td>
+                    <td>
+                        <input disabled type="text" value="{{apellidoPat}}" />
+                    </td>
+                    <td>
+                        <input disabled type="text" value="{{apellidoMat}}" />
+                    </td>
+
+                </tr>
+                <tr>
+                    <td>
+                        <span>Puesto que desempeña</span>
+                    </td>
+                    <td>
+                        <span>Fecha en que aplico el cuestionario</span>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <input disabled type="text" />
+                    </td>
+                    <td>
+                        <input disabled type="text" value="{{fecha}}" />
+                    </td>
+                </tr>
+            </table>
+        </div>
+
+        <div style="width: 64%;" >
+            <div style="text-align: left;">
+                <br>
+                <br>
+                <span class="vinetas"> o </span><span class="titulos">Lee detenidamente la siguiente pregunta para definir si te has encontrado con algún acontecimiento traumático severo.</span>
+                <br>
+                <br>
+            </div>
+            <table class="tablas">
+                
+                <tr>
+                    <td class="tituloCategoria">
+                        I.- Acontecimiento traumático severo
+                    </td>
+                    <td class="columnaRespusta">
+                    <b>Si</b>
+
+                    </td>
+                    <td class="columnaRespusta">
+                    <b>No</b>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <span>¿Ha presenciado o sufrido alguna vez, durante o con motivo del trabajo un acontecimiento como los siguientes:</span><br>
+                        <span> ➢ Accidente que tenga como consecuencia la muerte, la pérdida de un miembro o una lesión grave,</span><br>
+                        <span> ➢ Asaltos, Actos violentos que derivaron en lesiones graves, Secuestro,</span><br>
+                        <span> ➢ Amenazas o cualquier otro que ponga en riesgo su vida o salud, y/o la de otras personas?</span>
+                    </td>
+                    <td class="columnaRespusta">
+                        <label for="">
+              <input name="opcion_00" [(ngModel)]="pregunta100" value="7" type="radio"  />
+            </label>
+                    </td>
+                    <td class="columnaRespusta">
+                        <label for="">
+              <input name="opcion_00" [(ngModel)]="pregunta100"  value="6" type="radio"/>
+            </label>
+                    </td>
+                </tr>
+            </table>
+        </div>
+    </div>
+    <div *ngIf="mostrardiv03" class="col-lg-12 col-md-12 col-sm-12" style="width: 64%;">
+       
+        <div>
+            <br>
+            <div style="text-align: left;">
+            <span class="titulos" ><span class="vinetas"> o </span>Especifica con mayor detalle los efectos posibles del acontecimiento traumático</span>
+            </div>
+            <br>
+            <table>
+                
+                <tr>
+                    <td class="tituloCategoria">
+                        <span>II.- Recuerdos persistentes sobre el acontecimiento (durante el último mes):</span>
+                    </td>
+                    <td class="columnaRespusta">
+                        <span>Si</span>
+                    </td>
+                    <td class="columnaRespusta">
+                        <span>No</span>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <span>¿Ha tenido recuerdos recurrentes sobre el acontecimiento que le provocan malestares?</span>
+                    </td>
+                    <td class="columnaRespusta">
+                        <label for="">
+                <input name="opcion_01" [(ngModel)]="pregunta101" value="7" type="radio"  />
+              </label>
+                    </td>
+                    <td class="columnaRespusta">
+                        <label for="">
+                <input name="opcion_01" [(ngModel)]="pregunta101"  value="6" type="radio"  />
+              </label>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <span>¿Ha tenido sueños de carácter recurrente sobre el acontecimiento, que le producen malestar?</span>
+                    </td>
+                    <td class="columnaRespusta">
+                        <label for="">
+                <input name="opcion_02" [(ngModel)]="pregunta102" value="7" type="radio"  />
+              </label>
+                    </td>
+             <td class="columnaRespusta">
+                        <label for="">
+                <input name="opcion_02" [(ngModel)]="pregunta102"  value="6" type="radio"  />
+              </label>
+                </td>
+                </tr>
+                <tr  class="tituloCategoria">
+                    <td colspan="3">
+                    <span>III.- Esfuerzo por evitar circunstancias parecidas o asociadas al acontecimiento (durante el último mes):</span>
+                </td>
+                </tr>
+                <tr>
+                    <td>
+                        <span>¿Se ha esforzado por evitar todo tipo de sentimientos, conversaciones o situaciones que le puedan recordar el acontecimiento?</span>
+                    </td>
+                    <td class="columnaRespusta">
+                        <label for="">
+                <input name="opcion_03" [(ngModel)]="pregunta103" value="7" type="radio"  />
+              </label>
+                    </td>
+                    <td class="columnaRespusta">
+                        <label for="">
+                <input name="opcion_03" [(ngModel)]="pregunta103"  value="6" type="radio"  />
+              </label>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <span>¿Se ha esforzado por evitar todo tipo de actividades, lugares o personas que motivan recuerdos del acontecimiento?</span>
+                    </td>
+                    <td class="columnaRespusta">
+                        <label for="">
+                <input name="opcion_04" [(ngModel)]="pregunta104" value="7" type="radio"  />
+              </label>
+                    </td>
+                    <td class="columnaRespusta">
+                        <label for="">
+                <input name="opcion_04" [(ngModel)]="pregunta104"  value="6" type="radio"  />
+              </label>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <span>¿Ha tenido dificultad para recordar alguna parte importante del evento?</span>
+                    </td>
+                    <td class="columnaRespusta">
+                        <label for="">
+                <input name="opcion_05" [(ngModel)]="pregunta105" value="7" type="radio"  />
+              </label>
+                    </td>
+                    <td class="columnaRespusta">
+                        <label for="">
+                <input name="opcion_05" [(ngModel)]="pregunta105"  value="6" type="radio"  />
+              </label>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <span>¿Ha disminuido su interés en sus actividades cotidianas?</span>
+                    </td>
+                    <td class="columnaRespusta">
+                        <label for="">
+                <input name="opcion_06" [(ngModel)]="pregunta106" value="7" type="radio"  />
+              </label>
+                    </td>
+                    <td class="columnaRespusta">
+                        <label for="">
+                <input name="opcion_06" [(ngModel)]="pregunta106"  value="6" type="radio"  />
+              </label>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <span>¿Se ha sentido usted alejado o distante de los demás?</span>
+                    </td>
+                    <td class="columnaRespusta">
+                        <label for="">
+                <input name="opcion_07" [(ngModel)]="pregunta107" value="7" type="radio"  />
+              </label>
+                    </td>
+                    <td class="columnaRespusta">
+                        <label for="">
+                <input name="opcion_07" [(ngModel)]="pregunta107"  value="6" type="radio"  />
+              </label>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <span>¿Ha notado que tiene dificultad para expresar sus sentimientos?</span>
+                    </td>
+                    <td class="columnaRespusta">
+                        <label for="">
+                <input name="opcion_08" [(ngModel)]="pregunta108" value="7" type="radio"  />
+              </label>
+                    </td>
+                    <td class="columnaRespusta">
+                        <label for="">
+                <input name="opcion_08" [(ngModel)]="pregunta108"  value="6" type="radio"  />
+              </label>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <span>¿Ha tenido la impresión de que su vida se va a acortar, que va a morir antes que otras personas o que tiene un futuro limitado?
+              </span>
+                    </td>
+                    <td class="columnaRespusta">
+                        <label for="">
+                <input name="opcion_09" [(ngModel)]="pregunta109" value="7" type="radio"  />
+              </label>
+                    </td>
+                    <td class="columnaRespusta">
+                        <label for="">
+                <input name="opcion_09" [(ngModel)]="pregunta109"  value="6" type="radio"  />
+              </label>
+                    </td>
+                </tr>
+                <tr class="tituloCategoria">
+                    <td colspan="3">
+                    <span>IV Afectación (durante el último mes):</span>
+                </td>
+                </tr>
+                <tr>
+                    <td>
+                        <span>¿Ha tenido usted dificultades para dormir?
+              </span>
+                    </td>
+                    <td class="columnaRespusta">
+                        <label for="">
+                <input name="opcion_10" [(ngModel)]="pregunta110" value="7" type="radio"  />
+              </label>
+                    </td>
+                    <td class="columnaRespusta">
+                        <label for="">
+                <input name="opcion_10" [(ngModel)]="pregunta110"  value="6" type="radio"  />
+              </label>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <span>¿Ha estado particularmente irritable o le han dado arranques de coraje?</span>
+                    </td>
+                    <td class="columnaRespusta">
+                        <label for="">
+                <input name="opcion_11" [(ngModel)]="pregunta111" value="7" type="radio"  />
+              </label>
+                    </td>
+                    <td class="columnaRespusta">
+                        <label for="">
+                <input name="opcion_11" [(ngModel)]="pregunta111"  value="6" type="radio"  />
+              </label>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <span>¿Ha tenido dificultad para concentrarse?
+              </span>
+                    </td>
+                    <td class="columnaRespusta">
+                        <label for="">
+                <input name="opcion_12" [(ngModel)]="pregunta112" value="7" type="radio"  />
+              </label>
+                    </td>
+                    <td class="columnaRespusta">
+                        <label for="">
+                <input name="opcion_12" [(ngModel)]="pregunta112"  value="6" type="radio"  />
+              </label>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <span>¿Ha estado nervioso o constantemente en alerta?
+              </span>
+                    </td>
+                    <td class="columnaRespusta">
+                        <label for="">
+                <input name="opcion_13" [(ngModel)]="pregunta113" value="7" type="radio"  />
+              </label>
+                    </td>
+                    <td class="columnaRespusta">
+                        <label for="">
+                <input name="opcion_13" [(ngModel)]="pregunta113"  value="6" type="radio"  />
+              </label>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <span>¿Se ha sobresaltado fácilmente por cualquier cosa?
+              </span>
+                    </td>
+                    <td class="columnaRespusta">
+                        <label for="">
+                <input name="opcion_14" [(ngModel)]="pregunta114" value="7" type="radio"  />
+              </label>
+                    </td>
+                    <td class="columnaRespusta">
+                        <label for="">
+                <input name="opcion_14" [(ngModel)]="pregunta114"  value="6" type="radio"  />
+              </label>
+                    </td>
+                </tr>
+            </table>
+        </div>
+    </div>
+    <div *ngIf="mostrardiv04" class="col-lg-12 col-md-12 col-sm-12" style="width: 64%;">
+        <div>
+            <br>
+            <div style="text-align: left;">
+                <span class="vinetas"> o </span><span class="titulos">Para responder las preguntas siguientes considere las condiciones de su centro de trabajo, así como la cantidad y ritmo de trabajo.</span>
+            </div>
+            <br>
+            <table>
+                <thead>
+                    <td><b></b></td>
+                    <td><b></b></td>
+                    <td class="columnaRespusta"><b>Siempre</b></td>
+                    <td class="columnaRespusta"><b>Casi siempre</b></td>
+                    <td class="columnaRespusta"><b>Algunas veces</b></td>
+                    <td class="columnaRespusta"><b>Casi nunca</b></td>
+                    <td class="columnaRespusta"><b>Nunca</b></td>
+                </thead>
+                <tr>
+                    <td>
+                        <span>1
+            </span>
+                    </td>
+                    <td>
+                        <span>Mi trabajo me exige hacer mucho esfuerzo físico
+              </span>
+                    </td>
+                    <td class="columnaRespusta">
+                        <label for="">
+                <input name="opcion_15" [(ngModel)]="pregunta1" value="5" type="radio"  />
+              </label>
+                    </td>
+                    <td class="columnaRespusta">
+                        <label for="">
+                <input name="opcion_15" [(ngModel)]="pregunta1"  value="4" type="radio"  />
+              </label>
+                    </td>
+                    <td class="columnaRespusta">
+                        <label for="">
+                <input name="opcion_15" [(ngModel)]="pregunta1"  value="3" type="radio"  />
+              </label>
+                    </td>
+                    <td class="columnaRespusta">
+                        <label for="">
+                <input name="opcion_15" [(ngModel)]="pregunta1"  value="2" type="radio"  />
+              </label>
+                    </td>
+                    <td class="columnaRespusta">
+                        <label for="">
+                <input name="opcion_15" [(ngModel)]="pregunta1"  value="1" type="radio"  />
+              </label>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <span>2
+            </span>
+                    </td>
+                    <td>
+                        <span>Me preocupa sufrir un accidente en mi trabajo
+              </span>
+                    </td>
+                    <td class="columnaRespusta">
+                        <label for="">
+                <input name="opcion_16" [(ngModel)]="pregunta2" value="5" type="radio"  />
+              </label>
+                    </td>
+                    <td class="columnaRespusta">
+                        <label for="">
+                <input name="opcion_16" [(ngModel)]="pregunta2"  value="4" type="radio"  />
+              </label>
+                    </td>
+                    <td class="columnaRespusta">
+                        <label for="">
+                <input name="opcion_16" [(ngModel)]="pregunta2"  value="3" type="radio"  />
+              </label>
+                    </td>
+                    <td class="columnaRespusta">
+                        <label for="">
+                <input name="opcion_16" [(ngModel)]="pregunta2"  value="2" type="radio"  />
+              </label>
+                    </td>
+                    <td class="columnaRespusta">
+                        <label for="">
+                <input name="opcion_16" [(ngModel)]="pregunta2"  value="1" type="radio"  />
+              </label>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <span>3
+            </span>
+                    </td>
+                    <td>
+                        <span>Considero que las actividades que realizo son peligrosas
+              </span>
+                    </td>
+                    <td class="columnaRespusta">
+                        <label for="">
+                <input name="opcion_17" [(ngModel)]="pregunta3" value="5" type="radio"  />
+              </label>
+                    </td>
+                    <td class="columnaRespusta">
+                        <label for="">
+                <input name="opcion_17" [(ngModel)]="pregunta3"  value="4" type="radio"  />
+              </label>
+                    </td>
+                    <td class="columnaRespusta">
+                        <label for="">
+                <input name="opcion_17" [(ngModel)]="pregunta3"  value="3" type="radio"  />
+              </label>
+                    </td>
+                    <td class="columnaRespusta">
+                        <label for="">
+                <input name="opcion_17" [(ngModel)]="pregunta3"  value="2" type="radio"  />
+              </label>
+                    </td>
+                    <td class="columnaRespusta">
+                        <label for="">
+                <input name="opcion_17" [(ngModel)]="pregunta3"  value="1" type="radio"  />
+              </label>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <span>4
+            </span>
+                    </td>
+                    <td>
+                        <span>Por la cantidad de trabajo que tengo debo quedarme tiempo adicional a mi turno
+              </span>
+                    </td>
+                    <td class="columnaRespusta">
+                        <label for="">
+                <input name="opcion_18" [(ngModel)]="pregunta4" value="5" type="radio"  />
+              </label>
+                    </td>
+                    <td class="columnaRespusta">
+                        <label for="">
+                <input name="opcion_18" [(ngModel)]="pregunta4"  value="4" type="radio"  />
+              </label>
+                    </td>
+                    <td class="columnaRespusta">
+                        <label for="">
+                <input name="opcion_18" [(ngModel)]="pregunta4"  value="3" type="radio"  />
+              </label>
+                    </td>
+                    <td class="columnaRespusta">
+                        <label for="">
+                <input name="opcion_18" [(ngModel)]="pregunta4"  value="2" type="radio"  />
+              </label>
+                    </td>
+                    <td class="columnaRespusta">
+                        <label for="">
+                <input name="opcion_18" [(ngModel)]="pregunta4"  value="1" type="radio"  />
+              </label>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <span>5
+            </span>
+                    </td>
+                    <td>
+                        <span>Por la cantidad de trabajo que tengo debo trabajar sin parar 
+              </span>
+                    </td>
+                    <td class="columnaRespusta">
+                        <label for="">
+                <input name="opcion_19" [(ngModel)]="pregunta5" value="5" type="radio"  />
+              </label>
+                    </td>
+                    <td class="columnaRespusta">
+                        <label for="">
+                <input name="opcion_19" [(ngModel)]="pregunta5"  value="4" type="radio"  />
+              </label>
+                    </td>
+                    <td class="columnaRespusta">
+                        <label for="">
+                <input name="opcion_19" [(ngModel)]="pregunta5"  value="3" type="radio"  />
+              </label>
+                    </td>
+                    <td class="columnaRespusta">
+                        <label for="">
+                <input name="opcion_19" [(ngModel)]="pregunta5"  value="2" type="radio"  />
+              </label>
+                    </td>
+                    <td class="columnaRespusta">
+                        <label for="">
+                <input name="opcion_19" [(ngModel)]="pregunta5"  value="1" type="radio"  />
+              </label>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <span>6
+            </span>
+                    </td>
+                    <td>
+                        <span>Considero que es necesario mantener un ritmo de trabajo acelerado
+              </span>
+                    </td>
+                    <td class="columnaRespusta">
+                        <label for="">
+                <input name="opcion_20" [(ngModel)]="pregunta6" value="5" type="radio"  />
+              </label>
+                    </td>
+                    <td class="columnaRespusta">
+                        <label for="">
+                <input name="opcion_20" [(ngModel)]="pregunta6"  value="4" type="radio"  />
+              </label>
+                    </td>
+                    <td class="columnaRespusta">
+                        <label for="">
+                <input name="opcion_20" [(ngModel)]="pregunta6"  value="3" type="radio"  />
+              </label>
+                    </td>
+                    <td class="columnaRespusta">
+                        <label for="">
+                <input name="opcion_20" [(ngModel)]="pregunta6"  value="2" type="radio"  />
+              </label>
+                    </td>
+                    <td class="columnaRespusta">
+                        <label for="">
+                <input name="opcion_20" [(ngModel)]="pregunta6"  value="1" type="radio"  />
+              </label>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <span>7
+            </span>
+                    </td>
+                    <td>
+                        <span>Mi trabajo exige que esté muy concentrado 
+              </span>
+                    </td>
+                    <td class="columnaRespusta">
+                        <label for="">
+                <input name="opcion_21" [(ngModel)]="pregunta7" value="5" type="radio"  />
+              </label>
+                    </td>
+                    <td class="columnaRespusta">
+                        <label for="">
+                <input name="opcion_21" [(ngModel)]="pregunta7"  value="4" type="radio"  />
+              </label>
+                    </td>
+                    <td class="columnaRespusta">
+                        <label for="">
+                <input name="opcion_21" [(ngModel)]="pregunta7"  value="3" type="radio"  />
+              </label>
+                    </td>
+                    <td class="columnaRespusta">
+                        <label for="">
+                <input name="opcion_21" [(ngModel)]="pregunta7"  value="2" type="radio"  />
+              </label>
+                    </td>
+                    <td class="columnaRespusta">
+                        <label for="">
+                <input name="opcion_21" [(ngModel)]="pregunta7"  value="1" type="radio"  />
+              </label>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <span>8
+            </span>
+                    </td>
+                    <td>
+                        <span>Mi trabajo requiere que memorice mucha información
+              </span>
+                    </td>
+                    <td class="columnaRespusta">
+                        <label for="">
+                <input name="opcion_22" [(ngModel)]="pregunta8" value="5" type="radio"  />
+              </label>
+                    </td>
+                    <td class="columnaRespusta">
+                        <label for="">
+                <input name="opcion_22" [(ngModel)]="pregunta8"  value="4" type="radio"  />
+              </label>
+                    </td>
+                    <td class="columnaRespusta">
+                        <label for="">
+                <input name="opcion_22" [(ngModel)]="pregunta8"  value="3" type="radio"  />
+              </label>
+                    </td>
+                    <td class="columnaRespusta">
+                        <label for="">
+                <input name="opcion_22" [(ngModel)]="pregunta8"  value="2" type="radio"  />
+              </label>
+                    </td>
+                    <td class="columnaRespusta">
+                        <label for="">
+                <input name="opcion_22" [(ngModel)]="pregunta8"  value="1" type="radio"  />
+              </label>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <span>9
+            </span>
+                    </td>
+                    <td>
+                        <span>Mi trabajo exige que atienda varios asuntos al mismo tiempo
+              </span>
+                    </td>
+                    <td class="columnaRespusta">
+                        <label for="">
+                <input name="opcion_23" [(ngModel)]="pregunta9" value="5" type="radio"  />
+              </label>
+                    </td>
+                    <td class="columnaRespusta">
+                        <label for="">
+                <input name="opcion_23" [(ngModel)]="pregunta9"  value="4" type="radio"  />
+              </label>
+                    </td>
+                    <td class="columnaRespusta">
+                        <label for="">
+                <input name="opcion_23" [(ngModel)]="pregunta9"  value="3" type="radio"  />
+              </label>
+                    </td>
+                    <td class="columnaRespusta">
+                        <label for="">
+                <input name="opcion_23" [(ngModel)]="pregunta9"  value="2" type="radio"  />
+              </label>
+                    </td>
+                    <td class="columnaRespusta">
+                        <label for="">
+                <input name="opcion_23" [(ngModel)]="pregunta9"  value="1" type="radio"  />
+              </label>
+                    </td>
+                </tr>
+
+            </table>
+        </div>
+
+        <div >
+            <br>
+            <br>
+            <div style="text-align: left;">
+                <span class="titulos"> <span class="vinetas"> o </span>Las preguntas siguientes están relacionadas con las actividades que realiza en su trabajo y las responsabilidades que tiene.</span>
+    
+            </div>
+            <br>
+            <table >
+                <thead>
+                    <td><b></b></td>
+                    <td><b></b></td>
+                    <td class="columnaRespusta"><b>Siempre</b></td>
+                    <td class="columnaRespusta"><b>Casi siempre</b></td>
+                    <td class="columnaRespusta"><b>Algunas veces</b></td>
+                    <td class="columnaRespusta"><b>Casi nunca</b></td>
+                    <td class="columnaRespusta"><b>Nunca</b></td>
+                </thead>
+                <tr>
+                    <td>
+                        <span>10
+            </span>
+                    </td>
+                    <td>
+                        <span>En mi trabajo soy responsable de cosas de mucho valor
+              </span>
+                    </td>
+                    <td class="columnaRespusta">
+                        <label for="">
+                <input name="opcion_24" [(ngModel)]="pregunta10" value="5" type="radio"  />
+              </label>
+                    </td>
+                    <td class="columnaRespusta">
+                        <label for="">
+                <input name="opcion_24" [(ngModel)]="pregunta10"  value="4" type="radio"  />
+              </label>
+                    </td>
+                    <td class="columnaRespusta">
+                        <label for="">
+                <input name="opcion_24" [(ngModel)]="pregunta10"  value="3" type="radio"  />
+              </label>
+                    </td>
+                    <td class="columnaRespusta">
+                        <label for="">
+                <input name="opcion_24" [(ngModel)]="pregunta10"  value="2" type="radio"  />
+              </label>
+                    </td>
+                    <td class="columnaRespusta">
+                        <label for="">
+                <input name="opcion_24" [(ngModel)]="pregunta10"  value="1" type="radio"  />
+              </label>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <span>11
+            </span>
+                    </td>
+                    <td>
+                        <span>Respondo ante mi jefe por los resultados de toda mi área de trabajo
+              </span>
+                    </td>
+                    <td class="columnaRespusta">
+                        <label for="">
+                <input name="opcion_25" [(ngModel)]="pregunta11" value="5" type="radio"  />
+              </label>
+                    </td>
+                    <td class="columnaRespusta">
+                        <label for="">
+                <input name="opcion_25" [(ngModel)]="pregunta11"  value="4" type="radio"  />
+              </label>
+                    </td>
+                    <td class="columnaRespusta">
+                        <label for="">
+                <input name="opcion_25" [(ngModel)]="pregunta11"  value="3" type="radio"  />
+              </label>
+                    </td>
+                    <td class="columnaRespusta">
+                        <label for="">
+                <input name="opcion_25" [(ngModel)]="pregunta11"  value="2" type="radio"  />
+              </label>
+                    </td>
+                    <td class="columnaRespusta">
+                        <label for="">
+                <input name="opcion_25" [(ngModel)]="pregunta11"  value="1" type="radio"  />
+              </label>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <span>12
+            </span>
+                    </td>
+                    <td>
+                        <span>En mi trabajo me dan órdenes contradictorias
+              </span>
+                    </td>
+                    <td class="columnaRespusta">
+                        <label for="">
+                <input name="opcion_26" [(ngModel)]="pregunta12" value="5" type="radio"  />
+              </label>
+                    </td>
+                    <td class="columnaRespusta">
+                        <label for="">
+                <input name="opcion_26" [(ngModel)]="pregunta12"  value="4" type="radio"  />
+              </label>
+                    </td>
+                    <td class="columnaRespusta">
+                        <label for="">
+                <input name="opcion_26" [(ngModel)]="pregunta12"  value="3" type="radio"  />
+              </label>
+                    </td>
+                    <td class="columnaRespusta">
+                        <label for="">
+                <input name="opcion_26" [(ngModel)]="pregunta12"  value="2" type="radio"  />
+              </label>
+                    </td>
+                    <td class="columnaRespusta">
+                        <label for="">
+                <input name="opcion_26" [(ngModel)]="pregunta12"  value="1" type="radio"  />
+              </label>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <span>13
+            </span>
+                    </td>
+                    <td>
+                        <span>Considero que en mi trabajo me piden hacer cosas innecesarias
+              </span>
+                    </td>
+                    <td class="columnaRespusta">
+                        <label for="">
+                <input name="opcion_27" [(ngModel)]="pregunta13" value="5" type="radio"  />
+              </label>
+                    </td>
+                    <td class="columnaRespusta">
+                        <label for="">
+                <input name="opcion_27" [(ngModel)]="pregunta13"  value="4" type="radio"  />
+              </label>
+                    </td>
+                    <td class="columnaRespusta">
+                        <label for="">
+                <input name="opcion_27" [(ngModel)]="pregunta13"  value="3" type="radio"  />
+              </label>
+                    </td>
+                    <td class="columnaRespusta">
+                        <label for="">
+                <input name="opcion_27" [(ngModel)]="pregunta13"  value="2" type="radio"  />
+              </label>
+                    </td>
+                    <td class="columnaRespusta">
+                        <label for="">
+                <input name="opcion_27" [(ngModel)]="pregunta13"  value="1" type="radio"  />
+              </label>
+                    </td>
+                </tr>
+            </table>
+        </div>
+    </div>
+    <div *ngIf="mostrardiv05" class="col-lg-12 col-md-12 col-sm-12" style="width: 64%;">
+        <div>
+            <br>
+            <div style="text-align: left;">
+                <span class="titulos"><span class="vinetas"> o </span>Las preguntas siguientes están relacionadas con el tiempo destinado a su trabajo y sus responsabilidades familiares.</span>
+            </div>
+             <br>
+            <table >
+                <thead>
+                    <td><b></b></td>
+                    <td><b></b></td>
+                    <td class="columnaRespusta"><b>Siempre</b></td>
+                    <td class="columnaRespusta"><b>Casi siempre</b></td>
+                    <td class="columnaRespusta"><b>Algunas veces</b></td>
+                    <td class="columnaRespusta"><b>Casi nunca</b></td>
+                    <td class="columnaRespusta"><b>Nunca</b></td>
+                </thead>
+                <tr>
+                    <td>
+                        <span>14
+            </span>
+                    </td>
+                    <td>
+                        <span>Trabajo horas extras más de tres veces a la semana
+              </span>
+                    </td>
+                    <td class="columnaRespusta">
+                        <label for="">
+                <input name="opcion_28" [(ngModel)]="pregunta14" value="5" type="radio"  />
+              </label>
+                    </td>
+                    <td class="columnaRespusta">
+                        <label for="">
+                <input name="opcion_28" [(ngModel)]="pregunta14"  value="4" type="radio"  />
+              </label>
+                    </td>
+                    <td class="columnaRespusta">
+                        <label for="">
+                <input name="opcion_28" [(ngModel)]="pregunta14"  value="3" type="radio"  />
+              </label>
+                    </td>
+                    <td class="columnaRespusta">
+                        <label for="">
+                <input name="opcion_28" [(ngModel)]="pregunta14"  value="2" type="radio"  />
+              </label>
+                    </td>
+                    <td class="columnaRespusta">
+                        <label for="">
+                <input name="opcion_28" [(ngModel)]="pregunta14"  value="1" type="radio"  />
+              </label>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <span>15
+            </span>
+                    </td>
+                    <td>
+                        <span>Mi trabajo me exige laborar en días de descanso, festivos o fines de semana
+              </span>
+                    </td>
+                    <td class="columnaRespusta">
+                        <label for="">
+                <input name="opcion_29" [(ngModel)]="pregunta15" value="5" type="radio"  />
+              </label>
+                    </td>
+                    <td class="columnaRespusta">
+                        <label for="">
+                <input name="opcion_29" [(ngModel)]="pregunta15"  value="4" type="radio"  />
+              </label>
+                    </td>
+                    <td class="columnaRespusta">
+                        <label for="">
+                <input name="opcion_29" [(ngModel)]="pregunta15"  value="3" type="radio"  />
+              </label>
+                    </td>
+                    <td class="columnaRespusta">
+                        <label for="">
+                <input name="opcion_29" [(ngModel)]="pregunta15"  value="2" type="radio"  />
+              </label>
+                    </td>
+                    <td class="columnaRespusta">
+                        <label for="">
+                <input name="opcion_29" [(ngModel)]="pregunta15"  value="1" type="radio"  />
+              </label>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <span>16
+            </span>
+                    </td>
+                    <td>
+                        <span>Considero que el tiempo en el trabajo es mucho y perjudica mis actividades familiares o personales
+              </span>
+                    </td>
+                    <td class="columnaRespusta">
+                        <label for="">
+                <input name="opcion_30" [(ngModel)]="pregunta16" value="5" type="radio"  />
+              </label>
+                    </td>
+                    <td class="columnaRespusta">
+                        <label for="">
+                <input name="opcion_30" [(ngModel)]="pregunta16"  value="4" type="radio"  />
+              </label>
+                    </td>
+                    <td class="columnaRespusta">
+                        <label for="">
+                <input name="opcion_30" [(ngModel)]="pregunta16"  value="3" type="radio"  />
+              </label>
+                    </td>
+                    <td class="columnaRespusta">
+                        <label for="">
+                <input name="opcion_30" [(ngModel)]="pregunta16"  value="2" type="radio"  />
+              </label>
+                    </td>
+                    <td class="columnaRespusta">
+                        <label for="">
+                <input name="opcion_30" [(ngModel)]="pregunta16"  value="1" type="radio"  />
+              </label>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <span>17
+            </span>
+                    </td>
+                    <td>
+                        <span>Pienso en las actividades familiares o personales cuando estoy en mi trabajo
+              </span>
+                    </td>
+                    <td class="columnaRespusta">
+                        <label for="">
+                <input name="opcion_31" [(ngModel)]="pregunta17" value="5" type="radio"  />
+              </label>
+                    </td>
+                    <td class="columnaRespusta">
+                        <label for="">
+                <input name="opcion_31" [(ngModel)]="pregunta17"  value="4" type="radio"  />
+              </label>
+                    </td>
+                    <td class="columnaRespusta">
+                        <label for="">
+                <input name="opcion_31" [(ngModel)]="pregunta17"  value="3" type="radio"  />
+              </label>
+                    </td>
+                    <td class="columnaRespusta">
+                        <label for="">
+                <input name="opcion_31" [(ngModel)]="pregunta17"  value="2" type="radio"  />
+              </label>
+                    </td>
+                    <td class="columnaRespusta">
+                        <label for="">
+                <input name="opcion_31" [(ngModel)]="pregunta17"  value="1" type="radio"  />
+              </label>
+                    </td>
+                </tr>
+            </table>
+        </div>
+
+        <div>
+            <br>
+            <div style="text-align: left;">
+                <span class="titulos"><span class="vinetas"> o </span>Las preguntas siguientes están relacionadas con las decisiones que puede tomar en su trabajo.						
+                </span>
+            </div>
+            <br>
+            <table>
+                <thead>
+                    <td><b></b></td>
+                    <td><b></b></td>
+                    <td class="columnaRespusta"><b>Siempre</b></td>
+                    <td class="columnaRespusta"><b>Casi siempre</b></td>
+                    <td class="columnaRespusta"><b>Algunas veces</b></td>
+                    <td class="columnaRespusta"><b>Casi nunca</b></td>
+                    <td class="columnaRespusta"><b>Nunca</b></td>
+                </thead>
+                <tr>
+                    <td>
+                        <span>18
+            </span>
+                    </td>
+                    <td>
+                        <span>Mi trabajo permite que desarrolle nuevas habilidades 
+              </span>
+                    </td>
+                    <td class="columnaRespusta">
+                        <label for="">
+                <input name="opcion_32" [(ngModel)]="pregunta18" value="5" type="radio"  />
+              </label>
+                    </td>
+                    <td class="columnaRespusta">
+                        <label for="">
+                <input name="opcion_32" [(ngModel)]="pregunta18"  value="4" type="radio"  />
+              </label>
+                    </td>
+                    <td class="columnaRespusta">
+                        <label for="">
+                <input name="opcion_32" [(ngModel)]="pregunta18"  value="3" type="radio"  />
+              </label>
+                    </td>
+                    <td class="columnaRespusta">
+                        <label for="">
+                <input name="opcion_32" [(ngModel)]="pregunta18"  value="2" type="radio"  />
+              </label>
+                    </td>
+                    <td class="columnaRespusta">
+                        <label for="">
+                <input name="opcion_32" [(ngModel)]="pregunta18"  value="1" type="radio"  />
+              </label>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <span>19
+            </span>
+                    </td>
+                    <td>
+                        <span>En mi trabajo puedo aspirar a un mejor puesto
+              </span>
+                    </td>
+                    <td class="columnaRespusta">
+                        <label for="">
+                <input name="opcion_33" [(ngModel)]="pregunta19" value="5" type="radio"  />
+              </label>
+                    </td>
+                    <td class="columnaRespusta">
+                        <label for="">
+                <input name="opcion_33" [(ngModel)]="pregunta19"  value="4" type="radio"  />
+              </label>
+                    </td>
+                    <td class="columnaRespusta">
+                        <label for="">
+                <input name="opcion_33" [(ngModel)]="pregunta19"  value="3" type="radio"  />
+              </label>
+                    </td>
+                    <td class="columnaRespusta">
+                        <label for="">
+                <input name="opcion_33" [(ngModel)]="pregunta19"  value="2" type="radio"  />
+              </label>
+                    </td>
+                    <td class="columnaRespusta">
+                        <label for="">
+                <input name="opcion_33" [(ngModel)]="pregunta19"  value="1" type="radio"  />
+              </label>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <span>20
+            </span>
+                    </td>
+                    <td>
+                        <span>Durante mi jornada de trabajo puedo tomar pausas cuando las necesito
+              </span>
+                    </td>
+                    <td class="columnaRespusta">
+                        <label for="">
+                <input name="opcion_34" [(ngModel)]="pregunta20" value="5" type="radio"  />
+              </label>
+                    </td>
+                    <td class="columnaRespusta">
+                        <label for="">
+                <input name="opcion_34" [(ngModel)]="pregunta20"  value="4" type="radio"  />
+              </label>
+                    </td>
+                    <td class="columnaRespusta">
+                        <label for="">
+                <input name="opcion_34" [(ngModel)]="pregunta20"  value="3" type="radio"  />
+              </label>
+                    </td>
+                    <td class="columnaRespusta">
+                        <label for="">
+                <input name="opcion_34" [(ngModel)]="pregunta20"  value="2" type="radio"  />
+              </label>
+                    </td>
+                    <td class="columnaRespusta">
+                        <label for="">
+                <input name="opcion_34" [(ngModel)]="pregunta20"  value="1" type="radio"  />
+              </label>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <span>21
+            </span>
+                    </td>
+                    <td>
+                        <span>Puedo decidir la velocidad a la que realizo mis actividades en mi trabajo
+              </span>
+                    </td>
+                    <td class="columnaRespusta">
+                        <label for="">
+                <input name="opcion_35" [(ngModel)]="pregunta21" value="5" type="radio"  />
+              </label>
+                    </td>
+                    <td class="columnaRespusta">
+                        <label for="">
+                <input name="opcion_35" [(ngModel)]="pregunta21"  value="4" type="radio"  />
+              </label>
+                    </td>
+                    <td class="columnaRespusta">
+                        <label for="">
+                <input name="opcion_35" [(ngModel)]="pregunta21"  value="3" type="radio"  />
+              </label>
+                    </td>
+                    <td class="columnaRespusta">
+                        <label for="">
+                <input name="opcion_35" [(ngModel)]="pregunta21"  value="2" type="radio"  />
+              </label>
+                    </td>
+                    <td class="columnaRespusta">
+                        <label for="">
+                <input name="opcion_35" [(ngModel)]="pregunta21"  value="1" type="radio"  />
+              </label>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <span>22
+            </span>
+                    </td>
+                    <td>
+                        <span>Puedo cambiar el orden de las actividades que realizo en mi trabajo
+              </span>
+                    </td>
+                    <td class="columnaRespusta">
+                        <label for="">
+                <input name="opcion_36" [(ngModel)]="pregunta22" value="5" type="radio"  />
+              </label>
+                    </td>
+                    <td class="columnaRespusta">
+                        <label for="">
+                <input name="opcion_36" [(ngModel)]="pregunta22"  value="4" type="radio"  />
+              </label>
+                    </td>
+                    <td class="columnaRespusta">
+                        <label for="">
+                <input name="opcion_36" [(ngModel)]="pregunta22"  value="3" type="radio"  />
+              </label>
+                    </td>
+                    <td class="columnaRespusta">
+                        <label for="">
+                <input name="opcion_36" [(ngModel)]="pregunta22"  value="2" type="radio"  />
+              </label>
+                    </td>
+                    <td class="columnaRespusta">
+                        <label for="">
+                <input name="opcion_36" [(ngModel)]="pregunta22"  value="1" type="radio"  />
+              </label>
+                    </td>
+                </tr>
+            </table>
+        </div>
+    </div>
+    <div *ngIf="mostrardiv06" class="col-lg-12 col-md-12 col-sm-12" style="width: 64%;">
+        <div>
+            <br>
+            <div style="text-align: left;">
+                <span class="titulos"><span class="vinetas"> o </span>Las preguntas siguientes están relacionadas con la capacitación e información que recibe sobre su trabajo.</span>
+    
+            </div>
+            <br>
+            <table>
+                <thead>
+                    <td><b></b></td>
+                    <td><b></b></td>
+                    <td class="columnaRespusta"><b>Siempre</b></td>
+                    <td class="columnaRespusta"><b>Casi siempre</b></td>
+                    <td class="columnaRespusta"><b>Algunas veces</b></td>
+                    <td class="columnaRespusta"><b>Casi nunca</b></td>
+                    <td class="columnaRespusta"><b>Nunca</b></td>
+                </thead>
+                <tr>
+                    <td>
+                        <span>23
+            </span>
+                    </td>
+                    <td>
+                        <span>Me informan con claridad cuáles son mis funciones
+              </span>
+                    </td>
+                    <td class="columnaRespusta">
+                        <label for="">
+                <input name="opcion_37" [(ngModel)]="pregunta23" value="5" type="radio"  />
+              </label>
+                    </td>
+                    <td class="columnaRespusta">
+                        <label for="">
+                <input name="opcion_37" [(ngModel)]="pregunta23"  value="4" type="radio"  />
+              </label>
+                    </td>
+                    <td class="columnaRespusta">
+                        <label for="">
+                <input name="opcion_37" [(ngModel)]="pregunta23"  value="3" type="radio"  />
+              </label>
+                    </td>
+                    <td class="columnaRespusta">
+                        <label for="">
+                <input name="opcion_37" [(ngModel)]="pregunta23"  value="2" type="radio"  />
+              </label>
+                    </td>
+                    <td class="columnaRespusta">
+                        <label for="">
+                <input name="opcion_37" [(ngModel)]="pregunta23"  value="1" type="radio"  />
+              </label>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <span>24
+            </span>
+                    </td>
+                    <td>
+                        <span>Me explican claramente los resultados que debo obtener en mi trabajo
+              </span>
+                    </td>
+                    <td class="columnaRespusta">
+                        <label for="">
+                <input name="opcion_38" [(ngModel)]="pregunta24" value="5" type="radio"  />
+              </label>
+                    </td>
+                    <td class="columnaRespusta">
+                        <label for="">
+                <input name="opcion_38" [(ngModel)]="pregunta24"  value="4" type="radio"  />
+              </label>
+                    </td>
+                    <td class="columnaRespusta">
+                        <label for="">
+                <input name="opcion_38" [(ngModel)]="pregunta24"  value="3" type="radio"  />
+              </label>
+                    </td>
+                    <td class="columnaRespusta">
+                        <label for="">
+                <input name="opcion_38" [(ngModel)]="pregunta24"  value="2" type="radio"  />
+              </label>
+                    </td>
+                    <td class="columnaRespusta">
+                        <label for="">
+                <input name="opcion_38" [(ngModel)]="pregunta24"  value="1" type="radio"  />
+              </label>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <span>25
+            </span>
+                    </td>
+                    <td>
+                        <span>Me informan con quién puedo resolver problemas o asuntos de trabajo
+              </span>
+                    </td>
+                    <td class="columnaRespusta">
+                        <label for="">
+                <input name="opcion_39" [(ngModel)]="pregunta25" value="5" type="radio"  />
+              </label>
+                    </td>
+                    <td class="columnaRespusta">
+                        <label for="">
+                <input name="opcion_39" [(ngModel)]="pregunta25"  value="4" type="radio"  />
+              </label>
+                    </td>
+                    <td class="columnaRespusta">
+                        <label for="">
+                <input name="opcion_39" [(ngModel)]="pregunta25"  value="3" type="radio"  />
+              </label>
+                    </td>
+                    <td class="columnaRespusta">
+                        <label for="">
+                <input name="opcion_39" [(ngModel)]="pregunta25"  value="2" type="radio"  />
+              </label>
+                    </td>
+                    <td class="columnaRespusta">
+                        <label for="">
+                <input name="opcion_39" [(ngModel)]="pregunta25"  value="1" type="radio"  />
+              </label>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <span>26
+            </span>
+                    </td>
+                    <td>
+                        <span>Me permiten asistir a capacitaciones relacionadas con mi trabajo
+              </span>
+                    </td>
+                    <td class="columnaRespusta">
+                        <label for="">
+                <input name="opcion_40" [(ngModel)]="pregunta26" value="5" type="radio"  />
+              </label>
+                    </td>
+                    <td class="columnaRespusta">
+                        <label for="">
+                <input name="opcion_40" [(ngModel)]="pregunta26"  value="4" type="radio"  />
+              </label>
+                    </td>
+                    <td class="columnaRespusta">
+                        <label for="">
+                <input name="opcion_40" [(ngModel)]="pregunta26"  value="3" type="radio"  />
+              </label>
+                    </td>
+                    <td class="columnaRespusta">
+                        <label for="">
+                <input name="opcion_40" [(ngModel)]="pregunta26"  value="2" type="radio"  />
+              </label>
+                    </td>
+                    <td class="columnaRespusta">
+                        <label for="">
+                <input name="opcion_40" [(ngModel)]="pregunta26"  value="1" type="radio"  />
+              </label>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <span>27
+            </span>
+                    </td>
+                    <td>
+                        <span>Recibo capacitación útil para hacer mi trabajo
+              </span>
+                    </td>
+                    <td class="columnaRespusta">
+                        <label for="">
+                <input name="opcion_41" [(ngModel)]="pregunta27" value="5" type="radio"  />
+              </label>
+                    </td>
+                    <td class="columnaRespusta">
+                        <label for="">
+                <input name="opcion_41" [(ngModel)]="pregunta27"  value="4" type="radio"  />
+              </label>
+                    </td>
+                    <td class="columnaRespusta">
+                        <label for="">
+                <input name="opcion_41" [(ngModel)]="pregunta27"  value="3" type="radio"  />
+              </label>
+                    </td>
+                    <td class="columnaRespusta">
+                        <label for="">
+                <input name="opcion_41" [(ngModel)]="pregunta27"  value="2" type="radio"  />
+              </label>
+                    </td>
+                    <td class="columnaRespusta">
+                        <label for="">
+                <input name="opcion_41" [(ngModel)]="pregunta27"  value="1" type="radio"  />
+              </label>
+                    </td>
+                </tr>
+            </table>
+        </div>
+        <div>
+            <div style="text-align: left;">
+                <br>
+                <br>
+                <span class="titulos"><span class="vinetas"> o </span>Las preguntas siguientes se refieren a las relaciones con sus compañeros de trabajo y su jefe.				
+            </span>
+    
+            </div>
+            <br>
+            <table>
+                <thead>
+                    <td><b></b></td>
+                    <td><b></b></td>
+                    <td class="columnaRespusta"><b>Siempre</b></td>
+                    <td class="columnaRespusta"><b>Casi siempre</b></td>
+                    <td class="columnaRespusta"><b>Algunas veces</b></td>
+                    <td class="columnaRespusta"><b>Casi nunca</b></td>
+                    <td class="columnaRespusta"><b>Nunca</b></td>
+                </thead>
+                <tr>
+                    <td>
+                        <span>28
+            </span>
+                    </td>
+                    <td>
+                        <span>Mi jefe tiene en cuenta mis puntos de vista y opiniones
+              </span>
+                    </td>
+                    <td class="columnaRespusta">
+                        <label for="">
+                <input name="opcion_42" [(ngModel)]="pregunta28" value="5" type="radio"  />
+              </label>
+                    </td>
+                    <td class="columnaRespusta">
+                        <label for="">
+                <input name="opcion_42" [(ngModel)]="pregunta28"  value="4" type="radio"  />
+              </label>
+                    </td>
+                    <td class="columnaRespusta">
+                        <label for="">
+                <input name="opcion_42" [(ngModel)]="pregunta28"  value="3" type="radio"  />
+              </label>
+                    </td>
+                    <td class="columnaRespusta">
+                        <label for="">
+                <input name="opcion_42" [(ngModel)]="pregunta28"  value="2" type="radio"  />
+              </label>
+                    </td>
+                    <td class="columnaRespusta">
+                        <label for="">
+                <input name="opcion_42" [(ngModel)]="pregunta28"  value="1" type="radio"  />
+              </label>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <span>29
+            </span>
+                    </td>
+                    <td>
+                        <span>Mi jefe ayuda a solucionar los problemas que se presentan en el trabajo
+              </span>
+                    </td>
+                    <td class="columnaRespusta">
+                        <label for="">
+                <input name="opcion_43" [(ngModel)]="pregunta29" value="5" type="radio"  />
+              </label>
+                    </td>
+                    <td class="columnaRespusta">
+                        <label for="">
+                <input name="opcion_43" [(ngModel)]="pregunta29"  value="4" type="radio"  />
+              </label>
+                    </td>
+                    <td class="columnaRespusta">
+                        <label for="">
+                <input name="opcion_43" [(ngModel)]="pregunta29"  value="3" type="radio"  />
+              </label>
+                    </td>
+                    <td class="columnaRespusta">
+                        <label for="">
+                <input name="opcion_43" [(ngModel)]="pregunta29"  value="2" type="radio"  />
+              </label>
+                    </td>
+                    <td class="columnaRespusta">
+                        <label for="">
+                <input name="opcion_43" [(ngModel)]="pregunta29"  value="1" type="radio"  />
+              </label>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <span>30
+            </span>
+                    </td>
+                    <td>
+                        <span>Puedo confiar en mis compañeros de trabajo
+              </span>
+                    </td>
+                    <td class="columnaRespusta">
+                        <label for="">
+                <input name="opcion_44" [(ngModel)]="pregunta30" value="5" type="radio"  />
+              </label>
+                    </td>
+                    <td class="columnaRespusta">
+                        <label for="">
+                <input name="opcion_44" [(ngModel)]="pregunta30"  value="4" type="radio"  />
+              </label>
+                    </td>
+                    <td class="columnaRespusta">
+                        <label for="">
+                <input name="opcion_44" [(ngModel)]="pregunta30"  value="3" type="radio"  />
+              </label>
+                    </td>
+                    <td class="columnaRespusta">
+                        <label for="">
+                <input name="opcion_44" [(ngModel)]="pregunta30"  value="2" type="radio"  />
+              </label>
+                    </td>
+                    <td class="columnaRespusta">
+                        <label for="">
+                <input name="opcion_44" [(ngModel)]="pregunta30"  value="1" type="radio"  />
+              </label>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <span>31
+            </span>
+                    </td>
+                    <td>
+                        <span>Cuando tenemos que realizar trabajo de equipo los compañeros colaboran
+              </span>
+                    </td>
+                    <td class="columnaRespusta">
+                        <label for="">
+                <input name="opcion_45" [(ngModel)]="pregunta31" value="5" type="radio"  />
+              </label>
+                    </td>
+                    <td class="columnaRespusta">
+                        <label for="">
+                <input name="opcion_45" [(ngModel)]="pregunta31"  value="4" type="radio"  />
+              </label>
+                    </td>
+                    <td class="columnaRespusta">
+                        <label for="">
+                <input name="opcion_45" [(ngModel)]="pregunta31"  value="3" type="radio"  />
+              </label>
+                    </td>
+                    <td class="columnaRespusta">
+                        <label for="">
+                <input name="opcion_45" [(ngModel)]="pregunta31"  value="2" type="radio"  />
+              </label>
+                    </td>
+                    <td class="columnaRespusta">
+                        <label for="">
+                <input name="opcion_45" [(ngModel)]="pregunta31"  value="1" type="radio"  />
+              </label>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <span>32
+            </span>
+                    </td>
+                    <td>
+                        <span>Mis compañeros de trabajo me ayudan cuando tengo dificultades
+              </span>
+                    </td>
+                    <td class="columnaRespusta">
+                        <label for="">
+                <input name="opcion_46" [(ngModel)]="pregunta32" value="5" type="radio"  />
+              </label>
+                    </td>
+                    <td class="columnaRespusta">
+                        <label for="">
+                <input name="opcion_46" [(ngModel)]="pregunta32"  value="4" type="radio"  />
+              </label>
+                    </td>
+                    <td class="columnaRespusta">
+                        <label for="">
+                <input name="opcion_46" [(ngModel)]="pregunta32"  value="3" type="radio"  />
+              </label>
+                    </td>
+                    <td class="columnaRespusta">
+                        <label for="">
+                <input name="opcion_46" [(ngModel)]="pregunta32"  value="2" type="radio"  />
+              </label>
+                    </td>
+                    <td class="columnaRespusta">
+                        <label for="">
+                <input name="opcion_46" [(ngModel)]="pregunta32"  value="1" type="radio"  />
+              </label>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <span>33
+            </span>
+                    </td>
+                    <td>
+                        <span>En mi trabajo puedo expresarme libremente sin interrupciones
+              </span>
+                    </td>
+                    <td class="columnaRespusta">
+                        <label for="">
+                <input name="opcion_47" [(ngModel)]="pregunta33" value="5" type="radio"  />
+              </label>
+                    </td>
+                    <td class="columnaRespusta">
+                        <label for="">
+                <input name="opcion_47" [(ngModel)]="pregunta33"  value="4" type="radio"  />
+              </label>
+                    </td>
+                    <td class="columnaRespusta">
+                        <label for="">
+                <input name="opcion_47" [(ngModel)]="pregunta33"  value="3" type="radio"  />
+              </label>
+                    </td>
+                    <td class="columnaRespusta">
+                        <label for="">
+                <input name="opcion_47" [(ngModel)]="pregunta33"  value="2" type="radio"  />
+              </label>
+                    </td>
+                    <td class="columnaRespusta">
+                        <label for="">
+                <input name="opcion_47" [(ngModel)]="pregunta33"  value="1" type="radio"  />
+              </label>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <span>34
+            </span>
+                    </td>
+                    <td>
+                        <span>Recibo críticas constantes a mi persona y/o trabajo
+              </span>
+                    </td>
+                    <td class="columnaRespusta">
+                        <label for="">
+                <input name="opcion_48" [(ngModel)]="pregunta34" value="5" type="radio"  />
+              </label>
+                    </td>
+                    <td class="columnaRespusta">
+                        <label for="">
+                <input name="opcion_48" [(ngModel)]="pregunta34"  value="4" type="radio"  />
+              </label>
+                    </td>
+                    <td class="columnaRespusta">
+                        <label for="">
+                <input name="opcion_48" [(ngModel)]="pregunta34"  value="3" type="radio"  />
+              </label>
+                    </td>
+                    <td class="columnaRespusta">
+                        <label for="">
+                <input name="opcion_48" [(ngModel)]="pregunta34"  value="2" type="radio"  />
+              </label>
+                    </td>
+                    <td class="columnaRespusta">
+                        <label for="">
+                <input name="opcion_48" [(ngModel)]="pregunta34"  value="1" type="radio"  />
+              </label>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <span>35
+            </span>
+                    </td>
+                    <td>
+                        <span>Recibo burlas, calumnias, difamaciones, humillaciones o ridiculizaciones
+              </span>
+                    </td>
+                    <td class="columnaRespusta">
+                        <label for="">
+                <input name="opcion_49" [(ngModel)]="pregunta35" value="5" type="radio"  />
+              </label>
+                    </td>
+                    <td class="columnaRespusta">
+                        <label for="">
+                <input name="opcion_49" [(ngModel)]="pregunta35"  value="4" type="radio"  />
+              </label>
+                    </td>
+                    <td class="columnaRespusta">
+                        <label for="">
+                <input name="opcion_49" [(ngModel)]="pregunta35"  value="3" type="radio"  />
+              </label>
+                    </td>
+                    <td class="columnaRespusta">
+                        <label for="">
+                <input name="opcion_49" [(ngModel)]="pregunta35"  value="2" type="radio"  />
+              </label>
+                    </td>
+                    <td class="columnaRespusta">
+                        <label for="">
+                <input name="opcion_49" [(ngModel)]="pregunta35"  value="1" type="radio"  />
+              </label>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <span>36
+            </span>
+                    </td>
+                    <td>
+                        <span>Se ignora mi presencia o se me excluye de las reuniones de trabajo y en la toma de decisiones
+              </span>
+                    </td>
+                    <td class="columnaRespusta">
+                        <label for="">
+                <input name="opcion_50" [(ngModel)]="pregunta36" value="5" type="radio"  />
+              </label>
+                    </td>
+                    <td class="columnaRespusta">
+                        <label for="">
+                <input name="opcion_50" [(ngModel)]="pregunta36"  value="4" type="radio"  />
+              </label>
+                    </td>
+                    <td class="columnaRespusta">
+                        <label for="">
+                <input name="opcion_50" [(ngModel)]="pregunta36"  value="3" type="radio"  />
+              </label>
+                    </td>
+                    <td class="columnaRespusta">
+                        <label for="">
+                <input name="opcion_50" [(ngModel)]="pregunta36"  value="2" type="radio"  />
+              </label>
+                    </td>
+                    <td class="columnaRespusta">
+                        <label for="">
+                <input name="opcion_50" [(ngModel)]="pregunta36"  value="1" type="radio"  />
+              </label>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <span>37
+            </span>
+                    </td>
+                    <td>
+                        <span>Se manipulan las situaciones de trabajo para hacerme parecer un mal trabajador
+              </span>
+                    </td>
+                    <td class="columnaRespusta">
+                        <label for="">
+                <input name="opcion_51" [(ngModel)]="pregunta37" value="5" type="radio"  />
+              </label>
+                    </td>
+                    <td class="columnaRespusta">
+                        <label for="">
+                <input name="opcion_51" [(ngModel)]="pregunta37"  value="4" type="radio"  />
+              </label>
+                    </td>
+                    <td class="columnaRespusta">
+                        <label for="">
+                <input name="opcion_51" [(ngModel)]="pregunta37"  value="3" type="radio"  />
+              </label>
+                    </td>
+                    <td class="columnaRespusta">
+                        <label for="">
+                <input name="opcion_51" [(ngModel)]="pregunta37"  value="2" type="radio"  />
+              </label>
+                    </td>
+                    <td class="columnaRespusta">
+                        <label for="">
+                <input name="opcion_51" [(ngModel)]="pregunta37"  value="1" type="radio"  />
+              </label>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <span>38
+            </span>
+                    </td>
+                    <td>
+                        <span>Se ignoran mis éxitos laborales y se atribuyen a otros trabajadores
+              </span>
+                    </td>
+                    <td class="columnaRespusta">
+                        <label for="">
+                <input name="opcion_52" [(ngModel)]="pregunta38" value="5" type="radio"  />
+              </label>
+                    </td>
+                    <td class="columnaRespusta">
+                        <label for="">
+                <input name="opcion_52" [(ngModel)]="pregunta38"  value="4" type="radio"  />
+              </label>
+                    </td>
+                    <td class="columnaRespusta">
+                        <label for="">
+                <input name="opcion_52" [(ngModel)]="pregunta38"  value="3" type="radio"  />
+              </label>
+                    </td>
+                    <td class="columnaRespusta">
+                        <label for="">
+                <input name="opcion_52" [(ngModel)]="pregunta38"  value="2" type="radio"  />
+              </label>
+                    </td>
+                    <td class="columnaRespusta">
+                        <label for="">
+                <input name="opcion_52" [(ngModel)]="pregunta38"  value="1" type="radio"  />
+              </label>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <span>39
+            </span>
+                    </td>
+                    <td>
+                        <span>Me bloquean o impiden las oportunidades que tengo para obtener ascenso o mejora en mi trabajo
+              </span>
+                    </td>
+                    <td class="columnaRespusta">
+                        <label for="">
+                <input name="opcion_53" [(ngModel)]="pregunta39" value="5" type="radio"  />
+              </label>
+                    </td>
+                    <td class="columnaRespusta">
+                        <label for="">
+                <input name="opcion_53" [(ngModel)]="pregunta39"  value="4" type="radio"  />
+              </label>
+                    </td>
+                    <td class="columnaRespusta">
+                        <label for="">
+                <input name="opcion_53" [(ngModel)]="pregunta39"  value="3" type="radio"  />
+              </label>
+                    </td>
+                    <td class="columnaRespusta">
+                        <label for="">
+                <input name="opcion_53" [(ngModel)]="pregunta39"  value="2" type="radio"  />
+              </label>
+                    </td>
+                    <td class="columnaRespusta">
+                        <label for="">
+                <input name="opcion_53" [(ngModel)]="pregunta39"  value="1" type="radio"  />
+              </label>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <span>40
+            </span>
+                    </td>
+                    <td>
+                        <span>He presenciado actos de violencia en mi centro de trabajo
+              </span>
+                    </td>
+                    <td class="columnaRespusta">
+                        <label for="">
+                <input name="opcion_54" [(ngModel)]="pregunta40" value="5" type="radio"  />
+              </label>
+                    </td>
+                    <td class="columnaRespusta">
+                        <label for="">
+                <input name="opcion_54" [(ngModel)]="pregunta40"  value="4" type="radio"  />
+              </label>
+                    </td>
+                    <td class="columnaRespusta">
+                        <label for="">
+                <input name="opcion_54" [(ngModel)]="pregunta40"  value="3" type="radio"  />
+              </label>
+                    </td>
+                    <td class="columnaRespusta">
+                        <label for="">
+                <input name="opcion_54" [(ngModel)]="pregunta40"  value="2" type="radio"  />
+              </label>
+                    </td>
+                    <td class="columnaRespusta">
+                        <label for="">
+                <input name="opcion_54" [(ngModel)]="pregunta40"  value="1" type="radio"  />
+              </label>
+                    </td>
+                </tr>
+            </table>
+        </div>
+    </div>
+    <div *ngIf="mostrardiv07" class="col-lg-12 col-md-12 col-sm-12" style="width: 64%;">
+        <div>
+            <br>
+            <br>
+            <div style="text-align: right;">
+                <span style="font-size: 14px; font-weight: bold;">CUESTIONARIO PARA IDENTIFICAR LOS FACTORES DE RIESGO PSICOSOCIAL EN LOS CENTROS DE TRABAJO</span>
+            </div>
+            <br>
+            <table style="width: 64%;">
+                <thead></thead>
+                <tr>
+                    <td>
+                        <span></span>
+                    </td>
+                    <td class="columnaRespusta">
+                    <b>Si</b>
+                    </td>
+                    <td class="columnaRespusta">
+                    <b>No</b>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <span>En mi trabajo debo brindar servicio a clientes o usuarios:</span>
+                    </td>
+                    <td class="columnaRespusta">
+                        <label for="">
+                <input name="opcion_55" [(ngModel)]="pregunta115" value="7" type="radio"  />
+              </label>
+                    </td>
+                    <td class="columnaRespusta">
+                        <label for="">
+                <input name="opcion_55" [(ngModel)]="pregunta115"  value="6" type="radio"  />
+              </label>
+                    </td>
+                </tr>
+            </table>
+        </div>
+    </div>
+    <div *ngIf="mostrardiv08" class="col-lg-12 col-md-12 col-sm-12" style="width: 64%;">
+        
+        <div>
+        <br>
+        <div style="text-align: left;"> 
+            <span class="titulos"><span class="vinetas"> o </span>Las preguntas siguientes están relacionadas con la atención a clientes y usuarios</span>
+
+        </div>
+        <br>
+            <table>
+                <thead>
+                    <td><b></b></td>
+                    <td><b></b></td>
+                    <td class="columnaRespusta"><b>Siempre</b></td>
+                    <td class="columnaRespusta"><b>Casi siempre</b></td>
+                    <td class="columnaRespusta"><b>Algunas veces</b></td>
+                    <td class="columnaRespusta"><b>Casi nunca</b></td>
+                    <td class="columnaRespusta"><b>Nunca</b></td>
+                </thead>
+                <tr>
+                    <td>
+                        <span>41
+            </span>
+                    </td>
+                    <td>
+                        <span>Atiendo clientes o usuarios muy enojados
+              </span>
+                    </td>
+                    <td class="columnaRespusta">
+                        <label for="">
+                <input name="opcion_56" [(ngModel)]="pregunta41" value="5" type="radio"  />
+              </label>
+                    </td>
+                    <td class="columnaRespusta">
+                        <label for="">
+                <input name="opcion_56" [(ngModel)]="pregunta41"  value="4" type="radio"  />
+              </label>
+                    </td>
+                    <td class="columnaRespusta">
+                        <label for="">
+                <input name="opcion_56" [(ngModel)]="pregunta41"  value="3" type="radio"  />
+              </label>
+                    </td>
+                    <td class="columnaRespusta">
+                        <label for="">
+                <input name="opcion_56" [(ngModel)]="pregunta41"  value="2" type="radio"  />
+              </label>
+                    </td>
+                    <td class="columnaRespusta">
+                        <label for="">
+                <input name="opcion_56" [(ngModel)]="pregunta41"  value="1" type="radio"  />
+              </label>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <span>42
+            </span>
+                    </td>
+                    <td>
+                        <span>Mi trabajo me exige atender personas muy necesitadas de ayuda o enfermas
+              </span>
+                    </td>
+                    <td class="columnaRespusta">
+                        <label for="">
+                <input name="opcion_57" [(ngModel)]="pregunta42" value="5" type="radio"  />
+              </label>
+                    </td>
+                    <td class="columnaRespusta">
+                        <label for="">
+                <input name="opcion_57" [(ngModel)]="pregunta42"  value="4" type="radio"  />
+              </label>
+                    </td>
+                    <td class="columnaRespusta">
+                        <label for="">
+                <input name="opcion_57" [(ngModel)]="pregunta42"  value="3" type="radio"  />
+              </label>
+                    </td>
+                    <td class="columnaRespusta">
+                        <label for="">
+                <input name="opcion_57" [(ngModel)]="pregunta42"  value="2" type="radio"  />
+              </label>
+                    </td>
+                    <td class="columnaRespusta">
+                        <label for="">
+                <input name="opcion_57" [(ngModel)]="pregunta42"  value="1" type="radio"  />
+              </label>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <span>43
+            </span>
+                    </td>
+                    <td>
+                        <span>Para hacer mi trabajo debo demostrar sentimientos distintos a los míos
+              </span>
+                    </td>
+                    <td class="columnaRespusta">
+                        <label for="">
+                <input name="opcion_58" [(ngModel)]="pregunta43" value="5" type="radio"  />
+              </label>
+                    </td>
+                    <td class="columnaRespusta">
+                        <label for="">
+                <input name="opcion_58" [(ngModel)]="pregunta43"  value="4" type="radio"  />
+              </label>
+                    </td>
+                    <td class="columnaRespusta">
+                        <label for="">
+                <input name="opcion_58" [(ngModel)]="pregunta43"  value="3" type="radio"  />
+              </label>
+                    </td>
+                    <td class="columnaRespusta">
+                        <label for="">
+                <input name="opcion_58" [(ngModel)]="pregunta43"  value="2" type="radio"  />
+              </label>
+                    </td>
+                    <td class="columnaRespusta">
+                        <label for="">
+                <input name="opcion_58" [(ngModel)]="pregunta43"  value="1" type="radio"  />
+              </label>
+                    </td>
+                </tr>
+            </table>
+        </div>
+    </div>
+    <div *ngIf="mostrardiv09" class="col-lg-12 col-md-12 col-sm-12" style="width: 64%;">
+        <div>
+            <br>
+            <br>
+            <div  style="text-align: right;">
+                <span style="font-size: 14px; font-weight: bold;">CUESTIONARIO PARA IDENTIFICAR LOS FACTORES DE RIESGO PSICOSOCIAL EN LOS CENTROS DE TRABAJO</span>
+            </div>
+            <br>
+            <table style="width: 64%;">
+                
+                <tr>
+                    <td>
+                        <span></span>
+                    </td>
+                    <td class="columnaRespusta">
+                        <b>Si</b>
+                    </td>
+                    <td class="columnaRespusta">
+                        <b>No</b>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <span>Soy jefe de otros trabajadores</span>
+                    </td>
+                    <td class="columnaRespusta">
+                        <label for="">
+                <input name="opcion_59" [(ngModel)]="pregunta116" value="7" type="radio"  (ngModelChange)="muestraBtnSiguiente()"/>
+              </label>
+                    </td>
+                    <td class="columnaRespusta">
+                        <label for="">
+                <input name="opcion_59" [(ngModel)]="pregunta116"  value="6" type="radio" (ngModelChange)="muestraBtnFinalizar()" />
+              </label>
+                    </td>
+                </tr>
+            </table>
+        </div>
+    </div>
+    <div *ngIf="mostrardiv10" class="col-lg-12 col-md-12 col-sm-12" style="width: 64%;">
+        
+        <div>
+            <br>
+            <div style="text-align: left;">
+                <span  class="titulos"><span class="vinetas"> o </span>Las siguientes preguntas están relacionadas con las actitudes de los trabajadores que supervisa</span>
+            </div>
+            <br>
+            <table>
+                <thead>
+                    <td><b></b></td>
+                    <td><b></b></td>
+                    <td class="columnaRespusta"><b>Siempre</b></td>
+                    <td class="columnaRespusta"><b>Casi siempre</b></td>
+                    <td class="columnaRespusta"><b>Algunas veces</b></td>
+                    <td class="columnaRespusta"><b>Casi nunca</b></td>
+                    <td class="columnaRespusta"><b>Nunca</b></td>
+                </thead>
+                <tr>
+                    <td>
+                        <span>44
+            </span>
+                    </td>
+                    <td>
+                        <span>Comunican tarde los asuntos de trabajo
+              </span>
+                    </td>
+                    <td class="columnaRespusta">
+                        <label for="">
+                <input name="opcion_60" [(ngModel)]="pregunta44" value="5" type="radio"  />
+              </label>
+                    </td>
+                    <td class="columnaRespusta">
+                        <label for="">
+                <input name="opcion_60" [(ngModel)]="pregunta44"  value="4" type="radio"  />
+              </label>
+                    </td>
+                    <td class="columnaRespusta">
+                        <label for="">
+                <input name="opcion_60" [(ngModel)]="pregunta44"  value="3" type="radio"  />
+              </label>
+                    </td>
+                    <td class="columnaRespusta">
+                        <label for="">
+                <input name="opcion_60" [(ngModel)]="pregunta44"  value="2" type="radio"  />
+              </label>
+                    </td>
+                    <td class="columnaRespusta">
+                        <label for="">
+                <input name="opcion_60" [(ngModel)]="pregunta44"  value="1" type="radio"  />
+              </label>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <span>45
+            </span>
+                    </td>
+                    <td>
+                        <span>Dificultan el logro de los resultados del trabajo
+              </span>
+                    </td>
+                    <td class="columnaRespusta">
+                        <label for="">
+                <input name="opcion_61" [(ngModel)]="pregunta45" value="5" type="radio"  />
+              </label>
+                    </td>
+                    <td class="columnaRespusta">
+                        <label for="">
+                <input name="opcion_61" [(ngModel)]="pregunta45"  value="4" type="radio"  />
+              </label>
+                    </td>
+                    <td class="columnaRespusta">
+                        <label for="">
+                <input name="opcion_61" [(ngModel)]="pregunta45"  value="3" type="radio"  />
+              </label>
+                    </td>
+                    <td class="columnaRespusta">
+                        <label for="">
+                <input name="opcion_61" [(ngModel)]="pregunta45"  value="2" type="radio"  />
+              </label>
+                    </td>
+                    <td class="columnaRespusta">
+                        <label for="">
+                <input name="opcion_61" [(ngModel)]="pregunta45"  value="1" type="radio"  />
+              </label>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <span>46
+            </span>
+                    </td>
+                    <td>
+                        <span>Ignoran las sugerencias para mejorar su trabajo
+              </span>
+                    </td>
+                    <td class="columnaRespusta">
+                        <label for="">
+                <input name="opcion_62" [(ngModel)]="pregunta46" value="5" type="radio"  />
+              </label>
+                    </td>
+                    <td class="columnaRespusta">
+                        <label for="">
+                <input name="opcion_62" [(ngModel)]="pregunta46"  value="4" type="radio"  />
+              </label>
+                    </td>
+                    <td class="columnaRespusta">
+                        <label for="">
+                <input name="opcion_62" [(ngModel)]="pregunta46"  value="3" type="radio"  />
+              </label>
+                    </td>
+                    <td class="columnaRespusta">
+                        <label for="">
+                <input name="opcion_62" [(ngModel)]="pregunta46"  value="2" type="radio"  />
+              </label>
+                    </td>
+                    <td class="columnaRespusta">
+                        <label for="">
+                <input name="opcion_62" [(ngModel)]="pregunta46"  value="1" type="radio"  />
+              </label>
+                    </td>
+                </tr>
+            </table>
+        </div>
+    </div>
+    <div id="div_botones" *ngIf="mostrarBtns" class="col-lg-12 col-md-12 col-sm-12" style="width: 64%;">
+    
+        
+        <br>
+        <br>
+        <button class="btn btn-secondary btn-size col-lg-12 col-md-12 col-sm-12" *ngIf="mostrarBtnSalir" (click)="btnSalir()">Salir</button>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        <button class="btn btn-secondary btn-size col-lg-12 col-md-12 col-sm-12" *ngIf="mostrarBtnRegresar" (click)="btnRegresar()">Regresar</button>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        <button class="btn btn-primary btn-size col-lg-12 col-md-12 col-sm-12" *ngIf="mostrarBtnSiguiente" (click)="btnSiguiente()">Siguiente</button>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        <button class="btn btn-primary btn-size col-lg-12 col-md-12 col-sm-12" *ngIf="mostrarBtnFinalizar" (click)="btnFinalizar()">Finalizar</button>
+    </div>
+    <br>
+    <br>
+    <div class="col-md-6 col-md-offset-3" *ngIf="mostrarBarraProcceso" class="col-lg-12 col-md-12 col-sm-12" style="width: 64%;">
+    
+     <mat-progress-bar style="border-radius: 7px; border: 1px solid black; height: 20px;" mode="determinate" [value]="value" [color]="color"></mat-progress-bar>
+    </div>
+    <br>
+    <br>
+</div>
