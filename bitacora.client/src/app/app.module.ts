@@ -29,6 +29,7 @@ import { ToastNoAnimationModule } from 'ngx-toastr';
 import { AppComponent } from './app.component';
 import { MenuComponent } from './components/menu/menu.component';
 import { RegistrosCalendarioComponent } from './components/registros-calendario/registros-calendario.component';
+//import { FormBitacoraComponent } from './components/form-bitacora/form-bitacora.component';
 //import { CatalogosComponent, ModalCambioEstatus, ModalReestablecerContrasenia, ModalEliminarRol } from './components/catalogos/catalogos.component';
 //import { ReportesComponent } from './components/reportes/reportes.component';
 //import { AvanceRealComponent } from './components/avance-real/avance-real.component';
@@ -39,7 +40,7 @@ import { TokenContraseniaComponent } from './components/token-contrasenia/token-
 //import {DialogTable2} from './components/reportes/reportes.component';
 //import {DialogTable3} from './components/reportes/reportes.component';
 //import { AgregarUsuarioComponent } from './components/agregar-usuario/agregar-usuario.component';
-//import { FiltroBitacoraPipe } from '../../src/app/pipes/filtro-bitacora.pipe';
+import { FiltroBitacoraPipe } from '../../src/app/pipes/filtro-bitacora.pipe';
 //import {MatCheckboxModule} from '@angular/material/checkbox';
 //import { FiltroProyectosPipe } from './pipes/filtro-proyectos.pipe';
 //import { AuthGuardBitacora } from './guards/AuthGuardBitacora';
@@ -71,7 +72,8 @@ export function getBaseUrl() {
     PermisosComponent,
     RegistrosCalendarioComponent,
     TokenContraseniaComponent,
-    Nom035Component
+    Nom035Component,
+    FiltroBitacoraPipe
   ],
   imports: [
     BrowserModule, HttpClientModule,
