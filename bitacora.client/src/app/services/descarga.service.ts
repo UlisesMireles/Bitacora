@@ -3,11 +3,13 @@ import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { saveAs } from 'file-saver';
+import { environment } from '../../environments/environment';
 @Injectable({
   providedIn: 'root'
 })
 export class DescargaService {
-  constructor(private http:HttpClient, @Inject("BASE_URL") private baseUrl:string ) { }
+  baseUrl: string = environment.baseURL;
+  constructor(private http:HttpClient) { }
 
   downloadFile(archivo:any):Observable<Blob>{
     var datos= {fileName:archivo};

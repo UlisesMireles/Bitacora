@@ -1404,7 +1404,7 @@ export class ReportesComponent implements OnInit {
     this.serviceReportes.getConsultaDistribucion(this.datosReporte).subscribe(
       res => {
         //console.log(res)
-
+        
         this.datosTabla = [];
         this.datosEventosExtra = [];
         this.usuarios = [];
@@ -1698,6 +1698,9 @@ export class ReportesComponent implements OnInit {
 
           }
         }
+
+        const distinctArray = [...new Set(this.datosDistribucion.map((item:any) => JSON.stringify(item)))].map(item => JSON.parse(item));
+        this.datosDistribucion = distinctArray;
 
         this.datosDistribucion;
         this.sortedData = this.datosDistribucion.map(x => Object.assign({}, x));
@@ -2065,7 +2068,6 @@ export class ReportesComponent implements OnInit {
     this.datosReporte = { idUser: idUsuario, idUnidad: this.unidadSeleccionada, idArea: this.areaSeleccionada, fechaIni: this.lunesRepo, fechaFin: this.domingoRepo };
     console.log(this.datosReporte);
     if (this.datosReporte.fechaIni == undefined) {
-      console.log('2')
       return;
     }
     this.serviceReportes.getConsultaEjecutivo(this.datosReporte).subscribe(res => {

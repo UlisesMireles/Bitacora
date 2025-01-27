@@ -1239,7 +1239,7 @@ namespace BitacoraData
                                  join cp in db.CategoriasProyecto on p.IdCategoria equals cp.IdCategoria
                                  join un in db.CatUnidadesNegocios on r.IdUnidad equals un.Id
                                  join rua in db.RelacionUsuarioUnidadArea on r.IdUnidad equals rua.IdUnidad
-                                 where r.IdArea == rua.IdArea && rua.IdUser == idUser /*&& b.Fecha >= fechaInicio*/ && b.Fecha < fechaFin
+                                 where r.IdArea == rua.IdArea && rua.IdUser == idUser && b.Fecha >= fechaInicio && b.Fecha < fechaFin
                                  select new ReporteSemanal
                                  {
                                      IdProyecto = p.Id,
