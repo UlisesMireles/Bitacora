@@ -8,6 +8,7 @@ import { PermisosComponent } from './components/permisos/permisos.component';
 import { TokenContraseniaComponent } from './components/token-contrasenia/token-contrasenia.component';
 import { Nom035Component } from './components/nom035/nom035.component';
 import { AuthGuard } from './guards/AuthGuard';
+import { ReportesComponent } from './components/reportes/reportes.component';
 import { AvanceRealComponent } from './components/avance-real/avance-real.component'
 import { FormBitacoraComponent } from './components/form-bitacora/form-bitacora.component'
 
@@ -19,6 +20,7 @@ const routes: Routes = [
   { path: 'administra-permisos', component: PermisosComponent, canActivate: [AuthGuardPermisos] },
   { path:'ingresa-token', component: TokenContraseniaComponent},
   { path: 'nom035', component: Nom035Component, canActivate:[AuthGuard]},
+  {path:'reportes/:reporte',component: ReportesComponent},
 ];
 
 @NgModule({
