@@ -11,16 +11,19 @@ import { AuthGuard } from './guards/AuthGuard';
 import { ReportesComponent } from './components/reportes/reportes.component';
 import { AvanceRealComponent } from './components/avance-real/avance-real.component'
 import { FormBitacoraComponent } from './components/form-bitacora/form-bitacora.component'
+import { CatalogosComponent } from './components/catalogos/catalogos.component';
+import { AuthGuardCatalogos } from './guards/AuthGuardCatalogos';
 
 const routes: Routes = [
   { path: '', component: LoginComponent, title: 'Bitácora' },
-  { path:'bitacora/:usuario',component:MenuComponent},
+  { path: 'bitacora/:usuario', component: MenuComponent },
   { path: 'bitacora/:admin', component: MenuComponent },
   { path: 'cambio-contraseña', component: CambiocontraseniaComponent },
   { path: 'administra-permisos', component: PermisosComponent, canActivate: [AuthGuardPermisos] },
-  { path:'ingresa-token', component: TokenContraseniaComponent},
-  { path: 'nom035', component: Nom035Component, canActivate:[AuthGuard]},
-  {path:'reportes/:reporte',component: ReportesComponent},
+  { path: 'ingresa-token', component: TokenContraseniaComponent },
+  { path: 'nom035', component: Nom035Component, canActivate: [AuthGuard] },
+  { path: 'reportes/:reporte', component: ReportesComponent },
+  { path: 'catalogos/:catalogo', component: CatalogosComponent, canActivate: [AuthGuardCatalogos] },
 ];
 
 @NgModule({

@@ -13,7 +13,7 @@ export var Globals = {
   filtroEstatusUN: false,
   filtroAreasUN: false,
   datosFiltrados: 0,
-  registrosBitacora: [],
+  registrosBitacora: [] ,
   editar: false,
   numRegBitacora: 0,
   filtroBitacora: 0,
