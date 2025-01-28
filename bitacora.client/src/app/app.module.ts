@@ -53,7 +53,7 @@ import { FiltroPipe } from './pipes/filtro.pipe';
 //import { FiltroBitacoraPipe } from './pipes/filtro-bitacora.pipe';
 //import {MatCheckboxModule} from '@angular/material/checkbox';
 import { FiltroProyectosPipe } from './pipes/filtro-proyectos.pipe';
-//import { AuthGuardBitacora } from './guards/AuthGuardBitacora';
+import { AuthGuardBitacora } from './guards/AuthGuardBitacora';
 import { PermisosComponent } from './components/permisos/permisos.component';
 //import { AuthGuardCatalogos } from './guards/AuthGuardCatalogos';
 //import { AuthGuardReportes } from './guards/AuthGuardReportes';
@@ -152,7 +152,7 @@ export function getBaseUrl() {
 
   ],
   providers: [
-    { provide: 'BASE_URL', useFactory: getBaseUrl, deps: [] },AuthGuardPermisos, AuthGuard,
+    { provide: 'BASE_URL', useFactory: getBaseUrl, deps: [] },AuthGuardBitacora, AuthGuardPermisos, AuthGuard,
     provideAnimationsAsync()
   ],
   //  entryComponents: [DialogTable, DialogTable2, DialogTable3, CatalogosComponent, AgregarUsuarioComponent, Modal, OlvidasteContraseniaComponent, ModalCambioEstatus, ModalReestablecerContrasenia, ModalEliminarRol],

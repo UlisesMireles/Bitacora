@@ -317,6 +317,7 @@ color:white!important;
 }
 #menuDiv {
     width: 100%;
+    padding-bottom: 3px !important;
 }
 .ulmenu {
     width: 67%;

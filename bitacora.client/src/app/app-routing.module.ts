@@ -13,11 +13,12 @@ import { AvanceRealComponent } from './components/avance-real/avance-real.compon
 import { FormBitacoraComponent } from './components/form-bitacora/form-bitacora.component'
 import { CatalogosComponent } from './components/catalogos/catalogos.component';
 import { AuthGuardCatalogos } from './guards/AuthGuardCatalogos';
+import { AuthGuardBitacora } from './guards/AuthGuardBitacora';
 
 const routes: Routes = [
   { path: '', component: LoginComponent, title: 'Bitácora' },
-  { path: 'bitacora/:usuario', component: MenuComponent },
-  { path: 'bitacora/:admin', component: MenuComponent },
+  { path: 'bitacora/:usuario', component: MenuComponent, canActivate:[AuthGuardBitacora] },
+  { path: 'bitacora/:admin', component: MenuComponent, canActivate:[AuthGuardBitacora] },
   { path: 'cambio-contraseña', component: CambiocontraseniaComponent },
   { path: 'administra-permisos', component: PermisosComponent, canActivate: [AuthGuardPermisos] },
   { path: 'ingresa-token', component: TokenContraseniaComponent },
