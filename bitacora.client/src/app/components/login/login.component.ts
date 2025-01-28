@@ -1,10 +1,10 @@
-import { Component, OnInit, Inject, HostListener } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
+import { Component, HostListener, Inject, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
-import { AuthenticationService } from '../../services/authentication.service';
 import { UserIdleService } from 'angular-user-idle';
-import { HttpClient } from '@angular/common/http';
 import { ToastrService } from 'ngx-toastr';
+import { AuthenticationService } from '../../services/authentication.service';
 //import { OlvidasteContraseniaComponent } from '../olvidaste-contrasenia/olvidaste-contrasenia.component';
 import { MatDialog } from '@angular/material/dialog';
 //import { Nom035Service } from 'src/app/services/nom035.service';
@@ -23,7 +23,7 @@ export class LoginComponent implements OnInit {
   loginForm!: FormGroup;
   returnUrl: string = "";
   submitted: boolean = false;
-  cadena!: Object;
+  cadena!: any;
   errorLogin: string = "";
   showErrorMessage: boolean = false;
   titulo: any;

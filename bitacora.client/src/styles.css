@@ -18,8 +18,8 @@ body {
 }
 
 body {
-    margin: 0;
-    font-family: 'Raleway', sans-serif;
+  margin: 0;
+  font-family: 'Raleway', sans-serif !important;
 }
 
 .titulobitacora {

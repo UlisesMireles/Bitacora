@@ -16,7 +16,7 @@ export class CatUsuarios {
   Registro?: number;
   IdEmpleado?: number;
   Email?: string;
-  ListaUnidadArea?: string;
+  ListaUnidadArea?: any;
 
   constructor(
     Estatus?: number,
