@@ -37,7 +37,7 @@ export class LoginComponent implements OnInit {
     private router: Router, private authenticationService: AuthenticationService, private userIdle: UserIdleService,
     private http: HttpClient, @Inject("BASE_URL") private baseUrl: string,private authenticationServiceNom035:Nom035Service) {
     if (this.authenticationService.currentUserValue) {
-      this.authenticationService.logout();
+      //this.authenticationService.logout();
 
       //this.router.navigate(['/']);
     }
