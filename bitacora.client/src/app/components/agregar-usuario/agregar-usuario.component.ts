@@ -124,18 +124,20 @@ export class AgregarUsuarioComponent implements OnInit, OnDestroy {
         if (usuarioEditar !== null) {
           var usuario = JSON.parse(usuarioEditar);
           this.relacionUnidadArea(usuario.idUser, this.unidades);
-          this.checkRegBitacora = usuario.registro;
-          if(usuario.registro==2){
-            if(this.checkRegBitacora == true){
+          this.checkRegBitacora = !!usuario.registro;
+          if (usuario.registro == 2) {
+            if (this.checkRegBitacora == true) {
               this.checkBloqRegBitacora = true;
             }
+          //  this.checkBloqRegBitacora = true;
           }
-        }
-        else{
+          else {
 
-          this.checkBloqRegBitacora = false;
+            this.checkBloqRegBitacora = false;
+          }
+          //console.log(usuario)
         }
-        //console.log(usuario)
+       
       }
       setTimeout(()=>{
       this.getUnidades();
@@ -179,7 +181,7 @@ export class AgregarUsuarioComponent implements OnInit, OnDestroy {
   }
   checkRegistroBitacora(event: any) {
     this.checkRegBitacora = event.checked;
-    //console.log(this.checkRegBitacora);
+    console.log(this.checkRegBitacora);
   }
 
   clickStopPropagation(event: any){
