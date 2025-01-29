@@ -51,9 +51,6 @@ export class AvanceRealComponent implements OnInit {
       currentPage:1,
       totalItems: this.avanceRealRegs.length
     }
-    localStorage.setItem('currentUser', '4281');
-    localStorage.setItem('userName', 'ulises.mireles');
-    localStorage.setItem('rol', '1');
   }
   ngAfterViewChecked()
   {
@@ -67,8 +64,6 @@ export class AvanceRealComponent implements OnInit {
     this.getUnidades();
     this.getAreas();
     this.getAvanceReal();
-    Globals.usuario = '4281';
-    Globals.rolUser = '1';
     console.log(localStorage.getItem('currentUser'));
     console.log(this.unidadesNegocio);
     try {

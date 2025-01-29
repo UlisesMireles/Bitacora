@@ -90,10 +90,10 @@ namespace Bitacora.Controllers
             return respuesa;
         }
 
-        [HttpGet("[action]/{id}")]
+        [HttpGet("[action]/")]
         public void logOut(int idUser)
         {
-                _loginData.InsertaHistorial(idUser, "LogOut", "Cierre de sesion", "El usuario a cerrado secion");
+             _loginData.InsertaHistorial(idUser, "LogOut", "Cierre de sesion", "El usuario a cerrado secion");
         }
 
         [HttpGet("[action]/{id}")]

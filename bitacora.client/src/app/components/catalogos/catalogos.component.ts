@@ -45,14 +45,6 @@ export class CatalogosComponent implements OnInit{
   ngOnInit(): void {
     $("#page-container").css("background-color","#EAEAEA");
 
-
-    //Globals.usuario = '4281';
-    //Globals.rolUser = '1';
-    //localStorage.setItem('currentUser', '4281');
-    //localStorage.setItem('userName', 'ulises.mireles');
-    //localStorage.setItem('rol', '1');
-
-
     this.movil = Globals.movil;
     this.texto(this.paginas)
     this.pageChanged(1);

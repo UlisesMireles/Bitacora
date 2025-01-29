@@ -49,10 +49,10 @@ import { FiltroPipe } from './pipes/filtro.pipe';
 //import { FiltroBitacoraPipe } from './pipes/filtro-bitacora.pipe';
 //import {MatCheckboxModule} from '@angular/material/checkbox';
 import { FiltroProyectosPipe } from './pipes/filtro-proyectos.pipe';
-//import { AuthGuardBitacora } from './guards/AuthGuardBitacora';
+import { AuthGuardBitacora } from './guards/AuthGuardBitacora';
 import { PermisosComponent } from './components/permisos/permisos.component';
 import { AuthGuardCatalogos } from './guards/AuthGuardCatalogos';
-//import { AuthGuardAvanceReal } from './guards/AuthGuardAvanceReal';
+import { AuthGuardAvanceReal } from './guards/AuthGuardAvanceReal';
 //import { AuthGuardPermisos } from './guards/AuthGuardPermisos';
 //import { OlvidasteContraseniaComponent } from './components/olvidaste-contrasenia/olvidaste-contrasenia.component';
 import { Nom035Component } from './components/nom035/nom035.component';
@@ -71,6 +71,7 @@ import { FormBitacoraComponent } from './components/form-bitacora/form-bitacora.
 import { ToastrModule } from 'ngx-toastr';
 import { AuthGuardPermisos } from './guards/AuthGuardPermisos';
 import { AuthGuardReportes } from './guards/AuthGuardReportes';
+import { OlvidasteContraseniaComponent } from './components/olvidaste-contrasenia/olvidaste-contrasenia.component';
 export function getBaseUrl() {
   return 'https://localhost:7127/'
   //return document.getElementsByTagName('base')[0].href;
@@ -97,7 +98,8 @@ export function getBaseUrl() {
     CatalogosComponent,
     AgregarUsuarioComponent,
     FiltroPipe,
-    FiltroProyectosPipe
+    FiltroProyectosPipe,
+    OlvidasteContraseniaComponent
   ],
   imports: [
     BrowserModule, HttpClientModule,
@@ -148,7 +150,7 @@ export function getBaseUrl() {
 
   ],
   providers: [
-    { provide: 'BASE_URL', useFactory: getBaseUrl, deps: [] },AuthGuardPermisos, AuthGuard, AuthGuardReportes, AuthGuardCatalogos,
+    { provide: 'BASE_URL', useFactory: getBaseUrl, deps: [] },AuthGuardBitacora, AuthGuardPermisos, AuthGuard, AuthGuardReportes, AuthGuardCatalogos, AuthGuardAvanceReal,
     provideAnimationsAsync()
   ],
   //  entryComponents: [DialogTable, DialogTable2, DialogTable3, CatalogosComponent, AgregarUsuarioComponent, Modal, OlvidasteContraseniaComponent, ModalCambioEstatus, ModalReestablecerContrasenia, ModalEliminarRol],

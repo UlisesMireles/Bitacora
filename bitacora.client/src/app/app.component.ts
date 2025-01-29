@@ -58,6 +58,8 @@ export class AppComponent implements OnInit {
   resultNom35: boolean = false;
   rol: string = '';
   foto: any;
+  private perfilAbierto: boolean = false;
+
   changeTab(tabIndex: number) {
     this.selectedTab = tabIndex;
   }
@@ -83,14 +85,15 @@ export class AppComponent implements OnInit {
     this.userInactive.subscribe(() => this.logout())
   }
 
-  @HostListener('document:click', ['$event'])
-  public onDocumentClick(event: MouseEvent): void {
-    const targetElement = event.target as HTMLElement;
-    // Check if the click was outside the element
-    if (targetElement && this.elementRef.nativeElement.contains(targetElement)) {
-      $(".dropdown-user-menu").css({ display: 'none' });
-    }
-  }
+  // @HostListener('document:click', ['$event'])
+  // public onDocumentClick(event: MouseEvent): void {
+  //   const targetElement = event.target as HTMLElement;
+  //   // Check if the click was outside the element
+  //   if (targetElement && !this.elementRef.nativeElement.contains(targetElement)) {
+  //     this.perfilAbierto = false;
+  //     $(".dropdown-user-menu").css({ display: 'none' });
+  //   }
+  // }
 
   ngAfterViewInit() {
     this.resize();
@@ -121,6 +124,7 @@ export class AppComponent implements OnInit {
         if (perm) {
           Globals.permisos = JSON.parse(perm);
         }
+        this.mostrarMenu = true;
         for (const permiso of Globals.permisos) {
           if (permiso['nombreMenu'] == "Bitácora") {
             this.bitacoraMenu = true;
@@ -294,15 +298,14 @@ export class AppComponent implements OnInit {
     }
   }
   abrirPerfilUsuario() {
-    $(".dropdown-user-menu").css({ display: 'block' });
+    this.perfilAbierto = !this.perfilAbierto;
+    $(".dropdown-user-menu").css({  display: this.perfilAbierto ? 'block' : 'none'  });
   }
   logout() {
     this.foto = null;
-    localStorage.clear();
     this.mostrarMenu = false;
     this.authenticationService.logout();
     this.banderasFalse();
-    this.router.navigate(['/']);
   }
   banderasFalse() {
     this.bitacoraMenu = false;

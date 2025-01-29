@@ -1,0 +1,16 @@
+.error{
+    color:red;
+}
+
+footer {
+    background: #103D70;
+    color: #ffffff;
+    position: relative!important;
+    
+    width: 100%;
+    border-top: 2px solid #ffffff;
+}
+
+.iconoUsuario {
+    height: 100%;
+}

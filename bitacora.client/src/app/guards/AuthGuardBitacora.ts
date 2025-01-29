@@ -13,8 +13,8 @@ export class AuthGuardBitacora implements CanActivate {
             // logged in so return true
             //console.log(Globals.permisos)
             if(Globals.permisos.length>0){
-                //var index = Globals.permisos.indexOf(Globals.permisos.find(x => x.nombrePantalla == 'Bitácora'));
-               const index = Globals.permisos.find((x: any) => x.nombrePantalla === "Bitácora") || 0 as number;
+                var index = Globals.permisos.indexOf(Globals.permisos.find(x => x.nombrePantalla == 'Bitácora'));
+               //const index = Globals.permisos.find((x: any) => x.nombrePantalla === "Bitácora") || 0 as number;
                 //console.log(index);
                 if(index>=0){
                     

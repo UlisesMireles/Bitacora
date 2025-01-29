@@ -140,9 +140,7 @@ export class FormBitacoraComponent implements OnInit, OnDestroy {
     this.cdRef.detectChanges();
   }
   constructor(private spinner: NgxSpinnerService,private cdRef:ChangeDetectorRef,private toastr:ToastrService,private http:HttpClient,private fb:FormBuilder,@Inject("BASE_URL") private baseUrl:string, private router:Router, private bitacoraService:BitacoraService, private authenticationService:AuthenticationService) {
-    localStorage.setItem('currentUser', '4281');
-    localStorage.setItem('userName', 'ulises.mireles');
-    localStorage.setItem('rol', '1');
+    
 
     this.router.onSameUrlNavigation ='reload';
     this.router.routeReuseStrategy.shouldReuseRoute = function(){
@@ -226,8 +224,6 @@ export class FormBitacoraComponent implements OnInit, OnDestroy {
 
   }
   ngOnInit() {
-    Globals.usuario = '4281';
-    Globals.rolUser = '1';
     this.idUsuario = Number(localStorage.getItem("currentUser"));
     this.recuperarProyectos(this.idUsuario);
     this.recuperarActividades();
