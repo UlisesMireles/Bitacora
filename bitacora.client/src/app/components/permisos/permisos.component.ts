@@ -7,6 +7,7 @@ import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { AuthenticationService } from '../../services/authentication.service';
+import { after } from 'underscore';
 declare var $: any;
 
 @Component({
@@ -40,9 +41,11 @@ export class PermisosComponent implements OnInit {
   mensaje: any;
   vacios: boolean = false;
 
+
+
   constructor(private spinner: NgxSpinnerService, private toastr: ToastrService, private router: Router,
-     private http: HttpClient, @Inject("BASE_URL") private baseUrl: string, private cdRef: ChangeDetectorRef, 
-     private authenticationService: AuthenticationService, private redireccionService: RedireccionService) {
+    private http: HttpClient, @Inject("BASE_URL") private baseUrl: string, private cdRef: ChangeDetectorRef,
+    private authenticationService: AuthenticationService, private redireccionService: RedireccionService) {
 
   }
   ngAfterViewInit() {
@@ -79,27 +82,6 @@ export class PermisosComponent implements OnInit {
       this.getPantallasAsignadas(this.idRol);
       //console.log("aqui")
     }
-    (<any>$('#optgroup')).multiselect({
-      afterMoveToRight: function (values: any) {
-        //console.log(values);
-        Globals.pantallasSeleccionadas = [];
-        var arreglo: Array<string> = [];
-        for (let index = 0; index < values[0].options.length; index++) {
-          var value = values[0].options.item(index).value;
-          //console.log(value)
-          Globals.pantallasSeleccionadas.push(Number(value));
-        }
-      }, afterMoveToLeft: function (values: any) {
-        Globals.pantallasSeleccionadas = [];
-        var arreglo: Array<string> = [];
-        for (let index = 0; index < values[0].options.length; index++) {
-          var value = values[0].options.item(index).value;
-
-          Globals.pantallasSeleccionadas.push(value);
-        }
-      }
-    });
-
     Globals.pagina = 2;
 
     if (Globals.pagina == 2) {
@@ -135,9 +117,9 @@ export class PermisosComponent implements OnInit {
       error: (err) => {
         //console.log(err)
       },
-      complete: () => { 
+      complete: () => {
         //console.log("complete")
-      }      
+      }
     });
   }
 
@@ -193,7 +175,7 @@ export class PermisosComponent implements OnInit {
   guardarRol() {
     this.spinner.show()
     this.sinSeleccionados = Globals.pantallasSeleccionadas;
-    //console.log(this.sinSeleccionados)
+    console.log(this.sinSeleccionados)
     this.pantallasTemp = [];
     for (let index = 0; index < this.pantallas.length; index++) {
       this.pantallasTemp.push(this.pantallas[index].idPantalla);
@@ -302,4 +284,68 @@ export class PermisosComponent implements OnInit {
     }
   }
 
+  moverDerecha(pantalla: any) {
+    if (pantalla.nombreMenu == 'Reportes') {
+      this.pantallasReporte = this.pantallasReporte.filter(p => p.idPantalla !== pantalla.idPantalla);
+      this.pantallasReporteSel.push(pantalla);
+    } else if (pantalla.nombreMenu == 'Catalogos') {
+      this.pantallasCatalogo = this.pantallasCatalogo.filter(p => p.idPantalla !== pantalla.idPantalla);
+      this.pantallasCatalogoSel.push(pantalla);
+    } else {
+      this.pantallasSinMenu = this.pantallasSinMenu.filter(p => p.idPantalla !== pantalla.idPantalla);
+      this.pantallasSinMenuSel.push(pantalla);
+    }
+    this.actualizarSeleccionadas();
+  }
+
+  moverIzquierda(pantalla: any) {
+    if (pantalla.nombreMenu == 'Reportes') {
+      this.pantallasReporteSel = this.pantallasReporteSel.filter(p => p.idPantalla !== pantalla.idPantalla);
+      this.pantallasReporte.push(pantalla);
+    } else if (pantalla.nombreMenu == 'Catalogos') {
+      this.pantallasCatalogoSel = this.pantallasCatalogoSel.filter(p => p.idPantalla !== pantalla.idPantalla);
+      this.pantallasCatalogo.push(pantalla);
+    } else {
+      this.pantallasSinMenuSel = this.pantallasSinMenuSel.filter(p => p.idPantalla !== pantalla.idPantalla);
+      this.pantallasSinMenu.push(pantalla);
+    }
+    this.actualizarSeleccionadas();
+  }
+
+
+  moverTodoDerecha() {
+    this.pantallasSinMenuSel = [...this.pantallasSinMenuSel, ...this.pantallasSinMenu];
+    this.pantallasReporteSel = [...this.pantallasReporteSel, ...this.pantallasReporte];
+    this.pantallasCatalogoSel = [...this.pantallasCatalogoSel, ...this.pantallasCatalogo];
+
+    this.pantallasSinMenu = [];
+    this.pantallasReporte = [];
+    this.pantallasCatalogo = [];
+
+    this.actualizarSeleccionadas();
+  }
+
+  moverTodoIzquierda() {
+    this.pantallasSinMenu = [...this.pantallasSinMenu, ...this.pantallasSinMenuSel];
+    this.pantallasReporte = [...this.pantallasReporte, ...this.pantallasReporteSel];
+    this.pantallasCatalogo = [...this.pantallasCatalogo, ...this.pantallasCatalogoSel];
+
+    this.pantallasSinMenuSel = [];
+    this.pantallasReporteSel = [];
+    this.pantallasCatalogoSel = [];
+
+    this.actualizarSeleccionadas();
+  }
+  actualizarSeleccionadas() {
+    Globals.pantallasSeleccionadas = [
+      ...this.pantallasReporteSel.map(p => p.idPantalla),
+      ...this.pantallasCatalogoSel.map(p => p.idPantalla),
+      ...this.pantallasSinMenuSel.map(p => p.idPantalla),
+    ];
+
+    this.catalogoIzquierdoVacio = this.pantallasCatalogo.length == 0;
+    this.catalogoDerechoVacio = this.pantallasCatalogoSel.length == 0;
+    this.reporteIzquierdoVacio = this.pantallasReporte.length == 0;
+    this.reporteDerechoVacio = this.pantallasReporteSel.length == 0;
+  }
 }

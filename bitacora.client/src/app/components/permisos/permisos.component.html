@@ -123,33 +123,33 @@
         <!-- Julieta -->
         <div class="row" style="padding-bottom: 20px;">
             <div class="col-lg-4 offset-lg-1 pantallasC">
-                <select name="from" id="optgroup" class="form-control" size="16" multiple="multiple">
-                        <option *ngFor="let pantSinM of pantallasSinMenu" class="{{pantSinM.nombrePantalla}}" id="{{pantSinM.nombrePantalla}}" value="{{pantSinM.idPantalla}}" >{{pantSinM.nombrePantalla}}</option>
+                <select name="from" id="optgroup" class="form-control" size="16" multiple>
+                        <option *ngFor="let pantSinM of pantallasSinMenu" class="{{pantSinM.nombrePantalla}}" id="{{pantSinM.nombrePantalla}}" value="{{pantSinM.idPantalla}}" (dblclick)="moverDerecha(pantSinM)">{{pantSinM.nombrePantalla}}</option>
                         
                         <optgroup  *ngIf="!reporteIzquierdoVacio" label="Reportes" class="reportesGroup" >
-                            <option *ngFor="let reporte of pantallasReporte" class="{{reporte.nombrePantalla}}" id="{{reporte.nombrePantalla}}" value="{{reporte.idPantalla}}">{{reporte.nombrePantalla}}</option>
+                            <option *ngFor="let reporte of pantallasReporte" class="{{reporte.nombrePantalla}}" id="{{reporte.nombrePantalla}}" value="{{reporte.idPantalla}}" (dblclick)="moverDerecha(reporte)">{{reporte.nombrePantalla}}</option>
 
                         </optgroup>
                         <optgroup *ngIf="!catalogoIzquierdoVacio" label="Catálogos">
-                            <option *ngFor="let catalogo of pantallasCatalogo" class="{{catalogo.nombrePantalla}}" id="{{catalogo.nombrePantalla}}" value="{{catalogo.idPantalla}}">{{catalogo.nombrePantalla}}</option>
+                            <option *ngFor="let catalogo of pantallasCatalogo" class="{{catalogo.nombrePantalla}}" id="{{catalogo.nombrePantalla}}" value="{{catalogo.idPantalla}}" (dblclick)="moverDerecha(catalogo)">{{catalogo.nombrePantalla}}</option>
 
                         </optgroup>
                     </select>
             </div>
             <div class="col-lg-2 contBotones d-flex flex-column justify-content-center">
-                <button type="button" id="optgroup_rightAll" class="btn btn-block btn-primary ">>></button>
-                <button type="button" id="optgroup_leftAll" class="btn btn-block btn-primary "><<</button>
+                <button type="button" class="btn btn-block btn-primary" (click)="moverTodoDerecha()">>></button>
+                <button type="button" class="btn btn-block btn-primary" (click)="moverTodoIzquierda()"><<</button>
             </div>
 
             <div class="col-lg-4 pantallasC">
-                <select name="to" id="optgroup_to" class="form-control" size="16" multiple="multiple">
-                        <option *ngFor="let pantSinM of pantallasSinMenuSel" class="{{pantSinM.nombrePantalla}}" id="{{pantSinM.nombrePantalla}}" value="{{pantSinM.idPantalla}}" >{{pantSinM.nombrePantalla}}</option>
+                <select name="to" id="optgroup_to" class="form-control" size="16" multiple>
+                        <option *ngFor="let pantSinM of pantallasSinMenuSel" class="{{pantSinM.nombrePantalla}}" id="{{pantSinM.nombrePantalla}}" value="{{pantSinM.idPantalla}}" (dblclick)="moverIzquierda(pantSinM)">{{pantSinM.nombrePantalla}}</option>
                         
                         <optgroup *ngIf="!reporteDerechoVacio"  label="Reportes" class="reportesGroup" >
-                            <option *ngFor="let reporte of pantallasReporteSel" class="{{reporte.nombrePantalla}}" id="{{reporte.nombrePantalla}}" value="{{reporte.idPantalla}}">{{reporte.nombrePantalla}}</option>
+                            <option *ngFor="let reporte of pantallasReporteSel" class="{{reporte.nombrePantalla}}" id="{{reporte.nombrePantalla}}" value="{{reporte.idPantalla}}" (dblclick)="moverIzquierda(reporte)">{{reporte.nombrePantalla}}</option>
                         </optgroup>
                         <optgroup *ngIf="!catalogoDerechoVacio" label="Catálogos">
-                            <option *ngFor="let catalogo of pantallasCatalogoSel" class="{{catalogo.nombrePantalla}}" id="{{catalogo.nombrePantalla}}" value="{{catalogo.idPantalla}}">{{catalogo.nombrePantalla}}</option>
+                            <option *ngFor="let catalogo of pantallasCatalogoSel" class="{{catalogo.nombrePantalla}}" id="{{catalogo.nombrePantalla}}" value="{{catalogo.idPantalla}}" (dblclick)="moverIzquierda(catalogo)">{{catalogo.nombrePantalla}}</option>
                           </optgroup>
                     </select>
             </div>
