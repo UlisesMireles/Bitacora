@@ -25,46 +25,17 @@
             </div>
 
 
-
-            <!--<div *ngIf="esEmpleado==true" class="form-group row">
-      <label class="lab col-md-12">Empleado</label>
-      <mat-form-field class="iconoProyecto col-md-12" [floatLabel]="formUsuario.value.floatLabel">
-          <mat-label class="inlab">Seleccione un empleado...</mat-label>
-          <mat-select id="proyectof" [formControl]="empleadoCtrl" (selectionChange)="seleccionEmpleado($event)" [(ngModel)]="empleadoSeleccionado">
-              <mat-option>
-                  <ngx-mat-select-search [placeholderLabel]="'Busca un empleado'" [noEntriesFoundLabel]="'No se encontró ningún empleado con este nombre'" [formControl]="filtroEmpleados"></ngx-mat-select-search>
-              </mat-option>
-              <mat-option *ngFor="let empleado of empleadosFiltrados | async" [value]="empleado">
-                  {{empleado.nombre}}
-              </mat-option>
-          </mat-select>
-      </mat-form-field>
-  </div>-->
-            <!--<div *ngIf="esEmpleado == true" class="form-group row">
-    <label class="lab col-md-12" style="color: #0E3E62">Empleado</label>
-    <mat-form-field class="iconoProyecto col-md-12" [floatLabel]="formUsuario.value.floatLabel">
-      <mat-label class="inlab" style="color: #008000">Seleccione un empleado...</mat-label>
-      <mat-select id="proyectof" [formControl]="empleadoCtrl" (selectionChange)="seleccionEmpleado($event)">
-        <mat-option>
-          <ngx-mat-select-search [placeholderLabel]="'Busca un empleado'" [noEntriesFoundLabel]="'No se encontró ningún empleado con este nombre'" [formControl]="filtroEmpleados"></ngx-mat-select-search>
-        </mat-option>
-        <mat-option *ngFor="let empleado of empleadosFiltrados | async" [value]="empleado">
-          {{empleado.nombre}}
-        </mat-option>
-      </mat-select>
-    </mat-form-field>
-  </div>-->
             <div *ngIf="esEmpleado" class="form-group row">
               <label class="lab col-md-12">Empleado</label>
               <mat-form-field class="iconoProyecto col-md-12" [floatLabel]="formUsuario.value.floatLabel">
-                <mat-label class="inlab"
+                <!--<mat-label class="inlab"
                            [ngClass]="{'empty-label': !empleadoSeleccionado, 'filled-label': empleadoSeleccionado}">
                   Seleccione un empleado...
-                </mat-label>
+                </mat-label>-->
                 <mat-select id="proyectof"
                             [formControl]="empleadoCtrl"
                             (selectionChange)="seleccionEmpleado($event)"
-                            [(ngModel)]="empleadoSeleccionado">
+                            [(ngModel)]="empleadoSeleccionado"  placeholder="Seleccione un empleado...">
                   <mat-option>
                     <ngx-mat-select-search [placeholderLabel]="'Busca un empleado'"
                                            [noEntriesFoundLabel]="'No se encontró ningún empleado con este nombre'"
@@ -82,33 +53,33 @@
               <label class="lab col-md-12">{{nombreUsuario}}</label>
               <!--Solo usuario-->
               <mat-form-field class="col-md-12 example-full-width" [floatLabel]="formUsuario.value.floatLabel">
-                <mat-label class="inlab"
+                <!--<mat-label class="inlab"
                            [ngClass]="{'empty-label': !formUsuario.get('nombre')?.value, 'filled-label': formUsuario.get('nombre')?.value}">
                   Ingresa un nombre...
-                </mat-label>
-                <input type="text" #nomUs formControlName="nombre" autocomplete="off" class="inlab" matInput style="caret-color: green;">
+                </mat-label>-->
+                <input  placeholder="Ingresa un nombre..." type="text" #nomUs formControlName="nombre" autocomplete="off" class="inlab" matInput style="caret-color: green;">
                 <mat-icon matSuffix>face</mat-icon>
               </mat-form-field>
             </div>
             <div *ngIf="esEmpleado==false" class="form-group row">
               <label class="lab col-md-12">Usuario</label>
               <mat-form-field class="col-md-12 example-full-width" [floatLabel]="formUsuario.value.floatLabel">
-                <mat-label class="inlab"
+                <!--<mat-label class="inlab"
                            [ngClass]="{'empty-label': !formUsuario.get('usuario')?.value, 'filled-label': formUsuario.get('usuario')?.value}">
                   Ingresa un usuario...
-                </mat-label>
-                <input type="text" #nomUs formControlName="usuario" autocomplete="off" class="inlab" style="caret-color: green;" matInput>
+                </mat-label>-->
+                <input  placeholder=" Ingresa un usuario..."  type="text" #nomUs formControlName="usuario" autocomplete="off" class="inlab" style="caret-color: green;" matInput>
                 <mat-icon matSuffix>account_box</mat-icon>
               </mat-form-field>
             </div>
             <div *ngIf="esEmpleado == false" class="form-group row">
               <label class="lab col-md-12">Correo</label>
               <mat-form-field class="col-md-12 example-full-width" [floatLabel]="formUsuario.value.floatLabel">
-                <mat-label class="inlab"
+                <!--<mat-label class="inlab"
                            [ngClass]="{'empty-label': !formUsuario.get('correo')?.value, 'filled-label': formUsuario.get('correo')?.value}">
                   Ingresa un correo...
-                </mat-label>
-                <input type="text" #nomUs formControlName="correo" autocomplete="off" class="inlab" style="caret-color: green;" matInput>
+                </mat-label>-->
+                <input  placeholder=" Ingresa un Correo..."  type="text" #nomUs formControlName="correo" autocomplete="off" class="inlab" style="caret-color: green;" matInput>
                 <mat-icon matSuffix>email</mat-icon>
               </mat-form-field>
             </div>
@@ -131,11 +102,12 @@
             <div *ngIf="editar && !view" class="form-group row duracionIn">
               <label class="lab col-md-12">Contraseña</label>
               <mat-form-field class="col-md-12 example-full-width" [floatLabel]="formUsuario.value.floatLabel">
-                <mat-label class="inlab"
+                <!--<mat-label class="inlab"
                            [ngClass]="{'empty-label': !formUsuario.get('passChange')?.value, 'filled-label': formUsuario.get('passChange')?.value}">
                   Ingresa una nueva contraseña
-                </mat-label>
-                <input id="txtPass"
+                </mat-label>-->
+                <input placeholder=" Ingresa una nueva contraseña"
+                       id="txtPass"
                        type="password"
                        #nuevaPass
                        formControlName="passChange"
@@ -152,11 +124,11 @@
             <div *ngIf="editar && !view" class="form-group row duracionIn">
               <label class="lab col-md-12">Confirmar Contraseña</label>
               <mat-form-field class="col-md-12 example-full-width" [floatLabel]="formUsuario.value.floatLabel">
-                <mat-label class="inlab"
+                <!--<mat-label class="inlab"
                            [ngClass]="{'empty-label': !formUsuario.get('passConfirm')?.value, 'filled-label': formUsuario.get('passConfirm')?.value}">
                   Confirma la nueva contraseña
-                </mat-label>
-                <input id="txtPassword"
+                </mat-label>-->
+                <input placeholder="Confirma la nueva contraseña" id="txtPassword"
                        type="password"
                        formControlName="passConfirm"
                        [(ngModel)]="confirmaCont"
@@ -186,7 +158,7 @@
 
         <div class="col-md-6 col-12 mx-auto" style="margin: 0; padding: 0; margin-left: 20px;">
           <div class="container text-center py-1">
-            <h3 class="titulo">Selección Unidades y Áreas</h3>
+            <h3 class="titulo" style="color:#0e3e62; font-size: 15.54px !important">Selección Unidades y Áreas</h3>
           </div>
           <mat-accordion #pruebas class="paneles" style="margin: 0; padding: 0;">
             <mat-expansion-panel #panelExpandible
