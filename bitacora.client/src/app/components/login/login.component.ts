@@ -39,7 +39,7 @@ export class LoginComponent implements OnInit {
     if (this.authenticationService.currentUserValue) {
       this.authenticationService.logout();
 
-      this.router.navigate(['/']);
+      //this.router.navigate(['/']);
     }
   }
   ngAfterViewInit() {

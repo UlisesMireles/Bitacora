@@ -303,11 +303,9 @@ export class AppComponent implements OnInit {
   }
   logout() {
     this.foto = null;
-    localStorage.clear();
     this.mostrarMenu = false;
     this.authenticationService.logout();
     this.banderasFalse();
-    this.router.navigate(['/']);
   }
   banderasFalse() {
     this.bitacoraMenu = false;

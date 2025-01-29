@@ -75,13 +75,6 @@ export class AgregarUsuarioComponent implements OnInit, OnDestroy {
     //asigno la base url desde el environment
     this.baseUrl = environment.baseURL;
 
-    //Globals.usuario = '4281';
-    //Globals.rolUser = '1';
-    //localStorage.setItem('currentUser', '4281');
-    //localStorage.setItem('userName', 'ulises.mireles');
-    //localStorage.setItem('rol', '1');
-
-
     this.formUsuario = this.fb.group({
       nombre:['',null],
       usuario:['',null],

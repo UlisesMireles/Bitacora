@@ -55,17 +55,19 @@ export class AuthenticationService {
 
   logout() {
     const id = localStorage.getItem('currentUser') || '';
-    this.http.get<any>(`${this.baseUrl}api/login/logout/${id}`).subscribe({
+    let datos = { idUser: id };
+    this.http.get<any>(this.baseUrl + "api/login/logout", { params: datos }).subscribe({
       next: res => {
         //console.log(res)
+        localStorage.clear();
+        Globals.permisos = [];
+        this.currentUserSubject.next(new User(0, ""));
+        this.router.navigate(['/']);
       },
       error: err => {
-        //console.log(err)
+        console.log(err)
       }
     });
-    localStorage.clear();
-    Globals.permisos = [];
-    this.currentUserSubject.next(new User(0, ""));
   }
   verificarSesion() {
     if (!localStorage.getItem('currentUser')) {
