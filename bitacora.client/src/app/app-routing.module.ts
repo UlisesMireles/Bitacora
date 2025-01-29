@@ -15,6 +15,7 @@ import { CatalogosComponent } from './components/catalogos/catalogos.component';
 import { AuthGuardCatalogos } from './guards/AuthGuardCatalogos';
 import { AuthGuardBitacora } from './guards/AuthGuardBitacora';
 import { AuthGuardReportes } from './guards/AuthGuardReportes';
+import { AuthGuardAvanceReal } from './guards/AuthGuardAvanceReal';
 
 const routes: Routes = [
   { path: '', component: LoginComponent, title: 'Bitácora' },
@@ -26,6 +27,7 @@ const routes: Routes = [
   { path: 'nom035', component: Nom035Component, canActivate: [AuthGuard] },
   { path: 'reportes/:reporte', component: ReportesComponent, canActivate: [AuthGuardReportes] },
   { path: 'catalogos/:catalogo', component: CatalogosComponent, canActivate: [AuthGuardCatalogos] },
+  { path:'avance-real',component: AvanceRealComponent,canActivate:[AuthGuardAvanceReal]},
 ];
 
 @NgModule({

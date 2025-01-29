@@ -10,6 +10,7 @@ import { MatDialog } from '@angular/material/dialog';
 //import { Nom035Service } from 'src/app/services/nom035.service';
 import { Globals } from '../../services/globals';
 import { Nom035Service } from '../../services/nom035.service';
+import { OlvidasteContraseniaComponent } from '../olvidaste-contrasenia/olvidaste-contrasenia.component';
 
 declare let $: any;
 
@@ -83,9 +84,9 @@ export class LoginComponent implements OnInit {
 
 
   abrirForm() {
-    //const dialogRef = this.dialog.open(OlvidasteContraseniaComponent, {
-    //  width: '500px', height: '300px'
-    //})
+    const dialogRef = this.dialog.open(OlvidasteContraseniaComponent, {
+     width: '500px', height: '300px'
+    })
   }
 
   onSubmit() {
@@ -120,7 +121,7 @@ export class LoginComponent implements OnInit {
                   if (Globals.permisos.length > 0) {
                     //console.log(Globals.permisos)
                     const index = Globals.permisos.find((x: any) => x.nombrePantalla === "NOM 035") || 0 as number;
-                    if (index > -1) {
+                    if (index > 0) {
                       this.authenticationServiceNom035.postInfoParticipante(data.usuario)
                        .subscribe((resp: any) => {
                          if (resp.aplicarExamen > 0) {//retorna al login
