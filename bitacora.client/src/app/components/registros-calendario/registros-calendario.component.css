@@ -178,3 +178,13 @@ footer {
   position: relative;
   top: 0; /* Elimina cualquier desplazamiento vertical */
 }
+.mat-mdc-form-field-has-icon-suffix .mat-mdc-text-field-wrapper {
+  padding-right: 0;
+  padding-left: 0;
+}
+.table-responsive {
+  max-height: 50vh;
+  /*overflow-y: auto;*/
+  overflow: hidden;
+  overflow-x: hidden;
+}

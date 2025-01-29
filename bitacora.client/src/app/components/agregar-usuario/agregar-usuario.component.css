@@ -5,6 +5,7 @@
 
 ::ng-deep span .ng-star-inserted {
   color: green;
+  font-size:14px!important;
 }
 
 .btn-modal-aceptar {
@@ -112,11 +113,17 @@ input:-internal-autofill-selected {
 }
 
 .lab {
+  /*  text-align: left;
+  color: #0e3e62;
+  font-weight: bold;
+  margin: 0px;
+  margin-bottom: -15px;*/
   text-align: left;
   color: #0e3e62;
   font-weight: bold;
   margin: 0px;
-  margin-bottom: -15px;
+  margin-bottom: -37px !important;
+  padding-top: .25em !important;
 }
 
 ::ng-deep .mat-checkbox-layout .mat-checkbox-label {
@@ -347,18 +354,9 @@ h3-azul {
 ::ng-deep .mdc-text-field--filled:not(.mdc-text-field--disabled) .mdc-floating-label {
   color: green !important;
 }
-::ng-deep html {
-  --mdc-checkbox-unselected-icon-color: #8fbc8f !important;
-  --mat-checkbox-label-text-font: Roboto, sans-serif;
-  --mat-checkbox-label-text-line-height: 20px;
-  --mat-checkbox-label-text-size: 14px;
-  --mat-checkbox-label-text-tracking: 0.0178571429em;
-  --mat-checkbox-label-text-weight: 400;
-  --mdc-checkbox-selected-hover-state-layer-color: #8fbc8f !important;
-  --mdc-checkbox-unselected-hover-icon-color: #8fbc8f !important;
-  --mat-checkbox-label-text-color: #8fbc8f !important;
-  --mdc-checkbox-unselected-focus-icon-color: #8fbc8f !important;
-}
+
+
+
 
 ::ng-deep .mat-mdc-checkbox label {
   cursor: pointer;
@@ -408,6 +406,7 @@ h3-azul {
 ::ng-deep .mat-mdc-checkbox label {
   cursor: pointer;
   font-weight: 700;
+  font-size: 15px !important;
 }
 ::ng-deep .mat-mdc-text-field-wrapper {
   height: auto !important;
@@ -531,6 +530,102 @@ h3-azul {
 ::ng-deep.mat-mdc-form-field-type-mat-select:not(.mat-form-field-disabled) .mat-mdc-text-field-wrapper {
   cursor: pointer;
   padding-left: 0px;
+}
+
+::ng-deep .mdc-outlined-text-field-input-text-placeholder-color{
+  color: green !important; /* Cambia 'red' por el color que desees */
+}
+::ng-deep .mat-mdc-input-element::placeholder {
+  color: green !important;
+}
+::ng-deep .mat-mdc-form-field-type-mat-select:not(.mat-form-field-disabled) .mat-mdc-text-field-wrapper {
+  padding-right: 0px;
+  padding-left: 0px;
+}
+
+::ng-deep .mat-mdc-form-field-has-icon-suffix .mat-mdc-text-field-wrapper {
+  padding-right: 0 !important;
+  padding-left: 0 !important;
+}
+/* Ocultar el placeholder o mat-label si hay un valor seleccionado */
+.mat-form-field.mat-form-field-can-float .mat-label {
+  display: none; /* Oculta el label flotante cuando hay un valor seleccionado */
+}
+
+  /* Mostrar el mat-label solo si no hay un valor seleccionado */
+  .mat-form-field.mat-form-field-can-float .mat-label.mat-form-field-empty {
+    display: block;
+    position: absolute;
+    top: 0;
+    left: 0;
+    font-size: 14px;
+    color: rgba(0, 0, 0, 0.6); /* Placeholder visible solo si el campo está vacío */
+  }
+
+/* Ajustar el valor seleccionado para que esté completamente pegado a la línea */
+.mat-select-trigger {
+  padding-top: 0;
+  padding-bottom: 0;
+  margin: 0;
+  display: flex;
+  align-items: center; /* Centrar verticalmente el valor */
+}
+
+/* Eliminar espacio entre la línea y el valor seleccionado */
+.mat-form-field-underline {
+  margin-top: 0;
+  height: 2px; /* Grosor de la línea */
+}
+
+/* Remover el espacio del label flotante cuando ya hay un valor seleccionado */
+.mat-form-field:not(.mat-form-field-empty) .mat-label {
+  display: none; /* Oculta el mat-label cuando hay contenido seleccionado */
+}
+
+/* Ajustar la línea del mat-form-field para que no haya separación al inicio */
+.mat-form-field-wrapper {
+  padding-bottom: 0;
+}
+
+/* Opcional: Asegurar que la línea sea consistente y pegada */
+.mat-form-field-flex {
+  align-items: center; /* Asegura que el contenido esté alineado con la línea */
+  margin: 0;
+  padding: 0;
+}
+::ng-deep .mat-mdc-form-field-infix {
+  padding-top: 1em !important;
+  padding-bottom: 0em !important;
+}
+::ng-deep .mdc-text-field--filled.mdc-text-field--disabled {
+  
+  padding-left: 0px;
+}
+::ng-deep html {
+  --mdc-checkbox-unselected-icon-color: #8fbc8f !important;
+  --mat-checkbox-label-text-font: Roboto, sans-serif;
+  --mat-checkbox-label-text-line-height: 20px;
+  --mat-checkbox-label-text-size: 14px;
+  --mat-checkbox-label-text-tracking: 0.0178571429em;
+  --mat-checkbox-label-text-weight: 400;
+  --mdc-checkbox-selected-hover-state-layer-color: #8fbc8f !important;
+  --mdc-checkbox-unselected-hover-icon-color: #8fbc8f !important;
+  --mat-checkbox-label-text-color: #8fbc8f !important;
+  --mdc-checkbox-unselected-focus-icon-color: #8fbc8f !important;
+  /*  --mdc-checkbox-disabled-selected-icon-color: #69f0ae !important;
+  --mdc-checkbox-disabled-selected-checkmark-color: #000 !important;*/
+}
+
+
+ /*Aplica un contorno rojo a los checkboxes deshabilitados con valor false */
+::ng-deep.mat-mdc-checkbox.mat-mdc-checkbox-disabled:not(.mdc-checkbox--selected) .mdc-checkbox__background {
+  border: 2px solid #8FBC8F !important;  /*Fuerza el estilo con rojo */
+background-color: #69f0ae !important; /* Agrega fondo de color Dark Sea Green */
+}
+
+/* Opcional: Si deseas usar solo el color verde oscuro */
+::ng-deep.mat-mdc-checkbox.mat-mdc-checkbox-disabled:not(.mdc-checkbox--selected) .mdc-checkbox__background:hover {
+    border-color: #8FBC8F !important;  /*Cambia el contorno al color verde */
 }
 
 

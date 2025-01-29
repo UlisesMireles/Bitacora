@@ -42,21 +42,16 @@ import {DialogTable3} from './components/reportes/reportes.component';
 import { FiltroBitacoraPipe } from './pipes/filtro-bitacora.pipe';
 //import { RegistrosCalendarioComponent } from './components/registros-calendario/registros-calendario.component';
 import { CatalogosComponent } from './components/catalogos/catalogos.component';
-//import { ReportesComponent } from './components/reportes/reportes.component';
 //import { AvanceRealComponent } from './components/avance-real/avance-real.component';
 //import { CambiocontraseniaComponent } from './components/cambiocontrasenia/cambiocontrasenia.component';
 //import { TokenContraseniaComponent } from './components/token-contrasenia/token-contrasenia.component';
 import { FiltroPipe } from './pipes/filtro.pipe';
-//import {DialogTable} from './components/reportes/reportes.component';
-//import {DialogTable2} from './components/reportes/reportes.component';
-//import {DialogTable3} from './components/reportes/reportes.component';
 //import { FiltroBitacoraPipe } from './pipes/filtro-bitacora.pipe';
 //import {MatCheckboxModule} from '@angular/material/checkbox';
 import { FiltroProyectosPipe } from './pipes/filtro-proyectos.pipe';
 import { AuthGuardBitacora } from './guards/AuthGuardBitacora';
 import { PermisosComponent } from './components/permisos/permisos.component';
-//import { AuthGuardCatalogos } from './guards/AuthGuardCatalogos';
-//import { AuthGuardReportes } from './guards/AuthGuardReportes';
+import { AuthGuardCatalogos } from './guards/AuthGuardCatalogos';
 //import { AuthGuardAvanceReal } from './guards/AuthGuardAvanceReal';
 //import { AuthGuardPermisos } from './guards/AuthGuardPermisos';
 //import { OlvidasteContraseniaComponent } from './components/olvidaste-contrasenia/olvidaste-contrasenia.component';
@@ -75,6 +70,7 @@ import { AvanceRealComponent } from './components/avance-real/avance-real.compon
 import { FormBitacoraComponent } from './components/form-bitacora/form-bitacora.component'
 import { ToastrModule } from 'ngx-toastr';
 import { AuthGuardPermisos } from './guards/AuthGuardPermisos';
+import { AuthGuardReportes } from './guards/AuthGuardReportes';
 export function getBaseUrl() {
   return 'https://localhost:7127/'
   //return document.getElementsByTagName('base')[0].href;
@@ -152,7 +148,7 @@ export function getBaseUrl() {
 
   ],
   providers: [
-    { provide: 'BASE_URL', useFactory: getBaseUrl, deps: [] },AuthGuardBitacora, AuthGuardPermisos, AuthGuard,
+    { provide: 'BASE_URL', useFactory: getBaseUrl, deps: [] },AuthGuardBitacora, AuthGuardPermisos, AuthGuard, AuthGuardReportes, AuthGuardCatalogos,
     provideAnimationsAsync()
   ],
   //  entryComponents: [DialogTable, DialogTable2, DialogTable3, CatalogosComponent, AgregarUsuarioComponent, Modal, OlvidasteContraseniaComponent, ModalCambioEstatus, ModalReestablecerContrasenia, ModalEliminarRol],

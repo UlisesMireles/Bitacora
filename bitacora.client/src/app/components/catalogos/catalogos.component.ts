@@ -195,7 +195,7 @@ export class CatalogosComponent implements OnInit{
     this.baseUrl = environment.baseURL;
 
     // Hardcodeando params para simular que se está en el catálogo de "clientes"
-    //this.activatedRoute.snapshot.params = { catalogo: 'usuarios' } as any;
+/*    this.activatedRoute.snapshot.params = { catalogo: 'usuarios' } as any;*/
 
     const params = this.activatedRoute.snapshot.params;
     this.config = {

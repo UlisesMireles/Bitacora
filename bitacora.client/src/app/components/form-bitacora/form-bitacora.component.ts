@@ -65,7 +65,7 @@ export class FormBitacoraComponent implements OnInit, OnDestroy {
   fases: any[] = [];
   idUsuario: any;
   campos:string="";
-  fechaDatePicker:Date | undefined;
+  fechaDatePicker: Date = new Date(new Date().setHours(0, 0, 0, 0));;
   edicionRegistro = false;
   registroEditar: any;
   sumaHoras: any;
@@ -492,7 +492,7 @@ export class FormBitacoraComponent implements OnInit, OnDestroy {
   }
 
   limpiarForm(){
-    var fecha = this.fechaDatePicker; //antes de la migracion new Date(this.fechaDatePicker);
+    let fecha = this.fechaDatePicker ? new Date(this.fechaDatePicker) : new Date();
     this.titleProy = '';
     this.titleEtapa = '';
     this.titleEvento = '';

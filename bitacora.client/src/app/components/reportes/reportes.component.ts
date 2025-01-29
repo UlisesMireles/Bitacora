@@ -886,7 +886,6 @@ export class ReportesComponent implements OnInit {
   }
 
   ngOnInit() {
-
     this.mostrarFiltro = true;
     $("#page-container").css("background-color", "#EAEAEA");
     this.unidadSeleccionada = -1;
