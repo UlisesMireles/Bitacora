@@ -13,8 +13,7 @@
       <form [formGroup]="formBitacora" class="col-md-12">
         <div class="form-group row fechaIn">
           <label class="lab col-md-12">Fecha</label>
-          <mat-form-field class="col-md-12 form-control-sm" [floatLabel]="formBitacora.value.floatLabel">
-            <mat-label class="inlab">DD/MM/AAAA</mat-label>
+          <mat-form-field class="col-md-12 " [floatLabel]="formBitacora.value.floatLabel">
             <input #fechaf class="inlab" style='color: #0e3e62 !important;' matInput [min]="minDate" [max]="maxDate" [matDatepicker]="picker" (focus)="picker.open()" (click)="picker.open()" (dateInput)="fechaSeleccion($event)" formControlName="fecha" [(ngModel)]="fechaDatePicker" readonly>
             <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
             <mat-datepicker #picker></mat-datepicker>
@@ -22,9 +21,9 @@
         </div>
         <div *ngIf="esEditable || pagina==0 && movil == true || movil==false" class="form-group row proyectoIn" [ngClass]="{'des': pagina==1 && movil==true}">
           <label class="lab col-md-12">Proyecto</label>
-          <mat-form-field class="iconoProyecto col-md-12 form-control-sm" [floatLabel]="formBitacora.value.floatLabel">
-            <mat-label class="inlab">Seleccione un proyecto...</mat-label>
-            <mat-select class="form-control-sm" #proyectoS id="proyectof" [formControl]="proyectoCtrl" (keyup)="abrirSelect('proyecto',$event)" (selectionChange)="proyectoSeleccion($event.value)" [(ngModel)]="proyectoSeleccionado" [disabled]="!editar && movil && pagina==1" title="{{titleProy}}">
+          <mat-form-field class="iconoProyecto col-md-12 " [floatLabel]="formBitacora.value.floatLabel">
+            <!--<mat-label class="inlab">Seleccione un proyecto...</mat-label>-->
+            <mat-select  #proyectoS placeholder="Seleccione un proyecto..." id="proyectof" [formControl]="proyectoCtrl" (keyup)="abrirSelect('proyecto',$event)" (selectionChange)="proyectoSeleccion($event.value)" [(ngModel)]="proyectoSeleccionado" [disabled]="!editar && movil && pagina==1" title="{{titleProy}}">
               <mat-option>
                 <ngx-mat-select-search [placeholderLabel]="'Busca un proyecto'"
                                        [noEntriesFoundLabel]="'No se encontró ningún proyecto con este nombre'" [formControl]="filtroProyecto"></ngx-mat-select-search>
@@ -55,8 +54,8 @@
         <div class="form-group row faseIn" *ngIf="mostrarFase" [ngClass]="{'faseIn': pagina==1 && movil==true}">
           <label class="lab col-md-12">Etapa</label>
           <mat-form-field class="iconoFase col-md-12" [floatLabel]="formBitacora.value.floatLabel">
-            <mat-label class="inlab">Seleccione una etapa...</mat-label>
-            <mat-select #fasef [formControl]="etapaCtrl" (keyup)="abrirSelect('fase',$event)" (selectionChange)="faseSeleccion($event)" [(ngModel)]="etapaSeleccionada" [disabled]="!editar && movil && pagina==1" title="{{titleEtapa}}">
+
+            <mat-select #fasef placeholder="Seleccione una etapa..." [formControl]="etapaCtrl" (keyup)="abrirSelect('fase',$event)" (selectionChange)="faseSeleccion($event)" [(ngModel)]="etapaSeleccionada" [disabled]="!editar && movil && pagina==1" title="{{titleEtapa}}">
               <mat-option>
                 <ngx-mat-select-search [placeholderLabel]="'Busca una etapa'"
                                        [noEntriesFoundLabel]="'No se encontró ninguna etapa con este nombre'" [formControl]="filtroEtapa"></ngx-mat-select-search>
@@ -77,8 +76,7 @@
         <div class="form-group row actividadIn" *ngIf="proyectoSel==true" [ngClass]="{'des': pagina==1 && movil==true}">
           <label class="lab col-md-12">Actividad</label>
           <mat-form-field class="iconoActividad col-md-12" [floatLabel]="formBitacora.value.floatLabel">
-            <mat-label class="inlab">Seleccione una actividad...</mat-label>
-            <mat-select #actividadf [formControl]="actividadCtrl" (keyup)="abrirSelect('actividad',$event)" (selectionChange)="actividadSeleccion($event)" [(ngModel)]="actividadSeleccionada" [disabled]="!editar && movil && pagina==1" title="{{titleEvento}}">
+            <mat-select #actividadf placeholder="Seleccione una actividad..." [formControl]="actividadCtrl" (keyup)="abrirSelect('actividad',$event)" (selectionChange)="actividadSeleccion($event)" [(ngModel)]="actividadSeleccionada" [disabled]="!editar && movil && pagina==1" title="{{titleEvento}}">
               <mat-option>
                 <ngx-mat-select-search [placeholderLabel]="'Busca una actividad'"
                                        [noEntriesFoundLabel]="'No se encontró ninguna actividad con este nombre'" [formControl]="filtroActividad"></ngx-mat-select-search>
@@ -99,8 +97,7 @@
         <div class="form-group row eventoIn" *ngIf="proyectoSel==false" [ngClass]="{'des': pagina==1 && movil==true}">
           <label class="lab col-md-12">Evento Extraordinario</label>
           <mat-form-field class="iconoActividad col-md-12" [floatLabel]="formBitacora.value.floatLabel">
-            <mat-label class="inlab">Seleccione un evento...</mat-label>
-            <mat-select #eventof [formControl]="eventoCtrl" (keyup)="abrirSelect('evento',$event)" (selectionChange)="actividadSeleccion($event)" [(ngModel)]="eventoSeleccionado" [disabled]="!editar && movil && pagina==1" title="{{titleEvento}}">
+            <mat-select #eventof  placeholder="Seleccione un evento..." [formControl]="eventoCtrl" (keyup)="abrirSelect('evento',$event)" (selectionChange)="actividadSeleccion($event)" [(ngModel)]="eventoSeleccionado" [disabled]="!editar && movil && pagina==1" title="{{titleEvento}}">
               <mat-option>
                 <ngx-mat-select-search [placeholderLabel]="'Busca un evento'"
                                        [noEntriesFoundLabel]="'No se encontró ningún evento con este nombre'" [formControl]="filtroEvento"></ngx-mat-select-search>
@@ -122,22 +119,20 @@
 
           <label class="lab col-md-12">Detalle</label>
           <mat-form-field class="iconoActividad col-md-12 example-full-width fix" [floatLabel]="formBitacora.value.floatLabel">
-            <mat-label class="inlab">Descripción de la actividad (Max 455 caracteres)</mat-label>
-            <textarea #detalle formControlName="detalle" autocomplete="off" maxlength="455" class="inlab fix" matInput (keyup)="detalleSeleccion(detalle.value)" style="height: 55px; max-height: 70px; caret-color: #103d66; color: #0e3e62 !important;"></textarea>
+            <textarea #detalle formControlName="detalle" placeholder="Descripción de la actividad (Max 455 caracteres)" autocomplete="off" maxlength="455" class="inlab fix" matInput (keyup)="detalleSeleccion(detalle.value)" style="height: 55px; max-height: 70px; caret-color: #103d66; color: #0e3e62 !important;"></textarea>
             <mat-icon matSuffix class="iconoDetalle"></mat-icon>
           </mat-form-field>
         </div>
         <div class="form-group row duracionIn">
           <label class="lab col-md-12">Duración</label>
           <mat-form-field class="col-md-12 example-full-width fix" [floatLabel]="formBitacora.value.floatLabel">
-            <mat-label class="inlab">H.M (Max 8 H)</mat-label>
-            <input type="number" min="1" max="8" #duracion formControlName="duracion" autocomplete="off" class="inlab fix" matInput (keyup)="duracionSeleccion(duracion.value)" style="caret-color: #103d66; color: #0e3e62 !important;">
+            <input type="number" min="1" max="8"  placeholder="H.M (Max 8 H)" #duracion formControlName="duracion" autocomplete="off" class="inlab fix" matInput (keyup)="duracionSeleccion(duracion.value)" style="caret-color: #103d66; color: #0e3e62 !important;">
             <mat-icon matSuffix class="iconoDuracion"></mat-icon>
           </mat-form-field>
         </div>
         <!-- <button (click)="timeStringToFloat(duracion.value)">Horas</button> -->
         <div *ngIf="movil == false  || (movil==true && pagina==0)" class="row text-align:right">
-          <div class="col-md-12 col-12 form-group" style="text-align: right; padding-bottom: 2%;">
+          <div class="col-md-12 col-12 form-group" style="text-align: right; padding-bottom: 2%; padding-top: 8%;">
             <button class="btn btn-primary" style="width: 100px;" (click)="guardarRegistro(formBitacora.value)">Guardar</button> &nbsp;
             <button class="btn btn-secondary" style="width: 100px;" (click)="limpiarForm()">Cancelar</button>
           </div>
@@ -153,8 +148,9 @@
             </ul>
           </div>
         </div>
+        <br />
         <div *ngIf="movil==true && pagina==1 && editar==true">
-          <div class="col-md-12 col-12 form-group" style="text-align: right; padding-bottom: 2%;">
+          <div class="col-md-12 col-12 form-group" style="text-align: right;padding-bottom: 2%; padding-top: 8%;">
             <button class="btn btn-primary" style="width: 100px;" (click)="guardarRegistro(formBitacora.value)">Guardar</button> &nbsp;
             <button class="btn btn-secondary" style="width: 100px;" (click)="cancelar()">Cancelar</button>
           </div>
@@ -166,7 +162,8 @@
       </form>
     </div>
 
-  </div>  
+  </div>
+  <br />
   <div style="position:absolute">
 
     <div class="mybtn" *ngIf="movil==false">
