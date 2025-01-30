@@ -127,7 +127,7 @@
               <input #filtroTre type="text" class="col-10" name="filtroTres" [(ngModel)]="filtroTres" placeholder="Buscar..." (keyup)="verificarFiltroTres(filtroTre.value)">
             </div>
           </th>
-          <th class="bb  th-custom">
+          <th class="bb  th-custom" style=" padding-left: 15px !important">
             <select #filtroCuatr class="col-10 select-custom" name="filtroCuatro" id="clien" [(ngModel)]="filtroCuatro" (change)="verificarFiltroCuatro(filtroCuatr.value)" ng-options="color.name for color in colors">
               <option value="Activo" selected="selected">Activo</option>
               <option value="Inactivo">Inactivo</option>
