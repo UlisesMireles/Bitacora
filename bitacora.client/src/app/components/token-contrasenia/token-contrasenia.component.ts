@@ -4,7 +4,7 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { HttpClient } from '@angular/common/http';
 import { ToastrService } from 'ngx-toastr';
 import { AuthenticationService } from '../../services/authentication.service';
-import moment from 'moment';
+import { environment } from '../../../environments/environment';
 
 @Component({
   selector: 'app-token-contrasenia',
@@ -15,8 +15,9 @@ import moment from 'moment';
 export class TokenContraseniaComponent implements OnInit {
 
   contForm!:FormGroup;
+  baseUrl: string = environment.baseURL;
 
-  constructor(private authenticationService:AuthenticationService,private toastr:ToastrService,private router:Router, private activatedRoute:ActivatedRoute, private formBuilder:FormBuilder, private http:HttpClient, @Inject("BASE_URL") private baseUrl:string) { }
+  constructor(private authenticationService:AuthenticationService,private toastr:ToastrService,private router:Router, private activatedRoute:ActivatedRoute, private formBuilder:FormBuilder, private http:HttpClient) { }
   usuario:string = '';
   showErrorMessage:boolean = false;
   errorToken: any;

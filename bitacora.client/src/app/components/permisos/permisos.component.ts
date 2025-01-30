@@ -7,7 +7,7 @@ import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { AuthenticationService } from '../../services/authentication.service';
-import { after } from 'underscore';
+import { environment } from '../../../environments/environment';
 declare var $: any;
 
 @Component({
@@ -40,11 +40,10 @@ export class PermisosComponent implements OnInit {
   titulo: any;
   mensaje: any;
   vacios: boolean = false;
-
-
+  baseUrl: string = environment.baseURL;
 
   constructor(private spinner: NgxSpinnerService, private toastr: ToastrService, private router: Router,
-    private http: HttpClient, @Inject("BASE_URL") private baseUrl: string, private cdRef: ChangeDetectorRef,
+    private http: HttpClient, private cdRef: ChangeDetectorRef,
     private authenticationService: AuthenticationService, private redireccionService: RedireccionService) {
 
   }

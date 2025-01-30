@@ -3,6 +3,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router, ActivatedRoute } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
 import { ToastrService } from 'ngx-toastr';
+import { environment } from '../../../environments/environment';
 
 @Component({
   selector: 'app-cambiocontrasenia',
@@ -17,8 +18,9 @@ export class CambiocontraseniaComponent implements OnInit {
   mensaje: any;
   currentUser: string = '';
   cambio: boolean = false;
+  baseUrl: string = environment.baseURL;
   constructor(private toastr: ToastrService, private formBuilder: FormBuilder, private route: Router, private activatedRouter: ActivatedRoute,
-    private http: HttpClient, @Inject("BASE_URL") private baseUrl: string) {
+    private http: HttpClient) {
   }
 
   ngOnInit(): void {
