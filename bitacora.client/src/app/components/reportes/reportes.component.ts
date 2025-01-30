@@ -2558,28 +2558,34 @@ export class ReportesComponent implements OnInit {
     this.ctx = this.canvas.getContext('2d');
     if (!this.ctx) return;
 
+    const colores = [
+      '#13871B', // Verde oscuro
+      '#20C92C', // Verde claro
+      '#B9FFBC', // Verde pastel
+      '#0e3e62'  // Azul oscuro
+    ];
+
+    const mapaColores = new Map<string, string>();
+
+    graficaRepEjecutivo.forEach((item: any, index: number) => {
+      if (!mapaColores.has(item.proyecto)) {
+        const color = colores[index];
+        mapaColores.set(item.proyecto, color);
+      }
+    });
+
+    const datosGrafica = graficaRepEjecutivo.filter((item: any) => item.porcentaje > 0);
+
+    console.log('Datos para la gráfica:', datosGrafica);
+    console.log('Colores para la gráfica:', datosGrafica.map((item:any) => item.color));
+
     this.chartEjecutivo = new Chart(this.ctx, {
       type: 'pie',
       data: {
-        labels: [
-          graficaRepEjecutivo[1].proyecto + " " + "(" + graficaRepEjecutivo[1].horas + " hr)",
-          graficaRepEjecutivo[0].proyecto + " " + "(" + graficaRepEjecutivo[0].horas + " hr)",
-          graficaRepEjecutivo[2].proyecto + " " + "(" + graficaRepEjecutivo[2].horas + " hr)",
-          graficaRepEjecutivo[3].proyecto + " " + "(" + graficaRepEjecutivo[3].horas + " hr)"
-        ],
+        labels: datosGrafica.map((item:any) => `${item.proyecto} (${item.horas} hr)`),
         datasets: [{
-          data: [
-            graficaRepEjecutivo[1].porcentaje,
-            graficaRepEjecutivo[0].porcentaje,
-            graficaRepEjecutivo[2].porcentaje,
-            graficaRepEjecutivo[3].porcentaje
-          ],
-          backgroundColor: [
-            '#13871B',
-            '#20C92C',
-            '#B9FFBC',
-            '#0e3e62',
-          ],
+          data: datosGrafica.map((item:any) => item.porcentaje),
+          backgroundColor: datosGrafica.map((item: any) => mapaColores.get(item.proyecto)),
           borderWidth: 1,
         }]
       },
@@ -2590,11 +2596,29 @@ export class ReportesComponent implements OnInit {
           legend: {
             display: true,
             position: 'left',
+            align: 'center',
             labels: {
-              boxWidth: 45,
-              padding: 20,
+              boxWidth: 40,
+              padding: 15,
               font: {
-                size: 15
+                size: 14
+              },
+              generateLabels: (chart) => {
+                return graficaRepEjecutivo.map((item: any) => ({
+                  text: `${item.proyecto} (${item.horas} hr)`,
+                  fillStyle: item.porcentaje === 0 
+                    ? '#cccccc' 
+                    : mapaColores.get(item.proyecto), 
+                  hidden: false,
+                  lineCap: 'butt',
+                  lineDash: [],
+                  lineDashOffset: 0,
+                  lineJoin: 'miter',
+                  lineWidth: 1,
+                  strokeStyle: '#fff',
+                  pointStyle: 'circle',
+                  datasetIndex: 0
+                }));
               }
             },
           },
@@ -2607,25 +2631,25 @@ export class ReportesComponent implements OnInit {
               return percentage + "%";
             },
             color: 'white',
-            textShadowBlur: 15,
+            textShadowBlur: 14,
             textShadowColor: 'black',
             textStrokeColor: 'black',
             textStrokeWidth: 8,
             font: {
-              size: 18,
-              weight: 600
+              size: 12,
+              weight: 400
             }
           }
         },
         layout: {
           padding: {
-            left: 50,   // Añade padding al contenedor del gráfico
-            right: 50,
+            left: 0,  
+            right: 60,
             top: 20,
             bottom: 20
           }
         },
-        aspectRatio: 2,
+        aspectRatio: 2.5,
       },
     });
   }
