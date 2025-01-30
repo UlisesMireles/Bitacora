@@ -375,7 +375,7 @@ export class CatalogosComponent implements OnInit{
       this.pageChanged(1);
 
       // Notifica cambios manualmente
-//this.cdRef.markForCheck();
+      this.cdRef.markForCheck();
       this.spinner.hide();
       this.filtroCuatro = 'Activo'
     }, error => {
@@ -414,7 +414,7 @@ export class CatalogosComponent implements OnInit{
       this.pageChanged(1);
 
         // Notifica cambios manualmente
-        //this.cdRef.markForCheck();
+        this.cdRef.markForCheck();
       this.spinner.hide();
     }, error => {
       this.spinner.hide();
