@@ -1,5 +1,5 @@
-<div style="font-family: Raleway, sans-serif;" class="container-fluid bit">
-    <h3 style="text-align: left;">Administración de Permisos</h3>
+<div class="container-fluid bit">
+    <h3>Administración de Permisos</h3>
     <div class="container">
         <div class="row">
             <!-- <div class="table responsive outter-table col-8">
@@ -27,26 +27,27 @@
             </div> -->
             <div class="col-12 row">
 
-                <div class="container col">
-                    <div class="row align-items-center mb-4" style="margin-left: 175px;">
-                        <label class="labelC col-auto" for="">Nombre</label>
-                        <input type="text" style="margin-left: 10px;" [(ngModel)]="nombre" class="form-control input-small" placeholder="Nombre" maxlength="25" [disabled]="editar">
+                <div class="container col-6">
+                    <div class="row align-items-center mb-4">
+                        <label class="labelC  col-auto" for="">Nombre</label>
+                        <input type="text" [(ngModel)]="nombre" class="form-control input-small " placeholder="Nombre" maxlength="25" [disabled]="editar">
                     </div>
-                    <div class="row align-items-center mb-4" style="margin-left: 174px;">
-                        <label class="form-label col-auto" for="">Descripción</label>
-                        <input type="text" style="margin-left: 17px;" [(ngModel)]="desc" class="form-control input-small" placeholder="Descripción">
+                    <div class="row align-items-center mb-4">
+                        <label class="labelC  col-auto" for="">Descripción</label>
+                        <input type="text" [(ngModel)]="desc" class="form-control input-small " placeholder="Descripción">
                     </div>
 
                 </div>
-                <div class="col-lg-3 row">
-                    <div class="mb-3" *ngIf="editar">
-                        <label class="form-label">Estatus</label>
-                        <select [(ngModel)]="estatus" id="" class="form-select">
+                <div class="col-3 row">
+                    <div *ngIf="editar">
+                        <label class="labelC">Estatus</label>
+                        <select [(ngModel)]="estatus" id="" class="input-sm form-control mb-4">
                         <option value="Activo">Activo</option>
                         <option value="Inactivo">Inactivo</option>
                     </select>
                     </div>
-                    <div class="d-flex align-items-center" style="padding-left: 10px;">
+                    <div style="    padding-left: 10px;
+                  padding-top: 30px;">
                         <button (click)="guardarRol()" class="btn btn-primary">Guardar</button>
                     </div>
                 </div>
@@ -122,7 +123,7 @@
 
         <!-- Julieta -->
         <div class="row" style="padding-bottom: 20px;">
-            <div class="col-lg-4 offset-lg-1 pantallasC">
+            <div class="col-4 offset-1">
                 <select name="from" id="optgroup" class="form-control" size="16" multiple>
                         <option *ngFor="let pantSinM of pantallasSinMenu" class="{{pantSinM.nombrePantalla}}" id="{{pantSinM.nombrePantalla}}" value="{{pantSinM.idPantalla}}" (dblclick)="moverDerecha(pantSinM)">{{pantSinM.nombrePantalla}}</option>
                         
@@ -136,12 +137,13 @@
                         </optgroup>
                     </select>
             </div>
+
             <div class="col-lg-2 contBotones d-flex flex-column justify-content-center">
                 <button type="button" class="btn btn-block btn-primary" (click)="moverTodoDerecha()">>></button>
                 <button type="button" class="btn btn-block btn-primary" (click)="moverTodoIzquierda()"><<</button>
             </div>
 
-            <div class="col-lg-4 pantallasC">
+            <div class="col-4">
                 <select name="to" id="optgroup_to" class="form-control" size="16" multiple>
                         <option *ngFor="let pantSinM of pantallasSinMenuSel" class="{{pantSinM.nombrePantalla}}" id="{{pantSinM.nombrePantalla}}" value="{{pantSinM.idPantalla}}" (dblclick)="moverIzquierda(pantSinM)">{{pantSinM.nombrePantalla}}</option>
                         
@@ -150,7 +152,6 @@
                         </optgroup>
                         <optgroup *ngIf="!catalogoDerechoVacio" label="Catálogos">
                             <option *ngFor="let catalogo of pantallasCatalogoSel" class="{{catalogo.nombrePantalla}}" id="{{catalogo.nombrePantalla}}" value="{{catalogo.idPantalla}}" (dblclick)="moverIzquierda(catalogo)">{{catalogo.nombrePantalla}}</option>
-                          </optgroup>
                     </select>
             </div>
         </div>
