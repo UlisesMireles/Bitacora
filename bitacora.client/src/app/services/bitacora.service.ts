@@ -5,14 +5,16 @@ import { Router } from '@angular/router';
 import { Globals} from '../services/globals';
 import { ToastrService } from 'ngx-toastr';
 import { NgxSpinnerService } from 'ngx-spinner';
+import { environment } from '../../environments/environment';
 @Injectable({
   providedIn: 'root'
 })
 @Injectable({providedIn:'root'})
 export class BitacoraService {
  titulo: any;
- mensaje: any;
-  constructor(private spinner: NgxSpinnerService,private toastr:ToastrService, private router:Router,private http:HttpClient,@Inject("BASE_URL") private baseUrl:string) { }
+  mensaje: any;
+  baseUrl: string = environment.baseURL;
+  constructor(private spinner: NgxSpinnerService,private toastr:ToastrService, private router:Router,private http:HttpClient) { }
 
   recuperarRegistros(idUsuario:any):Observable<any>{
     var datos = {idUser:idUsuario};
