@@ -17,6 +17,7 @@ import { NgxSpinnerService } from 'ngx-spinner';
 import { AuthenticationService } from '../../services/authentication.service';
 import { HttpParams } from '@angular/common/http';
 import  $ from 'jquery';
+import { environment } from '../../../environments/environment';
 
 @Component({
   selector: 'form-bitacora',
@@ -112,8 +113,8 @@ export class FormBitacoraComponent implements OnInit, OnDestroy {
   @ViewChild("fasef", {static: false}) Etapa!: MatSelect 
   @ViewChild("proyectoS", {static: false}) Proyecto!: MatSelect
   @ViewChild("actividadf", {static: false}) Actividad!: MatSelect
-  @ViewChild("eventof", {static: false}) Evento!: MatSelect
-
+  @ViewChild("eventof", { static: false }) Evento!: MatSelect
+  baseUrl: string = environment.baseURL;
   abrirSelect(select: any, event: KeyboardEvent){
     if(event.key=="Tab"){
       if(select=='fase'){
@@ -139,7 +140,7 @@ export class FormBitacoraComponent implements OnInit, OnDestroy {
     }
     this.cdRef.detectChanges();
   }
-  constructor(private spinner: NgxSpinnerService,private cdRef:ChangeDetectorRef,private toastr:ToastrService,private http:HttpClient,private fb:FormBuilder,@Inject("BASE_URL") private baseUrl:string, private router:Router, private bitacoraService:BitacoraService, private authenticationService:AuthenticationService) {
+  constructor(private spinner: NgxSpinnerService,private cdRef:ChangeDetectorRef,private toastr:ToastrService,private http:HttpClient,private fb:FormBuilder, private router:Router, private bitacoraService:BitacoraService, private authenticationService:AuthenticationService) {
     
 
     this.router.onSameUrlNavigation ='reload';
