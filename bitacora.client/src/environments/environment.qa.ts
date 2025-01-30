@@ -1,4 +1,4 @@
 export const environment = {
   production: true,
-  baseURL: "https://localhost:7127/"
+  baseURL: "http://192.168.0.117:9090/Bitacora/"
 };
