@@ -9,6 +9,7 @@ import { NgxSpinnerService } from 'ngx-spinner';
 import { AuthenticationService } from '../../services/authentication.service';
 import { HttpParams } from '@angular/common/http';
 import $ from 'jquery';
+import { environment } from '../../../environments/environment.qa';
 /*import { THIS_EXPR } from '@angular/compiler/src/output/output_ast';*/
 @Component({
   selector: 'app-avance-real',
@@ -51,6 +52,7 @@ export class AvanceRealComponent implements OnInit {
       currentPage:1,
       totalItems: this.avanceRealRegs.length
     }
+    this.baseUrl = environment.baseURL;
   }
   ngAfterViewChecked()
   {

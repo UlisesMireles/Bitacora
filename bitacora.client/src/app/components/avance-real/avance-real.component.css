@@ -151,7 +151,7 @@ footer {
 ::ng-deep.ngx-pagination {
     padding-left: 8px;
     margin-left: 0;
-    margin-bottom: 0.5rem!important;
+    margin-bottom: 0rem !important;
 }
 ::ng-deep .ngx-pagination .current {
    
