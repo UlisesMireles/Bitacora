@@ -338,7 +338,6 @@ export class ReportesComponent implements OnInit {
   regresar: boolean = false;
   _id = 0;
   _email = "";
-  baseUrl = 'https://localhost:7127';
   resize() {
     var hei = window.innerHeight;
     this.filtros = $(".divFiltros").height();
@@ -379,7 +378,6 @@ export class ReportesComponent implements OnInit {
   @ViewChild('charDominio', { static: false }) canvasDomRef!: ElementRef;
   constructor(public dialog: MatDialog, private spinner: NgxSpinnerService, private toastr: ToastrService, private authenticationService: AuthenticationService,
     private cdRef: ChangeDetectorRef, private activatedRoute: ActivatedRoute, private router: Router, private http: HttpClient,
-    // @Inject("BASE_URL") private baseUrl: string, 
     private serviceReportes: ReportesService, private descargaService: DescargaService, private nom35Service: Nom035Service) {
 
       document.addEventListener('hide.bs.modal', () => {
@@ -3715,7 +3713,7 @@ export class DialogTable3 {
   constructor(
     public dialogRef: MatDialogRef<DialogTable3>,
     @Inject(MAT_DIALOG_DATA) public data: DialogData,
-    private serviceReportes:ReportesService, @Inject("BASE_URL") private baseUrl: string, private spinner: NgxSpinnerService,
+    private serviceReportes:ReportesService, private spinner: NgxSpinnerService,
     public dialog: MatDialog
   ) {
     console.log(data)
