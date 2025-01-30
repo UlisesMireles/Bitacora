@@ -62,7 +62,7 @@ header .content-wrapper {
 }
 
 #footer {
-    position: absolute;
+    position: fixed;
     bottom: 0;
     width: 100%;
     height: 35px;
@@ -83,7 +83,7 @@ header .content-wrapper {
 
 @media only screen and (max-width: 767px) {
     #footer {
-        position: absolute;
+        position: fixed;
         bottom: 0;
         width: 100%;
         height: 48px;
