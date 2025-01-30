@@ -9,7 +9,7 @@ import { NgxSpinnerService } from 'ngx-spinner';
 import { AuthenticationService } from '../../services/authentication.service';
 import { HttpParams } from '@angular/common/http';
 import $ from 'jquery';
-import { environment } from '../../../environments/environment.qa';
+import { environment } from '../../../environments/environment';
 /*import { THIS_EXPR } from '@angular/compiler/src/output/output_ast';*/
 @Component({
   selector: 'app-avance-real',
