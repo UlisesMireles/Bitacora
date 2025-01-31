@@ -1,13 +1,12 @@
-/*@import "../node_modules/ngx-responsive-stack-table/ngx-responsive-stack-table.css";*/
-
+/* @import "../node_modules/ngx-responsive-stack-table/ngx-responsive-stack-table.css"; */
 @font-face {
-  font-family: 'Raleway';
-  src: url('assets/fonts/Raleway-Regular.ttf') format("opentype");
+    font-family: 'Raleway';
+    src: url('assets/fonts/Raleway-Regular.ttf') format("opentype");
 }
 
 @font-face {
-  font-family: 'Raleway-Bold';
-  src: url('assets/fonts/Raleway-Bold.ttf') format("opentype");
+    font-family: 'Raleway-Bold';
+    src: url('assets/fonts/Raleway-Bold.ttf') format("opentype");
 }
 
 
@@ -15,86 +14,150 @@
 
 html,
 body {
-  height: 100%;
+    height: 100%;
 }
 
 body {
   margin: 0;
-  font-family: 'Raleway', sans-serif;
+  font-family: 'Raleway', sans-serif !important;
 }
 
 .titulobitacora {
-  background-color: #0e3e62;
-  text-align: center;
-  color: #fff;
-  width: 100%;
-  line-height: 50px;
-  text-align: center;
+    background-color: #0e3e62;
+    text-align: center;
+    color: #fff;
+    width: 100%;
+    line-height: 50px;
+    text-align: center;
 }
 
 footer {
-  background: #103D70;
-  color: #ffffff;
-  position: absolute;
-  bottom: 10px;
-  width: 100%;
-  border-top: 2px solid #ffffff;
+    background: #103D70;
+    color: #ffffff;
+    position: absolute;
+    bottom: 10px;
+    width: 100%;
+    border-top: 2px solid #ffffff;
 }
 
 .content-wrapper {
-  margin: 0 auto;
-  max-width: 960px;
+    margin: 0 auto;
+    max-width: 960px;
 }
 
 header .content-wrapper {
-  padding-top: 10px;
-  padding-bottom: 10px;
+    padding-top: 10px;
+    padding-bottom: 10px;
 }
 
 .table-responsive {
-  max-height: 55vh;
-  overflow-y: auto;
-  overflow-x: hidden;
-}
-
-#page-container {
-  position: relative;
-  min-height: 100vh;
-  height: 90%;
-  padding-bottom: 35px;
+    max-height: 55vh;
+    overflow-y: auto;
+    overflow-x: hidden;
 }
 
 #content-wrap {
-  /*padding-bottom: 35px;*/
-  /* Footer height */
+    /*padding-bottom: 35px;*/
+    /* Footer height */
 }
 
 #footer {
-  position: absolute;
-  bottom: 0;
-  width: 100%;
-  height: 35px;
-  /* Footer height */
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    height: 35px;
+    /* Footer height */
 }
 
 .mat-drawer-content {
-  background-color: #eaeaea !important;
+    background-color: #eaeaea !important;
 }
 
 .btn-success {
-  background-color: #5cb85c !important;
+    background-color: #5cb85c !important;
 }
 
-  .btn-success:hover {
+.btn-success:hover {
     background-color: #449D44 !important;
-  }
+}
 
 @media only screen and (max-width: 767px) {
-  #footer {
-    position: absolute;
-    bottom: 0;
-    width: 100%;
-    height: 48px;
-  }
+    #footer {
+        position: fixed;
+        bottom: 0;
+        width: 100%;
+        height: 48px;
+    }
 }
+
 /* You can add global styles to this file, and also import other style files */
+
+div.fechasEle>mat-form-field>div.mat-mdc-text-field-wrapper {
+    max-height: 30px !important;
+}
+
+div.fechasEle>mat-form-field>div.mat-mdc-text-field-wrapper>div.mat-mdc-form-field-flex>div.mat-mdc-form-field-infix {
+    padding-top: 0 !important;
+    padding-bottom: 0 !important;
+}
+
+div.fechasEle>mat-form-field>div.mat-mdc-text-field-wrapper>div.mat-mdc-form-field-flex>div.mdc-notched-outline>div.mat-mdc-notch-piece.mdc-notched-outline__leading {
+    display: none !important;
+}
+
+div.fechasEle>mat-form-field>div.mat-mdc-text-field-wrapper>div.mat-mdc-form-field-flex>div.mdc-notched-outline>div.mat-mdc-notch-piece {
+    border-color: #CCC !important;
+    border-radius: 4px;
+    border-left: 1px solid #ccc !important;
+}
+
+div.fechasEle>mat-form-field>div.mat-mdc-text-field-wrapper>div.mat-mdc-form-field-flex>div.mat-mdc-form-field-infix>input.fechaCont {
+    color: black !important;
+}
+
+/***/
+form.usuarioSelect>mat-form-field>div.mat-mdc-text-field-wrapper {
+    max-height: 30px !important;
+}
+
+form.usuarioSelect>mat-form-field>div.mat-mdc-text-field-wrapper>div.mat-mdc-form-field-flex>div.mat-mdc-form-field-infix {
+    padding-top: 0 !important;
+    padding-bottom: 0 !important;
+}
+
+form.usuarioSelect>mat-form-field>div.mat-mdc-text-field-wrapper>div.mat-mdc-form-field-flex>div.mdc-notched-outline>div.mat-mdc-notch-piece.mdc-notched-outline__leading {
+    display: none !important;
+}
+
+form.usuarioSelect>mat-form-field>div.mat-mdc-text-field-wrapper>div.mat-mdc-form-field-flex>div.mdc-notched-outline>div.mat-mdc-notch-piece {
+    border-color: #CCC !important;
+    border-radius: 4px;
+    border-left: 1px solid #ccc !important;
+}
+
+form.usuarioSelect>mat-form-field>div.mat-mdc-text-field-wrapper>div.mat-mdc-form-field-flex>div.mat-mdc-form-field-infix>input.fechaCont {
+    color: black !important;
+}
+
+div.mat-mdc-dialog-surface{
+    background: white;
+    color: black;
+}
+
+mat-dialog-content {
+    background: white;
+    color: black;
+}
+
+mat-dialog-content>h3 {
+    color: black;
+}
+
+mat-dialog-container{
+    background: white;
+    color: black;
+}
+
+div.modal-backdrop.fade.show{
+    display: none !important;
+}

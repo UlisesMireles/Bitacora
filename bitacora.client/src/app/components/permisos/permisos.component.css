@@ -1,0 +1,55 @@
+
+.fixed_header tbody{
+  display:block;
+  overflow:auto;
+  height:100px;
+  cursor: pointer;
+}
+.fixed_header tr{
+    width: 100%;
+    display: table;
+    
+}
+ul li{
+    color: black;
+    cursor: pointer;
+}
+.contenedores ul li:hover, .contenedores a:hover {
+  background-color: rgba(0, 0, 0, 0.075);
+}
+.contenedores{
+  height: 250px;
+  overflow-x: auto;
+}
+
+.bordes{
+  border: outset;
+  border-color: gainsboro;
+  border-width: thin;
+}
+
+.contBotones button{
+  width: 80px;
+  font-size: 15px;
+  margin: 1px 0px;
+  background-color: #31A5F8;
+  border: none;
+}
+
+.labelC{
+  width: 108px;
+  font-size: 16px;
+  padding-top: 6px;
+}
+
+footer {
+background: #103D70;
+color: #ffffff;
+position: relative!important;
+
+width: 100%;
+border-top: 2px solid #ffffff;
+}
+.input-small{
+  width: 288px !important;
+}

@@ -1,0 +1,607 @@
+<div class="container-fluid bitActu" style="background-color: #EAEAEA;">
+  <div class="col-md-12 col12">
+    <div class="divPanel">
+
+      <div class="mb-3">
+        <div class="d-flex justify-content-between align-items-center mb-3">
+          <h1 class="pull-left textotituloCabecera" style="margin: 0px;">Catálogo de {{tipoCatalogo}}</h1>
+        </div>
+
+        <div class="row" style="margin:0px; padding:0px">
+          <div class="col-12 text-end">
+            <button *ngIf="tablaUsuarios" class="btn btn-primary me-2 btn-icon1" (click)="abrirFormUsuario(null)" title="Agregar Usuario">
+              <i class="bi bi-plus bit-icon"></i>
+            </button>
+            <button *ngIf="!btnActualizar" class="btn btn-primary me-2 btn-icon1" (click)="limpiarCampos()" title="Limpiar Campos">
+              <i class="bi bi-arrow-clockwise bit-icon"></i>
+            </button>
+            <button *ngIf="btnOcultarCampos" class="btn btn-primary me-2 btn-icon1" (click)="ocultarFiltroCampos()" title="Ocultar Campos">
+              <i class="bi bi-zoom-out bit-icon"></i>
+            </button>
+            <button *ngIf="btnMostrarCampos" class="btn btn-primary me-2 btn-icon1" (click)="mostrarFiltroCampos()" title="Mostrar Campos">
+              <i class="bi bi-zoom-in bit-icon"></i>
+            </button>
+            <button *ngIf="tablaRoles" class="btn btn-primary btn-icon1" (click)="direccionPermisos(null)" [routerLink]="['/administra-permisos']" title="Agregar Roles">
+              <i class="bi bi-plus bit-icon"></i>
+            </button>
+          </div>
+        </div>
+      </div>
+
+
+      <div class="" *ngIf="filtroUsuarios">
+
+        <thead *ngIf="filtroUsuarios">
+          <tr>
+            <th class="cabecerasCatalogos">{{filtro2}}</th>
+            <th class="cabecerasCatalogos">{{filtro1}}</th>
+            <th class="cabecerasCatalogos">Correo Interno</th>
+            <th class="cabecerasCatalogos">Correo Asignado</th>
+
+          </tr>
+
+          <tr>
+            <th class="lo">
+              <div class="input-group">
+                <input #filtroDo type="text" class="col-10" name="filtroDos" [(ngModel)]="filtroDos" placeholder="Buscar..." (keyup)="verificarFiltroDos(filtroDo.value)">
+              </div>
+            </th>
+            <th class="lo">
+              <div class="input-group userdiv">
+                <input #filtroUn type="text" class="col-10" name="filtroUno" [(ngModel)]="filtroUno" placeholder="Busca..." (keyup)="verificarFiltroUno(filtroUn.value)">
+              </div>
+            </th>
+            <th class="lo">
+              <div class="input-group">
+                <input #filtroSiet type="text" class="col-10" name="filtroSiete" [(ngModel)]="filtroSiete" placeholder="Buscar..." (keyup)="verificarFiltroSiete(filtroSiet.value)">
+              </div>
+            </th>
+            <th class="lo">
+              <div class="input-group">
+                <input #filtroOch type="text" class="col-10" name="filtroOcho" [(ngModel)]="filtroOcho" placeholder="Buscar..." (keyup)="verificarFiltroOcho(filtroOch.value)">
+              </div>
+            </th>
+          </tr>
+          <tr>
+            <th class="cabecerasCatalogos">{{filtro3}}</th>
+            <th class="cabecerasCatalogos">Situación</th>
+            <th class="cabecerasCatalogos">Registra Bitácora</th>
+            <th class="cabecerasCatalogos">{{filtro4}}</th>
+          </tr>
+          <tr>
+            <th class="lo">
+              <div class="input-group">
+                <input #filtroTre type="text" class="col-10" name="filtroTres" [(ngModel)]="filtroTres" placeholder="Buscar..." (keyup)="verificarFiltroTres(filtroTre.value)">
+              </div>
+            </th>
+            <th class="lo">
+              <div class="input-group">
+                <input #filtroSei type="text" class="col-10" name="filtroSeis" [(ngModel)]="filtroSeis" placeholder="Buscar..." (keyup)="verificarFiltroSeis(filtroSei.value)">
+
+              </div>
+            </th>
+            <th class="lo">
+              <div class="input-group">
+                <input #filtroCinc type="text" class="col-10" name="filtroCinco" [(ngModel)]="filtroCinco" placeholder="Buscar..." (keyup)="verificarFiltroCinco(filtroCinc.value)">
+
+              </div>
+            </th>
+            <th class="lo th-custom" style="padding-left: 15px !important">
+              <div class="input-group">
+                <!--<input autofocus #filtroCuatr type="text" class="form-control-sm  col-10" name="filtroCuatro" [(ngModel)]="filtroCuatro" placeholder="Buscar..." (keyup)="verificarFiltroCuatro(filtroCuatr.value)">-->
+                <select #filtroCuatr class="col-10 select-custom "  style="width:80%" name="filtroCuatro" id="usua" [(ngModel)]="filtroCuatro" (change)="verificarFiltroCuatro(filtroCuatr.value)" ng-options="color.name for color in colors">
+                  <option value="Activo" selected="selected">Activo</option>
+                  <option value="Inactivo">Inactivo</option>
+
+                </select>
+
+
+              </div>
+            </th>
+          </tr>
+        </thead>
+
+      </div>
+      <div class="" *ngIf="filtroClientes">
+        <tr>
+          <th class="cabecerasCatalogos">{{filtro1}}</th>
+          <th class="cabecerasCatalogos">{{filtro2}}</th>
+          <th class="cabecerasCatalogos">{{filtro3}}</th>
+          <th class="cabecerasCatalogos">{{filtro4}}</th>
+          <!-- <th *ngIf="tablaClientes" class=""></th> -->
+          <th *ngIf="tablaUsuarios" class=""></th>
+        </tr>
+        <tr>
+          <th class="bb">
+            <div class="input-group">
+              <input #filtroUn type="text" class=" col-10" name="filtroUno" [(ngModel)]="filtroUno" placeholder="Busca..." (keyup)="verificarFiltroUno(filtroUn.value)">
+            </div>
+          </th>
+          <th class="bb">
+            <div class="input-group">
+              <input #filtroDo type="text" class="col-10" name="filtroDos" [(ngModel)]="filtroDos" placeholder="Buscar..." (keyup)="verificarFiltroDos(filtroDo.value)">
+            </div>
+          </th>
+          <th class="bb">
+            <div class="input-group">
+              <input #filtroTre type="text" class="col-10" name="filtroTres" [(ngModel)]="filtroTres" placeholder="Buscar..." (keyup)="verificarFiltroTres(filtroTre.value)">
+            </div>
+          </th>
+          <th class="bb  th-custom" style=" padding-left: 15px !important">
+            <select #filtroCuatr class="col-10 select-custom" name="filtroCuatro" id="clien" [(ngModel)]="filtroCuatro" (change)="verificarFiltroCuatro(filtroCuatr.value)" ng-options="color.name for color in colors">
+              <option value="Activo" selected="selected">Activo</option>
+              <option value="Inactivo">Inactivo</option>
+            </select>
+          </th>
+          <!-- <th *ngIf="tablaClientes">
+            <div class="input-group">
+            </div>
+        </th> -->
+
+        </tr>
+
+      </div>
+      <div style="margin-top: 28.5px;" class="" *ngIf="filtroUnidades">
+
+        <tr>
+          <th class="cabecerasCatalogos">{{filtro1}}</th>
+          <th class="cabecerasCatalogos">{{filtro2}}</th>
+          <th class="cabecerasCatalogos">{{filtro3}}</th>
+        </tr>
+        <tr>
+          <th class="bb">
+            <div class="input-group">
+              <input #filtroUn type="text" class="col-10" name="filtroUno" [(ngModel)]="filtroUno" placeholder="Busca..." (keyup)="verificarFiltroUno(filtroUn.value)">
+            </div>
+          </th>
+          <th class="bb">
+            <div class="input-group">
+              <input #filtroDo type="text" class="col-10" name="filtroDos" [(ngModel)]="filtroDos" placeholder="Buscar..." (keyup)="verificarFiltroDos(filtroDo.value)">
+            </div>
+          </th>
+          <th class="bb th-custom" style="padding-left: 15px !important" >
+            <select #filtrotre class="col-10 select-custom" name="filtroTres" id="apli" [(ngModel)]="filtroTres" (change)="verificarFiltroTres(filtrotre.value)" ng-options="color.name for color in colors">
+              <option value="Activo" selected="selected">Activo</option>
+              <option value="Inactivo">Inactivo</option>
+            </select>
+          </th>
+        </tr>
+      </div>
+      <div style="margin-top: 28.5px;" class="" *ngIf="filtroUnidades1">
+
+        <tr>
+          <th class="cabecerasCatalogos">{{filtro1}}</th>
+          <th class="cabecerasCatalogos">{{filtro2}}</th>
+          <th class="cabecerasCatalogos">{{filtro3}}</th>
+        </tr>
+        <tr>
+          <th class="bb">
+            <div class="input-group">
+              <input #filtroUn type="text" class="col-10" name="filtroUno" [(ngModel)]="filtroUno" placeholder="Busca..." (keyup)="verificarFiltroUno(filtroUn.value)">
+            </div>
+          </th>
+          <th class="bb  th-custom" style="padding-left: 15px !important" >
+            <select #filtroDo class="col-10 select-custom" name="filtroDos" id="apli" [(ngModel)]="filtroDos" (change)="verificarFiltroDos(filtroDo.value)" ng-options="color.name for color in colors">
+              <option value="Activo" selected="selected">Activo</option>
+              <option value="Inactivo">Inactivo</option>
+            </select>
+
+          </th>
+          <th class="bb">
+            <div class="input-group">
+              <input #filtroTre type="text" class="col-10" name="filtroTres" [(ngModel)]="filtroTres" placeholder="Buscar..." (keyup)="verificarFiltroTres(filtroTre.value)">
+            </div>
+
+          </th>
+        </tr>
+      </div>
+      <div class="" style="margin-top: 28.5px;" *ngIf="filtroAreas">
+
+        <thead *ngIf="tablaAreasUnidades || tablaFases">
+          <tr>
+            <th class="cabecerasCatalogos">{{filtro1}}</th>
+            <th class="cabecerasCatalogos">{{filtro2}}</th>
+          </tr>
+          <tr>
+            <th class="bb">
+              <div class="input-group">
+                <input #filtroUn type="text" class="col-10" name="filtroUno" [(ngModel)]="filtroUno" placeholder="Busca..." (keyup)="verificarFiltroUno(filtroUn.value)">
+              </div>
+            </th>
+            <th class="bb th-custom" style="padding-left: 15px !important">
+              <select #filtroDo class="col-10 select-custom" style="margin-bottom: 10px !important;" id="fase" [(ngModel)]="filtroDos" (change)="verificarFiltroDos(filtroDo.value)" ng-options="color.name for color in colors">
+                <option value="Activo" selected="selected">Activo</option>
+                <option value="Inactivo">Inactivo</option>
+              </select>
+
+            </th>
+          </tr>
+          <!--Aqui estaban los filtros de unidades-->
+        </thead>
+      </div>
+      <div class="" style="margin-top: 28.5px;" *ngIf="filtroAreas1">
+
+        <thead *ngIf="tablaAreasUnidades || tablaFases">
+          <tr>
+            <th class="cabecerasCatalogos">{{filtro1}}</th>
+            <th class="cabecerasCatalogos">{{filtro2}}</th>
+          </tr>
+          <tr>
+            <th class="bb">
+              <div class="input-group">
+                <input #filtroUn type="text" class="col-10" name="filtroUno" [(ngModel)]="filtroUno" placeholder="Busca..." (keyup)="verificarFiltroUno(filtroUn.value)">
+              </div>
+            </th>
+            <th class="bb th-custom" style="padding-left: 15px !important">
+              <select #filtroDo class="col-10 select-custom" style="margin-bottom: 10px !important;" name="filtroDos" id="fase1" [(ngModel)]="filtroDos" (change)="verificarFiltroDos(filtroDo.value)" ng-options="color.name for color in colors">
+                <option value="Activo" selected="selected">Activo</option>
+                <option value="Inactivo">Inactivo</option>
+              </select>
+
+            </th>
+          </tr>
+          <!--Aqui estaban los filtros de unidades-->
+        </thead>
+      </div>
+      <div class="" style="margin-top: 28.5px;" *ngIf="filtroActividades">
+
+        <thead *ngIf="tablaActividades">
+          <tr>
+            <th class="cabecerasCatalogos">{{filtro1}}</th>
+            <th class="cabecerasCatalogos">{{filtro2}}</th>
+            <th class="cabecerasCatalogos">{{filtro3}}</th>
+          </tr>
+          <tr>
+            <th class="bb">
+              <div class="input-group">
+                <input #filtroUn type="text" class="col-10" name="filtroUno" [(ngModel)]="filtroUno" placeholder="Busca..." (keyup)="verificarFiltroUno(filtroUn.value)">
+              </div>
+
+            </th>
+            <th class="bb th-custom">
+              <select #filtroDo class="col-10 select-custom" style="margin-bottom: 10px !important;" name="filtroDos" id="apli" [(ngModel)]="filtroDos" (change)="verificarFiltroDos(filtroDo.value)" ng-options="color.name for color in colors">
+                <option value="" selected="selected">Todos</option>
+                <option value="Proyecto">Proyecto</option>
+                <option value="Extraordinaria">Extraordinaria</option>
+              </select>
+              <!--<div class="input-group">
+                <input #filtroDo type="text" class="form-control-sm  col-10" name="filtroDos" [(ngModel)]="filtroDos" placeholder="Buscar..." (keyup)="verificarFiltroDos(filtroDo.value)">
+            </div>-->
+            </th>
+            <th class="bb  th-custom" style="padding-left:15px !important">
+              <!-- <div class="input-group">
+                <input #filtroTre type="text" class="form-control-sm  col-10" name="filtroTres" [(ngModel)]="filtroTres" placeholder="Buscar..." (keyup)="verificarFiltroTres(filtroTre.value)">
+            </div>-->
+              <select #filtroTre class="col-10 select-custom" style="margin-bottom: 10px !important;" name="filtroTres" id="apli" [(ngModel)]="filtroTres" (change)="verificarFiltroTres(filtroTre.value)" ng-options="color.name for color in colors">
+                <option value="Activo" selected="selected">Activo</option>
+                <option value="Inactivo">Inactivo</option>
+              </select>
+
+            </th>
+
+          </tr>
+          <!--Aqui estaban los filtros de unidades-->
+        </thead>
+      </div>
+      <div class="" *ngIf="filtroProyectos">
+        <thead *ngIf="tablaProyectos">
+          <tr>
+            <th class="cabecerasCatalogos">Proyecto</th>
+            <th class="cabecerasCatalogos">Nombre Corto</th>
+            <th class="cabecerasCatalogos">Sistema</th>
+            <th class="cabecerasCatalogos">Cliente</th>
+            <th class="cabecerasCatalogos">Estatus</th>
+          </tr>
+          <tr>
+            <th class="">
+              <div class="input-group">
+                <input #filtroUn type="text" class="col-10" name="filtroUno" [(ngModel)]="filtroUno" placeholder="Busca..." (keyup)="verificarFiltroUno(filtroUn.value)">
+              </div>
+            </th>
+            <th class="">
+              <div class="input-group">
+                <input #filtroDo type="text" class="col-10" name="filtroDos" [(ngModel)]="filtroDos" placeholder="Buscar..." (keyup)="verificarFiltroDos(filtroDo.value)">
+
+              </div>
+            </th>
+            <th class="">
+              <div class="input-group">
+                <input #filtroTre type="text" class="col-10" name="filtroTres" [(ngModel)]="filtroTres" placeholder="Buscar..." (keyup)="verificarFiltroTres(filtroTre.value)">
+
+              </div>
+            </th>
+            <th class="">
+              <div class="input-group">
+                <input #filtroCuatr type="text" class="col-10" name="filtroCuatro" [(ngModel)]="filtroCuatro" placeholder="Buscar..." (keyup)="verificarFiltroCuatro(filtroCuatr.value)">
+
+              </div>
+            </th>
+            <th class="bb  th-custom" style="padding-left: 15px !important" >
+              <select #filtroCinc class="col-10 select-custom" style="margin-bottom: 10px !important;" name="filtroCinco" id="proye" [(ngModel)]="filtroCinco" (change)="verificarFiltroCinco(filtroCinc.value)" ng-options="color.name for color in colors">
+                <option value="Activo" selected="selected">Activo</option>
+                <option value="Inactivo">Inactivo</option>
+              </select>
+            </th>
+          </tr>
+        </thead>
+      </div>
+
+    </div>
+
+
+    <div *ngIf="!movil" class="catalogo-container">
+      <!-- Contenedor principal con Flexbox para alineación horizontal -->
+      <div class="catalogo-row">
+
+        <!-- Sección de "Mostrar registros por página" a la izquierda -->
+        <div class="catalogo-header">
+          <label class="catalogo-label catalogo-bold-text catalogo-margin-left paginador-catalogos">Mostrar</label>
+          <select #regPorPagina
+                  [(ngModel)]="registrosPorPagina"
+                  class="form-select form-select-sm catalogo-select"
+                  (change)="cambioRPP(regPorPagina.value)">
+            <option value="10">10</option>
+            <option value="20">20</option>
+            <option value="30">30</option>
+            <option value="50">50</option>
+          </select>
+          <label class="catalogo-label catalogo-bold-text paginador-catalogos">registros por página</label>
+        </div>
+
+        <!-- Sección de paginación a la derecha -->
+        <div class="catalogo-pagination">
+
+          <div class="catalogo-pagination-text">
+            <label *ngIf="filtroActivo" class="catalogo-paginas catalogo-bold-text paginador-catalogos">
+              {{coleccionFiltro}} Registros en {{pagFiltrados}} {{pag}}
+            </label>
+            <label *ngIf="!filtroActivo" class="catalogo-label catalogo-bold-text paginador-catalogos">
+              {{coleccion}} Registros en {{paginas}} {{pag}}
+            </label>
+          </div>
+          <pagination-controls class="pagination-sm"
+                               (pageChange)="pageChanged($event)"
+                               previousLabel=""
+                               nextLabel="">
+          </pagination-controls>
+        </div>
+
+      </div>
+    </div>
+
+
+
+
+
+    <!--<div *ngIf="tablaRoles" class="col-12" style="text-align: right; padding-bottom: 10px;">
+      <button class="btn btn-primary btn-md mat-mini-fab" (click)="direccionPermisos(null)" [routerLink]="['/administra-permisos']" title="Agregar Roles"><mat-icon matSuffix style="padding-top: 8px;color:white; font-weight: bold;">add</mat-icon></button>
+  </div>-->
+    <div class="div-responsive-catalogos">
+      <table id="tablaUsuarios" #tablaCatalogos class="paginadoTabla table table-striped table-bordered cellspacing dataTable" NgxResponsiveStackTable>
+
+        <thead *ngIf="tablaUsuarios">
+          <tr>
+            <th class="alinear-izquierda">{{filtro2}}</th>
+            <th class="alinear-izquierda">{{filtro1}}</th>
+            <th class="alinear-izquierda">Correo Interno</th>
+            <th class="alinear-izquierda">Correo Asignado</th>
+            <th class="alinear-izquierda">{{filtro3}}</th>
+            <th class="alinear-izquierda">Situación</th>
+            <th class="alinear-izquierda">Registra Bitácora</th>
+            <th class="alinear-izquierda">{{filtro4}}</th>
+            <th class="alinear-izquierda" style="width:5% !important;" class="cicon alinear-izquierda">Acciones</th>
+          </tr>
+          <!--Aqui estaban los filtros de usuarios-->
+        </thead>
+        <thead *ngIf="tablaClientes">
+          <tr>
+            <th class="cabecerasCatalogos alinear-izquierda">{{filtro1}}</th>
+            <th class="cabecerasCatalogos alinear-izquierda">{{filtro2}}</th>
+            <th class="cabecerasCatalogos alinear-izquierda">{{filtro3}}</th>
+            <th class="cabecerasCatalogos alinear-izquierda">{{filtro4}}</th>
+            <!-- <th *ngIf="tablaClientes" class=""></th> -->
+            <th *ngIf="tablaUsuarios" class=""></th>
+          </tr>
+
+          <!--Aqui estaban los filtros de clientes-->
+        </thead>
+
+        <tbody *ngIf="tablaClientes" style="height: 100%">
+          <tr *ngFor="let cliente of arreglo | filtro:'clientes': filtroUno:filtroDos:filtroTres:filtroCuatro:'':'':'':''  | paginate: config" class="trow">
+            <td class="clienteCliente alinear-izquierda">{{cliente.nombre}}</td>
+            <td class="clienteAlias alinear-izquierda">{{cliente.alias}}</td>
+            <td class="clienteGiro alinear-izquierda">{{cliente.giro}}</td>
+            <td class="clienteEstatus alinear-izquierda">{{cliente.estatus}}</td>
+            <!-- <td class="clienteAreaUn" *ngIf="cliente.bandera==true"><mat-icon matSuffix (click)="abrirTabla(cliente.areasUnidades)">remove_red_eye</mat-icon></td>
+      <td class="clienteAreaUn" *ngIf="cliente.bandera==false"><mat-icon matSuffix style="color:lightgray">remove_red_eye</mat-icon></td> -->
+          </tr>
+        </tbody>
+        <tbody *ngIf="tablaUsuarios" style="height: 100%">
+          <tr *ngFor="let usuario of arreglo | filtro: 'usuarios': filtroUno:filtroDos:filtroTres:filtroCuatro:filtroCinco:filtroSeis:filtroSiete:filtroOcho | paginate: config" class="trow">
+            <td class="usuarioNombre alinear-izquierda">{{usuario.nombre}}</td>
+            <td class="usuarioUsuario alinear-izquierda">{{usuario.usuario}}</td>
+            <td class="usuarioEmail alinear-izquierda">{{usuario.email}}</td>
+            <td class="usuarioEmail alinear-izquierda">{{usuario.emailAsignado}}</td>
+            <td class="usuarioTipo alinear-izquierda">{{usuario.rol}}</td>
+            <td class="usuarioEstatus alinear-izquierda">{{usuario.estatusERT}}</td>
+            <td class="usuarioLlenaBitacora alinear-izquierda">{{usuario.llenaBitacora}}</td>
+            <td class="usuarioEstatus alinear-izquierda">{{usuario.estatus}}</td>
+            <td class="usuarioAcciones alinear-izquierda" style="width: 10%;">
+              <div class="row tdicon" style="text-align:center; width:100%;">
+                <mat-icon *ngIf="usuario.estausEmpleado==null || usuario.estausEmpleado=='1' " class="icon bit-icon" title="Editar" (click)="abrirViewUsuario(usuario)" matSuffix>remove_red_eye</mat-icon>
+                <mat-icon *ngIf="usuario.estausEmpleado=='0'" style="color:lightgray" class="bit-icon">remove_red_eye</mat-icon>
+                <mat-icon *ngIf="usuario.estausEmpleado==null || usuario.estausEmpleado=='1' " class="icon bit-icon" title="Editar" (click)="abrirFormUsuario(usuario)" matSuffix>edit</mat-icon>
+                <mat-icon *ngIf="usuario.estausEmpleado=='0'" style="color:lightgray" class="bit-icon" matSuffix>edit</mat-icon>
+                <mat-icon class="icon bit-icon" style="color:green" *ngIf="usuario.estatus=='Inactivo' && (usuario.estausEmpleado==null || usuario.estausEmpleado == '1' )" title="Cambiar Estatus" (click)="abrirModalCambioEstatus(usuario)" matSuffix>done</mat-icon>
+                <mat-icon *ngIf="usuario.estatus=='Inactivo' && usuario.estausEmpleado=='0'" class="icon bit-icon" style="color:lightgray" matSuffix>done</mat-icon>
+                <mat-icon class="icon bit-icon" style="color:red" *ngIf="usuario.estatus=='Activo' && (usuario.estausEmpleado==null || usuario.estausEmpleado == '1'  )" title="Cambiar Estatus" (click)="abrirModalCambioEstatus(usuario)" matSuffix>clear</mat-icon>
+                <mat-icon *ngIf="usuario.estatus=='Activo' && usuario.estausEmpleado=='0'" style="color:lightgray" class="bit-icon" matSuffix>clear</mat-icon>
+                <mat-icon class="icon bit-icon" *ngIf="usuario.estausEmpleado==null || usuario.estausEmpleado=='1' " (click)="abrirModalReestablecerContrasenia(usuario.idUser)" style="color:black" title="Reestablecer Contraseña" matSuffix>vpn_key</mat-icon>
+                <mat-icon *ngIf="usuario.estausEmpleado=='0'" style="color:lightgray" title="Reestablecer Contraseña" class="bit-icon" matSuffix>vpn_key</mat-icon>
+              </div>
+
+
+            </td>
+
+          </tr>
+        </tbody>
+
+        <thead *ngIf="tablaAplicativos || tablaUnidadesNegocios">
+          <tr>
+            <th class="alinear-izquierda">{{filtro1}}</th>
+            <th class="alinear-izquierda">{{filtro2}}</th>
+            <th class="alinear-izquierda">{{filtro3}}</th>
+          </tr>
+
+          <!--Aqui estaban los filtros de unidades-->
+        </thead>
+
+        <tbody *ngIf="tablaAplicativos" style="height: 100%">
+          <tr *ngFor="let sistema of arreglo | filtro: 'sistemas':filtroUno:filtroDos:filtroTres:'':'':'':'':''  | paginate: config" class="trow">
+            <td class="aplicativoNombre alinear-izquierda">{{sistema.nombre}}</td>
+            <td class="aplicativoCliente alinear-izquierda">{{sistema.cliente}}</td>
+            <td class="aplicativoEstatus alinear-izquierda">{{sistema.estatus}}</td>
+          </tr>
+        </tbody>
+
+
+        <tbody *ngIf="tablaUnidadesNegocios" style="height: 100%">
+          <tr *ngFor="let unidadNegocio of arreglo | filtro:'unidadesNegocio':filtroUno:filtroDos:filtroTres:'':'':'':'':''  | paginate: config" class="trow">
+            <td class="unidadNegocioUnidad alinear-izquierda">{{unidadNegocio.unidad}}</td>
+            <td class="unidadNegocioEstatus alinear-izquierda">{{unidadNegocio.estatus}}</td>
+            <td class="unidadNegocioArea alinear-izquierda">{{unidadNegocio.areas}}</td>
+          </tr>
+        </tbody>
+
+        <thead *ngIf="tablaAreasUnidades || tablaFases">
+          <tr>
+            <th class="alinear-izquierda">{{filtro1}}</th>
+            <th class="alinear-izquierda">{{filtro2}}</th>
+          </tr>
+
+          <!--Aqui estaban los filtros de unidades-->
+        </thead>
+        <thead *ngIf="tablaActividades">
+          <tr>
+            <th class="alinear-izquierda">{{filtro1}}</th>
+            <th class="alinear-izquierda">{{filtro2}}</th>
+            <th class="alinear-izquierda">{{filtro3}}</th>
+          </tr>
+
+          <!--Aqui estaban los filtros de actividades-->
+        </thead>
+
+        <tbody *ngIf="tablaAreasUnidades" style="height: 100%">
+          <tr *ngFor="let areaUnidadNegocio of arreglo | filtro:'areasUnidades':filtroUno:filtroDos:'':'':'':'':'':''  | paginate:config">
+            <td class="areaUnArea alinear-izquierda">{{areaUnidadNegocio.nombre}}</td>
+            <td class="areaUnEstatus alinear-izquierda">{{areaUnidadNegocio.estatus}}</td>
+          </tr>
+        </tbody>
+        <tbody *ngIf="tablaActividades" style="height: 100%">
+          <tr *ngFor="let actividad of arreglo | filtro:'actividades':filtroUno:filtroDos:filtroTres:'':'':'':'':''  | paginate:config">
+            <td class="actividadActividad alinear-izquierda">{{actividad.nombre}}</td>
+            <td class="actividadEvento alinear-izquierda">{{actividad.evento}}</td>
+            <td class="actividadEstatus alinear-izquierda">{{actividad.estatus}}</td>
+          </tr>
+        </tbody>
+        <tbody *ngIf="tablaFases" style="height: 100%">
+          <tr *ngFor="let fase of arreglo | filtro:'etapas':filtroUno:filtroDos:'':'':'':'':'':''  | paginate:config">
+            <td class="faseFase alinear-izquierda">{{fase.nombre}}</td>
+            <td class="faseEstatus alinear-izquierda">{{fase.estatus}}</td>
+          </tr>
+        </tbody>
+
+        <thead *ngIf="tablaProyectos">
+          <tr>
+            <th class="alinear-izquierda">Proyecto</th>
+            <th class="alinear-izquierda">Nombre Corto</th>
+            <th class="alinear-izquierda">Sistema</th>
+            <th class="alinear-izquierda">Cliente</th>
+            <th class="alinear-izquierda">Unidad-Área</th>
+            <th class="alinear-izquierda">Horas</th>
+            <th class="alinear-izquierda">Estatus</th>
+          </tr>
+
+        </thead>
+        <!--Aqui estaban los filtros de clientes-->
+        <tbody *ngIf="tablaProyectos" style="height: 100%">
+          <tr *ngFor="let proyecto of arreglo | filtroProyectos:filtroUno:filtroDos:filtroTres:filtroCuatro:filtroCinco | paginate: config" class="trow">
+            <td class="proyectoNombre alinear-izquierda">{{proyecto.nombre}}</td>
+            <td class="proyectoNombreCorto alinear-izquierda">{{proyecto.nombreCorto}}</td>
+            <td class="proyectoSistema alinear-izquierda">{{proyecto.sistema}}</td>
+            <td class="proyectoCliente alinear-izquierda">{{proyecto.cliente}}</td>
+            <td class="proyectoUnidadArea alinear-izquierda">{{proyecto.unidadArea}}</td>
+            <td class="proyectoHoras alinear-izquierda">{{proyecto.totalHoras}}</td>
+            <td class="proyectoEstatus alinear-izquierda">{{proyecto.estatus}}</td>
+          </tr>
+        </tbody>
+
+
+
+        <thead *ngIf="tablaRoles">
+          <tr>
+            <th class="alinear-izquierda">Nombre</th>
+            <th class="alinear-izquierda">Descripción</th>
+
+            <th class="alinear-izquierda">Estatus</th>
+            <th class="alinear-izquierda">Fecha Registro</th>
+            <th class="alinear-izquierda">Fecha Modificación</th>
+            <th class="alinear-izquierda">Pantallas</th>
+            <th class="alinear-izquierda">Acciones</th>
+          </tr>
+
+        </thead>
+        <tbody class="temptyrow" *ngIf="tablaRoles">
+          <tr *ngFor="let rol of arreglo | paginate: config">
+            <td class="rolRol alinear-izquierda">{{rol.rol}}</td>
+            <td class="rolDescripcion alinear-izquierda">{{rol.descripcion}}</td>
+            <td class="rolEstatus alinear-izquierda">{{rol.estatus}}</td>
+            <td class="rolFechaRegistro alinear-izquierda">{{rol.fechaRegistro}}</td>
+            <td class="rolFechaModificacion alinear-izquierda">{{rol.fechaModificacion}}</td>
+            <td class="rolListaPantallas alinear-izquierda">{{rol.listPantallas}}</td>
+            <td class="usuarioAcciones alinear-izquierda">
+              <div class="row tdicon" style="text-align: center;">
+
+                <mat-icon class="boton" matSuffix (click)="direccionPermisos(rol)" [routerLink]="['/administra-permisos']">edit</mat-icon>
+
+                <mat-icon class="boton" style="color:red" (click)="abrirModalEliminarRol(rol)" matSuffix>clear</mat-icon>
+              </div>
+            </td>
+          </tr>
+        </tbody>
+        <tbody class="temptyrow" *ngIf="agregarVacios">
+          <tr *ngFor="let vacio of vacios" style="height: 0px; background-color: #EFEEEF;"></tr>
+        </tbody>
+        <tbody class="temptyrow filtro" *ngIf="agregarVaciosFiltro">
+          <tr *ngFor="let vacio of vacios" style="height: 0px; background-color: #EFEEEF;"></tr>
+        </tbody>
+
+
+      </table>
+
+    </div>
+    <div>
+      <table style="background-color: #EAEAEA; margin-top: 10px; box-shadow: 0 0px 0px 0px #EAEAEA !important; width: 100%; text-align: center; ">
+        <tr *ngIf="tablaProyectos || tablaAplicativos || tablaFases || tablaActividades">
+          <td colspan="7" style="color:red; text-align: left;">Este catálogo solo es administrable desde Tablero</td>
+        </tr>
+        <tr *ngIf="tablaClientes || tablaUnidadesNegocios || tablaAreasUnidades">
+          <td colspan="7" style="color:red; text-align: left;">Este catálogo solo es administrable desde ERT</td>
+        </tr>
+
+        <tr role="row">
+          <td colspan="7">
+            <div class="row" style="font-family: 'Raleway', sans-serif; justify-content: center;">
+              <pagination-controls class="my-pagination" (pageChange)="pageChanged($event)" previousLabel="" nextLabel=""></pagination-controls>
+            </div>
+            <div class="row" style="font-family: 'Raleway', sans-serif; justify-content: center;">
+              <label style="padding-left: 15px;" *ngIf="filtroActivo" class="labeltext">{{coleccionFiltro}} Registros en {{pagFiltrados}} {{pag}} </label>
+              <label style="padding-left: 15px;" *ngIf="!filtroActivo" class="labeltext">{{coleccion}} Registros en {{paginas}} {{pag}} </label>
+            </div>
+          </td>
+        </tr>
+      </table>
+
+    </div>
+  </div>
+</div>

@@ -51,17 +51,17 @@ namespace Bitacora.Controllers
             return Bitacora;
         }
 
-        [HttpPut("[action]/{id}")]
+        [HttpPost("[action]")]
         public int ModificarBitacora(BitacoraH datos)
         {
             var Bitacora = _BitacoraLogic.ModificaBitacora(datos);
             return Bitacora;
         }
 
-        [HttpDelete("[action]/{id}")]
-        public int EliminarBitacora(int id)
+        [HttpPost("[action]")]
+        public int EliminarBitacora(BitacoraH datos)
         {
-            var Bitacora = _BitacoraLogic.EliminarBitacora(id);
+            var Bitacora = _BitacoraLogic.EliminarBitacora(datos.Id);
             return Bitacora;
         }
 

@@ -1,0 +1,222 @@
+
+
+
+<mat-dialog-content>
+  <div class="col-12  " style="padding:0px;">
+    <div class="col-12 ">
+      <img src="assets/icons/header-modal.png" width="100%" height="7px">
+      <div class="container" style="text-align: left; text-align: center; padding-top: .5%; padding-bottom: .5%;">
+        <h3 *ngIf="!editar && !view" style="font-size: 1.6em; color: black !important;" class="colorLetra">Agregar Usuario</h3>
+        <h3 *ngIf="editar && !view" style="font-size: 1.6em; color: black !important;" class="colorLetra">Editar Usuario</h3>
+        <h3 *ngIf="view" style="font-size: 1.6em; color: black !important;" class="colorLetra">Información Usuario</h3>
+      </div>
+
+      <div class="col-12 row">
+        <div class="col-md-6 col-12">
+
+          <form [formGroup]="formUsuario" class="col-md-12">
+            <div class="form-group" *ngIf="!editar" style="padding: 14px 0px;">
+              <label class="lab radLab">¿Es empleado?</label><br>
+
+              <mat-radio-group formControlName="empleado" (change)="radioEmpleado($event)">
+                <mat-radio-button id="empRadioSi" class="example-margin" value="S">Si</mat-radio-button>
+                <mat-radio-button id="empRadioNo" class="example-margin" value="N">No</mat-radio-button>
+              </mat-radio-group>
+            </div>
+
+
+            <div *ngIf="esEmpleado" class="form-group row">
+              <label class="lab col-md-12">Empleado</label>
+              <mat-form-field class="iconoProyecto col-md-12" [floatLabel]="formUsuario.value.floatLabel">
+                <!--<mat-label class="inlab"
+                           [ngClass]="{'empty-label': !empleadoSeleccionado, 'filled-label': empleadoSeleccionado}">
+                  Seleccione un empleado...
+                </mat-label>-->
+                <mat-select id="proyectof"
+                            [formControl]="empleadoCtrl"
+                            (selectionChange)="seleccionEmpleado($event)"
+                            [(ngModel)]="empleadoSeleccionado"  placeholder="Seleccione un empleado...">
+                  <mat-option>
+                    <ngx-mat-select-search [placeholderLabel]="'Busca un empleado'"
+                                           [noEntriesFoundLabel]="'No se encontró ningún empleado con este nombre'"
+                                           [formControl]="filtroEmpleados">
+                    </ngx-mat-select-search>
+                  </mat-option>
+                  <mat-option *ngFor="let empleado of empleadosFiltrados | async" [value]="empleado">
+                    {{empleado.nombre}}
+                  </mat-option>
+                </mat-select>
+              </mat-form-field>
+            </div>
+
+            <div class="form-group row">
+              <label class="lab col-md-12">{{nombreUsuario}}</label>
+              <!--Solo usuario-->
+              <mat-form-field class="col-md-12 example-full-width" [floatLabel]="formUsuario.value.floatLabel">
+                <!--<mat-label class="inlab"
+                           [ngClass]="{'empty-label': !formUsuario.get('nombre')?.value, 'filled-label': formUsuario.get('nombre')?.value}">
+                  Ingresa un nombre...
+                </mat-label>-->
+                <input  placeholder="Ingresa un nombre..." type="text" #nomUs formControlName="nombre" autocomplete="off" class="inlab" matInput style="caret-color: green;">
+                <mat-icon matSuffix>face</mat-icon>
+              </mat-form-field>
+            </div>
+            <div *ngIf="esEmpleado==false" class="form-group row">
+              <label class="lab col-md-12">Usuario</label>
+              <mat-form-field class="col-md-12 example-full-width" [floatLabel]="formUsuario.value.floatLabel">
+                <!--<mat-label class="inlab"
+                           [ngClass]="{'empty-label': !formUsuario.get('usuario')?.value, 'filled-label': formUsuario.get('usuario')?.value}">
+                  Ingresa un usuario...
+                </mat-label>-->
+                <input  placeholder=" Ingresa un usuario..."  type="text" #nomUs formControlName="usuario" autocomplete="off" class="inlab" style="caret-color: green;" matInput>
+                <mat-icon matSuffix>account_box</mat-icon>
+              </mat-form-field>
+            </div>
+            <div *ngIf="esEmpleado == false" class="form-group row">
+              <label class="lab col-md-12">Correo</label>
+              <mat-form-field class="col-md-12 example-full-width" [floatLabel]="formUsuario.value.floatLabel">
+                <!--<mat-label class="inlab"
+                           [ngClass]="{'empty-label': !formUsuario.get('correo')?.value, 'filled-label': formUsuario.get('correo')?.value}">
+                  Ingresa un correo...
+                </mat-label>-->
+                <input  placeholder=" Ingresa un Correo..."  type="text" #nomUs formControlName="correo" autocomplete="off" class="inlab" style="caret-color: green;" matInput>
+                <mat-icon matSuffix>email</mat-icon>
+              </mat-form-field>
+            </div>
+
+
+
+            <div class="form-group row">
+              <label class="lab col-md-12">Rol</label>
+              <mat-form-field class="iconoProyecto col-md-12" [floatLabel]="formUsuario.value.floatLabel">
+                <mat-select id="msRol" formControlName="tipoUsuario" [(ngModel)]="valor" placeholder="Seleccione un Rol...">
+                  <mat-option [value]="0" disabled>Seleccione un Rol...</mat-option>
+                  <mat-option *ngFor="let tipo of tiposUsuario" [value]="tipo.id">{{ tipo.nombre }}</mat-option>
+                </mat-select>
+              </mat-form-field>
+            </div>
+
+
+
+
+            <div *ngIf="editar && !view" class="form-group row duracionIn">
+              <label class="lab col-md-12">Contraseña</label>
+              <mat-form-field class="col-md-12 example-full-width" [floatLabel]="formUsuario.value.floatLabel">
+                <!--<mat-label class="inlab"
+                           [ngClass]="{'empty-label': !formUsuario.get('passChange')?.value, 'filled-label': formUsuario.get('passChange')?.value}">
+                  Ingresa una nueva contraseña
+                </mat-label>-->
+                <input placeholder=" Ingresa una nueva contraseña"
+                       id="txtPass"
+                       type="password"
+                       #nuevaPass
+                       formControlName="passChange"
+                       [(ngModel)]="nuevaCont"
+                       autocomplete="off"
+                       class="inlab"
+                       matInput
+                       (keyup)="cambioCont(nuevaPass.value)"
+                       style="caret-color: green;">
+                <mat-icon matSuffix>lock</mat-icon>
+              </mat-form-field>
+            </div>
+
+            <div *ngIf="editar && !view" class="form-group row duracionIn">
+              <label class="lab col-md-12">Confirmar Contraseña</label>
+              <mat-form-field class="col-md-12 example-full-width" [floatLabel]="formUsuario.value.floatLabel">
+                <!--<mat-label class="inlab"
+                           [ngClass]="{'empty-label': !formUsuario.get('passConfirm')?.value, 'filled-label': formUsuario.get('passConfirm')?.value}">
+                  Confirma la nueva contraseña
+                </mat-label>-->
+                <input placeholder="Confirma la nueva contraseña" id="txtPassword"
+                       type="password"
+                       formControlName="passConfirm"
+                       [(ngModel)]="confirmaCont"
+                       autocomplete="off"
+                       class="inlab"
+                       matInput
+                       style="caret-color: green;">
+                <mat-icon matSuffix>lock</mat-icon>
+              </mat-form-field>
+            </div>
+
+            <div class="col-12 row">
+              <div class="col-12" style="padding: 0px 0px;">
+                <mat-checkbox (change)="checkRegistroBitacora($event)"
+                              [checked]="checkRegBitacora"
+                              disabled="{{checkBloqRegBitacora}}"
+                              style="font-weight: bold;">
+                  <mat-label style="font-weight: 400 !important">Registro en Bitácora</mat-label>
+                </mat-checkbox>
+              </div>
+            </div>
+
+
+
+          </form>
+        </div>
+
+        <div class="col-md-6 col-12 mx-auto" style="margin: 0; padding: 0; margin-left: 20px;">
+          <div class="container text-center py-1">
+            <h3 class="titulo" style="color:#0e3e62; font-size: 15.54px !important">Selección Unidades y Áreas</h3>
+          </div>
+          <mat-accordion #pruebas class="paneles" style="margin: 0; padding: 0;">
+            <mat-expansion-panel #panelExpandible
+                                 *ngFor="let unidad of unidades"
+                                 class="unidad-{{unidad.id}}"
+                                 [expanded]="unidad.expanded"
+                                 [disabled]="unidad.disabled"
+                                 style="margin: 0; padding: 0; border: none;">
+              <mat-expansion-panel-header style="border: none; box-shadow: none; background-color: white;">
+                <mat-panel-title>
+                  <mat-checkbox class="fontCheckUnidades unidad-checkbox"
+                                [id]="unidad.id"
+                                (change)="checkUnidades(unidad.id, $event, unidad.areas, unidad.indice)"
+                                (click)="$event.stopPropagation()"
+                                (keydown)="$event.stopPropagation()"
+                                [checked]="unidad.checked"
+                                [disabled]="unidad.pertenece"
+                                style="border: none; box-shadow: none; margin: 0;">
+                    {{ unidad.nombre }}
+                  </mat-checkbox>
+                </mat-panel-title>
+              </mat-expansion-panel-header>
+
+              <mat-checkbox *ngFor="let area of unidad.areas"
+                            [id]="unidad.id + '-' + area.id"
+                            [checked]="area.checked"
+                            (change)="checkAreas(unidad.id, area.id, $event)"
+                            class="area-checkbox"
+                            style="border: none; box-shadow: none; margin-left: 10px; margin-bottom: 5px; font-weight: 200 !important">
+                
+                <mat-label style="font-weight: 400 !important">{{ area.nombre }}</mat-label>
+              </mat-checkbox>
+
+            </mat-expansion-panel>
+          </mat-accordion>
+        </div>
+
+
+
+
+      </div>
+      <div class="col-12">
+        <div class="pull-right" style="padding: 16px;">
+          <div class="col-md-12 col-12" style="text-align:right; padding-bottom: 2%; padding-top:10px">
+            <button id="btnCancelar" class="btn btn-cancel" style="width: 100px;" (click)="cancelar()">Cancelar</button>&nbsp;
+            <button id="btnGuardar" class="btn btn-modal-aceptar" style="width: 100px;" (click)="guardarUsuario(formUsuario.value)">Guardar</button>
+          </div>
+        </div>
+        <div class="col-md-6"></div>
+      </div>
+    </div>
+  </div>
+</mat-dialog-content>
+
+
+<script>
+  function ev() {
+    $('.reportes').dblclick();
+  }
+</script>
+

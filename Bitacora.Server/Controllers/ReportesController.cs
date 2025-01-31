@@ -1,24 +1,18 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using BitacoraLogic;
+﻿using BitacoraLogic;
 using Microsoft.AspNetCore.Mvc;
 using BitacoraModels;
-using System.IO;
 using Bitacora.Helpers;
-using AutoMapper;
-using Newtonsoft.Json;
+using Microsoft.AspNetCore.Cors;
 
 namespace Bitacora.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class ReportesController
+    public class ReportesController : ControllerBase
     {
         ReportesLogic _reportesLogic = new ReportesLogic();
 
-        [HttpPost("[action]/{id}")]
+        [HttpPost("[action]")]
         public object ConsultaDistribucion(DatosReporte datos)
         {
             var lista = _reportesLogic.ConsultaDistribucion(datos);
@@ -30,7 +24,7 @@ namespace Bitacora.Controllers
             return resp;
         }
 
-        [HttpGet("[action]/{id}")]
+        [HttpGet("[action]")]
         public string ExportaReporteDistribucion()
         {
             var resp = _reportesLogic.ExportaReporte("Distribucion");
@@ -61,7 +55,7 @@ namespace Bitacora.Controllers
             };
         }
 
-        [HttpGet("[action]/{id}")]
+        [HttpGet("[action]")]
         public string ExportaReporteDetallado()
         {
             var resp = _reportesLogic.ExportaReporte("Detallado");
@@ -69,7 +63,7 @@ namespace Bitacora.Controllers
             return resp;
         }
 
-        [HttpPost("[action]/{id}")]
+        [HttpPost("[action]")]
         public object ConsultaPersonas(DatosReporte datos)
         {
             var listaPersonas = _reportesLogic.ConsultaPersonas(datos);
@@ -79,7 +73,7 @@ namespace Bitacora.Controllers
             return resp;
         }
 
-        [HttpPost("[action]/{id}")]
+        [HttpPost("[action]")]
         public object ConsultaDetalleUsuario(DatosReporte datos)
         {
             var listaPersonas = _reportesLogic.ConsultaDetalladoUsuario(datos);
@@ -88,7 +82,7 @@ namespace Bitacora.Controllers
             return resp;
         }
 
-        [HttpPost("[action]/{id}")]
+        [HttpPost("[action]")]
         public object ConsultaPersonas_RegistroPorProyecto(DatosReporte datos)
         {
             var listaPersonas = _reportesLogic.ConsultaPersonas_RegistroPorProyecto(datos);
@@ -96,7 +90,7 @@ namespace Bitacora.Controllers
 
             return resp;
         }
-        [HttpPost("[action]/{id}")]
+        [HttpPost("[action]")]
         public object ConsultaPersonas_RegistroPorProyectoSemanal(DatosReporte datos)
         {
             var listaPersonas = _reportesLogic.ConsultaPersonas_RegistroPorSemanaProyecto(datos);
@@ -105,7 +99,7 @@ namespace Bitacora.Controllers
             return resp;
         }
 
-        [HttpPost("[action]/{id}")]
+        [HttpPost("[action]")]
         public object ConsultaDetallado_UsuarioPorProyecto(DatosReporte datos)
         {
             var listaRegistros = _reportesLogic.ConsultaDetallado_UsuarioPorProyecto(datos);
@@ -115,7 +109,7 @@ namespace Bitacora.Controllers
         }
 
 
-        [HttpGet("[action]/{id}")]
+        [HttpGet("[action]")]
         public string ExportaReportePersonas()
         {
             var resp = _reportesLogic.ExportaReporte("Personas");
@@ -123,7 +117,7 @@ namespace Bitacora.Controllers
             return resp;
         }
 
-        [HttpPost("[action]/{id}")]
+        [HttpPost("[action]")]
         public object ConsultaProyectos(DatosReporte datos)
         {
             var listaProyectos = _reportesLogic.ConsultaProyectos(datos);
@@ -134,7 +128,7 @@ namespace Bitacora.Controllers
             return resp;
         }
 
-        [HttpGet("[action]/{id}")]
+        [HttpGet("[action]")]
         public string ExportaReporteProyectos()
         {
             var resp = _reportesLogic.ExportaReporte("Proyectos");
@@ -142,7 +136,7 @@ namespace Bitacora.Controllers
             return resp;
         }
 
-        [HttpPost("[action]/{id}")]
+        [HttpPost("[action]")]
         public object ConsultaSemanal(DatosReporte datos)
         {
             var listaSemanal = _reportesLogic.ConsultaSemanal(datos);
@@ -154,7 +148,7 @@ namespace Bitacora.Controllers
             return resp;
         }
 
-        [HttpGet("[action]/{id}")]
+        [HttpGet("[action]")]
         public string ExportaReporteSemanal()
         {
             var resp = _reportesLogic.ExportaReporte("Semanal");
@@ -162,7 +156,7 @@ namespace Bitacora.Controllers
             return resp;
         }
 
-        [HttpGet("[action]/{id}")]
+        [HttpGet("[action]")]
         public List<BItacoraInf> ConsultaUsuarios(int idUnidad)
         {
             var resp = _reportesLogic.ConsultaListaUsuarios(idUnidad);
@@ -170,7 +164,7 @@ namespace Bitacora.Controllers
             return resp;
         }
 
-        [HttpGet("[action]/{id}")]
+        [HttpGet("[action]")]
         public List<BItacoraInf> ConsultaUsuariosSemanal(int idUnidad)
         {
             var resp = _reportesLogic.ConsultaListaUsuariosSemanal(idUnidad);
@@ -178,7 +172,7 @@ namespace Bitacora.Controllers
             return resp;
         }
 
-        [HttpGet("[action]/{id}")]
+        [HttpGet("[action]")]
         public object ConsultaUsuariosPersona()
         {
             var Usuarios = _reportesLogic.ConsultaListaUsuariosPersona();
@@ -186,7 +180,7 @@ namespace Bitacora.Controllers
             return Usuarios;
         }
 
-        [HttpPost("[action]/{id}")]
+        [HttpPost("[action]")]
         public List<BItacoraInf> ConsultaListaProyectos(DatosReporte datos)
         {
             var resp = _reportesLogic.ConsultaListaProyectos(datos);
@@ -194,7 +188,7 @@ namespace Bitacora.Controllers
             return resp;
         }
 
-        [HttpPost("[action]/{id}")]
+        [HttpPost("[action]")]
         public List<BItacoraInf> ConsultaActividades(DatosReporte datos)
         {
             var resp = _reportesLogic.ConsultaListaActividades(datos);
@@ -202,7 +196,7 @@ namespace Bitacora.Controllers
             return resp;
         }
 
-        [HttpPost("[action]/{id}")]
+        [HttpPost("[action]")]
         public List<BItacoraInf> ConsultaEtapas(DatosReporte datos)
         {
             var resp = _reportesLogic.ConsultaListaEtapas(datos);
@@ -210,27 +204,19 @@ namespace Bitacora.Controllers
             return resp;
         }
 
-        
+
         [HttpGet("[action]/{fileName}")]
-        public async Task<FileStreamResult> descarga(string fileName) { 
-           
-            var currentDirectory = System.IO.Directory.GetCurrentDirectory();
-            currentDirectory = currentDirectory + "\\Reportes";
+        public async Task<FileStreamResult> descarga(string fileName)
+        {
+            var currentDirectory = System.AppDomain.CurrentDomain.BaseDirectory + @"\Reportes";
             var file = Path.Combine(currentDirectory, fileName);
             var memory = new MemoryStream();
-            //using (var stream = new FileStream(currentDirectory,FileMode.Open))
-            //{
-            //    await stream.CopyToAsync(memory);    
-            //}
             memory.Position = 0;
-            var stream = File.OpenRead(file);
+            var stream = System.IO.File.OpenRead(file);
             return new FileStreamResult(stream, "application/octet-stream");
-            //return  File(memory, "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",fileName);
-            
-
         }
 
-        [HttpPost("[action]/{id}")]
+        [HttpPost("[action]")]
         public object ConsultaEjecutivo(DatosReporte datos)
         {
             List<ReporteSemanal> EjecutivoPrc = new List<ReporteSemanal>();
@@ -278,7 +264,7 @@ namespace Bitacora.Controllers
             return resp;
         }
 
-        [HttpGet("[action]/{id}")]
+        [HttpGet("[action]")]
         public string ExportaReporteEjecutivo()
         {
             var resp = _reportesLogic.ExportaReporte("Ejecutivo");
@@ -286,7 +272,7 @@ namespace Bitacora.Controllers
             return resp;
         }
 
-        [HttpPost("[action]/{id}")]
+        [HttpPost("[action]")]
         public object ConsultaClientesDistribucion(DatosReporte datos)
         {
             var clientes = _reportesLogic.ConsultaClientesDistribucion(datos);
@@ -295,7 +281,7 @@ namespace Bitacora.Controllers
             return resp;
         }
 
-        [HttpPost("[action]/{id}")]
+        [HttpPost("[action]")]
         public object ConsultaClientesPorProyecto(DatosReporte datos)
         {
             var clientes = _reportesLogic.ConsultaClientesPorProyecto(datos);

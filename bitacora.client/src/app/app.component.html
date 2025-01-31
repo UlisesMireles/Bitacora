@@ -1,2 +1,448 @@
+<mat-sidenav-container style="color:black; background-color:#fff;height: 100%;" class="main-sidenav-container"
+  (backdropClick)="opened = !opened; menu1=true; menu2=false; menu3=false;">
+  <mat-sidenav class="sideNavP col-6 pad0" [opened]="opened" [fixedInViewport]="true" [fixedTopGap]="layoutGap"
+    position="end">
 
-<router-outlet></router-outlet>
+    <ul class="menuDer nav" *ngIf="menu1">
+      <li *ngIf="reportesMenu" class="col-12 pad0">
+        <button class="col-12 pad0 buttonMenu" mat-button (click)="menu1 = false; menu2=true; menu3=false;">
+          <mat-icon class="col-1">assignment</mat-icon>
+          <label class="col-8">Reportes</label>
+          <mat-icon class="col-1">arrow_forward_ios</mat-icon>
+        </button>
+      </li>
+      <li *ngIf="catalogosMenu" class="col-12 pad0">
+        <button mat-button class="col-12 pad0 buttonMenu" (click)="menu1 = false; menu2=false; menu3=true;">
+          <mat-icon class="col-1">table_chart</mat-icon>
+          <label class="col-8">Catálogos</label>
+          <mat-icon class="col-1">arrow_forward_ios</mat-icon>
+        </button>
+      </li>
+      <li *ngIf="avanceMenu" class="col-12 pad0">
+        <button mat-button class="col-12 pad0 buttonMenu" (click)="avanceReal(); opened=false">
+          <mat-icon class="col-1">trending_up</mat-icon>
+          <label class="col-8">Avance Real</label>
+          <mat-icon class="col-1"></mat-icon>
+        </button>
+      </li>
+    </ul>
+    <ul class="menuDer nav" *ngIf="menu2">
+      <li class="col-12 row">
+        <button class=" btn btn-primary btn-md mat-mini-fab" (click)="volverMenu()">
+          <mat-icon matSuffix style="color:white; font-weight: bold;margin:0px; padding-top:6px;">arrow_back</mat-icon>
+        </button>
+        <h4 class="col-10">Reportes</h4>
+      </li>
+      <li *ngIf="distribucion" class="col-12 pad0">
+        <button class="col-12 pad0 buttonMenu" mat-button (click)="reporte('distribucion'); setMenu();">
+          <mat-icon class="col-1">view_comfy</mat-icon>
+          <label class="col-8">Distribución</label>
+          <mat-icon class="col-1"></mat-icon>
+        </button>
+      </li>
+      <li *ngIf="detallado" class="col-12 pad0">
+        <button mat-button class="col-12 pad0 buttonMenu" (click)="reporte('detallado'); setMenu();">
+          <mat-icon class="col-1">format_align_justify</mat-icon>
+          <label class="col-8">Detallado</label>
+          <mat-icon class="col-1"></mat-icon>
+        </button>
+      </li>
+      <li *ngIf="persona" class="col-12 pad0">
+        <button mat-button class="col-12 pad0 buttonMenu" (click)="reporte('persona'); setMenu();">
+          <mat-icon class="col-1">perm_contact_calendar</mat-icon>
+          <label class="col-8">Persona</label>
+          <mat-icon class="col-1"></mat-icon>
+        </button>
+      </li>
+      <li *ngIf="proyecto" class="col-12 pad0">
+        <button mat-button class="col-12 pad0 buttonMenu" (click)="reporte('proyecto'); setMenu();">
+          <mat-icon class="col-1">work</mat-icon>
+          <label class="col-8">Proyecto</label>
+          <mat-icon class="col-1"></mat-icon>
+        </button>
+      </li>
+      <li *ngIf="semanal" class="col-12 pad0">
+        <button mat-button class="col-12 pad0 buttonMenu" (click)="reporte('semanal'); setMenu();">
+          <mat-icon class="col-1">date_range</mat-icon>
+          <label class="col-8">Semanal</label>
+          <mat-icon class="col-1"></mat-icon>
+        </button>
+      </li>
+      <li *ngIf="ejecutivo" class="col-12 pad0">
+        <button mat-button class="col-12 pad0 buttonMenu" (click)="reporte('ejecutivo'); setMenu();">
+          <mat-icon class="col-1">date_range</mat-icon>
+          <label class="col-8">Ejecutivo</label>
+          <mat-icon class="col-1"></mat-icon>
+        </button>
+      </li>
+      <li *ngIf="participacion" class="col-12 pad0">
+        <button mat-button class="col-12 pad0 buttonMenu" (click)="reporte('participacion'); setMenu();">
+          <mat-icon class="col-1"> pie_chart</mat-icon>
+          <label class="col-8">Participación</label>
+          <mat-icon class="col-1"></mat-icon>
+        </button>
+      </li>
+      <li *ngIf="resultNom35" class="col-12 pad0">
+        <button mat-button class="col-12 pad0 buttonMenu" (click)="reporte('resultNom35'); setMenu();">
+          <mat-icon class="col-1"> bar_chart</mat-icon>
+          <label class="col-8">Resultados</label>
+          <mat-icon class="col-1"></mat-icon>
+        </button>
+      </li>
+    </ul>
+    <ul class="menuDer nav" *ngIf="menu3">
+      <li class="col-12 row">
+        <button class=" btn btn-primary btn-md mat-mini-fab" (click)="volverMenu()">
+          <mat-icon matSuffix style="color:white; font-weight: bold;margin:0px; padding-top:6px;">arrow_back</mat-icon>
+        </button>
+        <h4 class="col-10">Catálogos</h4>
+      </li>
+      <li *ngIf="clientesOpc" class="col-12 pad0">
+        <button class="col-12 pad0 buttonMenu" mat-button (click)="catalogo('clientes'); setMenu();">
+          <mat-icon class="col-1">assignment_id</mat-icon>
+          <label class="col-8">Clientes</label>
+          <mat-icon class="col-1"></mat-icon>
+        </button>
+      </li>
+      <li *ngIf="proyectoOpc" class="col-12 pad0">
+        <button mat-button class="col-12 pad0 buttonMenu" (click)="catalogo('proyectos'); setMenu();">
+          <mat-icon class="col-1">work</mat-icon>
+          <label class="col-8">Proyectos</label>
+          <mat-icon class="col-1"></mat-icon>
+        </button>
+      </li>
+      <li *ngIf="sistemasOpc" class="col-12 pad0">
+        <button mat-button class="col-12 pad0 buttonMenu" (click)="catalogo('aplicativos'); setMenu();">
+          <mat-icon class="col-1">computer</mat-icon>
+          <label class="col-8">Sistemas</label>
+          <mat-icon class="col-1"></mat-icon>
+        </button>
+      </li>
+      <li *ngIf="usuariosOpc" class="col-12 pad0">
+        <button mat-button class="col-12 pad0 buttonMenu" (click)="catalogo('usuarios'); setMenu();">
+          <mat-icon class="col-1">supervisor_account</mat-icon>
+          <label class="col-8">Usuarios</label>
+          <mat-icon class="col-1"></mat-icon>
+        </button>
+      </li>
+      <li *ngIf="unidadNegocioOpc" class="col-12 pad0">
+        <button mat-button class="col-12 pad0 buttonMenu" (click)="catalogo('unidad-negocio'); setMenu();">
+          <mat-icon class="col-1">group_work</mat-icon>
+          <label class="col-8">Unidades de Negocio</label>
+          <mat-icon class="col-1"></mat-icon>
+        </button>
+      </li>
+      <li *ngIf="areaNegocioOpc" class="col-12 pad0">
+        <button mat-button class="col-12 pad0 buttonMenu" (click)="catalogo('areas-un'); setMenu();">
+          <mat-icon class="col-1">trip_origin</mat-icon>
+          <label class="col-8">Áreas de UN</label>
+          <mat-icon class="col-1"></mat-icon>
+        </button>
+      </li>
+      <li *ngIf="etapaOpc" class="col-12 pad0">
+        <button mat-button class="col-12 pad0 buttonMenu" (click)="catalogo('fases'); setMenu();">
+          <mat-icon class="col-1">view_column</mat-icon>
+          <label class="col-8">Etapas</label>
+          <mat-icon class="col-1"></mat-icon>
+        </button>
+      </li>
+      <li *ngIf="actividadesOpc" class="col-12 pad0">
+        <button mat-button class="col-12 pad0 buttonMenu" (click)="catalogo('actividades'); setMenu();">
+          <mat-icon class="col-1">developer_board</mat-icon>
+          <label class="col-8">Actividades</label>
+          <mat-icon class="col-1"></mat-icon>
+        </button>
+      </li>
+      <li *ngIf="permisosMenu" class="col-12 pad0">
+        <button mat-button class="col-12 pad0 buttonMenu" (click)="catalogo('roles'); setMenu();">
+          <mat-icon class="col-1">developer_board</mat-icon>
+          <label class="col-8">Roles</label>
+          <mat-icon class="col-1"></mat-icon>
+        </button>
+      </li>
+    </ul>
+
+    <ul *ngIf="menu1" class="col-12 pad0 menuDer" style="position:absolute;bottom: 0px; margin:0px">
+      <li class="col-12 pad0">
+        <button class="btn btn-primary col-12 pad0 buttonMenu" mat-button (click)="abrirModalCerrarSesion()">
+          <label class="col-12">Cerrar Sesión</label>
+        </button>
+      </li>
+    </ul>
+    <!-- <button class="col-12" mat-button>Reportes</button>
+    <button class="col-12" mat-button>Catálogos</button>
+    <button class="col-12" mat-button (click)="avanceReal()">Avance Real</button> -->
+  </mat-sidenav>
+
+  <div>
+    <div *ngIf="movil==false && mostrarMenu==true" class="container-fluid navmenu " id="menuDiv">
+      <div *ngIf="movil==false && mostrarMenu==true"
+        class="logoeisei-lg font-bold col-lg-4 col-md-4 col-sm-4 col-xs-12 pull-left ">
+        <img *ngIf="currentUser" src="assets/icons/logo-header.png" (click)="redirigeUr()" class="imagenLogo">
+        <img *ngIf="!currentUser" src="assets/icons/logoeisei2.png" (click)="volverLogin()" class="imagenLogoLogin">
+      </div>
+      <!--Inicio de la nueva barra-->
+      <div *ngIf="movil==false" class="ulmenu">
+        <!--movil==False-->
+
+        <nav *ngIf="currentUser" class="navbar navbar-expand-lg navbar-light bg-light">
+
+          <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup"
+            aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+            <div class="navbar-nav col-12" style="background-color: #103D66;">
+              <a *ngIf="bitacoraMenu==true" class="nav-item nav-link" (click)="bitacora(0)">
+                <mat-icon style="top: 7px!important; position: relative!important; font-size: 21px!important;" class="material-icons">description</mat-icon>
+                BITÁCORA<span class="sr-only">(current)</span></a>
+
+              <a *ngIf="avanceMenu" class="nav-item nav-link" (click)="avanceReal()">
+                <mat-icon style="top: 7px!important; position: relative!important; font-size: 21px!important;" class="material-icons">trending_up</mat-icon>
+                AVANCE REAL</a>
+              <li *ngIf="reportesMenu" class="nav-item dropdown">
+
+                <a style="padding-bottom: 16px;" class="nav-link dropdown-toggle" id="navbarDropdown" role="button" data-toggle="dropdown"
+                  aria-haspopup="true" aria-expanded="false">
+                  <mat-icon style="top: 7px!important; position: relative!important; font-size: 21px!important;" class="material-icons">assignment</mat-icon>
+                  REPORTE
+                </a>
+                <div aria-labelledby="navbarDropdown" class="dropdown-menu" style="
+                  color: #000000!important;
+                  background-color: #F5F5F5!important;
+                  text-decoration: none!important;
+                  text-align: left!important;
+                  font-size: 12px!important;
+                  text-transform: capitalize!important;
+                  line-height: 13px!important;
+                  padding-top: 16px!important;
+                  padding-bottom: 0px!important;
+                  -moz-box-shadow: 1.3px 1.3px 0px #777777!important;
+                  -webkit-box-shadow: 1.3px 1.3px 0px #777777!important;
+                  box-shadow: 1.3px 1.3px 0px #777777!important;
+                  border-left: 0.5px solid #777777!important;
+                  margin-top: -1.6px;
+                  border-top: 3px solid #777777;
+              ">
+                  <a *ngIf="distribucion" class="dropdown-item" (click)="reporte('distribucion')">Reporte Distribución</a>
+                  <div *ngIf="distribucion" class="dropdown-divider"></div>
+                  <a *ngIf="detallado" class="dropdown-item" (click)="reporte('detallado')">Reporte Detallado</a>
+                  <div *ngIf="detallado" class="dropdown-divider"></div>
+                  <a *ngIf="persona" class="dropdown-item" (click)="reporte('persona')">Reporte por Persona</a>
+                  <div *ngIf="persona" class="dropdown-divider"></div>
+                  <a *ngIf="proyecto" class="dropdown-item" (click)="reporte('proyecto')">Reporte por Proyecto</a>
+                  <!-- <li *ngIf="proyecto" class="subMenu dropdown">
+                    <div *ngIf="proyecto" style="border-top: 0px solid #e9ecef!important;" class="dropdown-divider"></div>
+                    <a style="padding-right: 4px; padding-bottom: 11px;" *ngIf="proyecto" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
+                    aria-haspopup="true" aria-expanded="false" class="dropdown-item dropdown-toggle">Reporte por Proyecto</a>
+                    <div class="dropdown-menu" aria-labelledby="navbarDropdown"style="
+                    color: #000000!important;
+                    background-color: #F5F5F5!important;
+                    text-decoration: none!important;
+                    text-align: left!important;
+                    font-size: 12px!important;
+                    text-transform: capitalize!important;
+                    line-height: 13px!important;
+                    padding-top: 16px!important;
+                    padding-bottom: 0px!important;
+                    -moz-box-shadow: 1.3px 1.3px 0px #777777!important;
+                    -webkit-box-shadow: 1.3px 1.3px 0px #777777!important;
+                    box-shadow: 1.3px 1.3px 0px #777777!important;
+                    border-left: 0.5px solid #777777!important;
+                    margin-top: -28.6px;
+                    border-top: 3px solid #777777;
+                    margin-left: 168px;
+                ">
+                    <a *ngIf="proyecto" class="dropdown-item" (click)="reporte('proyecto')">Persona</a>
+                    <div *ngIf="proyectoSemanal" class="dropdown-divider"></div>
+                    <a *ngIf="proyectoSemanal" class="dropdown-item" (click)="reporte('proyectoSemanal')">Semana</a>
+                  </div>
+                </li> -->
+                  <div *ngIf="proyecto" class="dropdown-divider"></div>
+                  <a *ngIf="semanal" class="dropdown-item" (click)="reporte('semanal')">Reporte Semanal</a>
+                  <div *ngIf="ejecutivo" class="dropdown-divider"></div>
+                  <a *ngIf="ejecutivo" class="dropdown-item" (click)="reporte('ejecutivo')">Reporte Ejecutivo</a>
+
+
+                  <div *ngIf="proyecto" class="dropdown-divider"></div>
+                  <li *ngIf="participacion" class="subMenu dropdown">
+                    <div *ngIf="proyecto" style="border-top: 0px solid #e9ecef!important;" class="dropdown-divider"></div>
+                    <a style="padding-right: 4px; padding-bottom: 11px;" *ngIf="participacion" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
+                    aria-haspopup="true" aria-expanded="false" class="dropdown-item dropdown-toggle">Reporte NOM 035</a>
+                    <div class="dropdown-menu" aria-labelledby="navbarDropdown"style="
+                    color: #000000!important;
+                    background-color: #F5F5F5!important;
+                    text-decoration: none!important;
+                    text-align: left!important;
+                    font-size: 12px!important;
+                    text-transform: capitalize!important;
+                    line-height: 13px!important;
+                    padding-top: 16px!important;
+                    padding-bottom: 0px!important;
+                    -moz-box-shadow: 1.3px 1.3px 0px #777777!important;
+                    -webkit-box-shadow: 1.3px 1.3px 0px #777777!important;
+                    box-shadow: 1.3px 1.3px 0px #777777!important;
+                    border-left: 0.5px solid #777777!important;
+                    margin-top: -28.6px;
+                    border-top: 3px solid #777777;
+                    margin-left: 159px;
+                ">
+                    <a *ngIf="participacion" class="dropdown-item" (click)="reporte('participacion')">Reporte de Participación</a>
+                    <div *ngIf="proyecto" class="dropdown-divider"></div>
+                    <a *ngIf="resultNom35" class="dropdown-item" (click)="reporte('resultNom35')">Reporte Resultados NOM 035</a>
+                  </div>
+                </li>
+
+                </div>
+              </li>
+              <li *ngIf="catalogosMenu" class="nav-item dropdown">
+                <a style="padding-bottom: 16px;"  class="nav-link dropdown-toggle" id="navbarDropdown" role="button" data-toggle="dropdown"
+                  aria-haspopup="true" aria-expanded="false">
+                  <mat-icon style="top: 7px!important; position: relative!important; font-size: 21px!important; height:21px !important; width:24px !important;"  class="material-icons">table_chart</mat-icon>
+                  CATÁLOGOS
+                </a>
+                <div class="dropdown-menu" aria-labelledby="navbarDropdown"style="
+                color: #000000!important;
+                background-color: #F5F5F5!important;
+                text-decoration: none!important;
+                text-align: left!important;
+                font-size: 12px!important;
+                text-transform: capitalize!important;
+                line-height: 13px!important;
+                padding-top: 16px!important;
+                padding-bottom: 0px!important;
+                -moz-box-shadow: 1.3px 1.3px 0px #777777!important;
+                -webkit-box-shadow: 1.3px 1.3px 0px #777777!important;
+                box-shadow: 1.3px 1.3px 0px #777777!important;
+                border-left: 0.5px solid #777777!important;
+                margin-top: -1.6px;
+                border-top: 3px solid #777777;
+            ">
+                  <a *ngIf="clientesOpc" class="dropdown-item" (click)="catalogo('clientes')">Clientes</a>
+                  <div *ngIf="clientesOpc" class="dropdown-divider"></div>
+                  <a *ngIf="proyectoOpc" class="dropdown-item" (click)="catalogo('proyectos')">Proyectos</a>
+                  <div *ngIf="proyectoOpc" class="dropdown-divider"></div>
+                  <a *ngIf="sistemasOpc" class="dropdown-item" (click)="catalogo('aplicativos')">Aplicativos</a>
+                  <div *ngIf="sistemasOpc" class="dropdown-divider"></div>
+                  <a *ngIf="usuariosOpc" class="dropdown-item" (click)="catalogo('usuarios')">Usuarios</a>
+                  <div *ngIf="usuariosOpc" class="dropdown-divider"></div>
+                  <a *ngIf="unidadNegocioOpc" class="dropdown-item" (click)="catalogo('unidad-negocio')">Unidades de Negocio</a>
+                  <div *ngIf="unidadNegocioOpc" class="dropdown-divider"></div>
+                  <a *ngIf="areaNegocioOpc" class="dropdown-item" (click)="catalogo('areas-un')">Áreas de UN</a>
+                  <div *ngIf="areaNegocioOpc" class="dropdown-divider"></div>
+                  <a *ngIf="etapaOpc" class="dropdown-item" (click)="catalogo('fases')">Etapas</a>
+                  <div *ngIf="etapaOpc" class="dropdown-divider"></div>
+                  <a *ngIf="actividadesOpc" class="dropdown-item" (click)="catalogo('actividades')">Actividades</a>
+                  <div *ngIf="actividadesOpc" class="dropdown-divider"></div>
+                  <a *ngIf="permisosMenu" class="dropdown-item" (click)="catalogo('roles')">Roles</a>
+                </div>
+              </li>
+
+              <!-- <a class="ml-auto mr-1 btn btn-link" style="font-size: 14px;" (click)="cambiarContrasenia()">Cambiar contraseña</a> -->
+
+
+            </div>
+          </div>
+        </nav>
+      </div>
+      <div *ngIf="movil==false && mostrarMenu==true" class="dropdown user user-menu">
+        <!-- Menu Toggle Button -->
+        <a (click)="abrirPerfilUsuario()" class="perfilUser" data-toggle="dropdown">
+          <mat-icon style="top: 7px; right: 3px; position: relative; font-size: 22px;">account_circle</mat-icon>
+          <span class="hidden-xs">{{ usuario }}</span>
+        </a>
+        <ul id="dropdown" class="dropdown-user-menu" >
+          <!-- The user image in the menu -->
+          <li class="user-header">
+            <!-- <div class="user-image" alt="User Image" [style.background-image]="imagen"></div> -->
+            <div *ngIf="!imagenVista" class="user-image" alt="User Image" style="background-image: url('assets/icons/persona_icono_principal.png'); width:90px; height:90px;"></div>
+            <img *ngIf="imagenVista" class="user-image"  [src]="imagen" />
+            <p style="color:#fff;">
+              {{usuario}}
+              <small><br>{{rolUser}}</small>
+            </p>
+          </li>
+          <li class="user-footer">
+            <div class="pull-right">
+              <a (click)="cambiarContrasenia()" id="btnmiperfil" class="btn btn-cancel btnmenuuser" style="text-align:center;">Contraseña</a>
+              <a *ngIf="!movil" (click)='logout()' id="btncerrarsesion" class="btn btn-cancel btnmenuuser"
+                style="text-align:center;">Cerrar Sesión</a>
+            </div>
+          </li>
+        </ul>
+      </div>
+    </div>
+
+    <!--Fin de la nueva barra-->
+    <header *ngIf="movil==true || mostrarMenu==false" class="titulobitacora">
+
+      <div class="container-fluid">
+
+        <div class="row">
+          <div class="col-md-4 login col-4" style="padding-left: 2%;">
+            <div class="col-md-12">
+              <!--<section *ngIf="currentUser">
+                <div class="row"> <span style="height: 15px;">Bienvenido,&nbsp; </span><span
+                    style="text-decoration:underline; height: 15px;">{{usuario}}</span> </div>
+              </section>-->
+
+            </div>
+          </div>
+
+          <div *ngIf="movil==true || mostrarMenu==false" class="col-md-4 col-4" style="text-align: center">
+            <img *ngIf="currentUser" src="assets/icons/logoeisei2.png" (click)="redirigeUr()" style="cursor: pointer;">
+            <img *ngIf="!currentUser" src="assets/icons/logoeisei2.png" (click)="volverLogin()"
+              style="cursor: pointer;">
+          </div>
+
+        </div>
+      </div>
+    </header>
+    <!--Aqui estaba anteriormente el menu-->
+
+    <div *ngIf="currentUser && movil">
+      <!--movil-->
+      <div style="text-align: center ">
+        <mat-tab-group mat-align-tabs="center" animationDuration="0ms" [selectedIndex]="pagina"
+          (selectedTabChange)="cambioPagina($event)">
+          <mat-tab *ngIf="bitacoraMenu==true" class="col-md-3 " label="REGISTRO">
+
+            <div *ngIf="pagina==0" class="container resize">
+               <form-bitacora></form-bitacora>
+            </div>
+
+          </mat-tab>
+          <mat-tab *ngIf="bitacoraMenu==true" class="col-md-3" label="HISTORIAL">
+
+            <div *ngIf="pagina==1" class="container">
+               <form-bitacora></form-bitacora>
+            </div>
+
+          </mat-tab>
+          <mat-tab label="Tab 5" class="opciones" style="justify-content: right;width: 45%;">
+            <ng-template mat-tab-label>
+              <button mat-icon-button (click)="$event.stopPropagation(); opened = !opened">
+                <!-- [matMenuTriggerFor]="menu"  en boton-->
+                <mat-icon color="#fff">dehaze</mat-icon>
+              </button>
+            </ng-template>
+
+          </mat-tab>
+        </mat-tab-group>
+
+      </div>
+    </div>
+
+
+
+  </div>
+  <div *ngIf="movil==false || (movil==true && pagina==2) || (movil==true && pagina==0)">
+    <router-outlet></router-outlet>
+  </div>
+
+</mat-sidenav-container>
+
+<ngx-spinner bdOpacity=0.9 bdColor="rgba(180,175,175,0.4)" size="medium" color="#0a6792" type="ball-clip-rotate"
+  [fullScreen]="true">
+  <p style="color: #0a6792"> Cargando... </p>
+</ngx-spinner>

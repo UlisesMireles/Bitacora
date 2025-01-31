@@ -26,11 +26,11 @@ namespace Bitacora.Controllers
             if (respuesa.Estatus == "1" && respuesa.EstausEmpleado == "1")
             {
                 if (respuesa.Password is null)
-                    _loginData.InsertaHistorial(respuesa.IdUser, "Login", "Login Fallido", "El Usuario " + respuesa.Usuario + " entró por priera vez al sistema y se receteo su Password");
+                    _loginData.InsertaHistorial(respuesa.IdUser, "Login", "Login Fallido", "El Usuario " + respuesa.Usuario + " entró por primera vez al sistema y se receteo su Password");
                 if (respuesa.Password == "False")
                     _loginData.InsertaHistorial(respuesa.IdUser, "Login", "Login Fallido", "El Usuario " + respuesa.Usuario + " Ingreso contraseña fallida");
                 if (respuesa.Password == "True")
-                    _loginData.InsertaHistorial(respuesa.IdUser, "Login", "Login Exitoso", "El Usuario " + respuesa.Usuario + " a iniciado secion exitosamente");
+                    _loginData.InsertaHistorial(respuesa.IdUser, "Login", "Login Exitoso", "El Usuario " + respuesa.Usuario + " a iniciado sesion exitosamente");
             }
             else
             {
@@ -90,10 +90,10 @@ namespace Bitacora.Controllers
             return respuesa;
         }
 
-        [HttpGet("[action]/{id}")]
+        [HttpGet("[action]/")]
         public void logOut(int idUser)
         {
-                _loginData.InsertaHistorial(idUser, "LogOut", "Cierre de sesion", "El usuario a cerrado secion");
+             _loginData.InsertaHistorial(idUser, "LogOut", "Cierre de sesion", "El usuario a cerrado secion");
         }
 
         [HttpGet("[action]/{id}")]

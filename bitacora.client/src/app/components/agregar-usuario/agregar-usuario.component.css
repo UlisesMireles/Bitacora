@@ -1,0 +1,632 @@
+
+::ng-deep .mat-mc-checkbox-frame {
+  border-color: green;
+}
+
+::ng-deep span .ng-star-inserted {
+  color: green;
+  font-size:14px!important;
+}
+
+.btn-modal-aceptar {
+  background-color: #2EA6FF;
+  font-size: 13px;
+  color: #fff;
+  border-radius: 0;
+  border-color: #2EA6FF;
+  text-transform: uppercase;
+  font-weight: bold;
+  width: 100px;
+}
+
+  .btn-modal-aceptar:hover, .btn-modal-aceptar:active, .btn-modal-aceptar:active:hover, .btn-modal-aceptar:focus {
+    background-color: #0090E8;
+    border-color: #0090E8;
+    box-shadow: 2px 2px 4px #ddd;
+  }
+
+.btn-cancel {
+  background-color: #CCCCCC;
+  font-size: 13px;
+  color: #fff;
+  border-radius: 0;
+  border-color: #CCCCCC;
+  text-transform: uppercase;
+  font-weight: bold;
+  width: 100px;
+}
+
+  .btn-cancel:hover, .btn-cancel:active, .btn-cancel:active:hover, .btn-cancel:focus {
+    background-color: #AFAFAF;
+    border-color: #AFAFAF;
+    box-shadow: 2px 2px 4px #ddd;
+  }
+
+::ng-deep .mat-form-field-appearance-legacy .mat-form-field-underline {
+  background-color: #0e3e62
+}
+
+
+::ng-deep .mat-form-field-appearance-legacy .mat-form-field-label {
+  color: #0e3e62;
+}
+
+::ng-deep .mat-form-field-infix input {
+  color: green !important;
+}
+
+input:-internal-autofill-selected {
+  background-color: green !important;
+  background-image: none !important;
+  color: green !important;
+}
+
+::ng-deep .mat-form-field-hide-placeholder .mat-form-field-wrapper .mat-form-field-underline .mat-form-field-ripple {
+  background-color: green;
+}
+
+::ng-deep .mat-datepicker-toggle-default-icon {
+  width: 2em !important;
+  height: 2em !important;
+}
+
+::ng-deep .mat-form-field-suffix .mat-icon-button {
+  height: 40px;
+  width: 40px;
+}
+
+::ng-deep span .mat-datepicker-toggle-default-icon.ng-star-inserted {
+  color: green !important;
+}
+
+::ng-deep div .ng-invalid .mat-form-field-should-float .mat-focused {
+  color: green !important;
+}
+
+::ng-deep .mat-form-field.mat-focused .mat-form-field-ripple {
+  background-color: green !important
+}
+
+::ng-deep .mat-form-field-ripple {
+  background-color: #0e3e62 !important
+}
+
+.form-group {
+  margin-bottom: 0px !important;
+}
+
+::ng-deep .mat-form-field-appearance-legacy .mat-form-field-wrapper {
+  padding-bottom: .9em;
+}
+
+
+::ng-deep .mat-form-field-placeholder {
+  display: block !important;
+}
+
+.form-group {
+  margin-bottom: 0px !important;
+}
+
+::ng-deep .mat-form-field-appearance-legacy .mat-form-field-wrapper {
+  padding-bottom: .9em;
+}
+
+.lab {
+  /*  text-align: left;
+  color: #0e3e62;
+  font-weight: bold;
+  margin: 0px;
+  margin-bottom: -15px;*/
+  text-align: left;
+  color: #0e3e62;
+  font-weight: bold;
+  margin: 0px;
+  margin-bottom: -37px !important;
+  padding-top: .25em !important;
+}
+
+::ng-deep .mat-checkbox-layout .mat-checkbox-label {
+  line-height: 24px;
+  width: 180px;
+  padding-left: 7.5%;
+  text-align: left;
+  color: #0e3e62;
+  font-weight: bold;
+}
+
+.example-margin {
+  margin: 0 10px;
+}
+
+::ng-deep .mat-radio-button.mat-accent.mat-radio-checked .mat-radio-outer-circle {
+  border-color: green;
+}
+
+::ng-deep .mat-radio-button.mat-accent .mat-radio-inner-circle, .mat-radio-button.mat-accent .mat-radio-ripple .mat-ripple-element:not(.mat-radio-persistent-ripple), .mat-radio-button.mat-accent.mat-radio-checked .mat-radio-persistent-ripple, .mat-radio-button.mat-accent:active .mat-radio-persistent-ripple {
+  background-color: green;
+}
+
+::ng-deep .mat-radio-outer-circle {
+  border-color: gray;
+}
+
+.radLab {
+  padding: 0px 0px 17px 0px;
+}
+
+::ng-deep span .mat-icon.ng-star-inserted {
+  color: white;
+}
+
+::ng-deep .mat-select-search-no-entries-found.ng-star-inserted {
+  color: white;
+}
+
+::ng-deep .mat-tab-header {
+  background-color: #424242 !important;
+}
+
+.mat-icon {
+  color: green;
+}
+/* .mat-expansion-panel {
+    background: #424242;
+    color: black;
+} */
+::ng-deep .mat-checkbox-layout .mat-checkbox-label {
+  line-height: 24px;
+  width: 180px;
+  padding-left: 7.5%;
+  text-align: left;
+  color: black;
+  font-weight: 400;
+}
+
+::ng-deep .mat-checkbox-frame {
+  border-color: darkseagreen;
+}
+
+::ng-deep .mat-expansion-panel-body {
+  padding: 0 24px 16px;
+  margin-left: 18px;
+}
+
+::ng-deep .mat-expansion-panel-header-description {
+  color: darkseagreen;
+}
+
+.mat-expansion-panel {
+  background: white;
+  color: black;
+}
+
+.mat-content {
+  display: flex;
+  flex: 1;
+  flex-direction: row;
+  overflow: hidden;
+  color: gray;
+}
+
+::ng-deep .mat-expansion-indicator::after {
+  color: darkseagreen;
+}
+
+::ng-deep .mat-checkbox-layout .mat-checkbox-label {
+  color: green;
+}
+
+.mat-expansion-panel-header-title {
+  color: green;
+}
+/* titulo sin check
+.mat-expansion-panel {
+    background: #424242;
+    color: #fff;
+} */
+
+.mat-expansion-panel-header[aria-disabled=true] {
+  color: gray;
+  padding: 0px;
+  height: 30px !important;
+}
+
+.mat-expansion-panel-header:not([aria-disabled=true]) {
+  cursor: pointer;
+  padding: 0px;
+  height: 30px !important;
+}
+
+::ng-deep .mat-dialog-container {
+  padding: 0px;
+}
+
+
+::ng-deep .ng-animating div mat-accordion mat-expansion-panel mat-expansion-panel-header {
+  height: 48px;
+}
+
+::ng-deep .ng-animating div mat-accordion mat-expansion-panel div.mat-expansion-panel-content {
+  height: 0px;
+  visibility: hidden;
+}
+
+::ng-deep .mat-dialog-container {
+  overflow: hidden;
+}
+
+.paneles {
+  overflow-y: auto;
+  height: 35vh;
+  padding: 0px 25px;
+}
+
+::ng-deep .mat-checkbox-inner-container {
+  height: 14px;
+  width: 14px;
+}
+
+::ng-deep mat-checkbox.fontCheckUnidades label.mat-checkbox-layout span.mat-checkbox-label {
+  font-weight: bold;
+}
+
+footer {
+  background: #103D70;
+  color: #ffffff;
+  position: relative !important;
+  width: 100%;
+  border-top: 2px solid #ffffff;
+}
+mat-dialog-content {
+  background: white;
+  color: black
+}
+
+
+::ng-deep .mat-mdc-text-field-wrapper {
+  height: 3em !important;
+  background: transparent !important;
+}
+div.mat-mdc-dialog-surface {
+  background: white;
+  color: black;
+}
+colorLetra {
+  color: black !important;
+}
+
+
+h3-azul {
+  color: #0E3E62 !important;
+}
+
+
+
+::ng-deep .mat-internal-form-field > label {
+  margin-left: 0;
+  margin-right: auto;
+  padding-left: 4px;
+  padding-right: 0;
+  order: 0;
+  color: black;
+}
+
+.mat-mdc-radio-button.mat-accent {
+  --mdc-radio-disabled-selected-icon-color: white;
+  --mdc-radio-disabled-unselected-icon-color: white;
+  --mdc-radio-unselected-hover-icon-color: green;
+  --mdc-radio-unselected-focus-icon-color: green;
+  --mdc-radio-unselected-icon-color: gray;
+  --mdc-radio-unselected-pressed-icon-color: rgba(255, 255, 255, 0.54);
+  --mdc-radio-selected-focus-icon-color: green;
+  --mdc-radio-selected-hover-icon-color: green;
+  --mdc-radio-selected-icon-color: green;
+  --mdc-radio-selected-pressed-icon-color: green
+}
+
+.mat-mdc-radio-button.mat-accent {
+  --mat-radio-ripple-color: white;
+  --mat-radio-checked-ripple-color: green;
+  --mat-radio-disabled-label-color: rgba(255, 255, 255, 0.5);
+  --mat-radio-label-text-color: white
+}
+
+.mat-mdc-radio-button.mat-warn {
+  --mdc-radio-disabled-selected-icon-color: white;
+  --mdc-radio-disabled-unselected-icon-color: white;
+  --mdc-radio-unselected-hover-icon-color: green;
+  --mdc-radio-unselected-focus-icon-color: #eeeeee;
+  --mdc-radio-unselected-icon-color: rgba(255, 255, 255, 0.54);
+  --mdc-radio-unselected-pressed-icon-color: rgba(255, 255, 255, 0.54);
+  --mdc-radio-selected-focus-icon-color: #f44336;
+  --mdc-radio-selected-hover-icon-color: #f44336;
+  --mdc-radio-selected-icon-color: #f44336;
+  --mdc-radio-selected-pressed-icon-color: #f44336
+}
+
+::ng-deep .mat-mdc-radio-button.mat-warn {
+  --mat-radio-ripple-color: white;
+  --mat-radio-checked-ripple-color: #f44336;
+  --mat-radio-disabled-label-color: rgba(255, 255, 255, 0.5);
+  --mat-radio-label-text-color: white
+}
+::ng-deep .mdc-text-field--filled:not(.mdc-text-field--disabled) .mdc-floating-label {
+  color: green !important;
+}
+
+
+
+
+::ng-deep .mat-mdc-checkbox label {
+  cursor: pointer;
+  color: green !important;
+}
+/*****************************/
+/* Asegúrate de que el contenedor del panel ocupe todo el ancho */
+/* Elimina márgenes y paddings en el contenedor principal */
+.col-md-6.col-12.mx-auto {
+  margin: 0; /* Sin márgenes externos */
+  padding: 0; /* Sin padding interno */
+  margin-left: 20px; /* Aplica margen izquierdo de 20px */
+}
+
+/* Ajusta el contenedor del acordeón */
+.mat-accordion.paneles {
+  margin: 0; /* Sin márgenes */
+  padding: 0; /* Sin padding */
+}
+
+/* Ajusta los paneles para que no tengan separación */
+.mat-expansion-panel {
+  margin: 0; /* Sin espacio entre paneles */
+  padding: 0; /* Sin padding interno */
+}
+
+/* Ajusta los checkbox de las unidades */
+.fontCheckUnidades.unidad-checkbox {
+  margin-bottom: 5px; /* Espaciado mínimo entre checkbox */
+  font-weight: bold; /* Opcional: texto más visible */
+}
+
+/* Estilo para los checkboxes */
+.area-checkbox {
+  display: block; /* Asegura que cada checkbox ocupe toda la línea */
+  white-space: nowrap; /* Evita que el texto se divida en varias líneas */
+  margin-left: 10px; /* Margen izquierdo para las áreas */
+  margin-bottom: -13px !important; /* Espaciado mínimo entre áreas */
+}
+
+/* Opcional: Ajuste del contenedor si es necesario */
+.mat-expansion-panel-body {
+  padding: 10px; /* Ajusta el espacio interno del panel */
+}
+
+
+::ng-deep .mat-mdc-checkbox label {
+  cursor: pointer;
+  font-weight: 700;
+  font-size: 15px !important;
+}
+::ng-deep .mat-mdc-text-field-wrapper {
+  height: auto !important;
+  background: transparent !important;
+  --mdc-filled-text-field-active-indicator-color: #103D66 !important; /* Cambia por el color deseado */
+  --mdc-filled-text-field-hover-active-indicator-color: green;
+  color: #0E3E62 !important;
+}
+::ng-deep .mdc-text-field--filled:not(.mdc-text-field--disabled) .mdc-text-field__input {
+  color: green !important;
+}
+/* Quitar sombras y bordes de los paneles */
+.mat-expansion-panel {
+  border: none !important; /* Sin bordes */
+  box-shadow: none !important; /* Sin sombras */
+  background-color: white !important; /* Fondo blanco */
+  margin: 0; /* Sin márgenes */
+}
+
+/* Quitar bordes y sombras del encabezado del panel */
+.mat-expansion-panel-header {
+  border: none !important; /* Sin bordes */
+  box-shadow: none !important; /* Sin sombras */
+  background-color: white !important; /* Fondo blanco */
+  margin: 0; /* Sin margen */
+  padding: 0; /* Sin relleno */
+}
+
+/* Quitar bordes y sombras de los checkbox de unidades */
+.fontCheckUnidades.unidad-checkbox .mat-checkbox-frame {
+  border-color: white !important; /* Borde blanco */
+  box-shadow: none !important; /* Sin sombra */
+}
+
+/* Quitar bordes y sombras de los checkbox de áreas */
+.area-checkbox .mat-checkbox-frame {
+  border-color: white !important; /* Borde blanco */
+  box-shadow: none !important; /* Sin sombra */
+
+}
+
+/* Ajustar espaciado y eliminar márgenes */
+.mat-checkbox-layout {
+  margin: 0; /* Sin margen */
+  padding: 0; /* Sin relleno */
+}
+
+/* Eliminar bordes visibles en los checkbox al seleccionarlos */
+.mat-checkbox-checked.mat-accent .mat-checkbox-background {
+  background-color: white !important; /* Fondo blanco */
+  box-shadow: none !important; /* Sin sombra */
+}
+
+/* Opcional: quitar bordes del título */
+.mat-panel-title {
+  border: none !important; /* Sin bordes */
+  box-shadow: none !important; /* Sin sombras */
+  margin: 0; /* Sin margen */
+  padding: 0; /* Sin relleno */
+}
+
+
+
+::ng-deep.mat-mdc-form-field-infix {
+  display: block;
+  position: relative;
+  flex: auto;
+  min-width: 0;
+  border-top: .84375em solid transparent;
+  width: 180px;
+  min-height: 40px !important;
+  padding-top: 0px !important;
+  padding-bottom: var(--mat-form-field-filled-with-label-container-padding-bottom, 0px) !important;
+  padding-bottom: 0px !important;
+}
+::ng-deep .mat-mdc-text-field-wrapper {
+  height: auto !important;
+  background: transparent !important;
+  --mdc-filled-text-field-active-indicator-color: #103D66 !important; /* Cambia por el color deseado */
+  --mdc-filled-text-field-hover-active-indicator-color: green;
+  color: #0E3E62 !important;
+}
+::ng-deep.mat-mdc-form-field-appearance-legacy .mat-form-field-infix {
+  padding: .4375em 0;
+}
+::ng-deep.mat-mdc--form-field {
+  font-size: inherit;
+  font-weight: 400;
+  line-height: 1.125;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+}
+::ng-deep.mdc-text-field--filled.mdc-text-field--disabled .mdc-text-field__input {
+  color: green !important;
+}
+
+
+::ng-deep.mdc-text-field--filled.mdc-text-field--disabled .mdc-floating-label {
+  color: green !important;
+}
+
+
+::ng-deep.mat-mdc-form-field-error-wrapper {
+  display: none !important;
+}
+/* Cuando el campo está vacío */
+.empty-label {
+  color: green !important;
+}
+
+/* Cuando el usuario selecciona o escribe algo */
+.filled-label {
+  color: white !important; /* Cambiar a transparente si prefieres */
+}
+::ng-deep .mat-mdc-form-field-has-icon-suffix .mat-mdc-text-field-wrapper {
+  padding-right: 0;
+  padding-left: 0;
+}
+::ng-deep .mat-mdc-select-placeholder {
+  color: green !important; /* Cambia 'red' por el color que desees */
+}
+::ng-deep.mat-mdc-form-field-type-mat-select:not(.mat-form-field-disabled) .mat-mdc-text-field-wrapper {
+  cursor: pointer;
+  padding-left: 0px;
+}
+
+::ng-deep .mdc-outlined-text-field-input-text-placeholder-color{
+  color: green !important; /* Cambia 'red' por el color que desees */
+}
+::ng-deep .mat-mdc-input-element::placeholder {
+  color: green !important;
+}
+::ng-deep .mat-mdc-form-field-type-mat-select:not(.mat-form-field-disabled) .mat-mdc-text-field-wrapper {
+  padding-right: 0px;
+  padding-left: 0px;
+}
+
+::ng-deep .mat-mdc-form-field-has-icon-suffix .mat-mdc-text-field-wrapper {
+  padding-right: 0 !important;
+  padding-left: 0 !important;
+}
+/* Ocultar el placeholder o mat-label si hay un valor seleccionado */
+.mat-form-field.mat-form-field-can-float .mat-label {
+  display: none; /* Oculta el label flotante cuando hay un valor seleccionado */
+}
+
+  /* Mostrar el mat-label solo si no hay un valor seleccionado */
+  .mat-form-field.mat-form-field-can-float .mat-label.mat-form-field-empty {
+    display: block;
+    position: absolute;
+    top: 0;
+    left: 0;
+    font-size: 14px;
+    color: rgba(0, 0, 0, 0.6); /* Placeholder visible solo si el campo está vacío */
+  }
+
+/* Ajustar el valor seleccionado para que esté completamente pegado a la línea */
+.mat-select-trigger {
+  padding-top: 0;
+  padding-bottom: 0;
+  margin: 0;
+  display: flex;
+  align-items: center; /* Centrar verticalmente el valor */
+}
+
+/* Eliminar espacio entre la línea y el valor seleccionado */
+.mat-form-field-underline {
+  margin-top: 0;
+  height: 2px; /* Grosor de la línea */
+}
+
+/* Remover el espacio del label flotante cuando ya hay un valor seleccionado */
+.mat-form-field:not(.mat-form-field-empty) .mat-label {
+  display: none; /* Oculta el mat-label cuando hay contenido seleccionado */
+}
+
+/* Ajustar la línea del mat-form-field para que no haya separación al inicio */
+.mat-form-field-wrapper {
+  padding-bottom: 0;
+}
+
+/* Opcional: Asegurar que la línea sea consistente y pegada */
+.mat-form-field-flex {
+  align-items: center; /* Asegura que el contenido esté alineado con la línea */
+  margin: 0;
+  padding: 0;
+}
+::ng-deep .mat-mdc-form-field-infix {
+  padding-top: 1em !important;
+  padding-bottom: 0em !important;
+}
+::ng-deep .mdc-text-field--filled.mdc-text-field--disabled {
+  
+  padding-left: 0px;
+}
+::ng-deep html {
+  --mdc-checkbox-unselected-icon-color: #8fbc8f !important;
+  --mat-checkbox-label-text-font: Roboto, sans-serif;
+  --mat-checkbox-label-text-line-height: 20px;
+  --mat-checkbox-label-text-size: 14px;
+  --mat-checkbox-label-text-tracking: 0.0178571429em;
+  --mat-checkbox-label-text-weight: 400;
+  --mdc-checkbox-selected-hover-state-layer-color: #8fbc8f !important;
+  --mdc-checkbox-unselected-hover-icon-color: #8fbc8f !important;
+  --mat-checkbox-label-text-color: #8fbc8f !important;
+  --mdc-checkbox-unselected-focus-icon-color: #8fbc8f !important;
+  --mdc-checkbox-disabled-selected-checkmark-color: black !important;
+  /*  --mdc-checkbox-disabled-selected-icon-color: #69f0ae !important;
+  --mdc-checkbox-disabled-selected-checkmark-color: #000 !important;*/
+}
+
+
+ /*Aplica un contorno rojo a los checkboxes deshabilitados con valor false */
+::ng-deep.mat-mdc-checkbox.mat-mdc-checkbox-disabled:not(.mdc-checkbox--selected) .mdc-checkbox__background {
+  border: 2px solid #8FBC8F !important;  /*Fuerza el estilo con rojo */
+background-color: dimgrey !important; /* Agrega fondo de color Dark Sea Green */
+}
+
+/* Opcional: Si deseas usar solo el color verde oscuro */
+::ng-deep.mat-mdc-checkbox.mat-mdc-checkbox-disabled:not(.mdc-checkbox--selected) .mdc-checkbox__background:hover {
+    border-color: #8FBC8F !important;  /*Cambia el contorno al color verde */
+}
+
+

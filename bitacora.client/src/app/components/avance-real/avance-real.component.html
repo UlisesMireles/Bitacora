@@ -1,0 +1,108 @@
+<div class="container-fluid" style="background-color: #EAEAEA;">
+  <div class=" topp">
+    <div class="col-md-12">
+      <h1 class="textotituloCabecera">Registros de Avance Real</h1>
+    </div>
+    <div class="pad">
+      <div class="row" style="padding:2.5px;">
+        <thead class="col-lg-7 col-md-7 col-sm-7">
+          <tr>
+            <th class="cabecerasCatalogos">Unidad de Negocio</th>
+            <th class="cabecerasCatalogos"> Área</th>
+          </tr>
+          <tr>
+            <th class="col-12">
+              <div class="col-12" style="text-align:left; padding:0 10px;">
+                <select #unidadNeg class="form-select form-select-sm opc col-10" [value]="unidadSeleccionada"
+                        (change)="actualizarAreas(unidadNeg.value)" (change)="buscarAvanceReal(unidadNeg.value,areaNeg.value)">
+                  <option [value]="-1">Todas</option>
+                  <option *ngFor="let unidad of unidadesNegocio" [value]="unidad.id">{{unidad.nombre}}</option>
+                </select>
+
+              </div>
+            </th>
+            <th class="col-12">
+              <div class="col-12" style="text-align: left; padding: 0 20px;">
+                <select #areaNeg class="form-select form-select-sm opc col-10 " [value]="areaSeleccionada"
+                        (change)="actualizarUnidades(areaNeg.value)" (change)="buscarAvanceReal(unidadNeg.value,areaNeg.value)">
+                  <option [value]="0">Todas</option>
+                  <option *ngFor="let area of areasUnidades" [value]="area.id">{{area.nombre}}</option>
+                </select>
+              </div>
+            </th>
+            <th>
+              <div style="text-align: left; " class="col-lg-4 col-md-4 col-sm-4">
+                <button class="btn btn-primary" (click)="guardarCambios()">Guardar</button>
+              </div>
+            </th>
+          </tr>
+        </thead>
+
+      </div>
+    </div>
+    <br>
+    <div class="divTablas">
+      <div class="table responsive ">
+        <table class="table table-striped cellspacing= dataTable" fixed-header>
+          <thead>
+            <tr role="row">
+              <th class="proyecto txtcnt" rowspan="1" colspan="1">Proyecto</th>
+              <th class=" txtcnt" rowspan="1" colspan="1">% Avance Real Nuevo</th>
+              <th class=" txtcnt" rowspan="1" colspan="1">Hrs. Inv. últimos 15 días</th>
+              <th class=" txtcnt" rowspan="1" colspan="1">% Avance Real Actual</th>
+              <th class=" txtcnt" rowspan="1" colspan="1">Fecha</th>
+              <th class="unidad txtcnt" rowspan="1" colspan="1">Unidad</th>
+              <th class=" txtcnt" rowspan="1" colspan="1">Área</th>
+
+
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let avance of avanceRealRegs | paginate: config">
+              <td class="proyecto">{{avance.nompreProyecto}}</td>
+              <td *ngIf="avance.bandera == 1" class="txtcnt">
+                <input class="avinput" type="number"
+                       #avanceNuevo value="0" (change)="registroEditado(avanceNuevo.value, avance)">
+              </td>
+              <td *ngIf="avance.bandera == 0" class="txtcnt">
+                <input class="avinput" type="number"
+                       value="0.00" disabled>
+              </td>
+              <td class="txtcnt">{{avance.horas}}</td>
+              <td class="txtcnt">{{avance.avance}}%</td>
+              <td class="txtcnt">{{avance.fechaRegistro}}</td>
+              <td class="unidad txtcnt">{{avance.unidad}}</td>
+              <td class="txtcnt">{{avance.area}}</td>
+
+            </tr>
+
+
+          </tbody>
+        </table>
+
+
+
+      </div>
+
+    </div>
+    <div class="col-md-12 row" style="margin-top: 10px;">
+      <div class="col-md-12 ">
+        <div class="row" style="font-family: 'Raleway', sans-serif; justify-content: center;">
+          <pagination-controls class="my-pagination" (pageChange)="pageChanged($event)" previousLabel="" nextLabel=""></pagination-controls>
+        </div>
+        <div class="row" style="font-family: 'Raleway', sans-serif; justify-content: center;">
+          <label class="labeltext" style="text-align: center; width: 100%;padding-left: 30px;">{{coleccion}} Registros en {{paginas}} {{pag}} </label>
+        </div>
+
+      </div>
+
+    </div>
+    <div>
+
+    </div>
+
+
+
+
+  </div>
+</div>
