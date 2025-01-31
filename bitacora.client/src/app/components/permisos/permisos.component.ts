@@ -174,22 +174,12 @@ export class PermisosComponent implements OnInit {
   guardarRol() {
     this.spinner.show()
     this.sinSeleccionados = Globals.pantallasSeleccionadas;
-    console.log(this.sinSeleccionados)
-    this.pantallasTemp = [];
-    for (let index = 0; index < this.pantallas.length; index++) {
-      this.pantallasTemp.push(this.pantallas[index].idPantalla);
-    }
 
-    for (let index = 0; index < this.sinSeleccionados.length; index++) {
-      var indice = this.pantallasTemp.indexOf(this.pantallasTemp.find(x => this.sinSeleccionados[index] == x));
-      //console.log(this.sinSeleccionados[index])
-      //console.log(this.pantallasTemp[indice])
-      //console.log(indice);
-      if (indice !== -1) {
-        this.pantallasTemp.splice(indice, 1)
-      }
-    }
-    //console.log(this.sinSeleccionados)
+    this.pantallasTemp = [
+      ...this.pantallasReporteSel.map(p => p.idPantalla),
+      ...this.pantallasCatalogoSel.map(p => p.idPantalla),
+      ...this.pantallasSinMenuSel.map(p => p.idPantalla),
+    ];
 
     if (this.editar) {
       if (this.nombre.length != undefined || this.desc != undefined || this.pantallasTemp.length > 0) {
