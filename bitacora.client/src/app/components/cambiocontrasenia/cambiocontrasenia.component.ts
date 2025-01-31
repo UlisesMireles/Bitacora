@@ -58,12 +58,18 @@ export class CambiocontraseniaComponent implements OnInit {
         }
         const datos = { idUser: user || '', password: this.f['pass'].value }
         if (this.cambio) {
-          this.http.get(this.baseUrl + "api/Login/CambioContrasenia/{id?}", { params: datos }).subscribe(res => {
+          this.http.get(this.baseUrl + "api/Login/CambioContrasenia/{id}", { params: datos }).subscribe(res => {
             //console.log(res);
             this.titulo = "Contraseña Actualizada";
             this.mensaje = "La contraseña ha sido actualizada correctamente"
             this.toastr.success(this.mensaje, this.titulo);
             localStorage.removeItem('idUs');
+            if (this.currentUser != '') {
+              this.route.navigate(['/bitacora/' + Globals.usuario]);
+            }
+            else {
+              this.route.navigate(['/login']);
+            }
           }, err => {
             //console.log(err);
             this.titulo = "Error";
@@ -72,12 +78,6 @@ export class CambiocontraseniaComponent implements OnInit {
             localStorage.removeItem('idUs');
           }
           )
-        }
-        if (this.currentUser != '') {
-          this.route.navigate(['/bitacora/' + Globals.usuario]);
-        }
-        else {
-          this.route.navigate(['/login']);
         }
       }
       else {
