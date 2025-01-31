@@ -612,6 +612,7 @@ h3-azul {
   --mdc-checkbox-unselected-hover-icon-color: #8fbc8f !important;
   --mat-checkbox-label-text-color: #8fbc8f !important;
   --mdc-checkbox-unselected-focus-icon-color: #8fbc8f !important;
+  --mdc-checkbox-disabled-selected-checkmark-color: black !important;
   /*  --mdc-checkbox-disabled-selected-icon-color: #69f0ae !important;
   --mdc-checkbox-disabled-selected-checkmark-color: #000 !important;*/
 }
@@ -620,7 +621,7 @@ h3-azul {
  /*Aplica un contorno rojo a los checkboxes deshabilitados con valor false */
 ::ng-deep.mat-mdc-checkbox.mat-mdc-checkbox-disabled:not(.mdc-checkbox--selected) .mdc-checkbox__background {
   border: 2px solid #8FBC8F !important;  /*Fuerza el estilo con rojo */
-background-color: #69f0ae !important; /* Agrega fondo de color Dark Sea Green */
+background-color: dimgrey !important; /* Agrega fondo de color Dark Sea Green */
 }
 
 /* Opcional: Si deseas usar solo el color verde oscuro */
