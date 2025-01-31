@@ -68,17 +68,17 @@ export class AppComponent implements OnInit {
   constructor(private readonly router: Router, private readonly authenticationService: AuthenticationService, private readonly userIdle: UserIdleService, private readonly cdRef: ChangeDetectorRef,
     public readonly dialog: MatDialog, private readonly redirige: RedireccionService, private readonly elementRef: ElementRef, private readonly sanitizer: DomSanitizer, private readonly http: HttpClient) {
     this.authenticationService.currentUser.subscribe(x => this.currentUser = x);
-    // this.router.routeReuseStrategy.shouldReuseRoute = function(){
-    //   return false;
-    // }
-    this.router.events.subscribe((evt) => {
-      if (evt instanceof NavigationEnd) {
-        // trick the Router into believing its last link wasn't previously loaded
-        this.router.navigated = false;
-        // if you need to scroll back to top, here is the right place
-        window.scrollTo(0, 0);
-      }
-    });
+    this.router.routeReuseStrategy.shouldReuseRoute = function(){
+      return false;
+    }
+    // this.router.events.subscribe((evt) => {
+    //   if (evt instanceof NavigationEnd) {
+    //     // trick the Router into believing its last link wasn't previously loaded
+    //     this.router.navigated = false;
+    //     // if you need to scroll back to top, here is the right place
+    //     window.scrollTo(0, 0);
+    //   }
+    // });
 
     this.setTimeout();
     this.mostrarMenu = false;

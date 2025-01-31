@@ -3,7 +3,7 @@ import { DateAdapter, MAT_DATE_FORMATS } from '@angular/material/core';
 import { MatDatepickerInputEvent } from '@angular/material/datepicker';  
 import { MatSelectChange, MatSelect } from '@angular/material/select';
 import { AppDateAdapter, APP_DATE_FORMATS } from './format-datepicker';
-import { Router, ActivatedRoute } from '@angular/router';
+import { Router, ActivatedRoute, NavigationEnd } from '@angular/router';
 import { FormGroup, FormBuilder, Validators, FormControl } from '@angular/forms';
 import { Globals } from '../../services/globals';
 import moment from 'moment';
@@ -144,9 +144,17 @@ export class FormBitacoraComponent implements OnInit, OnDestroy {
     
 
     this.router.onSameUrlNavigation ='reload';
-    this.router.routeReuseStrategy.shouldReuseRoute = function(){
-      return false;
-    }
+    // this.router.routeReuseStrategy.shouldReuseRoute = function(){
+    //   return false;
+    // }
+    this.router.events.subscribe((evt) => {
+      if (evt instanceof NavigationEnd) {
+        // trick the Router into believing its last link wasn't previously loaded
+        this.router.navigated = false;
+        // if you need to scroll back to top, here is the right place
+        window.scrollTo(0, 0);
+      }
+    });
     var mes=parseInt(this.fechaAct.format('M'));
     var dia=parseInt(this.fechaAct.format('D'));
     var año=(this.fechaAct.year())

@@ -3,7 +3,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { DatePipe } from '@angular/common';
 import {BitacoraService} from '../../services/bitacora.service';
 import  moment from 'moment';
-import { Router } from '@angular/router';
+import { NavigationEnd, Router } from '@angular/router';
 import {Globals} from '../../services/globals';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { AuthenticationService } from '../../services/authentication.service';
@@ -50,9 +50,17 @@ export class RegistrosCalendarioComponent implements OnInit {
   @Input() sumaHoras:number=0;
   constructor(private authenticationService:AuthenticationService,private cdRef:ChangeDetectorRef,private spinner: NgxSpinnerService,private router:Router, private bitacoraService:BitacoraService,private http:HttpClient, @Inject("BASE_URL") private baseUrl:string, private datePipe: DatePipe) {
 
-    this.router.routeReuseStrategy.shouldReuseRoute = function(){
-      return false;
-    }
+    // this.router.routeReuseStrategy.shouldReuseRoute = function(){
+    //   return false;
+    // }
+    this.router.events.subscribe((evt) => {
+          if (evt instanceof NavigationEnd) {
+            // trick the Router into believing its last link wasn't previously loaded
+            this.router.navigated = false;
+            // if you need to scroll back to top, here is the right place
+            window.scrollTo(0, 0);
+          }
+        });
     this.config= {
       itemsPerPage: this.registrosPorPagina,
       currentPage:1,
