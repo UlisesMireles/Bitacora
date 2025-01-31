@@ -755,7 +755,7 @@ export class AgregarUsuarioComponent implements OnInit, OnDestroy {
       if(this.tieneUnidadArea){
         if(this.editaEmpleadoConArea){
           this.editaEmpleadoConArea = false;
-          this.http.put<any>(this.baseUrl + "api/Usuarios/ModificaUsuario/{id?}",user).subscribe(result => {
+          this.http.post<any>(this.baseUrl + "api/Usuarios/ModificaUsuario",user).subscribe(result => {
             this.dialog.closeAll();
             localStorage.removeItem('usuarioEditar');
             this.titulo = "Usuario Modificado";

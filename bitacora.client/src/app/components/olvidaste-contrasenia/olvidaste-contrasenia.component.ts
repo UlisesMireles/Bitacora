@@ -25,6 +25,9 @@ export class OlvidasteContraseniaComponent implements OnInit {
       username: ['',Validators.required]
     });
   }
+  cerrar() {
+    this.dialog.closeAll();
+  }
   get f() { return this.form.controls; }
   recuperarContrasenia(){
     if(this.f.username.value==''){

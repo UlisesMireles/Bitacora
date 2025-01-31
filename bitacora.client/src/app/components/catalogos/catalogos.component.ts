@@ -849,8 +849,8 @@ export class CatalogosComponent implements OnInit{
   eliminarRol(rol: { idRol: any }) {
     this.spinner.show();
     //console.log(rol)
-    var idRol=rol.idRol;
-    this.http.delete<any>(this.baseUrl + `api/Roles/EliminaRol/${idRol}`).subscribe(
+    var datos = { idRol: rol.idRol };
+    this.http.post<any>(this.baseUrl + `api/Roles/EliminaRol`, datos).subscribe(
       res=>{
         if(res.rol==-2){
           this.titulo = "Error";

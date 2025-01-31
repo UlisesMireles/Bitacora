@@ -61,7 +61,7 @@ namespace Bitacora.Controllers
             return idUsuer;
         }
 
-        [HttpPut("[action]/{id}")]
+        [HttpPost("[action]")]
         public int ModificaUsuario(Usuarios datos)
         {
             var idUsuer = _UsuariosLogic.ModificaUsuario(datos);
