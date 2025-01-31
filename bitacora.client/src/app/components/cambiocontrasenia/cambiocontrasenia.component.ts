@@ -4,6 +4,7 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
 import { ToastrService } from 'ngx-toastr';
 import { environment } from '../../../environments/environment';
+import { Globals } from '../../services/globals';
 
 @Component({
   selector: 'app-cambiocontrasenia',
@@ -73,7 +74,7 @@ export class CambiocontraseniaComponent implements OnInit {
           )
         }
         if (this.currentUser != '') {
-          this.route.navigate(['/bitacora', localStorage.getItem('userName')]);
+          this.route.navigate(['/bitacora/' + Globals.usuario]);
         }
         else {
           this.route.navigate(['/login']);

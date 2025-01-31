@@ -679,7 +679,7 @@ export class FormBitacoraComponent implements OnInit, OnDestroy {
     var datos:RegistroBitacora;
         datos = {id: this.registroEditar.id,fecha:fecha, IdUser:idUs, idProyecto:this.proyectoSeleccionado,idEtapa:this.etapaSeleccionada,idActividad:actividad,descripcion:value.detalle,
         duracion:value.duracion, fechaRegistro:value.fechaRegistro};
-    return this.http.put(this.baseUrl + "api/Bitacora/ModificarBitacora/{id?}",datos).subscribe(res=>{
+    return this.http.post(this.baseUrl + "api/Bitacora/ModificarBitacora/",datos).subscribe(res=>{
       this.spinner.hide();
       this.titulo = "Registro Editado";
       this.mensaje = "Tu registro se ha editado correctamente"

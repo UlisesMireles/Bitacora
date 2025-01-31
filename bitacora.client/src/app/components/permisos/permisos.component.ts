@@ -208,7 +208,7 @@ export class PermisosComponent implements OnInit {
             this.toastr.warning(this.mensaje, this.titulo);
             this.spinner.hide();
           } else {
-            this.http.put<any>(this.baseUrl + 'api/Roles/ModificaRol/{id?}', rol).subscribe(
+            this.http.post<any>(this.baseUrl + 'api/Roles/ModificaRol', rol).subscribe(
               res => {
                 //console.log(res)
                 this.titulo = "Rol Actualizado";

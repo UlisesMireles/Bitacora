@@ -51,7 +51,7 @@ namespace Bitacora.Controllers
             return resp;
         }
 
-        [HttpPut("[action]/{id}")]
+        [HttpPost("[action]")]
         public object ModificaRol(Roles rol)
         {
             var Rol = _RolesLogic.ModificaRol(rol);
@@ -60,10 +60,10 @@ namespace Bitacora.Controllers
             return resp;
         }
 
-        [HttpDelete("[action]/{idRol}")]
-        public object EliminaRol(int idRol)
+        [HttpPost("[action]")]
+        public object EliminaRol(Roles data)
         {
-            var Rol = _RolesLogic.EliminaRol(idRol);
+            var Rol = _RolesLogic.EliminaRol(data.IdRol);
             var resp = new { result = "", Rol = Rol };
 
             return resp;

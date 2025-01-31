@@ -6,7 +6,7 @@ builder.Services.AddCors(options =>
 {
     options.AddPolicy("AllowSpecificOrigins", policy =>
     {
-        policy.WithOrigins("https://127.0.0.1:4200", "https://localhost:4200")
+        policy.WithOrigins("https://127.0.0.1:4200", "https://localhost:4200", "http://192.168.0.117:9090/Bitacora", "https://bitacora.eisei.net.mx/Bitacora")
             .AllowAnyHeader()
             .AllowAnyMethod()
             .AllowCredentials();
@@ -14,7 +14,7 @@ builder.Services.AddCors(options =>
 });
 
 builder.Services.AddCors();
- 
+
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
