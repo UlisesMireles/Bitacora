@@ -27,11 +27,11 @@ const routes: Routes = [
   { path: 'nom035', component: Nom035Component, canActivate: [AuthGuard] },
   { path: 'reportes/:reporte', component: ReportesComponent, canActivate: [AuthGuardReportes] },
   { path: 'catalogos/:catalogo', component: CatalogosComponent, canActivate: [AuthGuardCatalogos] },
-  { path:'avance-real',component: AvanceRealComponent,canActivate:[AuthGuardAvanceReal]},
+  //{ path:'avance-real',component: AvanceRealComponent,canActivate:[AuthGuardAvanceReal]},
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes)],
+  imports: [RouterModule.forRoot(routes, { useHash: true })],
   exports: [RouterModule]
 })
 export class AppRoutingModule { }

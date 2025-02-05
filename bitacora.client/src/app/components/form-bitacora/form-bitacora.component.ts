@@ -140,13 +140,14 @@ export class FormBitacoraComponent implements OnInit, OnDestroy {
     }
     this.cdRef.detectChanges();
   }
-  constructor(private spinner: NgxSpinnerService,private cdRef:ChangeDetectorRef,private toastr:ToastrService,private http:HttpClient,private fb:FormBuilder, private router:Router, private bitacoraService:BitacoraService, private authenticationService:AuthenticationService) {
+  constructor(private spinner: NgxSpinnerService, private cdRef: ChangeDetectorRef, private toastr: ToastrService, private http: HttpClient,
+    private fb: FormBuilder, private router: Router, private bitacoraService: BitacoraService, private authenticationService: AuthenticationService) {
     
 
-    this.router.onSameUrlNavigation ='reload';
-    // this.router.routeReuseStrategy.shouldReuseRoute = function(){
-    //   return false;
-    // }
+    //this.router.onSameUrlNavigation ='reload';
+    this.router.routeReuseStrategy.shouldReuseRoute = function(){
+       return false;
+    }
     this.router.events.subscribe((evt) => {
       if (evt instanceof NavigationEnd) {
         // trick the Router into believing its last link wasn't previously loaded
