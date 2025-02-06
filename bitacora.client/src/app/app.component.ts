@@ -85,15 +85,14 @@ export class AppComponent implements OnInit {
     this.userInactive.subscribe(() => this.logout())
   }
 
-  // @HostListener('document:click', ['$event'])
-  // public onDocumentClick(event: MouseEvent): void {
-  //   const targetElement = event.target as HTMLElement;
-  //   // Check if the click was outside the element
-  //   if (targetElement && !this.elementRef.nativeElement.contains(targetElement)) {
-  //     this.perfilAbierto = false;
-  //     $(".dropdown-user-menu").css({ display: 'none' });
-  //   }
-  // }
+  @HostListener('document:click', ['$event'])
+  onDocumentClick(event: MouseEvent) {
+    const clickedInside = (event.target as HTMLElement).closest('.dropdown');
+    if (!clickedInside) {
+      $(".dropdown-user-menu").css({ display: 'none' });  // Cerrar el menú si se hace clic fuera
+      this.perfilAbierto = false;
+    }
+  }
 
   ngAfterViewInit() {
     this.resize();
