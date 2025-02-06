@@ -13,7 +13,7 @@
       <form [formGroup]="formBitacora" class="col-md-12">
         <div class="form-group row fechaIn">
           <label class="lab col-md-12">Fecha</label>
-          <mat-form-field class="col-md-12" style="max-height: 40px !important;" [floatLabel]="formBitacora.value.floatLabel">
+          <mat-form-field class="col-md-12 max-h" style="max-height: 40px !important;" [floatLabel]="formBitacora.value.floatLabel">
             <input #fechaf class="inlab" style='color: #0e3e62 !important;' matInput [min]="minDate" [max]="maxDate" [matDatepicker]="picker" (focus)="picker.open()" (click)="picker.open()" (dateInput)="fechaSeleccion($event)" formControlName="fecha" [(ngModel)]="fechaDatePicker" readonly>
             <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
             <mat-datepicker #picker></mat-datepicker>
