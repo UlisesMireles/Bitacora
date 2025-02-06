@@ -161,3 +161,24 @@ mat-dialog-container{
 div.modal-backdrop.fade.show{
     display: none !important;
 }
+
+.toast-container{
+    top:42%
+}
+
+.toast-container .ngx-toastr {
+    margin-left: auto;
+    margin-right: auto;
+    width: 80vh !important;
+    height: 20vh !important;
+}
+.toast-title {
+    font-weight: bold;
+    font-size: 22px;
+    text-align: center;
+}
+.toast-message {
+    word-wrap: break-word;
+    font-size: 19px;
+    text-align: center;
+}
