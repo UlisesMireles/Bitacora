@@ -18,13 +18,13 @@
           <mat-icon class="col-1">arrow_forward_ios</mat-icon>
         </button>
       </li>
-      <li *ngIf="avanceMenu" class="col-12 pad0">
+      <!--<li *ngIf="avanceMenu" class="col-12 pad0">
         <button mat-button class="col-12 pad0 buttonMenu" (click)="avanceReal(); opened=false">
           <mat-icon class="col-1">trending_up</mat-icon>
           <label class="col-8">Avance Real</label>
           <mat-icon class="col-1"></mat-icon>
         </button>
-      </li>
+      </li>-->
     </ul>
     <ul class="menuDer nav" *ngIf="menu2">
       <li class="col-12 row">
@@ -197,9 +197,9 @@
                 <mat-icon style="top: 7px!important; position: relative!important; font-size: 21px!important;" class="material-icons">description</mat-icon>
                 BITÁCORA<span class="sr-only">(current)</span></a>
 
-              <a *ngIf="avanceMenu" class="nav-item nav-link" (click)="avanceReal()">
+              <!--<a *ngIf="avanceMenu" class="nav-item nav-link" (click)="avanceReal()">
                 <mat-icon style="top: 7px!important; position: relative!important; font-size: 21px!important;" class="material-icons">trending_up</mat-icon>
-                AVANCE REAL</a>
+                AVANCE REAL</a>-->
               <li *ngIf="reportesMenu" class="nav-item dropdown">
 
                 <a style="padding-bottom: 16px;" class="nav-link dropdown-toggle" id="navbarDropdown" role="button" data-toggle="dropdown"
@@ -267,7 +267,7 @@
                   <div *ngIf="proyecto" class="dropdown-divider"></div>
                   <li *ngIf="participacion" class="subMenu dropdown">
                     <div *ngIf="proyecto" style="border-top: 0px solid #e9ecef!important;" class="dropdown-divider"></div>
-                    <a style="padding-right: 4px; padding-bottom: 11px;" *ngIf="participacion" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
+                    <a style="padding-right: 4px; padding-bottom: 11px;" *ngIf="participacion" id="navbarDropdown" role="button" data-toggle="dropdown"
                     aria-haspopup="true" aria-expanded="false" class="dropdown-item dropdown-toggle">Reporte NOM 035</a>
                     <div class="dropdown-menu" aria-labelledby="navbarDropdown"style="
                     color: #000000!important;
