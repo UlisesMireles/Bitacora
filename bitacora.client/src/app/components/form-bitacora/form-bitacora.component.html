@@ -21,7 +21,7 @@
         </div>
         <div *ngIf="esEditable || pagina==0 && movil == true || movil==false" class="form-group row proyectoIn mt-2" [ngClass]="{'des': pagina==1 && movil==true}">
           <label class="lab col-md-12">Proyecto</label>
-          <mat-form-field class="iconoProyecto col-md-12 " [floatLabel]="formBitacora.value.floatLabel">
+          <mat-form-field class="iconoProyecto col-md-12 " style="margin-bottom: 5px;" [floatLabel]="formBitacora.value.floatLabel">
             <!--<mat-label class="inlab">Seleccione un proyecto...</mat-label>-->
             <mat-select  #proyectoS placeholder="Seleccione un proyecto..." id="proyectof" [formControl]="proyectoCtrl" (keyup)="abrirSelect('proyecto',$event)" (selectionChange)="proyectoSeleccion($event.value)" [(ngModel)]="proyectoSeleccionado" [disabled]="!editar && movil && pagina==1" title="{{titleProy}}">
               <mat-option>
@@ -119,7 +119,7 @@
 
           <label class="lab col-md-12">Detalle</label>
           <mat-form-field class="iconoActividad col-md-12 example-full-width fix" [floatLabel]="formBitacora.value.floatLabel">
-            <textarea #detalle formControlName="detalle" placeholder="Descripción de la actividad (Max 455 caracteres)" autocomplete="off" maxlength="455" class="inlab fix" matInput (keyup)="detalleSeleccion(detalle.value)" style="height: 55px; max-height: 70px; caret-color: #103d66; color: #0e3e62 !important;"></textarea>
+            <textarea #detalle formControlName="detalle" placeholder="Descripción de la actividad (Max 455 caracteres)" autocomplete="off" maxlength="455" class="inlab fix" matInput (keyup)="detalleSeleccion(detalle.value)" style="height: 70px; max-height: 85px; caret-color: #103d66; color: #0e3e62 !important;" pattern="\S+"></textarea>
             <mat-icon matSuffix class="iconoDetalle"></mat-icon>
           </mat-form-field>
         </div>

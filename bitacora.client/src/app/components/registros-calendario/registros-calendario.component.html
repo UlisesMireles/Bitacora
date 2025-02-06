@@ -6,10 +6,29 @@
           <mat-icon class="custom-icon">search</mat-icon>
         </div>
         <div class="col-sm-10" style="background-color:transparent">
-          <input type="text" style="width: 100%;; height: 35px; border: 1px solid #ccc; border-radius: 5px; font-weight: bold!important; font-size: 14px!important; padding-left: 9px!important;" #busq autocomplete="off" name="busqueda" [(ngModel)]="busqueda" class="inlab" (keyup)="filtroBitacora(busq.value)">
-          <button class="clear_icon" style="position: relative; right: 41px; top: 2px;" mat-button *ngIf="busq.value" matSuffix mat-icon-button aria-label="Clear" (click)="busqueda=''; filtroBitacora(busqueda)">
-            <mat-icon style="font-size: 21px; color: #cccccc;">close</mat-icon>
-          </button>
+          <!--<input type="text" style="width: 100%;; height: 35px; border: 1px solid #ccc; border-radius: 5px; font-weight: bold!important; font-size: 14px!important; padding-left: 9px!important;" #busq autocomplete="off" name="busqueda" [(ngModel)]="busqueda" class="inlab" (keyup)="filtroBitacora(busq.value)">
+              <button class="clear_icon" style="position: relative; right: 41px; top: 2px;" mat-button *ngIf="busq.value" matSuffix mat-icon-button aria-label="Clear" (click)="busqueda=''; filtroBitacora(busqueda)">
+                <mat-icon style="font-size: 21px; color: #cccccc !i;">close</mat-icon>
+              </button>-->
+          <div class="position-relative" style="width: 100%;">
+            <input type="text"
+                   class="form-control"
+                   placeholder="Buscar"
+                   aria-label="Buscar"
+                   [(ngModel)]="busqueda"
+                   #busq
+                   (keyup)="filtroBitacora(busq.value)"
+                   autocomplete="off"
+                   style="font-weight: bold; font-size: 14px; padding-left: 9px; padding-right: 35px;">
+
+            <button class="btn position-absolute"
+                    *ngIf="busq.value"
+                    (click)="busqueda=''; filtroBitacora(busqueda)"
+                    type="button"
+                    style="top: 60%; right: -8px; transform: translateY(-50%); background: transparent; border: none; outline: none; box-shadow: none;">
+              <mat-icon style="font-size: 21px; color: #cccccc;">close</mat-icon>
+            </button>
+          </div>
         </div>
 
       </td>
