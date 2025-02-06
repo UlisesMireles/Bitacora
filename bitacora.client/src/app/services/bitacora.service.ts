@@ -33,14 +33,16 @@ export class BitacoraService {
         this.titulo = "Registro Eliminado";
         this.mensaje = "El registro ha sido eliminado correctamente"
         this.toastr.success(this.mensaje, this.titulo);
-        this.router.navigate(['/bitacora/' + Globals.usuario]);
+        //this.router.navigate(['/bitacora/' + Globals.usuario]);
+        this.router.navigate(['/bitacora/' + Globals.usuario], { queryParams: { refresh: new Date().getTime() } });
         this.spinner.hide();
       }
       else {
         this.titulo = "Error";
         this.mensaje = "Ocurrio un error al tratar de eliminar el registro"
         this.toastr.error(this.mensaje, this.titulo);
-        this.router.navigate(['/bitacora/' + Globals.usuario]);
+        this.router.navigate(['/bitacora/' + Globals.usuario], { queryParams: { refresh: new Date().getTime() } });
+        //this.router.navigate(['/bitacora/' + Globals.usuario]);
         this.spinner.hide();
       }
     }, error=>{

@@ -351,6 +351,9 @@ box-shadow: inset 32px 3px 23px -31px rgba(0,0,0,0.91);
   background: transparent !important;
   --mdc-filled-text-field-active-indicator-color: #103D66 !important; /* Cambia por el color deseado */
   --mdc-filled-text-field-hover-active-indicator-color: green;
+  --mdc-filled-text-field-error-focus-active-indicator-color: green;
+  --mdc-filled-text-field-error-hover-active-indicator-color: green;
+  --mdc-filled-text-field-error-active-indicator-color: #103D66 !important;
   color: #0E3E62 !important;
 }
 
@@ -410,4 +413,15 @@ box-shadow: inset 32px 3px 23px -31px rgba(0,0,0,0.91);
 }
 .max-h {
   max-height: 40px !important;
+}
+::ng-deep .mat-mdc-option .mdc-list-item__primary-text {
+  font-size: 14px !important;
+  padding-top: 10px !important;
+  padding-bottom: 10px !important;
+}
+::ng-deep .mat-mdc-select-arrow-wrapper{
+    margin-bottom: 5px !important;
+}
+:host ::ng-deep #resize-handle {
+  background-color: transparent !important;
 }
