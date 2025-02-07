@@ -1,23 +1,22 @@
-import { Component, OnInit, Inject, Injectable, OnDestroy, HostListener, ChangeDetectorRef, ViewChild, ElementRef } from '@angular/core';
+import { HttpClient, HttpParams } from '@angular/common/http';
+import { ChangeDetectorRef, Component, HostListener, Injectable, OnDestroy, OnInit, ViewChild } from '@angular/core';
+import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { DateAdapter, MAT_DATE_FORMATS } from '@angular/material/core';
-import { MatDatepickerInputEvent } from '@angular/material/datepicker';  
-import { MatSelectChange, MatSelect } from '@angular/material/select';
-import { AppDateAdapter, APP_DATE_FORMATS } from './format-datepicker';
-import { Router, ActivatedRoute, NavigationEnd } from '@angular/router';
-import { FormGroup, FormBuilder, Validators, FormControl } from '@angular/forms';
-import { Globals } from '../../services/globals';
+import { MatDatepickerInputEvent } from '@angular/material/datepicker';
+import { MatSelect, MatSelectChange } from '@angular/material/select';
+import { NavigationEnd, Router } from '@angular/router';
+import $ from 'jquery';
 import moment from 'moment';
-import { takeUntil, take } from 'rxjs/operators';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { RegistroBitacora } from '../../models/registroBitacora';
-import {BitacoraService} from '../../services/bitacora.service';
-import { ToastrService } from 'ngx-toastr';
-import { Subject, ReplaySubject } from 'rxjs';
 import { NgxSpinnerService } from 'ngx-spinner';
-import { AuthenticationService } from '../../services/authentication.service';
-import { HttpParams } from '@angular/common/http';
-import  $ from 'jquery';
+import { ToastrService } from 'ngx-toastr';
+import { ReplaySubject, Subject } from 'rxjs';
+import { takeUntil } from 'rxjs/operators';
 import { environment } from '../../../environments/environment';
+import { RegistroBitacora } from '../../models/registroBitacora';
+import { AuthenticationService } from '../../services/authentication.service';
+import { BitacoraService } from '../../services/bitacora.service';
+import { Globals } from '../../services/globals';
+import { APP_DATE_FORMATS, AppDateAdapter } from './format-datepicker';
 
 @Component({
   selector: 'form-bitacora',
@@ -531,135 +530,253 @@ export class FormBitacoraComponent implements OnInit, OnDestroy {
     this.edicionRegistro = false;
     this.mostrarFase = false;
   }
-  guardarRegistro(value : any){
-    this.campos="";
+  //guardarRegistro(value : any){
+  //  this.campos="";
+  //  var fecha = this.fechaDatePicker;
+  //  if(this.edicionRegistro){
+  //    this.formBitacora.controls['fecha'].setValue(fecha);
+  //  }
+  //  if(this.proyectoSeleccionado == -1){
+  //    this.proyectoSeleccionado = undefined;
+  //  }
+  //  var proy = this.proyectoSeleccionado;
+
+  //  //var fase = this.formBitacora.get('fase').value;
+  //  var fase = this.etapaSeleccionada;
+  //  //var evento = this.formBitacora.get('evento').value;
+  //  var evento = this.eventoSeleccionado;
+  //  var actividad = this.actividadSeleccionada;
+  //  //var actividad = this.formBitacora.get('actividad').value;
+  //  var detalle = this.formBitacora.get('detalle')!.value.trim();
+  //  var duracion = this.formBitacora.get('duracion')!.value;
+
+  //  if(this.formBitacora.valid ){
+
+
+  //    if(proy==undefined){
+  //      if(this.eventoSeleccionado == undefined){
+  //        this.campos+= "| Evento ";
+  //      }
+  //      if(this.eventoSeleccionado != undefined){
+  //        if (value.duracion >8 || value.duracion <0) {
+
+  //          this.campos+= "| Duración debe ser menor o igual a 8 Horas"
+  //          this.titulo = "Advertencia";
+  //          this.mensaje = "Revisar campo(s): "+this.campos;
+  //          this.toastr.warning(this.mensaje, this.titulo);
+  //        }
+  //        else {
+  //          if(this.edicionRegistro==false){
+  //            this.insertarBitacora(value);
+
+  //          }
+  //          else{
+  //            this.editarBitacora(value,fecha);
+  //          }
+  //        }
+  //      }
+  //      else{
+  //          this.titulo = "Advertencia";
+  //          this.mensaje = "Revisar campo(s): "+this.campos;
+  //          this.toastr.warning(this.mensaje, this.titulo);
+  //      }
+  //    }
+  //    else if(proy!= undefined){
+  //      if(this.etapaSeleccionada == undefined){
+  //        this.campos+= "| Etapa ";
+  //      }
+  //      if(this.actividadSeleccionada == undefined){
+  //        this.campos+= "| Actividad ";
+  //      }
+  //      if(this.etapaSeleccionada != undefined && this.actividadSeleccionada != undefined){
+  //        if (value.duracion >8 || value.duracion <0) {
+
+  //          this.campos+= "| Duración debe ser menor o igual a 8 Horas "
+
+  //          this.titulo = "Advertencia";
+  //          this.mensaje = "Revisar campo(s): "+this.campos;
+  //          this.toastr.warning(this.mensaje, this.titulo);
+
+  //        }
+  //        else{
+  //          if(this.edicionRegistro==false){
+  //            this.insertarBitacora(value);
+
+  //          }
+  //          else{
+  //            this.editarBitacora(value,fecha);
+  //          }
+  //        }
+  //      }else{
+  //        this.titulo = "Advertencia";
+  //          this.mensaje = "Revisar campo(s): "+this.campos;
+  //          this.toastr.warning(this.mensaje, this.titulo);
+  //      }
+  //    }
+
+  //  }
+
+  //  else{
+
+  //    if(proy == undefined){
+  //      if(fecha==null){
+  //        this.campos+= "| Fecha ";
+  //      }
+  //      if(evento == undefined || evento == ''){
+  //        this.campos+= "| Evento ";
+  //      }
+  //      if(detalle=='' || detalle==null){
+  //        this.campos+= "| Detalle ";
+  //      }
+  //      if(duracion=='' || duracion == null){
+  //        this.campos+= "| Duracion ";
+  //      }
+  //      this.campos+="|";
+  //    }
+  //    if(proy!=undefined){
+  //      if(fecha==null){
+  //        this.campos+= "| Fecha ";
+  //      }
+  //      if(fase==undefined || fase==''){
+  //        this.campos+= "| Etapa ";
+  //      }
+  //      if(actividad == undefined || actividad==''){
+  //        this.campos+= "| Actividad ";
+  //      }
+  //      if(detalle=='' || detalle==null){
+  //        this.campos+= "| Detalle ";
+  //      }
+  //      if(duracion=='' || duracion == null){
+  //        this.campos+= "| Duracion ";
+  //      }
+  //      this.campos+="|";
+  //    }
+  //    this.titulo = "Advertencia";
+  //    this.mensaje = "Revisar campo(s): "+this.campos;
+  //    this.toastr.warning(this.mensaje, this.titulo);
+
+
+  //  }
+
+  //}
+
+
+  ///07/02/2025 Daniel Mercado
+  ///ajutes en las validaciones del formulario para campos rqueridos espacios y la duracion se valide entre 0-8 horas
+  guardarRegistro(value: any) {
+    this.campos = "";
     var fecha = this.fechaDatePicker;
-    if(this.edicionRegistro){
+    if (this.edicionRegistro) {
       this.formBitacora.controls['fecha'].setValue(fecha);
     }
-    if(this.proyectoSeleccionado == -1){
+    if (this.proyectoSeleccionado == -1) {
       this.proyectoSeleccionado = undefined;
     }
     var proy = this.proyectoSeleccionado;
-   
-    //var fase = this.formBitacora.get('fase').value;
+
     var fase = this.etapaSeleccionada;
-    //var evento = this.formBitacora.get('evento').value;
     var evento = this.eventoSeleccionado;
     var actividad = this.actividadSeleccionada;
-    //var actividad = this.formBitacora.get('actividad').value;
-    var detalle = this.formBitacora.get('detalle')!.value;
-    var duracion = this.formBitacora.get('duracion')!.value;
-    
-    if(this.formBitacora.valid ){
+    var detalle = (this.formBitacora.get('detalle')?.value ?? '').trim();
+    var duracion = this.formBitacora.get('duracion')?.value ?? null;
+    var duracionNum = Number(duracion);
 
-     
-      if(proy==undefined){
-        if(this.eventoSeleccionado == undefined){
-          this.campos+= "| Evento ";
+    if (this.formBitacora.valid) {
+      if (proy == undefined) {
+        if (this.eventoSeleccionado == undefined) {
+          this.campos += "| Evento ";
         }
-        if(this.eventoSeleccionado != undefined){
-          if (value.duracion >8 || value.duracion <0) {
-        
-            this.campos+= "| Duración debe ser menor o igual a 8 Horas"
+        if (this.eventoSeleccionado != undefined) {
+          if (isNaN(duracionNum) || duracionNum > 8 || duracionNum < 0) {
+            this.campos += "| Duración debe ser entre 0 y 8 Horas";
             this.titulo = "Advertencia";
-            this.mensaje = "Revisar campo(s): "+this.campos;
+            this.mensaje = "Revisar campo(s): " + this.campos;
             this.toastr.warning(this.mensaje, this.titulo);
           }
           else {
-            if(this.edicionRegistro==false){            
+            if (this.edicionRegistro == false) {
               this.insertarBitacora(value);
-                     
             }
-            else{
-              this.editarBitacora(value,fecha);
-            }
-          }
-        }
-        else{
-            this.titulo = "Advertencia";
-            this.mensaje = "Revisar campo(s): "+this.campos;
-            this.toastr.warning(this.mensaje, this.titulo);
-        }
-      }
-      else if(proy!= undefined){
-        if(this.etapaSeleccionada == undefined){
-          this.campos+= "| Etapa ";
-        }
-        if(this.actividadSeleccionada == undefined){
-          this.campos+= "| Actividad ";
-        }
-        if(this.etapaSeleccionada != undefined && this.actividadSeleccionada != undefined){
-          if (value.duracion >8 || value.duracion <0) {
-           
-            this.campos+= "| Duración debe ser menor o igual a 8 Horas "
-            
-            this.titulo = "Advertencia";
-            this.mensaje = "Revisar campo(s): "+this.campos;
-            this.toastr.warning(this.mensaje, this.titulo);
-      
-          }
-          else{
-            if(this.edicionRegistro==false){
-              this.insertarBitacora(value);
-         
-            }
-            else{
-              this.editarBitacora(value,fecha);
+            else {
+              this.editarBitacora(value, fecha);
             }
           }
-        }else{
+        }
+        else {
           this.titulo = "Advertencia";
-            this.mensaje = "Revisar campo(s): "+this.campos;
+          this.mensaje = "Revisar campo(s): " + this.campos;
+          this.toastr.warning(this.mensaje, this.titulo);
+        }
+      }
+      else if (proy != undefined) {
+        if (this.etapaSeleccionada == undefined) {
+          this.campos += "| Etapa ";
+        }
+        if (this.actividadSeleccionada == undefined) {
+          this.campos += "| Actividad ";
+        }
+        if (this.etapaSeleccionada != undefined && this.actividadSeleccionada != undefined) {
+          if (isNaN(duracionNum) || duracionNum > 8 || duracionNum < 0) {
+            this.campos += "| Duración debe ser entre 0 y 8 Horas ";
+            this.titulo = "Advertencia";
+            this.mensaje = "Revisar campo(s): " + this.campos;
             this.toastr.warning(this.mensaje, this.titulo);
+          }
+          else {
+            if (this.edicionRegistro == false) {
+              this.insertarBitacora(value);
+            }
+            else {
+              this.editarBitacora(value, fecha);
+            }
+          }
+        } else {
+          this.titulo = "Advertencia";
+          this.mensaje = "Revisar campo(s): " + this.campos;
+          this.toastr.warning(this.mensaje, this.titulo);
         }
       }
-
     }
-    
-    else{
-      
-      if(proy == undefined){
-        if(fecha==null){
-          this.campos+= "| Fecha ";
+    else {
+      if (proy == undefined) {
+        if (fecha == null) {
+          this.campos += "| Fecha ";
         }
-        if(evento == undefined || evento == ''){
-          this.campos+= "| Evento ";
+        if (evento == undefined || evento == '') {
+          this.campos += "| Evento ";
         }
-        if(detalle=='' || detalle==null){
-          this.campos+= "| Detalle ";
+        if (!detalle) {
+          this.campos += "| Detalle ";
         }
-        if(duracion=='' || duracion == null){
-          this.campos+= "| Duracion ";
+        if (!duracion || isNaN(duracionNum) || duracionNum > 8 || duracionNum < 0) {
+          this.campos += "| Duración debe ser entre 0 y 8 Horas ";
         }
-        this.campos+="|";
+        this.campos += "|";
       }
-      if(proy!=undefined){
-        if(fecha==null){
-          this.campos+= "| Fecha ";
+      if (proy != undefined) {
+        if (fecha == null) {
+          this.campos += "| Fecha ";
         }
-        if(fase==undefined || fase==''){
-          this.campos+= "| Etapa ";
+        if (fase == undefined || fase == '') {
+          this.campos += "| Etapa ";
         }
-        if(actividad == undefined || actividad==''){
-          this.campos+= "| Actividad ";
+        if (actividad == undefined || actividad == '') {
+          this.campos += "| Actividad ";
         }
-        if(detalle=='' || detalle==null){
-          this.campos+= "| Detalle ";
+        if (!detalle) {
+          this.campos += "| Detalle ";
         }
-        if(duracion=='' || duracion == null){
-          this.campos+= "| Duracion ";
+        if (!duracion || isNaN(duracionNum) || duracionNum > 8 || duracionNum < 0) {
+          this.campos += "| Duración debe ser entre 0 y 8 Horas ";
         }
-        this.campos+="|";
+        this.campos += "|";
       }
       this.titulo = "Advertencia";
-      this.mensaje = "Revisar campo(s): "+this.campos;
+      this.mensaje = "Revisar campo(s): " + this.campos;
       this.toastr.warning(this.mensaje, this.titulo);
-     
-     
     }
-
   }
+
   editarBitacora(value: any, fecha: any){
     this.spinner.show();
     var etapa = this.etapaSeleccionada;

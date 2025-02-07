@@ -119,7 +119,17 @@
 
           <label class="lab col-md-12">Detalle</label>
           <mat-form-field class="iconoActividad col-md-12 example-full-width fix" [floatLabel]="formBitacora.value.floatLabel">
-            <textarea #detalle formControlName="detalle" placeholder="Descripción de la actividad (Max 455 caracteres)" autocomplete="off" maxlength="455" class="inlab fix" matInput (keyup)="detalleSeleccion(detalle.value)" style="height: 70px; max-height: 85px; caret-color: #103d66; color: #0e3e62 !important;" pattern="\S+"></textarea>
+            <!--<textarea #detalle formControlName="detalle" placeholder="Descripción de la actividad (Max 455 caracteres)" autocomplete="off" maxlength="455" class="inlab fix" matInput (keyup)="detalleSeleccion(detalle.value)" style="height: 70px; max-height: 85px; caret-color: #103d66; color: #0e3e62 !important;" pattern="\S+"></textarea>-->
+            <textarea #detalle
+                      formControlName="detalle"
+                      placeholder="Descripción de la actividad (Max 455 caracteres)"
+                      autocomplete="off"
+                      maxlength="455"
+                      class="inlab fix"
+                      matInput
+                      (keyup)="detalleSeleccion(detalle.value.trim())"
+                      (blur)="formBitacora.patchValue({ detalle: detalle.value.trim() })"
+                      style="height: 70px; max-height: 85px; caret-color: #103d66; color: #0e3e62 !important;"></textarea>
             <mat-icon matSuffix class="iconoDetalle"></mat-icon>
           </mat-form-field>
         </div>
