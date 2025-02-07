@@ -96,7 +96,7 @@ export class CatalogosComponent implements OnInit{
       }
     }
     else if(this.tipoCatalogo == 'Usuarios'){
-      if(this.filtroCuatro!=''){
+      if(this.filtroCuatro!='' || this.filtroCinco!=''){
         this.filtroActivo=true;
         this.coleccionFiltro = Globals.datosFiltrados;
         var pagFiltrados = Math.ceil(this.coleccionFiltro/this.config.itemsPerPage)
@@ -694,19 +694,21 @@ export class CatalogosComponent implements OnInit{
 
 
   verificarBancerasUN(){
-    if(Globals.filtroUN==true || Globals.filtroEstatusUN==true || Globals.filtroAreasUN==true){
+    if (Globals.filtroUN == true || Globals.filtroEstatusUN == true || Globals.filtroAreasUN == true || Globals.filtroCincoUN == true) {
+
       Globals.filtroActivo=true;
       this.filtroActivo=true;
       this.agregarVaciosFiltro=true;
       this.pageChanged(1);
     }
-    else if(Globals.filtroUN==false && Globals.filtroEstatusUN==false && Globals.filtroAreasUN==false)
+    else if (Globals.filtroUN == false && Globals.filtroEstatusUN == false && Globals.filtroAreasUN == false || Globals.filtroCincoUN == false )
     {
       Globals.filtroActivo=false;
       this.filtroActivo=false;
       this.agregarVaciosFiltro=false;
       this.pageChanged(1);
     }
+
   }
   verificarFiltroUno(event: string){
     if(event==''){
@@ -750,17 +752,22 @@ export class CatalogosComponent implements OnInit{
       Globals.filtroEstatusUN = true;
       this.verificarBancerasUN();
     }
+
   }
   verificarFiltroCinco(event: string){
     if(event=''){
-      Globals.filtroEstatusUN=false;
+      Globals.filtroEstatusUN = false;
+      Globals.filtroCincoUN = false;  
       this.verificarBancerasUN();
     }
     else{
       Globals.filtroEstatusUN = true;
+      Globals.filtroCincoUN = true;   
       this.verificarBancerasUN();
     }
   }
+
+
 
   verificarFiltroSeis(event: string){
 
