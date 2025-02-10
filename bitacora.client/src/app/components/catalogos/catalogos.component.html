@@ -82,20 +82,22 @@
             </th>
             <th class="lo">
               <div class="input-group">
-                <input #filtroCinc type="text" class="col-10" name="filtroCinco" [(ngModel)]="filtroCinco" placeholder="Buscar..." (keyup)="verificarFiltroCinco(filtroCinc.value)">
-
+                <!--<input #filtroCinc type="text" class="col-10" name="filtroCinco" [(ngModel)]="filtroCinco" placeholder="Buscar..." (keyup)="verificarFiltroCinco(filtroCinc.value)">-->
+                <select #filtroCinc class="col-10 select-custom" style="margin-bottom: 10px !important;" name="filtroCinco" id="apli" [(ngModel)]="filtroCinco" (change)="verificarFiltroCinco(filtroCinc.value)" ng-options="color.name for color in colors">
+                  <option value="" selected="selected">Todos</option>
+                  <option value="Si">Si</option>
+                  <option value="No">No</option>
+                </select>
               </div>
             </th>
             <th class="lo th-custom" style="padding-left: 15px !important">
               <div class="input-group">
                 <!--<input autofocus #filtroCuatr type="text" class="form-control-sm  col-10" name="filtroCuatro" [(ngModel)]="filtroCuatro" placeholder="Buscar..." (keyup)="verificarFiltroCuatro(filtroCuatr.value)">-->
-                <select #filtroCuatr class="col-10 select-custom "  style="width:80%" name="filtroCuatro" id="usua" [(ngModel)]="filtroCuatro" (change)="verificarFiltroCuatro(filtroCuatr.value)" ng-options="color.name for color in colors">
-                  <option value="Activo" selected="selected">Activo</option>
+                <select #filtroCuatr class="col-10 select-custom " style="width:80%" name="filtroCuatro" id="usua" [(ngModel)]="filtroCuatro" (change)="verificarFiltroCuatro(filtroCuatr.value)" ng-options="color.name for color in colors">        
+                  <option value="0" >Todos</option>
+                  <option value="Activo" selected="selected" >Activo</option>
                   <option value="Inactivo">Inactivo</option>
-
                 </select>
-
-
               </div>
             </th>
           </tr>
