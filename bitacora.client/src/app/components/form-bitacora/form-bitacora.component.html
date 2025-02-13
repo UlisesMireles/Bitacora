@@ -136,7 +136,7 @@
         <div class="form-group row duracionIn mt-2">
           <label class="lab col-md-12">Duración</label>
           <mat-form-field class="col-md-12 example-full-width fix" [floatLabel]="formBitacora.value.floatLabel">
-            <input type="number" min="1" max="8"  placeholder="H.M (Max 8 H)" #duracion formControlName="duracion" autocomplete="off" class="inlab fix" matInput (keyup)="duracionSeleccion(duracion.value)" style="caret-color: #103d66; color: #0e3e62 !important;">
+            <input type="number" min="0.5" max="8"  placeholder="H.M (Max 8 H)" #duracion formControlName="duracion" autocomplete="off" class="inlab fix" matInput (keyup)="duracionSeleccion(duracion.value)" style="caret-color: #103d66; color: #0e3e62 !important;">
             <mat-icon matSuffix class="iconoDuracion"></mat-icon>
           </mat-form-field>
         </div>
