@@ -276,5 +276,37 @@ namespace BitacoraLogic
 
             return ListaRelacion;
         }
+        ///combo roles segun la consulta usuarios 
+        public List<ComboRolesUsuarios> ConsultaRolesUsuarios()
+        {
+            List<ComboRolesUsuarios> listaRolesUsuarios = new List<ComboRolesUsuarios>();
+            try
+            {
+                listaRolesUsuarios = _UsuariosData.ConsultaRolesUsuarios();
+
+            }
+            catch (Exception e)
+            {
+                string result = e.Message;
+            }
+            return listaRolesUsuarios;
+        }
+
+        ///combo Situación segun la consulta usuarios 
+        public List<ComboEstatusERTUsuarios> ConsultaEstatusERTUsuarios()
+        {
+            List<ComboEstatusERTUsuarios> listaEstatusERTUsuarios = new List<ComboEstatusERTUsuarios>();
+            try
+            {
+                listaEstatusERTUsuarios = _UsuariosData.ConsultaEstatusERTUsuarios();
+
+            }
+            catch (Exception e)
+            {
+                string result = e.Message;
+            }
+            return listaEstatusERTUsuarios;
+        }
+
     }
 }
