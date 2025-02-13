@@ -71,15 +71,37 @@
           <tr>
             <th class="lo">
               <div class="input-group">
-                <input #filtroTre type="text" class="col-10" name="filtroTres" [(ngModel)]="filtroTres" placeholder="Buscar..." (keyup)="verificarFiltroTres(filtroTre.value)">
+                <!--<input #filtroTre type="text" class="col-10" name="filtroTres" [(ngModel)]="filtroTres" placeholder="Buscar..." (keyup)="verificarFiltroTres(filtroTre.value)">-->
+                <select #filtroTre class="col-10 select-custom" style="margin-bottom: 10px !important;"
+                        name="filtroTres"  [(ngModel)]="filtroTres"
+                        (change)="verificarFiltroTres(filtroTre.value)">
+                  <option value="" selected="selected">Todos</option>
+                  <option *ngFor="let rolItem of comboRoles" [ngValue]="rolItem.rol">
+                    {{ rolItem.rol }}
+                  </option>
+                </select>
+
               </div>
             </th>
             <th class="lo">
               <div class="input-group">
-                <input #filtroSei type="text" class="col-10" name="filtroSeis" [(ngModel)]="filtroSeis" placeholder="Buscar..." (keyup)="verificarFiltroSeis(filtroSei.value)">
+                <select #filtroSei class="col-10 select-custom" style="margin-bottom: 10px !important;"
+                        name="filtroSeis"  [(ngModel)]="filtroSeis"
+                        (change)="verificarFiltroSeis(filtroSei.value)">
+                  <option value="" selected="selected">Todos</option>
+                  <option *ngFor="let situasionItem of comboSituacion" [ngValue]="situasionItem.estatusERT ">
+                    {{ situasionItem.estatusERT  }}
+                  </option>
+                </select>
 
               </div>
             </th>
+            <!--<th class="lo">
+    <div class="input-group">
+      <input #filtroSei type="text" class="col-10" name="filtroSeis" [(ngModel)]="filtroSeis" placeholder="Buscar..." (keyup)="verificarFiltroSeis(filtroSei.value)">
+
+    </div>
+  </th>-->
             <th class="lo">
               <div class="input-group">
                 <!--<input #filtroCinc type="text" class="col-10" name="filtroCinco" [(ngModel)]="filtroCinco" placeholder="Buscar..." (keyup)="verificarFiltroCinco(filtroCinc.value)">-->
@@ -93,9 +115,9 @@
             <th class="lo th-custom" style="padding-left: 15px !important">
               <div class="input-group">
                 <!--<input autofocus #filtroCuatr type="text" class="form-control-sm  col-10" name="filtroCuatro" [(ngModel)]="filtroCuatro" placeholder="Buscar..." (keyup)="verificarFiltroCuatro(filtroCuatr.value)">-->
-                <select #filtroCuatr class="col-10 select-custom " style="width:80%" name="filtroCuatro" id="usua" [(ngModel)]="filtroCuatro" (change)="verificarFiltroCuatro(filtroCuatr.value)" ng-options="color.name for color in colors">        
-                  <option value="0" >Todos</option>
-                  <option value="Activo" selected="selected" >Activo</option>
+                <select #filtroCuatr class="col-10 select-custom " style="width:80%" name="filtroCuatro" id="usua" [(ngModel)]="filtroCuatro" (change)="verificarFiltroCuatro(filtroCuatr.value)" ng-options="color.name for color in colors">
+                  <option value="0">Todos</option>
+                  <option value="Activo" selected="selected">Activo</option>
                   <option value="Inactivo">Inactivo</option>
                 </select>
               </div>
@@ -436,8 +458,8 @@
                 <mat-icon *ngIf="usuario.estausEmpleado=='0'" style="color:lightgray" class="bit-icon" matSuffix>edit</mat-icon>
                 <mat-icon class="icon bit-icon" style="color:green" *ngIf="usuario.estatus=='Inactivo' && (usuario.estausEmpleado==null || usuario.estausEmpleado == '1' )" title="Cambiar Estatus" (click)="abrirModalCambioEstatus(usuario)" matSuffix>done</mat-icon>
                 <mat-icon *ngIf="usuario.estatus=='Inactivo' && usuario.estausEmpleado=='0'" class="icon bit-icon" style="color:lightgray" matSuffix>done</mat-icon>
-                <mat-icon class="icon bit-icon" style="color:red" *ngIf="usuario.estatus=='Activo' && (usuario.estausEmpleado==null || usuario.estausEmpleado == '1'  )" title="Cambiar Estatus" (click)="abrirModalCambioEstatus(usuario)" matSuffix>clear</mat-icon>
-                <mat-icon *ngIf="usuario.estatus=='Activo' && usuario.estausEmpleado=='0'" style="color:lightgray" class="bit-icon" matSuffix>clear</mat-icon>
+                <mat-icon class="icon bit-icon" style="color:red" *ngIf="usuario.estatus=='Activo' && (usuario.estausEmpleado==null || usuario.estausEmpleado == '1' || usuario.estausEmpleado == ''  )" title="Cambiar Estatus" (click)="abrirModalCambioEstatus(usuario)" matSuffix>clear</mat-icon>
+                <mat-icon *ngIf="usuario.estatus=='Activo' && usuario.estausEmpleado=='0'  " style="color:lightgray" class="bit-icon" matSuffix>clear</mat-icon>
                 <mat-icon class="icon bit-icon" *ngIf="usuario.estausEmpleado==null || usuario.estausEmpleado=='1' " (click)="abrirModalReestablecerContrasenia(usuario.idUser)" style="color:black" title="Reestablecer Contraseña" matSuffix>vpn_key</mat-icon>
                 <mat-icon *ngIf="usuario.estausEmpleado=='0'" style="color:lightgray" title="Reestablecer Contraseña" class="bit-icon" matSuffix>vpn_key</mat-icon>
               </div>

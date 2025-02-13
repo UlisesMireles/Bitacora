@@ -11,6 +11,7 @@ import { AuthenticationService } from '../../services/authentication.service';
 import { Globals } from '../../services/globals';
 import { AgregarUsuarioComponent } from '../agregar-usuario/agregar-usuario.component';
 import { environment } from '../../../environments/environment';
+import { CatalogosService } from '../../services/catalogos.service';
 
 ///import  $ from 'jquery';
 declare var $: any;
@@ -187,9 +188,11 @@ export class CatalogosComponent implements OnInit{
   btnOcultarCampos: boolean = false;
   btnActualizar: boolean = false;
   btnMostrarCampos: boolean = false;
-
+  comboRoles: any[] = [];
+  comboSituacion: any[] = [];
   constructor(private authenticationService:AuthenticationService,private cdRef:ChangeDetectorRef,private spinner: NgxSpinnerService,private toastr:ToastrService,
-    private activatedRoute:ActivatedRoute, private router:Router,private http:HttpClient,@Inject("BASE_URL") private baseUrl:string,public dialog:MatDialog ) {
+    private activatedRoute: ActivatedRoute, private router: Router, private http: HttpClient, @Inject("BASE_URL") private baseUrl: string, public dialog: MatDialog
+    , private serviceCatalogos: CatalogosService  ) {
     this.router.onSameUrlNavigation = 'reload';
     //asigno la base url desde el environment
     this.baseUrl = environment.baseURL;
@@ -255,6 +258,8 @@ export class CatalogosComponent implements OnInit{
         this.filtroUsuarios = true;
         this.btnOcultarCampos = true;
         this.getUsuarios();
+        this.getConsultaRolesUsuarios();
+        this.getConsultaEstatusERTUsuarios();
       }
       else if (params['catalogo'] === 'unidad-negocio') {
         this.tipoCatalogo = 'Negocio (Unidades de Negocio)';
@@ -829,6 +834,8 @@ export class CatalogosComponent implements OnInit{
     })
     this.dialog.afterAllClosed.subscribe(()=>{
       this.getUsuarios();
+      this.getConsultaRolesUsuarios();
+      this.getConsultaEstatusERTUsuarios();
     })
   }
 
@@ -851,6 +858,8 @@ export class CatalogosComponent implements OnInit{
     $("#txtPassword").css({display:'none'});
     this.dialog.afterAllClosed.subscribe(()=>{
       this.getUsuarios();
+      this.getConsultaRolesUsuarios();
+      this.getConsultaEstatusERTUsuarios();
     })
   }
   eliminarRol(rol: { idRol: any }) {
@@ -901,6 +910,8 @@ export class CatalogosComponent implements OnInit{
       this.mensaje = "El estatus del usuario ha sido cambiado correctamente";
       this.toastr.success(this.mensaje, this.titulo);
       this.getUsuarios();
+      this.getConsultaRolesUsuarios();
+      this.getConsultaEstatusERTUsuarios();
       this.spinner.hide();
     }, err =>{
       this.spinner.hide();
@@ -1118,6 +1129,8 @@ export class CatalogosComponent implements OnInit{
       this.filtroCuatro = 'Activo';
       this.filtro6 = 'Situacion';
       this.getUsuarios();
+      this.getConsultaRolesUsuarios();
+      this.getConsultaEstatusERTUsuarios();
     }
     else if(this.tipoCatalogo == 'Negocio (Unidades de Negocio)'){
       this.filtro1 = 'Unidad de Negocio';
@@ -1161,7 +1174,30 @@ export class CatalogosComponent implements OnInit{
   }
 
 
+  getConsultaRolesUsuarios() {
+    this.comboRoles = [];
+    this.serviceCatalogos.getConsultaRolesUsuarios()
+      .subscribe(res => {
+        this.comboRoles = res.listaRolesUsuarios; 
+        console.log(this.comboRoles);
+      }, err => { console.log(err); });
+  }
+
+
+  getConsultaEstatusERTUsuarios() {
+    this.comboSituacion = [];
+    this.serviceCatalogos.getConsultaEstatusERTUsuarios()
+      .subscribe(res => {
+        this.comboSituacion = res.listaEstatusERTUsuarios;
+        console.log(this.comboSituacion);
+      }, err => { console.log(err); });
+  }
+
 }
+
+
+
+
 
 @Component({
   selector: 'confirmacionCambioEstatus',

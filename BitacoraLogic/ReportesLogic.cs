@@ -5,6 +5,7 @@ using BitacoraModels;
 using BitacoraData;
 using System.Linq;
 using System.IO;
+using System.Globalization;
 
 namespace BitacoraLogic
 {
@@ -128,8 +129,20 @@ namespace BitacoraLogic
                 var idEtapa = datos.IdEtapa;
                 var idActividad = datos.IdActividad;
                 var idUnidadUsuario = datos.IdUnidadUsuario;
+                var varDetalle = datos.varDetalle;
 
                 Detallado =  _ReportesData.ConsultaDetallado(datos.IdUser, fechaIni, fechaFin);
+
+                //  Agregar el filtro por Detalle si varDetalle tiene valor
+                if (!string.IsNullOrEmpty(varDetalle))
+                {
+                    //Detallado = Detallado.Where(x => x.Detalle.Contains(varDetalle)).ToList();
+                    varDetalle = varDetalle.ToLower();
+                    Detallado = Detallado.Where(x =>
+                        CultureInfo.CurrentCulture.CompareInfo
+                            .IndexOf(x.Detalle.ToLower(), varDetalle, CompareOptions.IgnoreNonSpace) >= 0
+                    ).ToList();
+                }
 
                 if (idUnidad > 0)
                     Detallado = (from x in Detallado where x.IdUnidad == idUnidad select x).ToList();

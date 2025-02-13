@@ -18,5 +18,6 @@ namespace BitacoraModels
         public int IdEtapa { get; set; }
         public int IdActividad { get; set; }
         public int IdUnidadUsuario { get; set; }
+        public string varDetalle { get; set; }
     }
 }
