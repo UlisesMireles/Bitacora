@@ -419,7 +419,7 @@
             </div>
 
           </mat-tab>
-          <mat-tab label="Tab 5" class="opciones" style="justify-content: right;width: 45%;">
+          <mat-tab *ngIf="bitacoraMenu==true" label="Tab 5" class="opciones" style="justify-content: right;width: 45%;">
             <ng-template mat-tab-label>
               <button mat-icon-button (click)="$event.stopPropagation(); opened = !opened">
                 <!-- [matMenuTriggerFor]="menu"  en boton-->
