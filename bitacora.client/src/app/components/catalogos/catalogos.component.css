@@ -526,5 +526,47 @@ input{
   border-color: inherit;
   height: 323px;
 }*/
+.div-responsive-catalogos {
+  width: 100%;
+  overflow-x: auto; /* Permite el desplazamiento horizontal */
+  display: block;
+}
+
+table {
+  width: 100%;
+  min-width: 600px; /* Ajusta esto según el contenido */
+  white-space: nowrap; /* Evita que el texto se corte en varias líneas */
+
+}
 
 
+/* Activar el scroll en pantallas menores a 1700px */
+@media screen and (max-width: 1700px) {
+  table {
+    display: block;
+    overflow-x: auto;
+    width: 100%;
+  }
+
+  th, td {
+    white-space: nowrap;
+  }
+}
+
+/* Estilo para pantallas entre 769px y 1024px */
+@media screen and (min-width: 769px) and (max-width: 1024px) {
+  table {
+    font-size: 11px;
+  }
+
+  th, td {
+    padding: 10px;
+  }
+}
+
+/* Estilo para pantallas de más de 1025px */
+@media screen and (min-width: 1025px) {
+  table {
+    font-size: 11px;
+  }
+}

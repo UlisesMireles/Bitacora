@@ -551,3 +551,13 @@ tbody.tablabody > tr > td {
 div.modal-backdrop.fade.show{
     display: none !important;
 }
+
+@media screen and (min-width: 1025px) {
+  table {
+    font-size: 11px;
+  }
+}
+.table-responsive {
+  -webkit-overflow-scrolling: touch;
+  overflow-x: auto;
+}
