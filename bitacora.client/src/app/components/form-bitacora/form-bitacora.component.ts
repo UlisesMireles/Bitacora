@@ -769,10 +769,6 @@ export class FormBitacoraComponent implements OnInit, OnDestroy {
         if (!duracion || isNaN(duracionNum) || duracionNum > 8 || duracionNum < 0) {
           this.campos += "| Duración debe ser entre 0 y 8 Horas ";
         }
-        this.campos += "|";
-      }
-      this.titulo = "Advertencia";
-      this.mensaje = "Revisar campo(s): " + this.campos;
       this.toastr.warning(this.mensaje, this.titulo);
     }
   }
