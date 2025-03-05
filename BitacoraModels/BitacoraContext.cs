@@ -57,6 +57,8 @@ namespace BitacoraModels
         public virtual DbSet<TblCatOpcionesAccionFinal> TblCatOpcionesAccionFinal { get; set; }
         public virtual DbSet<TblCatOpcionesAccionDominio> TblCatOpcionesAccionDominio { get; set; }
         public virtual DbSet<TblRecordatorios> TblRecordatorios { get; set; }
+        public virtual DbSet<RelacionActividadEstatus> RelacionActividadEstatuses { get; set; }
+        public virtual DbSet<RelacionEtapaEstatus> RelacionEtapaEstatuses { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
@@ -79,7 +81,26 @@ namespace BitacoraModels
         }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder.HasAnnotation("ProductVersion", "2.2.6-servicing-10079");                     
+            modelBuilder.HasAnnotation("ProductVersion", "2.2.6-servicing-10079");
+            modelBuilder.Entity<RelacionActividadEstatus>(entity =>
+            {
+                entity.HasKey(e => e.Id).HasName("PK__Relacion__3214EC07AA648A07");
+
+                entity.ToTable("Relacion_ActividadEstatus");
+
+                entity.Property(e => e.FechaModificacion).HasColumnType("datetime");
+                entity.Property(e => e.FechaRegistro).HasColumnType("datetime");
+            });
+
+            modelBuilder.Entity<RelacionEtapaEstatus>(entity =>
+            {
+                entity.HasKey(e => e.Id).HasName("PK__Relacion__3214EC073293EAB6");
+
+                entity.ToTable("Relacion_EtapaEstatus");
+
+                entity.Property(e => e.FechaModificacion).HasColumnType("datetime");
+                entity.Property(e => e.FechaRegistro).HasColumnType("datetime");
+            });
 
             modelBuilder.Entity<AvanceReal>(entity =>
             {
