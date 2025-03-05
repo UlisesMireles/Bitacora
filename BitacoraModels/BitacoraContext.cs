@@ -58,6 +58,8 @@ namespace BitacoraModels
         public virtual DbSet<TblCatOpcionesAccionDominio> TblCatOpcionesAccionDominio { get; set; }
         public virtual DbSet<TblRecordatorios> TblRecordatorios { get; set; }
 
+        public virtual DbSet<Estatus> Estatus { get; set; }
+
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             //            if (!optionsBuilder.IsConfigured)
@@ -612,6 +614,7 @@ namespace BitacoraModels
                 entity.Property(e => e.IdArea).HasColumnName("IdArea");
 
                 entity.Property(e => e.Estatus).HasColumnName("Estatus");
+                entity.Property(e => e.IdEstatusProceso).HasColumnName("IdEstatusProceso");
 
                 entity.HasOne(d => d.IdProyectoNavigation)
                     .WithMany(p => p.RelacionProyectos)
@@ -991,6 +994,27 @@ namespace BitacoraModels
                     .HasForeignKey(d => d.IdUsuario)
                     .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("FK_UsuarioRecordatorio");
+            });
+
+            modelBuilder.Entity<Estatus>(entity =>
+            {
+                entity.HasKey(e => e.IdEstatus);
+
+                entity.ToTable("Estatus");
+
+                entity.Property(e => e.IdEstatus).ValueGeneratedNever();
+
+                entity.Property(e => e.DesEstatus)
+                    .HasMaxLength(100)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.Abreviatura)
+                    .HasMaxLength(10)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.Activo)
+                    .HasMaxLength(1)
+                    .IsUnicode(false);
             });
 
         }

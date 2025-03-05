@@ -78,5 +78,20 @@ namespace Bitacora.Controllers
 
             return resp;
         }
+
+        [HttpGet("[action]")]
+        public object ConsultaEstatusProceso()
+        {
+            var listaEstatusProceso = _ConsultaCatalogo.ConsultaEstatusProceso();
+
+            var listaFiltrada = listaEstatusProceso
+                .Where(u => !string.IsNullOrEmpty(u.EstatusProceso))
+                .ToList();
+
+            var resp = new { result = "", listaEstatusProceso = listaFiltrada };
+
+            return resp;           
+           
+        }
     }
 }

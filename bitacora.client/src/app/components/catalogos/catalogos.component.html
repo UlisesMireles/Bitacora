@@ -314,12 +314,13 @@
             <th class="cabecerasCatalogos">Nombre Corto</th>
             <th class="cabecerasCatalogos">Sistema</th>
             <th class="cabecerasCatalogos">Cliente</th>
+            <th class="cabecerasCatalogos">Estatus Proceso</th>
             <th class="cabecerasCatalogos">Estatus</th>
           </tr>
           <tr>
             <th class="">
               <div class="input-group">
-                <input #filtroUn type="text" class="col-10" name="filtroUno" [(ngModel)]="filtroUno" placeholder="Busca..." (keyup)="verificarFiltroUno(filtroUn.value)">
+                <input #filtroUn type="text" class="col-10" name="filtroUno" [(ngModel)]="filtroUno" placeholder="Buscar..." (keyup)="verificarFiltroUno(filtroUn.value)">
               </div>
             </th>
             <th class="">
@@ -340,8 +341,19 @@
 
               </div>
             </th>
+            <th class="bb th-custom" style="padding-left: 15px !important">
+              <select #filtroSei class="col-10 select-custom" style="margin-bottom: 10px !important;"
+                      name="filtroSeis" [(ngModel)]="filtroSeis"
+                      (change)="verificarFiltroSeis(filtroSei.value)">
+                <option value="" selected="selected">Todos</option>
+                <option *ngFor="let estatusItem of comboEstatusP" [ngValue]="estatusItem.estatusProceso">
+                  {{ estatusItem.estatusProceso }}
+                </option>
+              </select>
+            </th>
             <th class="bb  th-custom" style="padding-left: 15px !important" >
               <select #filtroCinc class="col-10 select-custom" style="margin-bottom: 10px !important;" name="filtroCinco" id="proye" [(ngModel)]="filtroCinco" (change)="verificarFiltroCinco(filtroCinc.value)" ng-options="color.name for color in colors">
+                <option value="" selected="selected">Todos</option>
                 <option value="Activo" selected="selected">Activo</option>
                 <option value="Inactivo">Inactivo</option>
               </select>
@@ -543,6 +555,7 @@
             <th class="alinear-izquierda">Cliente</th>
             <th class="alinear-izquierda">Unidad-Área</th>
             <th class="alinear-izquierda">Horas</th>
+            <th class="alinear-izquierda">Estatus Proceso</th>
             <th class="alinear-izquierda">Estatus</th>
           </tr>
 
@@ -556,6 +569,7 @@
             <td class="proyectoCliente alinear-izquierda">{{proyecto.cliente}}</td>
             <td class="proyectoUnidadArea alinear-izquierda">{{proyecto.unidadArea}}</td>
             <td class="proyectoHoras alinear-izquierda">{{proyecto.totalHoras}}</td>
+            <td class="proyectoEstatusProceso alinear-izquierda">{{proyecto.estatusProceso}}</td>
             <td class="proyectoEstatus alinear-izquierda">{{proyecto.estatus}}</td>
           </tr>
         </tbody>

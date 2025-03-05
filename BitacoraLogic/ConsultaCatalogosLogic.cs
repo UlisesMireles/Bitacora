@@ -118,7 +118,19 @@ namespace BitacoraLogic
             }
 
             return listaProyectos;
-        }    
-
+        }
+        public List<ComboEstatusProceso> ConsultaEstatusProceso()
+        {
+            List<ComboEstatusProceso> listaEstatusProceso = new List<ComboEstatusProceso>();
+            try
+            {
+                listaEstatusProceso = _consultaData.ConsultaEstatusProceso();
+            }
+            catch (Exception e)
+            {
+                string result = e.Message;
+            }
+            return listaEstatusProceso;
+        }
     }
 }
