@@ -80,8 +80,8 @@ export class CatalogosComponent implements OnInit{
         this.pagFiltrados=pagFiltrados;
       }
     }
-    else if(this.tipoCatalogo == 'Proyectos'){
-      if(this.filtroCinco!=''){
+    else if (this.tipoCatalogo == 'Proyectos') {
+      if (this.filtroCinco != '' || this.filtro6!='') {
         this.filtroActivo=true;
         this.coleccionFiltro = Globals.datosFiltrados;
         var pagFiltrados = Math.ceil(this.coleccionFiltro/this.config.itemsPerPage)
@@ -190,6 +190,7 @@ export class CatalogosComponent implements OnInit{
   btnMostrarCampos: boolean = false;
   comboRoles: any[] = [];
   comboSituacion: any[] = [];
+  comboEstatusP: any[] = [];
   constructor(private authenticationService:AuthenticationService,private cdRef:ChangeDetectorRef,private spinner: NgxSpinnerService,private toastr:ToastrService,
     private activatedRoute: ActivatedRoute, private router: Router, private http: HttpClient, @Inject("BASE_URL") private baseUrl: string, public dialog: MatDialog
     , private serviceCatalogos: CatalogosService  ) {
@@ -229,10 +230,12 @@ export class CatalogosComponent implements OnInit{
         this.filtro3 = 'Resp OP';
         this.filtro4 = 'Líder Proyecto';
         this.filtroCinco = 'Activo';
+        this.filtro6 = "Estatus Proceso";
         this.tablaProyectos = true;
         this.filtroProyectos = true;
         this.btnOcultarCampos = true;
         this.getProyectos();
+        this.getConsultaEstatusProceso();
       }
       else if (params['catalogo'] === 'aplicativos') {
         this.tipoCatalogo = 'Sistemas (Aplicativos)';
@@ -638,7 +641,6 @@ export class CatalogosComponent implements OnInit{
     this.pageChanged(1);
   }
   pageChanged(event: number) {
-
     this.agregarVacios = false;
     this.agregarVaciosFiltro = false;
     this.config.currentPage = event;
@@ -774,9 +776,8 @@ export class CatalogosComponent implements OnInit{
 
 
 
-  verificarFiltroSeis(event: string){
-
-    if(event=''){
+  verificarFiltroSeis(event: string) {
+    if(event===''){
       Globals.filtroEstatusUN=false;
       this.verificarBancerasUN();
     }
@@ -803,6 +804,18 @@ export class CatalogosComponent implements OnInit{
       this.verificarBancerasUN();
     }
     else{
+      Globals.filtroEstatusUN = true;
+      this.verificarBancerasUN();
+    }
+  }
+  verificarFiltroEstatus(event: string) {
+    console.log(event);
+    if (event === '') {
+      Globals.filtroEstatusUN = false;
+      console.log(Globals.filtroEstatusUN);
+      this.verificarBancerasUN();
+    }
+    else {
       Globals.filtroEstatusUN = true;
       this.verificarBancerasUN();
     }
@@ -1087,14 +1100,14 @@ export class CatalogosComponent implements OnInit{
   }
   limpiarCampos(){
 
-      this.filtroUno='';
+     this.filtroUno='';
     this.filtroDos='';
     this.filtroTres='';
     this.filtroCuatro='';
     this.filtroCinco='';
     this.filtroSeis ='';
     this.filtroSiete ='';
-    this.filtroOcho ='';
+    this.filtroOcho = '';
     if(this.tipoCatalogo == 'Clientes'){
       this.filtro1 = 'Cliente';
       this.filtro2 = 'Alias';
@@ -1107,11 +1120,12 @@ export class CatalogosComponent implements OnInit{
     else if(this.tipoCatalogo == 'Proyectos'){
       this.filtro1 = 'Proyecto';
       this.filtro2 = 'Estatus';
-
       this.filtro3 = 'Resp OP';
       this.filtro4 = 'Líder Proyecto';
       this.filtroCinco = 'Activo'
+      this.filtro6 = 'Estatus Proceso';
       this.getProyectos();
+      this.getConsultaEstatusProceso();
     }
     else if(this.tipoCatalogo == 'Sistemas (Aplicativos)'){
         this.filtro1 = 'Aplicativo';
@@ -1193,10 +1207,14 @@ export class CatalogosComponent implements OnInit{
       }, err => { console.log(err); });
   }
 
+  getConsultaEstatusProceso() {
+    this.comboEstatusP = [];
+    this.serviceCatalogos.getConsultaEstatusProceso()
+      .subscribe(res => { 
+        this.comboEstatusP = res.listaEstatusProceso;
+      }, err => { console.log(err); });
+  }
 }
-
-
-
 
 
 @Component({

@@ -26,4 +26,8 @@ export class CatalogosService {
   getConsultaEstatusERTUsuarios(): Observable<any> {
     return this.http.get<any>(this.baseUrl + "api/Usuarios/ConsultaEstatusERTUsuarios/");
   }
+
+  getConsultaEstatusProceso(): Observable<any> {
+    return this.http.get<any>(this.baseUrl + "api/ConsultaCatalogos/ConsultaEstatusProceso/");
+  }
 }

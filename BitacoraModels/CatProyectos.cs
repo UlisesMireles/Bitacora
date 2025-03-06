@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
+using System;
 using System.Collections.Generic;
 using System.Text;
 
@@ -23,6 +24,7 @@ namespace BitacoraModels
         public string UnidadArea { get; set; }
         public string Estatus { get; set; }
         public int IdCategoria { get; set; }
+        public string EstatusProceso { get; set; }
 
         public virtual CategoriasProyecto IdCategoriaNavigation { get; set; }
         public virtual ICollection<RelacionProyectos> RelacionProyectos { get; set; }

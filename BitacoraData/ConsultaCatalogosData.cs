@@ -207,6 +207,8 @@ namespace BitacoraData
                                       join s in db.CatSistemas on r.IdSistema equals s.Id
                                       join u in db.CatUnidadesNegocios on r.IdUnidad equals u.Id
                                       join a in db.CatAreasNegocio on r.IdArea equals a.Id
+                                      join e in db.Estatus on r.IdEstatusProceso equals e.IdEstatus into es
+                                      from e in es.DefaultIfEmpty()
                                       select new CatProyectos
                                       {
                                           Id = p.Id,
@@ -216,7 +218,8 @@ namespace BitacoraData
                                           Sistema = s.Nombre,
                                           Cliente = c.Nombre,
                                           UnidadArea = u.Nombre + "-" + a.Nombre,
-                                          Estatus = (r.Estatus == "1" ? "Activo" : r.Estatus == "0" ? "Inactivo" : "")
+                                          Estatus = (r.Estatus == "1" ? "Activo" : r.Estatus == "0" ? "Inactivo" : ""),
+                                          EstatusProceso = e != null ? e.DesEstatus : null
                                       }).Union
                                       (from p in db.CatProyectos
                                        join r in db.RelacionProyectos on p.Id equals r.IdProyecto
@@ -224,6 +227,8 @@ namespace BitacoraData
                                        join s in db.CatSistemas on r.IdSistema equals s.Id
                                        join u in db.CatUnidadesNegocios on r.IdUnidad equals u.Id into ps
                                        from u in ps.DefaultIfEmpty()
+                                       join e in db.Estatus on r.IdEstatusProceso equals e.IdEstatus into es
+                                       from e in es.DefaultIfEmpty()
                                        where u.Id == null
                                        select new CatProyectos
                                        {
@@ -234,13 +239,16 @@ namespace BitacoraData
                                            Sistema = s.Nombre,
                                            Cliente = c.Nombre,
                                            UnidadArea = null,
-                                           Estatus = (r.Estatus == "1" ? "Activo" : r.Estatus == "0" ? "Inactivo" : "")
+                                           Estatus = (r.Estatus == "1" ? "Activo" : r.Estatus == "0" ? "Inactivo" : ""),
+                                           EstatusProceso = e != null ? e.DesEstatus : null
                                        }).Union
                                       (from p in db.CatProyectos
                                        join r in db.RelacionProyectos on p.Id equals r.IdProyecto
                                        join c in db.CatClientes on r.IdCliente equals c.Id
                                        join s in db.CatSistemas on r.IdSistema equals s.Id into ps
                                        from s in ps.DefaultIfEmpty()
+                                       join e in db.Estatus on r.IdEstatusProceso equals e.IdEstatus into es
+                                       from e in es.DefaultIfEmpty()
                                        where s.Id == null
                                        select new CatProyectos
                                        {
@@ -251,7 +259,8 @@ namespace BitacoraData
                                            Sistema = null,
                                            Cliente = c.Nombre,
                                            UnidadArea = null,
-                                           Estatus = (r.Estatus == "1" ? "Activo" : r.Estatus == "0" ? "Inactivo" : "")
+                                           Estatus = (r.Estatus == "1" ? "Activo" : r.Estatus == "0" ? "Inactivo" : ""),
+                                           EstatusProceso = e != null ? e.DesEstatus : null
                                        }).ToList();
                 }
             }
@@ -264,6 +273,97 @@ namespace BitacoraData
             return listaProyectos;
 
         }
+
+        public List<ComboEstatusProceso> ConsultaEstatusProceso()
+        {
+            List<ComboEstatusProceso> listaEstatusProceso = new List<ComboEstatusProceso>();
+            try
+            {
+                using (BitacoraContext db = new BitacoraContext())
+                {
+                    /*listaEstatusProceso = ( from p in db.CatProyectos
+                                            join r in db.RelacionProyectos on p.Id equals r.IdProyecto
+                                            join e in db.Estatus on r.IdEstatusProceso equals e.IdEstatus into es
+                                            from e in es.DefaultIfEmpty()
+                                            select new ComboEstatusProceso
+                                            {
+                                                EstatusProceso = e != null ? e.DesEstatus : null
+                                            })
+                                            .Distinct()
+                                            .ToList();*/
+                    /* listaEstatusProceso = (from p in db.CatProyectos
+                                            join r in db.RelacionProyectos on p.Id equals r.IdProyecto
+                                            join e in db.Estatus on r.IdEstatusProceso equals e.IdEstatus
+                                            select new ComboEstatusProceso
+                                            {
+                                                EstatusProceso = e.DesEstatus
+                                            }).Distinct()
+                                            .Union
+                                            (from p in db.CatProyectos
+                                             join r in db.RelacionProyectos on p.Id equals r.IdProyecto
+                                             select new ComboEstatusProceso
+                                             {
+                                                 EstatusProceso = ""
+                                             }).Distinct()
+                                             .Union
+                                             (from p in db.CatProyectos
+                                              join r in db.RelacionProyectos on p.Id equals r.IdProyecto
+                                              join e in db.Estatus on r.IdEstatusProceso equals e.IdEstatus into es
+                                              from e in es.DefaultIfEmpty()
+                                              where e == null
+                                              select new ComboEstatusProceso
+                                              {
+                                                  EstatusProceso = ""
+                                              }).Distinct()
+                                              .ToList();*/
+                    listaEstatusProceso = (from p in db.CatProyectos
+                                      join r in db.RelacionProyectos on p.Id equals r.IdProyecto
+                                      join c in db.CatClientes on r.IdCliente equals c.Id
+                                      join s in db.CatSistemas on r.IdSistema equals s.Id
+                                      join u in db.CatUnidadesNegocios on r.IdUnidad equals u.Id
+                                      join a in db.CatAreasNegocio on r.IdArea equals a.Id
+                                      join e in db.Estatus on r.IdEstatusProceso equals e.IdEstatus into es
+                                      from e in es.DefaultIfEmpty()
+                                      select new ComboEstatusProceso
+                                      {                                          
+                                          EstatusProceso = e != null ? e.DesEstatus : null
+                                      }).Distinct().Union
+                                      (from p in db.CatProyectos
+                                       join r in db.RelacionProyectos on p.Id equals r.IdProyecto
+                                       join c in db.CatClientes on r.IdCliente equals c.Id
+                                       join s in db.CatSistemas on r.IdSistema equals s.Id
+                                       join u in db.CatUnidadesNegocios on r.IdUnidad equals u.Id into ps
+                                       from u in ps.DefaultIfEmpty()
+                                       join e in db.Estatus on r.IdEstatusProceso equals e.IdEstatus into es
+                                       from e in es.DefaultIfEmpty()
+                                       where u.Id == null
+                                       select new ComboEstatusProceso
+                                       {
+                                           EstatusProceso = e != null ? e.DesEstatus : null
+                                       }).Distinct().Union
+                                      (from p in db.CatProyectos
+                                       join r in db.RelacionProyectos on p.Id equals r.IdProyecto
+                                       join c in db.CatClientes on r.IdCliente equals c.Id
+                                       join s in db.CatSistemas on r.IdSistema equals s.Id into ps
+                                       from s in ps.DefaultIfEmpty()
+                                       join e in db.Estatus on r.IdEstatusProceso equals e.IdEstatus into es
+                                       from e in es.DefaultIfEmpty()
+                                       where s.Id == null
+                                       select new ComboEstatusProceso
+                                       {
+                                           EstatusProceso = e != null ? e.DesEstatus : null
+                                       }).Distinct().ToList();
+                }
+            }
+            catch (Exception e)
+            {
+                string result = e.Message;
+            }
+         return listaEstatusProceso.DistinctBy(x => x.EstatusProceso).ToList();
+        }
+
+        
+
 
     }
 }
