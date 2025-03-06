@@ -70,6 +70,26 @@ namespace BitacoraLogic
             return resp;
         }
 
+        public object GetRelacionEtapas(List<string> listaEstatus)
+        {
+            string result = "ok";
+            List<RelacionEtapaEstatus> relacionEtapasEstatus = new List<RelacionEtapaEstatus>();
+            try
+            {
+                relacionEtapasEstatus = _BitacoraData.GetRelacionesEtapas(listaEstatus);
+                relacionEtapasEstatus = (from x in relacionEtapasEstatus orderby x.Id select x).ToList();
+
+            }
+            catch (Exception e)
+            {
+                result = e.Message;
+            }
+
+            var resp = new { result = result, RelacionesEtapasEstatus = relacionEtapasEstatus };
+
+            return resp;
+        }
+
         public object GetActividades()
         {
             string result = "ok";
@@ -86,6 +106,46 @@ namespace BitacoraLogic
             }
 
             var resp = new { result = result, Actividades = actividades };
+
+            return resp;
+        }
+
+        public object GetRelacionActividades(List<string> listaEstatus)
+        {
+            string result = "ok";
+            List<RelacionActividadEstatus> relacionActividadEstatus = new List<RelacionActividadEstatus>();
+            try
+            {
+                relacionActividadEstatus = _BitacoraData.GetRelacionesActividades(listaEstatus);
+                relacionActividadEstatus = (from x in relacionActividadEstatus orderby x.Id select x).ToList();
+
+            }
+            catch (Exception e)
+            {
+                result = e.Message;
+            }
+
+            var resp = new { result = result, RelacionesActividadEstatus = relacionActividadEstatus };
+
+            return resp;
+        }
+
+        public object GetRelacionProyectos(int idUser)
+        {
+            string result = "ok";
+            List<RelacionProyectos> relacionProyectos = new List<RelacionProyectos>();
+            try
+            {
+                relacionProyectos = _BitacoraData.GetRelacionProyectos(idUser);
+                relacionProyectos = (from x in relacionProyectos orderby x.IdProyecto select x).ToList();
+
+            }
+            catch (Exception e)
+            {
+                result = e.Message;
+            }
+
+            var resp = new { result = result, RelacionesProyectos = relacionProyectos };
 
             return resp;
         }

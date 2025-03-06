@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Text;
 using System.Linq;
 using BitacoraModels;
+using System.Net.NetworkInformation;
 
 namespace BitacoraData
 {
@@ -70,6 +71,7 @@ namespace BitacoraData
         public List<CatProyectos> GetProyectos(int idUser)
         {
             List<CatProyectos> Proyectos = new List<CatProyectos>();
+            List<RelacionProyectos> relacionProyectos = new List<RelacionProyectos>();
 
             try
             {
@@ -80,13 +82,12 @@ namespace BitacoraData
                                  join re in db.RelacionProyectoEmpleado on p.Id equals re.IdProyecto
                                  join ru in db.RelacionUsuarioEmpleado on re.IdEmpleado equals ru.IdEmpleado
                                  join c in db.CatClientes on r.IdCliente equals c.Id
-                                 where r.Estatus == "1" && ru.IdUser == idUser &&  re.IdRol == 10
+                                 where r.Estatus == "1" && ru.IdUser == idUser &&  re.IdRol == 10 && r.IdEstatusProceso != null
                                  select new CatProyectos
                                  {
                                      Id = p.Id,
                                      Nombre = p.Nombre.Trim() + " - "  + c.Nombre.Trim(),
                                  }).ToList();
-
                 }
             }catch(Exception e){
                 string result = e.Message;
@@ -115,6 +116,29 @@ namespace BitacoraData
             return etapas;
         }
 
+        public List<RelacionEtapaEstatus> GetRelacionesEtapas(List<string> listaEstatus)
+        {
+            List<RelacionEtapaEstatus> relacionesEtapas = new List<RelacionEtapaEstatus>();
+            try
+            {
+                using (BitacoraContext db = new BitacoraContext())
+                {
+                    List<int?> estatusIds = listaEstatus.Select(s => (int?)Convert.ToInt32(s)).ToList();
+
+                    relacionesEtapas = (from e in db.CatEtapas
+                              join r in db.RelacionEtapaEstatuses on e.Id equals r.IdEtapa
+                              where e.Estatus == "1" && r.Activo == true && estatusIds.Contains(r.IdEstatus)
+                                        select new RelacionEtapaEstatus { Id = r.Id, IdEtapa = r.IdEtapa }).ToList();
+                }
+            }
+            catch (Exception e)
+            {
+                string result = e.Message;
+            }
+
+            return relacionesEtapas;
+        }
+
         public List<CatActividades> GetActividades()
         {
             List<CatActividades> actividades = new List<CatActividades>();
@@ -133,6 +157,59 @@ namespace BitacoraData
             }
 
             return actividades;
+        }
+
+        public List<RelacionActividadEstatus> GetRelacionesActividades(List<string> listaEstatus)
+        {
+            List<RelacionActividadEstatus> relacionesEtapas = new List<RelacionActividadEstatus>();
+            try
+            {
+                using (BitacoraContext db = new BitacoraContext())
+                {
+                    List<int?> estatusIds = listaEstatus.Select(s => (int?)Convert.ToInt32(s)).ToList();
+
+                    relacionesEtapas = (from e in db.CatActividades
+                                        join r in db.RelacionActividadEstatuses on e.Id equals r.IdActividad
+                                        where e.Estatus == "1" && r.Activo == true && estatusIds.Contains(r.IdEstatus)
+                                        select new RelacionActividadEstatus { Id = r.Id, IdActividad = r.IdActividad }).ToList();
+                }
+            }
+            catch (Exception e)
+            {
+                string result = e.Message;
+            }
+
+            return relacionesEtapas;
+        }
+
+        public List<RelacionProyectos> GetRelacionProyectos(int idUser)
+        {
+            List<RelacionProyectos> relacionProyectos = new List<RelacionProyectos>();
+
+            try
+            {
+                using (BitacoraContext db = new BitacoraContext())
+                {
+                    relacionProyectos = (from p in db.CatProyectos
+                                         join r in db.RelacionProyectos on p.Id equals r.IdProyecto
+                                         join re in db.RelacionProyectoEmpleado on p.Id equals re.IdProyecto
+                                         join ru in db.RelacionUsuarioEmpleado on re.IdEmpleado equals ru.IdEmpleado
+                                         join c in db.CatClientes on r.IdCliente equals c.Id
+                                         where r.Estatus == "1" && ru.IdUser == idUser && re.IdRol == 10 && (r.IdEstatusProceso != null)
+                                         select new RelacionProyectos
+                                         {
+                                             IdProyecto = p.Id,
+                                             IdEstatusProceso = r.IdEstatusProceso,
+                                         }).ToList();
+
+                }
+            }
+            catch (Exception e)
+            {
+                string result = e.Message;
+            }
+
+            return relacionProyectos;
         }
 
         public int InsertaBitacora(BitacoraH datos)

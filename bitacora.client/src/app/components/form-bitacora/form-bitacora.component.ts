@@ -62,6 +62,9 @@ export class FormBitacoraComponent implements OnInit, OnDestroy {
   proyectos: any[] =[];
   actividades: any[]=[];
   eventosExtra: any []=[];
+  relacionProyectos: any[] = [];
+  relacionEtapasEstatus: any[] = [];
+  relacionActividadesEstatus: any[] = [];
   fases: any[] = [];
   idUsuario: any;
   campos:string="";
@@ -101,6 +104,8 @@ export class FormBitacoraComponent implements OnInit, OnDestroy {
 
  proyectosFiltrados:ReplaySubject<any[]> = new ReplaySubject<any[]>(1);
  etapasFiltradas:ReplaySubject<any[]> = new ReplaySubject<any[]>(1);
+ etapasFiltradasEstatus:ReplaySubject<any[]> = new ReplaySubject<any[]>(1);
+ actividadesFiltradasEstatus:ReplaySubject<any[]> = new ReplaySubject<any[]>(1);
  actividadesFiltradas:ReplaySubject<any[]> = new ReplaySubject<any[]>(1);
  eventosFiltrados:ReplaySubject<any[]> = new ReplaySubject<any[]>(1);
  formExpandido:boolean | undefined;
@@ -382,7 +387,10 @@ export class FormBitacoraComponent implements OnInit, OnDestroy {
       //actividad.setValidators([Validators.required]);
       //fase.setValidators([Validators.required]);
       proyectoText!.setValidators(null);
-     
+
+      this.filtrarEtapas();
+      this.filtrarActividades();
+
     }else{
       this.proyectoSeleccionado = undefined;
       this.proyectoSel=false;
@@ -405,7 +413,25 @@ export class FormBitacoraComponent implements OnInit, OnDestroy {
     proyectoText!.updateValueAndValidity();
   }
 
+  filtrarEtapas(): void {
+    this.etapasFiltradas.subscribe((etapas) => {
+      const etapasFiltradas = etapas.filter(etapa => 
+        this.relacionEtapasEstatus.some(estatus => estatus.idEtapa === etapa.id)
+      );
+      this.etapasFiltradasEstatus.next(etapasFiltradas);
+      //console.log(etapasFiltradas);
+    });
+  };
 
+  filtrarActividades(): void {
+    this.actividadesFiltradas.subscribe((actividades) => {
+      const actividadesFiltradas = actividades.filter(actividad => 
+        this.relacionActividadesEstatus.some(estatus => estatus.idActividad === actividad.id)
+      );
+      this.actividadesFiltradasEstatus.next(actividadesFiltradas);
+      //console.log(etapasFiltradas);
+    });
+  };
 
   faseSeleccion(event:MatSelectChange){
     var index = this.fases.indexOf(this.fases.find(x => x.id == event.value));
@@ -464,6 +490,26 @@ export class FormBitacoraComponent implements OnInit, OnDestroy {
     .subscribe(result=>{
       this.proyectos=result.proyectos;
       this.proyectosFiltrados.next(this.proyectos.slice());
+      return this.http.get<any>(this.baseUrl + "api/Bitacora/GetRelacionProyectos/{id?}", { params })
+      .subscribe(resultProyectos=>{
+        this.relacionProyectos = resultProyectos.relacionesProyectos;
+        let listaEstatus = this.relacionProyectos.map(proyecto => proyecto.idEstatusProceso).join(',');
+        let params = new HttpParams().set('estatus', listaEstatus);
+        return this.http.get<any>(this.baseUrl + "api/Bitacora/GetRelacionEtapas", { params })
+          .subscribe(resultEtapas=>{
+            this.relacionEtapasEstatus = resultEtapas.relacionesEtapasEstatus;
+            return this.http.get<any>(this.baseUrl + "api/Bitacora/GetRelacionActividades", { params })
+              .subscribe(resultRelacionesActividades=>{
+                this.relacionActividadesEstatus = resultRelacionesActividades.relacionesActividadEstatus;
+              }, error=>{
+                //console.log(error)
+              })
+          }, error=>{
+            //console.log(error)
+          })
+      }, error=>{
+        //console.log(error)
+      })
       //console.log(this.proyectos)
     }, error=>{
       //console.log(error)
