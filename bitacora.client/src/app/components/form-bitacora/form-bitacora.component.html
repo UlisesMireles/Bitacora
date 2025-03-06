@@ -60,7 +60,7 @@
                 <ngx-mat-select-search [placeholderLabel]="'Busca una etapa'"
                                        [noEntriesFoundLabel]="'No se encontró ninguna etapa con este nombre'" [formControl]="filtroEtapa"></ngx-mat-select-search>
               </mat-option>
-              <mat-option *ngFor="let etapa of etapasFiltradas | async" [value]="etapa.id" title="{{etapa.nombre}}">
+              <mat-option *ngFor="let etapa of etapasFiltradasEstatus | async" [value]="etapa.id" title="{{etapa.nombre}}">
                 {{etapa.nombre}}
               </mat-option>
             </mat-select>
@@ -81,7 +81,7 @@
                 <ngx-mat-select-search [placeholderLabel]="'Busca una actividad'"
                                        [noEntriesFoundLabel]="'No se encontró ninguna actividad con este nombre'" [formControl]="filtroActividad"></ngx-mat-select-search>
               </mat-option>
-              <mat-option *ngFor="let activ of actividadesFiltradas | async" [value]="activ.id" title="{{activ.nombre}}">
+              <mat-option *ngFor="let activ of actividadesFiltradasEstatus | async" [value]="activ.id" title="{{activ.nombre}}">
                 {{activ.nombre}}
               </mat-option>
             </mat-select>

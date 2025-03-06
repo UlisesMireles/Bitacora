@@ -6,6 +6,8 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using BitacoraLogic;
 using BitacoraModels;
+using static Azure.Core.HttpHeader;
+using System.Net.NetworkInformation;
 
 namespace Bitacora.Controllers
 {
@@ -37,11 +39,35 @@ namespace Bitacora.Controllers
             return Etapas;
         }
 
+        [HttpGet("GetRelacionEtapas")]
+        public object GetRelacionEtapas([FromQuery] string estatus)
+        {
+            List<string> listaEstatus = estatus.Split(',').ToList();
+
+            var RelacionEtapasEstatus = _BitacoraLogic.GetRelacionEtapas(listaEstatus);
+            return RelacionEtapasEstatus;
+        }
+
         [HttpGet("[action]/{id}")]
         public object GetActividades()
         {
             var Actividades = _BitacoraLogic.GetActividades();
             return Actividades;
+        }
+
+        [HttpGet("[action]/{id}")]
+        public object GetRelacionProyectos(int idUser)
+        {
+            var RelacionProyectos = _BitacoraLogic.GetRelacionProyectos(idUser);
+            return RelacionProyectos;
+        }
+
+        [HttpGet("GetRelacionActividades")]
+        public object GetRelacionActividades([FromQuery] string estatus)
+        {
+            List<string> listaEstatus = estatus.Split(',').ToList();
+            var RelacionActividadesEstatus = _BitacoraLogic.GetRelacionActividades(listaEstatus);
+            return RelacionActividadesEstatus;
         }
 
         [HttpPost("[action]/{id}")]
