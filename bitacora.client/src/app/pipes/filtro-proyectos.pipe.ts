@@ -55,7 +55,7 @@ export class FiltroProyectosPipe implements PipeTransform {
       if (estatus.estatus == null) {
         estatus.estatus = '';
       }
-      if (estatus.estatus.substring(0, 1).toLowerCase() == (filtroCinco.substring(0, 1).toLowerCase())) {
+      if (filtroCinco === '' || estatus.estatus.substring(0, 1).toLowerCase() == filtroCinco.substring(0, 1).toLowerCase()) {
         resultFiltroCinco.push(estatus);
       }
     }
