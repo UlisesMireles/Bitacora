@@ -11,6 +11,7 @@ export var Globals = {
   filtroActivo: false,
   filtroUN: false,
   filtroEstatusUN: false,
+  filtroCincoUN: false,
   filtroAreasUN: false,
   datosFiltrados: 0,
   registrosBitacora: [] ,

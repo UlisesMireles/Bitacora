@@ -569,5 +569,190 @@ namespace BitacoraData
             }
             return usuario;
         }
+
+
+
+        ///obtengo roles usando la consulta d elos usurios 
+        ///
+        public List<ComboRolesUsuarios> ConsultaRolesUsuarios()
+        {
+            _log.Info("Bitacora Data ConsultaRolesUsuarios antes de consulta... roles de usuarios");
+            List<ComboRolesUsuarios> listaRolesUsuarios = new List<ComboRolesUsuarios>();
+            try
+            {
+                using (BitacoraContext db = new BitacoraContext())
+                {
+                    listaRolesUsuarios = (from u in db.CatUsuarios
+                                     join r in db.RelacionUsuarioEmpleado on u.Id equals r.IdUser
+                                     join e in db.CatEmpleados on r.IdEmpleado equals e.Id
+                                     join ro in db.CatRoles on u.IdRol equals ro.Id
+                                     join ee in db.TblCatEstatusEmpleado on e.EstatusERT equals ee.Id
+                                     select new ComboRolesUsuarios
+                                     {
+                                         IdRol = u.IdRol,
+                                         Rol = ro.Nombre
+                                      
+                                     }).Distinct().Union
+                                  (from u in db.CatUsuarios
+                                   join r in db.RelacionUsuarioEmail on u.Id equals r.IdUser
+                                   join ro in db.CatRoles on u.IdRol equals ro.Id
+                                   select new ComboRolesUsuarios
+                                   {
+                                       IdRol = u.IdRol,
+                                       Rol = ro.Nombre
+                                   }).Distinct().Union
+                                  (from u in db.CatUsuarios
+                                   join ro in db.CatRoles on u.IdRol equals ro.Id
+                                   join r in db.RelacionUsuarioEmpleado on u.Id equals r.IdUser into ps
+                                   from r in ps.DefaultIfEmpty()
+                                   where r.Id == null
+                                   join re in db.RelacionUsuarioEmail on u.Id equals re.IdUser into pr
+                                   from re in pr.DefaultIfEmpty()
+                                   where re.Id == null
+                                   select new ComboRolesUsuarios
+                                   {
+                                       IdRol = u.IdRol,
+                                       Rol = ro.Nombre
+                                   }).Distinct().ToList();
+
+
+
+
+                    // query here ....  
+                    var query = (from u in db.CatUsuarios
+                                 join r in db.RelacionUsuarioEmpleado on u.Id equals r.IdUser
+                                 join e in db.CatEmpleados on r.IdEmpleado equals e.Id
+                                 join ro in db.CatRoles on u.IdRol equals ro.Id
+                                 join ee in db.TblCatEstatusEmpleado on e.EstatusERT equals ee.Id
+                                 select new ComboRolesUsuarios
+                                 {
+                                     IdRol = u.IdRol,
+                                     Rol = ro.Nombre
+                                 }).Distinct().Union
+                              (from u in db.CatUsuarios
+                               join r in db.RelacionUsuarioEmail on u.Id equals r.IdUser
+                               join ro in db.CatRoles on u.IdRol equals ro.Id
+                               select new ComboRolesUsuarios
+                               {
+                                   IdRol = u.IdRol,
+                                   Rol = ro.Nombre
+                               }).Distinct().Union
+                              (from u in db.CatUsuarios
+                               join ro in db.CatRoles on u.IdRol equals ro.Id
+                               join r in db.RelacionUsuarioEmpleado on u.Id equals r.IdUser into ps
+                               from r in ps.DefaultIfEmpty()
+                               where r.Id == null
+                               join re in db.RelacionUsuarioEmail on u.Id equals re.IdUser into pr
+                               from re in pr.DefaultIfEmpty()
+                               where re.Id == null
+                               select new ComboRolesUsuarios
+                               {
+                                   IdRol = u.IdRol,
+                                   Rol = ro.Nombre
+                               }).Distinct();
+
+                }
+            }
+            catch (Exception e)
+            {
+                string result = e.Message;
+                _log.Info("Bitacora Data error catch: " + e.Message);
+            }
+            _log.Info("Cantidad de registros: " + listaRolesUsuarios.Count());
+            _log.Info("Bitacora Data despues de consulta, retorno de lista usuarios");
+
+            return listaRolesUsuarios.DistinctBy(x => x.IdRol).ToList();
+
+        }
+
+
+
+
+        //combo Estatus ERT
+
+        public List<ComboEstatusERTUsuarios> ConsultaEstatusERTUsuarios()
+        {
+            _log.Info("Bitacora Data ConsultaRolesUsuarios antes de consulta... roles de usuarios");
+            List<ComboEstatusERTUsuarios> listaEstatusERTUsuarios = new List<ComboEstatusERTUsuarios>();
+            try
+            {
+                using (BitacoraContext db = new BitacoraContext())
+                {
+                    listaEstatusERTUsuarios = (from u in db.CatUsuarios
+                                          join r in db.RelacionUsuarioEmpleado on u.Id equals r.IdUser
+                                          join e in db.CatEmpleados on r.IdEmpleado equals e.Id
+                                          join ro in db.CatRoles on u.IdRol equals ro.Id
+                                          join ee in db.TblCatEstatusEmpleado on e.EstatusERT equals ee.Id
+                                          select new ComboEstatusERTUsuarios
+                                          {
+                                              EstatusERT = ee.Descripcion
+
+                                          }).Distinct().Union
+                                  (from u in db.CatUsuarios
+                                   join r in db.RelacionUsuarioEmail on u.Id equals r.IdUser
+                                   join ro in db.CatRoles on u.IdRol equals ro.Id
+                                   select new ComboEstatusERTUsuarios
+                                   {
+                                       EstatusERT = ""
+                                   }).Distinct().Union
+                                  (from u in db.CatUsuarios
+                                   join ro in db.CatRoles on u.IdRol equals ro.Id
+                                   join r in db.RelacionUsuarioEmpleado on u.Id equals r.IdUser into ps
+                                   from r in ps.DefaultIfEmpty()
+                                   where r.Id == null
+                                   join re in db.RelacionUsuarioEmail on u.Id equals re.IdUser into pr
+                                   from re in pr.DefaultIfEmpty()
+                                   where re.Id == null
+                                   select new ComboEstatusERTUsuarios
+                                   {
+                                       EstatusERT = ""
+                                   }).Distinct().ToList();
+
+
+
+
+                    // query here ....  
+                    var query = (from u in db.CatUsuarios
+                                 join r in db.RelacionUsuarioEmpleado on u.Id equals r.IdUser
+                                 join e in db.CatEmpleados on r.IdEmpleado equals e.Id
+                                 join ro in db.CatRoles on u.IdRol equals ro.Id
+                                 join ee in db.TblCatEstatusEmpleado on e.EstatusERT equals ee.Id
+                                 select new ComboEstatusERTUsuarios
+                                 {
+                                     EstatusERT = ee.Descripcion
+                                 }).Distinct().Union
+                              (from u in db.CatUsuarios
+                               join r in db.RelacionUsuarioEmail on u.Id equals r.IdUser
+                               join ro in db.CatRoles on u.IdRol equals ro.Id
+                               select new ComboEstatusERTUsuarios
+                               {
+                                   EstatusERT = ""
+                               }).Distinct().Union
+                              (from u in db.CatUsuarios
+                               join ro in db.CatRoles on u.IdRol equals ro.Id
+                               join r in db.RelacionUsuarioEmpleado on u.Id equals r.IdUser into ps
+                               from r in ps.DefaultIfEmpty()
+                               where r.Id == null
+                               join re in db.RelacionUsuarioEmail on u.Id equals re.IdUser into pr
+                               from re in pr.DefaultIfEmpty()
+                               where re.Id == null
+                               select new ComboEstatusERTUsuarios
+                               {
+                                   EstatusERT = ""
+                               }).Distinct();
+
+                }
+            }
+            catch (Exception e)
+            {
+                string result = e.Message;
+                _log.Info("Bitacora Data error catch: " + e.Message);
+            }
+            _log.Info("Cantidad de registros: " + listaEstatusERTUsuarios.Count());
+            _log.Info("Bitacora Data despues de consulta, retorno de lista usuarios");
+
+            return listaEstatusERTUsuarios.DistinctBy(x => x.EstatusERT).ToList();
+
+        }
     }
 }

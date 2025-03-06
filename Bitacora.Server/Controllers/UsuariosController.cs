@@ -91,6 +91,34 @@ namespace Bitacora.Controllers
             return resp;
         }
 
+        [HttpGet("[action]")]
+        public object ConsultaRolesUsuarios()
+        {
+            _log.Info("Bitacora Controller ConsultaRolesUsuarios Llega Controller");
+            var listaRolesUsuarios = _UsuariosLogic.ConsultaRolesUsuarios();
+            var resp = new { result = "", listaRolesUsuarios = listaRolesUsuarios };
+
+            _log.Info("Bitacora Controller return ConsultaRolesUsuarios");
+            return resp;
+        }
+
+        [HttpGet("[action]")]
+        public object ConsultaEstatusERTUsuarios()
+        {
+            _log.Info("Bitacora Controller ConsultaEstatusERTUsuarios Llega Controller");
+
+            var listaEstatusERTUsuarios = _UsuariosLogic.ConsultaEstatusERTUsuarios();
+
+            // Filtrar los elementos donde estatusERT no sea null ni vacío
+            var listaFiltrada = listaEstatusERTUsuarios
+                .Where(u => !string.IsNullOrEmpty(u.EstatusERT))
+                .ToList();
+
+            var resp = new { result = "", listaEstatusERTUsuarios = listaFiltrada };
+
+            _log.Info("Bitacora Controller return ConsultaEstatusERTUsuarios");
+            return resp;
+        }
 
     }
 }

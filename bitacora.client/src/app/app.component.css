@@ -1,4 +1,4 @@
-﻿:host {
+:host {
     max-width: 1280px;
     padding: 2rem;
     text-align: center;
@@ -387,3 +387,51 @@ color:white!important;
 margin-top: -16px!important;
 }
 
+.catalogo-item {
+  display: inline-block !important;
+  text-align: center !important;
+  word-break: break-word !important;
+  padding: 5px !important;
+  width: auto  !important;
+}
+
+@media (max-width: 987px) {
+
+
+  .nav > li > button > span > label {
+    white-space: nowrap !important;
+    display: flex !important;
+    align-items: center !important;
+    gap: 10px !important;
+    width: auto !important; /* Evita que el texto ocupe todo el espacio */
+    font-size: 11px;
+    justify-content: start !important; /* Asegura que el contenido se vaya a la derecha */
+  }
+
+  .mat-icon.mat-icon.notranslate.col-1.material-icons.mat-ligature-font.mat-icon-no-colorn {
+    flex-shrink: 0 !important;
+    margin-left: auto !important; /* Mueve el ícono a la derecha */
+    margin-right: 0 !important;
+  }
+
+
+  .mat-mdc-button:has(.material-icons,mat-icon,[matButtonIcon]) {
+    -webkit-user-select: none;
+    user-select: none;
+    position: relative;
+    display: inline-flex;
+    align-items: start;
+    justify-content: start !important;
+    box-sizing: border-box;
+    min-width: 64px;
+    border: none;
+    outline: none;
+    line-height: inherit;
+    -webkit-appearance: none;
+    overflow: visible;
+    vertical-align: middle;
+    background: rgba(0, 0, 0, 0);
+    padding: 0 8px;
+    padding-left: 30% !important;
+  }
+}

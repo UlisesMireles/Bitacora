@@ -11,6 +11,7 @@ import { AuthenticationService } from '../../services/authentication.service';
 import { Globals } from '../../services/globals';
 import { AgregarUsuarioComponent } from '../agregar-usuario/agregar-usuario.component';
 import { environment } from '../../../environments/environment';
+import { CatalogosService } from '../../services/catalogos.service';
 
 ///import  $ from 'jquery';
 declare var $: any;
@@ -79,8 +80,8 @@ export class CatalogosComponent implements OnInit{
         this.pagFiltrados=pagFiltrados;
       }
     }
-    else if(this.tipoCatalogo == 'Proyectos'){
-      if(this.filtroCinco!=''){
+    else if (this.tipoCatalogo == 'Proyectos') {
+      if (this.filtroCinco != '' || this.filtro6!='') {
         this.filtroActivo=true;
         this.coleccionFiltro = Globals.datosFiltrados;
         var pagFiltrados = Math.ceil(this.coleccionFiltro/this.config.itemsPerPage)
@@ -96,7 +97,7 @@ export class CatalogosComponent implements OnInit{
       }
     }
     else if(this.tipoCatalogo == 'Usuarios'){
-      if(this.filtroCuatro!=''){
+      if(this.filtroCuatro!='' || this.filtroCinco!=''){
         this.filtroActivo=true;
         this.coleccionFiltro = Globals.datosFiltrados;
         var pagFiltrados = Math.ceil(this.coleccionFiltro/this.config.itemsPerPage)
@@ -187,9 +188,12 @@ export class CatalogosComponent implements OnInit{
   btnOcultarCampos: boolean = false;
   btnActualizar: boolean = false;
   btnMostrarCampos: boolean = false;
-
+  comboRoles: any[] = [];
+  comboSituacion: any[] = [];
+  comboEstatusP: any[] = [];
   constructor(private authenticationService:AuthenticationService,private cdRef:ChangeDetectorRef,private spinner: NgxSpinnerService,private toastr:ToastrService,
-    private activatedRoute:ActivatedRoute, private router:Router,private http:HttpClient,@Inject("BASE_URL") private baseUrl:string,public dialog:MatDialog ) {
+    private activatedRoute: ActivatedRoute, private router: Router, private http: HttpClient, @Inject("BASE_URL") private baseUrl: string, public dialog: MatDialog
+    , private serviceCatalogos: CatalogosService  ) {
     this.router.onSameUrlNavigation = 'reload';
     //asigno la base url desde el environment
     this.baseUrl = environment.baseURL;
@@ -226,10 +230,12 @@ export class CatalogosComponent implements OnInit{
         this.filtro3 = 'Resp OP';
         this.filtro4 = 'Líder Proyecto';
         this.filtroCinco = 'Activo';
+        this.filtro6 = "Estatus Proceso";
         this.tablaProyectos = true;
         this.filtroProyectos = true;
         this.btnOcultarCampos = true;
         this.getProyectos();
+        this.getConsultaEstatusProceso();
       }
       else if (params['catalogo'] === 'aplicativos') {
         this.tipoCatalogo = 'Sistemas (Aplicativos)';
@@ -255,6 +261,8 @@ export class CatalogosComponent implements OnInit{
         this.filtroUsuarios = true;
         this.btnOcultarCampos = true;
         this.getUsuarios();
+        this.getConsultaRolesUsuarios();
+        this.getConsultaEstatusERTUsuarios();
       }
       else if (params['catalogo'] === 'unidad-negocio') {
         this.tipoCatalogo = 'Negocio (Unidades de Negocio)';
@@ -633,7 +641,6 @@ export class CatalogosComponent implements OnInit{
     this.pageChanged(1);
   }
   pageChanged(event: number) {
-
     this.agregarVacios = false;
     this.agregarVaciosFiltro = false;
     this.config.currentPage = event;
@@ -694,19 +701,21 @@ export class CatalogosComponent implements OnInit{
 
 
   verificarBancerasUN(){
-    if(Globals.filtroUN==true || Globals.filtroEstatusUN==true || Globals.filtroAreasUN==true){
+    if (Globals.filtroUN == true || Globals.filtroEstatusUN == true || Globals.filtroAreasUN == true || Globals.filtroCincoUN == true) {
+
       Globals.filtroActivo=true;
       this.filtroActivo=true;
       this.agregarVaciosFiltro=true;
       this.pageChanged(1);
     }
-    else if(Globals.filtroUN==false && Globals.filtroEstatusUN==false && Globals.filtroAreasUN==false)
+    else if (Globals.filtroUN == false && Globals.filtroEstatusUN == false && Globals.filtroAreasUN == false || Globals.filtroCincoUN == false )
     {
       Globals.filtroActivo=false;
       this.filtroActivo=false;
       this.agregarVaciosFiltro=false;
       this.pageChanged(1);
     }
+
   }
   verificarFiltroUno(event: string){
     if(event==''){
@@ -750,21 +759,25 @@ export class CatalogosComponent implements OnInit{
       Globals.filtroEstatusUN = true;
       this.verificarBancerasUN();
     }
+
   }
   verificarFiltroCinco(event: string){
     if(event=''){
-      Globals.filtroEstatusUN=false;
+      Globals.filtroEstatusUN = false;
+      Globals.filtroCincoUN = false;  
       this.verificarBancerasUN();
     }
     else{
       Globals.filtroEstatusUN = true;
+      Globals.filtroCincoUN = true;   
       this.verificarBancerasUN();
     }
   }
 
-  verificarFiltroSeis(event: string){
 
-    if(event=''){
+
+  verificarFiltroSeis(event: string) {
+    if(event===''){
       Globals.filtroEstatusUN=false;
       this.verificarBancerasUN();
     }
@@ -791,6 +804,18 @@ export class CatalogosComponent implements OnInit{
       this.verificarBancerasUN();
     }
     else{
+      Globals.filtroEstatusUN = true;
+      this.verificarBancerasUN();
+    }
+  }
+  verificarFiltroEstatus(event: string) {
+    console.log(event);
+    if (event === '') {
+      Globals.filtroEstatusUN = false;
+      console.log(Globals.filtroEstatusUN);
+      this.verificarBancerasUN();
+    }
+    else {
       Globals.filtroEstatusUN = true;
       this.verificarBancerasUN();
     }
@@ -822,6 +847,8 @@ export class CatalogosComponent implements OnInit{
     })
     this.dialog.afterAllClosed.subscribe(()=>{
       this.getUsuarios();
+      this.getConsultaRolesUsuarios();
+      this.getConsultaEstatusERTUsuarios();
     })
   }
 
@@ -844,6 +871,8 @@ export class CatalogosComponent implements OnInit{
     $("#txtPassword").css({display:'none'});
     this.dialog.afterAllClosed.subscribe(()=>{
       this.getUsuarios();
+      this.getConsultaRolesUsuarios();
+      this.getConsultaEstatusERTUsuarios();
     })
   }
   eliminarRol(rol: { idRol: any }) {
@@ -894,6 +923,8 @@ export class CatalogosComponent implements OnInit{
       this.mensaje = "El estatus del usuario ha sido cambiado correctamente";
       this.toastr.success(this.mensaje, this.titulo);
       this.getUsuarios();
+      this.getConsultaRolesUsuarios();
+      this.getConsultaEstatusERTUsuarios();
       this.spinner.hide();
     }, err =>{
       this.spinner.hide();
@@ -1069,14 +1100,14 @@ export class CatalogosComponent implements OnInit{
   }
   limpiarCampos(){
 
-      this.filtroUno='';
+     this.filtroUno='';
     this.filtroDos='';
     this.filtroTres='';
     this.filtroCuatro='';
     this.filtroCinco='';
     this.filtroSeis ='';
     this.filtroSiete ='';
-    this.filtroOcho ='';
+    this.filtroOcho = '';
     if(this.tipoCatalogo == 'Clientes'){
       this.filtro1 = 'Cliente';
       this.filtro2 = 'Alias';
@@ -1089,11 +1120,12 @@ export class CatalogosComponent implements OnInit{
     else if(this.tipoCatalogo == 'Proyectos'){
       this.filtro1 = 'Proyecto';
       this.filtro2 = 'Estatus';
-
       this.filtro3 = 'Resp OP';
       this.filtro4 = 'Líder Proyecto';
       this.filtroCinco = 'Activo'
+      this.filtro6 = 'Estatus Proceso';
       this.getProyectos();
+      this.getConsultaEstatusProceso();
     }
     else if(this.tipoCatalogo == 'Sistemas (Aplicativos)'){
         this.filtro1 = 'Aplicativo';
@@ -1111,6 +1143,8 @@ export class CatalogosComponent implements OnInit{
       this.filtroCuatro = 'Activo';
       this.filtro6 = 'Situacion';
       this.getUsuarios();
+      this.getConsultaRolesUsuarios();
+      this.getConsultaEstatusERTUsuarios();
     }
     else if(this.tipoCatalogo == 'Negocio (Unidades de Negocio)'){
       this.filtro1 = 'Unidad de Negocio';
@@ -1154,7 +1188,34 @@ export class CatalogosComponent implements OnInit{
   }
 
 
+  getConsultaRolesUsuarios() {
+    this.comboRoles = [];
+    this.serviceCatalogos.getConsultaRolesUsuarios()
+      .subscribe(res => {
+        this.comboRoles = res.listaRolesUsuarios; 
+        console.log(this.comboRoles);
+      }, err => { console.log(err); });
+  }
+
+
+  getConsultaEstatusERTUsuarios() {
+    this.comboSituacion = [];
+    this.serviceCatalogos.getConsultaEstatusERTUsuarios()
+      .subscribe(res => {
+        this.comboSituacion = res.listaEstatusERTUsuarios;
+        console.log(this.comboSituacion);
+      }, err => { console.log(err); });
+  }
+
+  getConsultaEstatusProceso() {
+    this.comboEstatusP = [];
+    this.serviceCatalogos.getConsultaEstatusProceso()
+      .subscribe(res => { 
+        this.comboEstatusP = res.listaEstatusProceso;
+      }, err => { console.log(err); });
+  }
 }
+
 
 @Component({
   selector: 'confirmacionCambioEstatus',

@@ -151,27 +151,61 @@ export class FiltroPipe implements PipeTransform {
           resultFiltroTresUsuarios.push(bitEstatus);
         }
       }
+      ///se comenta codigo original para aplicar el cambio de hacer combo registro bitacora y el combo estatus ponerle la opcion todos
+
+      //for (const bit of resultFiltroTresUsuarios) {
+
+      //  if (bit.llenaBitacora == null) {
+      //    bit.llenaBitacora = '';
+      //  }
+      //  if (bit.llenaBitacora.substring(0, 1).toLowerCase().indexOf(filtroCinco.substring(0, 1).toLowerCase()) > -1) {
+      //    resultFiltroCuatroUsuarios.push(bit);
+      //  }
+      //}
+      //for(const estatus of resultFiltroCuatroUsuarios ){
+
+      //  if(estatus.estatus==null || estatus.estatus==undefined){
+      //    estatus.rol='';
+      //  }
+      //  if(estatus.estatus.substring(0,1).toLowerCase()==(filtroCuatro.substring(0,1).toLowerCase())){
+      //    resultFiltroCincoUsuarios.push(estatus);
+      //  }
+
+      //}
+
       for (const bit of resultFiltroTresUsuarios) {
 
         if (bit.llenaBitacora == null) {
           bit.llenaBitacora = '';
         }
-        if (bit.llenaBitacora.substring(0, 1).toLowerCase().indexOf(filtroCinco.substring(0, 1).toLowerCase()) > -1) {
+
+        // Si el usuario selecciona "Todos" (valor vacío ""), incluimos todos los elementos
+        if (filtroCinco === '') {
+          resultFiltroCuatroUsuarios.push(bit);
+        }
+        // Si el valor no es "Todos", filtramos normalmente
+        else if (bit.llenaBitacora.toLowerCase() === filtroCinco.toLowerCase()) {
           resultFiltroCuatroUsuarios.push(bit);
         }
       }
-      for(const estatus of resultFiltroCuatroUsuarios ){
 
-        if(estatus.estatus==null || estatus.estatus==undefined){
-          estatus.rol='';
+      for (const estatus of resultFiltroCuatroUsuarios) {
+
+        // Si el estatus es null o undefined, asignamos un valor vacío
+        if (estatus.estatus == null || estatus.estatus == undefined) {
+          estatus.rol = '';
         }
-        if(estatus.estatus.substring(0,1).toLowerCase()==(filtroCuatro.substring(0,1).toLowerCase())){
+
+        // Si filtroCuatro es "0", se debe incluir tanto "activo" como "inactivo"
+        if (filtroCuatro === '0') {
           resultFiltroCincoUsuarios.push(estatus);
         }
-        // if(estatus.estatusActivo.toLowerCase().indexOf(filtroCuatro.toLowerCase()) > -1){
-        //   resultFiltroTres.push(estatus);
-        // }
+        // Si filtroCuatro no es "0", se compara el primer carácter de "estatus" y "filtroCuatro" sin distinguir mayúsculas
+        else if (estatus.estatus.substring(0, 1).toLowerCase() === filtroCuatro.substring(0, 1).toLowerCase()) {
+          resultFiltroCincoUsuarios.push(estatus);
+        }
       }
+
     }
 
     else if(catalogo=='clientes'){

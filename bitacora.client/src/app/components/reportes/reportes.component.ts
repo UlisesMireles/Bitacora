@@ -336,6 +336,7 @@ export class ReportesComponent implements OnInit {
   hoverCat: boolean = false;
   hoverDom: boolean = this.fase;
   regresar: boolean = false;
+  valorFiltroDetalle = "";
   _id = 0;
   _email = "";
   resize() {
@@ -526,6 +527,11 @@ export class ReportesComponent implements OnInit {
     this.fechaInicio = lunes;
     this.fechaFin = domingo;
 
+
+  }
+
+  getfiltroDetalle(valor: string) {
+    this.valorFiltroDetalle = valor; // Guardar el valor ingresado en la variable
 
   }
 
@@ -1126,7 +1132,7 @@ export class ReportesComponent implements OnInit {
     this.actividadSeleccionada = 0;
     this.config.currentPage = 1;
     this.config.totalItems = 0;
-
+    this.valorFiltroDetalle = ""; 
 
     var days = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
     var fechaCalculo = moment();
@@ -1231,9 +1237,10 @@ export class ReportesComponent implements OnInit {
     this.datosReporte = {
       idUser: idUsuario, idUnidad: this.unidadSeleccionada, idArea: this.areaSeleccionada,
       idProyecto: this.proyectoSeleccionado, idEtapa: this.etapaSeleccionada, idUserFiltro: this.usuarioSeleccionado,
-      fechaIni: this.lunesRepo, fechaFin: this.domingoRepo, idActividad: this.actividadSeleccionada, idUnidadusuario: this.UnidadUsuarioSeleccionada
+      fechaIni: this.lunesRepo, fechaFin: this.domingoRepo, idActividad: this.actividadSeleccionada, idUnidadusuario: this.UnidadUsuarioSeleccionada,
+      varDetalle: this.valorFiltroDetalle
     };
-    //console.log(this.datosReporte)
+    console.log(this.datosReporte)
     this.serviceReportes.getConsultaDetallado(this.datosReporte,this.config.itemsPerPage, this.config.currentPage).subscribe(
       res => {
         //console.log(res)
@@ -2122,6 +2129,7 @@ export class ReportesComponent implements OnInit {
     this.proyectoSeleccionado = 0;
     this.etapaSeleccionada = 0;
     this.actividadSeleccionada = 0;
+    this.valorFiltroDetalle = ""; 
 
   }
 
@@ -2159,6 +2167,7 @@ export class ReportesComponent implements OnInit {
     this.proyectoSeleccionado = value;
     if (value > 0) {
       this.actividadSeleccionada = 0;
+      this.valorFiltroDetalle = ""; 
       $('#etapaSel').prop('disabled', false);
       // $('#actividadSel').prop('disabled',true);
       this.actividadDesac = true;
@@ -2176,6 +2185,7 @@ export class ReportesComponent implements OnInit {
 
     this.etapaSeleccionada = 0;
     this.actividadSeleccionada = 0;
+    this.valorFiltroDetalle = ""; 
   }
 
   selEtapa(event: any) {
@@ -2184,6 +2194,7 @@ export class ReportesComponent implements OnInit {
     this.getActividades(this.unidadSeleccionada);
 
     this.actividadSeleccionada = 0;
+    this.valorFiltroDetalle = ""; 
   }
 
   selUser(event: any) {
@@ -2196,12 +2207,15 @@ export class ReportesComponent implements OnInit {
     this.proyectoSeleccionado = 0;
     this.etapaSeleccionada = 0;
     this.actividadSeleccionada = 0;
+    this.valorFiltroDetalle = ""; 
   }
 
   selActividad(event: any) {
     const actividad = parseInt((event.target as HTMLSelectElement).value);
     this.actividadSeleccionada = actividad;
   }
+
+
 
   exportar() {
     //this.spinner.show();

@@ -98,7 +98,7 @@
             </div>
           </th>
           <th *ngIf="distribucion || proyecto" class="lo">
-            <div style="padding-left: 18px; padding-right: 11px;" class="col-lg-12 col-md-12 col-sm-12 col-6">
+            <div style="padding-left: 9px; padding-right: 11px;" class="col-lg-12 col-md-12 col-sm-12 col-6">
 
               <div class="col-12" style="padding-left: 0px;">
                 <select #cliente class="form-control-sm custom-select-sm opc col-12" [(ngModel)]="clienteSeleccionado"
@@ -110,7 +110,7 @@
             </div>
           </th>
           <th class="lo">
-            <div style="padding-left: 18px; padding-right: 11px;" class="col-lg-12 col-md-12 col-sm-12 col-6">
+            <div style="padding-left: 5px; padding-right: 11px;" class="col-lg-12 col-md-12 col-sm-12 col-6">
 
               <div class="col-12" style="padding-left: 0px;">
                 <select #unidadNeg class="form-control-sm custom-select-sm opc col-12" [(ngModel)]="unidadSeleccionada"
@@ -135,7 +135,7 @@
           </th>
 
           <th *ngIf="detallado || distribucion" class="lo">
-            <div style="padding-left: 18px;" class="col-lg-12 col-md-12 col-sm-12 col-6">
+            <div style="padding-left: 7px;" class="col-lg-12 col-md-12 col-sm-12 col-6">
 
               <div class="col-12" style="padding-left: 0px;">
                 <select id="unidadNegocioSel" class="form-control-sm custom-select-sm opc col-12"
@@ -149,7 +149,7 @@
 
           <th *ngIf="semanal" class="lo">
             <div style="padding: 0;" class="col-md-12 col-12 col-lg-12">
-              <div style="padding: 0;padding-right: 23px; padding-left: 26px;" class="col-12">
+              <div style="padding: 0;padding-right: 23px; padding-left: 10px;" class="col-12">
                 <select class="form-control-sm opc custom-select-sm col-12" [(ngModel)]="usuarioSeleccionado"
                   (change)="selUser($event);getDatosReporte()">
                   <option value="0">TODOS</option>
@@ -165,13 +165,14 @@
           <th class="cabecerasCatalogos" *ngIf="proyectoCampo">Proyecto</th>
           <th style="padding-left: 20px;" *ngIf="fase">Etapa</th>
           <th class="cabecerasCatalogos" *ngIf="fase">Actividad</th>
+          <th class="cabecerasCatalogos" style="padding-left: 20px;" *ngIf="fase">Detalle</th>
         </tr>
         <tr *ngIf="tipoReporte !== 'de Distribución'">
           <th class="lo">
             <div *ngIf="usuarioCampo && !semanal" style="padding: 0;" class="col-md-12 col-12 col-lg-12">
-              <div style="padding: 0;padding-right: 23px; padding-left: 26px;" class="col-12">
+              <div style="padding: 0;padding-right: 23px; padding-left: 10px;" class="col-12">
                 <select class="form-control-sm opc custom-select-sm col-12" [(ngModel)]="usuarioSeleccionado"
-                  (change)="selUser($event);getDatosReporte()">
+                        (change)="selUser($event);getDatosReporte()">
                   <option value="0">TODOS</option>
                   <option *ngFor="let usuario of usuariosFiltro" [value]="usuario.idUsr">{{usuario.usuario}}</option>
                 </select>
@@ -180,9 +181,9 @@
           </th>
           <th class="lo">
             <div *ngIf="proyectoCampo" style="padding: 0;" class="col-md-12 col-12 col-lg-12">
-              <div class="col-12" style="padding: 0; padding-right: 23px; padding-left: 26px;">
+              <div class="col-12" style="padding: 0; padding-right: 23px; padding-left: 10px;">
                 <select class="form-control-sm opc custom-select-sm col-12" [(ngModel)]="proyectoSeleccionado"
-                  (change)="selProyecto($event);getDatosReporte()">
+                        (change)="selProyecto($event);getDatosReporte()">
                   <option value="0">TODOS</option>
                   <option *ngFor="let pro of proyectosFiltro" [value]="pro.idProyecto">{{pro.proyecto}}</option>
                 </select>
@@ -194,7 +195,7 @@
 
               <div class="col-12">
                 <select id="etapaSel" class="form-control-sm opc custom-select-sm col-12"
-                  [(ngModel)]="etapaSeleccionada" (change)="selEtapa($event);getDatosReporte()">
+                        [(ngModel)]="etapaSeleccionada" (change)="selEtapa($event);getDatosReporte()">
                   <option value="0">TODAS</option>
                   <option *ngFor="let etapa of etapasFiltro" [value]="etapa.idEtapa">{{etapa.etapa}}</option>
 
@@ -204,11 +205,11 @@
           </th>
           <th class="lo">
             <div *ngIf="fase" style="padding-right: 14px; padding-left: 10px;"
-              class="col-lg-12 col-md-12 col-sm-12 col-6">
+                 class="col-lg-12 col-md-12 col-sm-12 col-6">
 
               <div class="col-12">
                 <select id="actividadSel" class="form-control-sm opc custom-select-sm col-12"
-                  [(ngModel)]="actividadSeleccionada" (change)="selActividad($event);getDatosReporte()">
+                        [(ngModel)]="actividadSeleccionada" (change)="selActividad($event);getDatosReporte()">
                   <option value="0">TODAS</option>
                   <option *ngFor="let actividad of actividadesFiltro" [value]="actividad.idActividad">
                     {{actividad.activadad}}
@@ -218,7 +219,16 @@
               </div>
             </div>
           </th>
+          <th class="lo">
+            <div *ngIf="fase" class="input-group" style="padding-left: 10px">
+              <input type="text" class="col-10" style="width:100%"
+                     name="valorFiltroDetalle"
+                     [(ngModel)]="valorFiltroDetalle"
+                     placeholder="Buscar..."
+                     (keyup)="getfiltroDetalle(valorFiltroDetalle); getDatosReporte()">
 
+            </div>
+          </th>
         </tr>
         <br>
       </thead>
@@ -253,7 +263,7 @@
         </div>
       </div>
     </div>
-    <div class="table responsive divTablas">
+    <div class="table-responsive divTablas">
       <table matSort (matSortChange)="sortData($event)" *ngIf="distribucion"
         class="table  table-hover table-bordered cellspacing">
         <thead>
@@ -330,7 +340,7 @@
             <th mat-sort-header="areaDetalladoSort" class="reng">Área</th>
             <th mat-sort-header="proyectoDetalladoSort" class="reng">Proyecto</th>
             <th mat-sort-header="actividadDetalladoSort" class="reng">Actividad</th>
-            <th mat-sort-header="detalleDetalladoSort" style="width: 17%;" class="det">Detalle</th>
+            <th mat-sort-header="detalleDetalladoSort" class="det">Detalle</th>
             <th mat-sort-header="etapaDetalladoSort" class="reng">Etapa</th>
             <th mat-sort-header="fechaRegDetalladoRegSort" class="reng">Fecha Registro</th>
 
@@ -350,9 +360,9 @@
             <td class="reng">{{detalle.area}}</td>
             <td class="reng">{{detalle.proyecto}}</td>
             <td class="reng">{{detalle.actividad}}</td>
-            <td style="width: 17%;" class="det">{{detalle.detalle}}</td>
+            <td  class="det">{{detalle.detalle}}</td>
             <td class="reng">{{detalle.etapa}}</td>
-            <td class="reng">{{detalle.fechaRegistro}}</td>
+            <td class="reng " style="padding-left:15px">{{detalle.fechaRegistro}}</td>
 
           </tr>
         </tbody>
