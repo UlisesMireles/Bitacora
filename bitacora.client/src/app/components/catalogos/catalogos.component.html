@@ -562,7 +562,7 @@
         </thead>
         <!--Aqui estaban los filtros de clientes-->
         <tbody *ngIf="tablaProyectos" style="height: 100%">
-          <tr *ngFor="let proyecto of arreglo | filtroProyectos:filtroUno:filtroDos:filtroTres:filtroCuatro:filtroCinco | paginate: config" class="trow">
+          <tr *ngFor="let proyecto of arreglo | filtroProyectos:filtroUno:filtroDos:filtroTres:filtroCuatro:filtroCinco:filtroSeis | paginate: config" class="trow">
             <td class="proyectoNombre alinear-izquierda">{{proyecto.nombre}}</td>
             <td class="proyectoNombreCorto alinear-izquierda">{{proyecto.nombreCorto}}</td>
             <td class="proyectoSistema alinear-izquierda">{{proyecto.sistema}}</td>

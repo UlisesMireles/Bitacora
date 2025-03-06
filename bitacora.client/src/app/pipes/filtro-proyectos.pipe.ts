@@ -7,12 +7,13 @@ import { Globals } from '../services/globals';
 })
 export class FiltroProyectosPipe implements PipeTransform {
 
-  transform(value: any, filtroUno: any, filtroDos: any, filtroTres: any, filtroCuatro: any, filtroCinco: any): any {
+  transform(value: any, filtroUno: any, filtroDos: any, filtroTres: any, filtroCuatro: any, filtroCinco: any, filtroSeis: any): any {
     var resultFiltroUno = [];
     var resultFiltroDos = [];
     var resultFiltroTres = [];
     var resultFiltroCuatro = [];
     var resultFiltroCinco = [];
+    var resultFiltroSeis = [];
     var resultFiltros = [];
 
     for (const proyecto of value) {
@@ -48,6 +49,7 @@ export class FiltroProyectosPipe implements PipeTransform {
         resultFiltroCuatro.push(cliente);
       }
     }
+
     for (const estatus of resultFiltroCuatro) {
 
       if (estatus.estatus == null) {
@@ -55,6 +57,16 @@ export class FiltroProyectosPipe implements PipeTransform {
       }
       if (estatus.estatus.substring(0, 1).toLowerCase() == (filtroCinco.substring(0, 1).toLowerCase())) {
         resultFiltroCinco.push(estatus);
+      }
+    }
+
+    for (const estatusProceso of resultFiltroCinco) {
+
+      if (estatusProceso.estatusProceso == null) {
+        estatusProceso.estatusProceso = '';
+      }
+      if (estatusProceso.estatusProceso.toLowerCase() == (filtroSeis.toLowerCase())) {
+        resultFiltroSeis.push(estatusProceso);
       }
     }
 
@@ -73,6 +85,10 @@ export class FiltroProyectosPipe implements PipeTransform {
     if (filtroCinco !== '') {
       resultFiltroUno = [];
       resultFiltroUno = resultFiltroCinco;
+    }
+    if (filtroSeis !== '') {
+      resultFiltroUno = [];
+      resultFiltroUno = resultFiltroSeis;
     }
     Globals.datosFiltrados = resultFiltroUno.length;
     return resultFiltroUno;
