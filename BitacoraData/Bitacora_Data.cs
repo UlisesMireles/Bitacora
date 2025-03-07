@@ -4,6 +4,7 @@ using System.Text;
 using System.Linq;
 using BitacoraModels;
 using System.Net.NetworkInformation;
+using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace BitacoraData
 {
@@ -71,7 +72,6 @@ namespace BitacoraData
         public List<CatProyectos> GetProyectos(int idUser)
         {
             List<CatProyectos> Proyectos = new List<CatProyectos>();
-            List<RelacionProyectos> relacionProyectos = new List<RelacionProyectos>();
 
             try
             {
@@ -82,11 +82,13 @@ namespace BitacoraData
                                  join re in db.RelacionProyectoEmpleado on p.Id equals re.IdProyecto
                                  join ru in db.RelacionUsuarioEmpleado on re.IdEmpleado equals ru.IdEmpleado
                                  join c in db.CatClientes on r.IdCliente equals c.Id
-                                 where r.Estatus == "1" && ru.IdUser == idUser &&  re.IdRol == 10 && r.IdEstatusProceso != null
-                                 select new CatProyectos
+                                 where r.Estatus == "1" && ru.IdUser == idUser && re.IdRol == 10 && r.IdEstatusProceso != null
+                                 select new { p, c })
+                                .GroupBy(x => x.p.Id)
+                                 .Select(g => new CatProyectos
                                  {
-                                     Id = p.Id,
-                                     Nombre = p.Nombre.Trim() + " - "  + c.Nombre.Trim(),
+                                     Id = g.Key,
+                                     Nombre = g.FirstOrDefault().p.Nombre.Trim() + " - " + g.FirstOrDefault().c.Nombre.Trim()
                                  }).ToList();
                 }
             }catch(Exception e){
@@ -128,7 +130,7 @@ namespace BitacoraData
                     relacionesEtapas = (from e in db.CatEtapas
                               join r in db.RelacionEtapaEstatuses on e.Id equals r.IdEtapa
                               where e.Estatus == "1" && r.Activo == true && estatusIds.Contains(r.IdEstatus)
-                                        select new RelacionEtapaEstatus { Id = r.Id, IdEtapa = r.IdEtapa }).ToList();
+                                        select new RelacionEtapaEstatus { Id = r.Id, IdEtapa = r.IdEtapa, IdEstatus = r.IdEstatus }).ToList();
                 }
             }
             catch (Exception e)
@@ -171,7 +173,7 @@ namespace BitacoraData
                     relacionesEtapas = (from e in db.CatActividades
                                         join r in db.RelacionActividadEstatuses on e.Id equals r.IdActividad
                                         where e.Estatus == "1" && r.Activo == true && estatusIds.Contains(r.IdEstatus)
-                                        select new RelacionActividadEstatus { Id = r.Id, IdActividad = r.IdActividad }).ToList();
+                                        select new RelacionActividadEstatus { Id = r.Id, IdActividad = r.IdActividad, IdEstatus = r.IdEstatus }).ToList();
                 }
             }
             catch (Exception e)
