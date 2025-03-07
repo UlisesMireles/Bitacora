@@ -64,6 +64,8 @@ export class FormBitacoraComponent implements OnInit, OnDestroy {
   eventosExtra: any []=[];
   relacionProyectos: any[] = [];
   relacionEtapasEstatus: any[] = [];
+  relacionesEtapasProyecto: any[] = [];
+  relacionesActividadesProyecto: any[] = [];
   relacionActividadesEstatus: any[] = [];
   fases: any[] = [];
   idUsuario: any;
@@ -388,8 +390,8 @@ export class FormBitacoraComponent implements OnInit, OnDestroy {
       //fase.setValidators([Validators.required]);
       proyectoText!.setValidators(null);
 
-      this.filtrarEtapas();
-      this.filtrarActividades();
+      this.filtrarEtapas(this.proyectos[index].id);
+      this.filtrarActividades(this.proyectos[index].id);
 
     }else{
       this.proyectoSeleccionado = undefined;
@@ -413,20 +415,22 @@ export class FormBitacoraComponent implements OnInit, OnDestroy {
     proyectoText!.updateValueAndValidity();
   }
 
-  filtrarEtapas(): void {
+  filtrarEtapas(idProyecto: number): void {
+    this.relacionesEtapasProyecto = this.relacionEtapasEstatus.filter(estatus => this.relacionProyectos.some(p => p.idProyecto == idProyecto && estatus.idEstatus == p.idEstatusProceso));
     this.etapasFiltradas.subscribe((etapas) => {
       const etapasFiltradas = etapas.filter(etapa => 
-        this.relacionEtapasEstatus.some(estatus => estatus.idEtapa === etapa.id)
+        this.relacionesEtapasProyecto.some(estatus => estatus.idEtapa === etapa.id)
       );
       this.etapasFiltradasEstatus.next(etapasFiltradas);
       //console.log(etapasFiltradas);
     });
   };
 
-  filtrarActividades(): void {
+  filtrarActividades(idProyecto: number): void {
+    this.relacionesActividadesProyecto = this.relacionActividadesEstatus.filter(estatus => this.relacionProyectos.some(p => p.idProyecto == idProyecto && estatus.idEstatus == p.idEstatusProceso));
     this.actividadesFiltradas.subscribe((actividades) => {
       const actividadesFiltradas = actividades.filter(actividad => 
-        this.relacionActividadesEstatus.some(estatus => estatus.idActividad === actividad.id)
+        this.relacionesActividadesProyecto.some(estatus => estatus.idActividad === actividad.id)
       );
       this.actividadesFiltradasEstatus.next(actividadesFiltradas);
       //console.log(etapasFiltradas);
