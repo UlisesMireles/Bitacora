@@ -1927,6 +1927,13 @@ export class ReportesComponent implements OnInit {
     });
 
   }
+  abrirAnalisisPersona(idUsuario: number, usuario: any) {
+    this.datosReporte = { idUser: idUsuario, fechaIni: this.lunesRepo, fechaFin: this.domingoRepo };
+    console.log(this.datosReporte);
+    this.nombreUsuario = usuario;
+    
+    
+  }
 
   abrirDetalleHoras(idProyecto: number, proyecto: any) {
     this.spinner.show();
