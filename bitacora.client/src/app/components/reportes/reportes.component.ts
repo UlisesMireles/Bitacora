@@ -1982,7 +1982,6 @@ export class ReportesComponent implements OnInit {
      this.openIaService.Asistente(body).subscribe({
       next: res => {
         this.respuestaAsistente = this.limpiarRespuesta(res.respuesta || 'No se recibió respuesta.');
-        console.log(this.respuestaAsistente);
         if (window.innerWidth > 1300) {
         const dialogRef = this.dialog.open(DialogTable4, {
           width: '70vw',
