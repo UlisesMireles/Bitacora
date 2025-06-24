@@ -17,7 +17,7 @@ namespace BitacoraLogic.Utils.Asistentes
         private readonly string _connectionString;
         public AsistenteHistorico(IConfiguration configuration)
         {
-            _connectionString = configuration.GetConnectionString("FunelDatabase");
+            _connectionString = configuration.GetConnectionString("BitacoraDatabase");
         }
 
         public async Task<ConsultaAsistente> AsistenteOpenAIAsync(ConsultaAsistente consultaAsistente)
@@ -55,10 +55,9 @@ namespace BitacoraLogic.Utils.Asistentes
             List<ConfiguracionDto> result = new List<ConfiguracionDto>();
             IList<ParameterSQl> list = new List<ParameterSQl>
             {
-
                 DataBase.CreateParameterSql("@IdBot", SqlDbType.Int, 0, ParameterDirection.Input, false, null, DataRowVersion.Default, idBot)
             };
-            using (IDataReader reader = await DataBase.GetReaderSql("F_ConfiguracionAsistentesPorIdBot", CommandType.StoredProcedure, list, _connectionString))
+            using (IDataReader reader = await DataBase.GetReaderSql("BitacoraQA.dbo.F_ConfiguracionAsistentesPorIdBot", CommandType.StoredProcedure, list, _connectionString))
             {
                 while (reader.Read())
                 {

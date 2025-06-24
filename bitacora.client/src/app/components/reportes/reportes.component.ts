@@ -26,6 +26,8 @@ import { User } from '../../models/user';
 import jQuery from 'jquery';
 import { APP_DATE_FORMATS, AppDateAdapter } from './datepicker-format';
 import { Nom035Service } from '../../services/nom035.service';
+import { OpenIaService } from '../../services/asistentes/openIA.service';
+import { ConsultaAsistenteDto } from '../../services/asistentes/openIA.service';
 
 export interface DialogData {
   unidadNeg: string,
@@ -339,6 +341,8 @@ export class ReportesComponent implements OnInit {
   valorFiltroDetalle = "";
   _id = 0;
   _email = "";
+  lista = [];
+  respuestaAsistente: string = '';
   resize() {
     var hei = window.innerHeight;
     this.filtros = $(".divFiltros").height();
@@ -379,7 +383,8 @@ export class ReportesComponent implements OnInit {
   @ViewChild('charDominio', { static: false }) canvasDomRef!: ElementRef;
   constructor(public dialog: MatDialog, private spinner: NgxSpinnerService, private toastr: ToastrService, private authenticationService: AuthenticationService,
     private cdRef: ChangeDetectorRef, private activatedRoute: ActivatedRoute, private router: Router, private http: HttpClient,
-    private serviceReportes: ReportesService, private descargaService: DescargaService, private nom35Service: Nom035Service) {
+    private serviceReportes: ReportesService, private descargaService: DescargaService, private nom35Service: Nom035Service,
+  private openIaService: OpenIaService) {
 
       document.addEventListener('hide.bs.modal', () => {
         if (document.activeElement) {
@@ -1929,10 +1934,82 @@ export class ReportesComponent implements OnInit {
   }
   abrirAnalisisPersona(idUsuario: number, usuario: any) {
     this.datosReporte = { idUser: idUsuario, fechaIni: this.lunesRepo, fechaFin: this.domingoRepo };
-    console.log(this.datosReporte);
     this.nombreUsuario = usuario;
+    this.serviceReportes.getConsultaDetalleUsuario(this.datosReporte).subscribe(res => {
+      this.resultDetallePersona = res.lista;
+      var cant = res.lista.length;
+      var fecha;
+      var fechaRegistro;
+      for (let index = 0; index < res.lista.length; index++) {
+        fecha = new Date(res.lista[index].fecha);
+        fechaRegistro = new Date(res.lista[index].fechaRegistro);
+
+        var mes = parseInt(moment(fecha).format('M'));
+        var dia = parseInt(moment(fecha).format('D'));
+        var año = (moment(fecha).year());
+        var fechaFormat = dia + "/" + (mes) + "/" + año;
+        res.lista[index].fecha = fechaFormat;
+
+        var mesReg = parseInt(moment(fechaRegistro).format('M'));
+        var diaReg = parseInt(moment(fechaRegistro).format('D'));
+        var añoReg = (moment(fechaRegistro).year());
+        var fechaFormatReg = diaReg + "/" + (mesReg) + "/" + añoReg;
+        res.lista[index].fechaRegistro = fechaFormatReg;
+      }
+        this.lista = res.lista.map((item: any) => ({
+          fecha: item.fecha,
+          proyecto: item.proyecto,
+          horas: item.horas,
+          actividad: item.actividad
+        }));
+    const pregunta = `Información de la oportunidad:\n\n${this.lista.map((item: any) => `Fecha: ${item.fecha}, Proyecto: ${item.proyecto}, Horas: ${item.horas}, Actividad: ${item.actividad}`).join('\n')}`;
+
+    const body: ConsultaAsistenteDto = {
+      exitoso: true,
+      errorMensaje: '',
+      idBot: 1,
+      pregunta: `${pregunta}`,
+      fechaPregunta: new Date(),
+      respuesta: '',
+      fechaRespuesta: new Date(),
+      tokensEntrada: 0,
+      tokensSalida: 0,
+      idUsuario: 0,
+      idTipoUsuario: 0,
+      idEmpresa: 0,
+      esPreguntaFrecuente: false,
+    };
+     this.openIaService.Asistente(body).subscribe({
+      next: res => {
+        this.respuestaAsistente = this.limpiarRespuesta(res.respuesta || 'No se recibió respuesta.');
+        console.log(this.respuestaAsistente);
+        if (window.innerWidth > 1300) {
+        const dialogRef = this.dialog.open(DialogTable4, {
+          width: '70vw',
+          height: '62vh',
+          data: [pregunta, this.respuestaAsistente]
+        });
+      } else {
+        const dialogRef = this.dialog.open(DialogTable4, {
+          width: '70vw',
+          height: '70vh',
+          data: [pregunta, this.respuestaAsistente]
+        });
+      }
+      },
+      error: err => {
+        this.respuestaAsistente = 'Error al consultar al asistente: ' + err.message;
+      }
+    });
     
-    
+    })  
+  }
+  limpiarRespuesta(respuesta: string): string {
+    return respuesta
+      .replace(/```(?:\w+)?\s*([^]*?)```/g, (_, contenido) => contenido.trim())
+      .replace(/^```(?:\w+)?\s*/, '')
+      .replace(/```$/, '')
+      .trim();
   }
 
   abrirDetalleHoras(idProyecto: number, proyecto: any) {
@@ -3743,6 +3820,149 @@ export class DialogTable2 {
     this.dialogRef.close();
   }
 
+}
+
+@Component({
+  selector: 'modalAsistente',
+  templateUrl: '../../components/reportes/modalAsistente.html',
+  styleUrls: ['./reportes.component.css'],
+  standalone: false
+})
+export class DialogTable4 {
+  dataArray: any[] = [];
+  leyendo: boolean = false;
+  copiado: boolean = false;
+  maximizedRespuesta: boolean = false;
+  constructor(
+    public dialogRef: MatDialogRef<DialogTable4>,
+    @Inject(MAT_DIALOG_DATA) public data: DialogData
+  ) {
+    const dialog = this.dialogRef
+    dialog.afterOpened().subscribe(_ => {
+      setTimeout(() => {
+        dialog.close();
+      }, 1000 * 60 * 30)
+    });
+    this.dataArray = Array.isArray(this.data) ? this.data : Object.values(this.data);
+  }
+
+  onNoClick(): void {
+    this.dialogRef.close();
+  }
+  cerrar(): void {
+    this.dialogRef.close();
+  }
+  
+
+  copiarTexto(): void {
+    if (!this.dataArray[1]) return;
+
+    const tempElement = document.createElement('div');
+    tempElement.innerHTML = this.dataArray[1];
+
+    function getPlainText(element: HTMLElement): string {
+      let text = '';
+
+      element.childNodes.forEach(node => {
+        if (node.nodeType === Node.TEXT_NODE) {
+          // Texto normal
+          text += node.textContent;
+        } else if (node.nodeType === Node.ELEMENT_NODE) {
+          const el = node as HTMLElement;
+          const tag = el.tagName.toLowerCase();
+
+          if (tag === 'p' || tag === 'div' || tag === 'br') {
+            text += getPlainText(el) + '\n';
+          } else if (tag === 'li') {
+            text += '- ' + getPlainText(el) + '\n';
+          } else if (tag === 'ul' || tag === 'ol') {
+            text += getPlainText(el) + '\n';
+          } else {
+            text += getPlainText(el);
+          }
+        }
+      });
+
+      return text;
+    }
+
+    const textoPlano = getPlainText(tempElement).trim();
+
+    navigator.clipboard.writeText(textoPlano).then(() => {
+      this.copiado = true;
+      setTimeout(() => this.copiado = false, 2000);
+    });
+  }
+
+  limpiarRespuesta(respuesta: string): string {
+    return respuesta
+      .replace(/```(?:\w+)?\s*([^]*?)```/g, (_, contenido) => contenido.trim())
+      .replace(/^```(?:\w+)?\s*/, '')
+      .replace(/```$/, '')
+      .trim();
+  }
+  
+  leerRespuesta(): void {
+    if (this.leyendo) {
+      window.speechSynthesis.cancel();
+      this.leyendo = false;
+    } else {
+      if (!this.dataArray[1]) return;
+
+      const tempElement = document.createElement('div');
+      tempElement.innerHTML = this.dataArray[1];
+
+      function getPlainText(element: HTMLElement): string {
+        let text = '';
+        element.childNodes.forEach(node => {
+          if (node.nodeType === Node.TEXT_NODE) {
+            text += node.textContent;
+          } else if (node.nodeType === Node.ELEMENT_NODE) {
+            const el = node as HTMLElement;
+            const tag = el.tagName.toLowerCase();
+
+            if (tag === 'p' || tag === 'div' || tag === 'br') {
+              text += getPlainText(el) + '\n';
+            } else if (tag === 'li') {
+              text += '- ' + getPlainText(el) + '\n';
+            } else {
+              text += getPlainText(el);
+            }
+          }
+        });
+        return text;
+      }
+
+      const textoPlano = getPlainText(tempElement).trim();
+
+      const utterance = new SpeechSynthesisUtterance(textoPlano);
+      utterance.lang = 'es-MX';
+      utterance.rate = 1;
+      utterance.pitch = 1;
+      utterance.volume = 1;
+
+      this.leyendo = true;
+
+      utterance.onend = () => {
+        this.leyendo = false;
+      };
+
+      utterance.onerror = () => {
+        this.leyendo = false;
+      };
+
+      window.speechSynthesis.cancel(); 
+      window.speechSynthesis.speak(utterance);
+    }
+  }
+  alCerrarDialogo(): void {
+    this.maximizedRespuesta = false;
+
+    if (this.leyendo) {
+      window.speechSynthesis.cancel();
+      this.leyendo = false;
+    }
+  }
 }
 
 

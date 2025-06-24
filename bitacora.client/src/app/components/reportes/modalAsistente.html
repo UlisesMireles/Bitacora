@@ -1,0 +1,22 @@
+<mat-dialog-content>
+  <div style="position: relative; padding-right: 10px; color: black;" class="float-end">
+    <mat-icon style="cursor: pointer;" (click)="cerrar()">close</mat-icon>
+  </div>
+
+  <h4 class="modal-title text-center" style="font-size: 16px; color:black">
+    <b>Análisis de reporte por persona con IA</b>
+  </h4>
+
+  <div style="margin-top: 20px; color: black;">
+    <p style="white-space: pre-line;">{{ dataArray[1] }}</p>
+  </div>
+
+ <button class="btn-copiar" (click)="copiarTexto()" >
+      <mat-icon [ngClass]="copiado ? 'icono-copiado' : ''">
+        {{ copiado ? 'check' : 'content_copy' }}
+      </mat-icon>
+    </button>
+    <button class="btn-copiar" (click)="leerRespuesta()">
+      <mat-icon>{{ leyendo ? 'stop' : 'volume_up' }}</mat-icon>
+  </button>
+</mat-dialog-content>

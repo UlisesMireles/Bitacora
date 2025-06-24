@@ -38,6 +38,7 @@ import { TokenContraseniaComponent } from './components/token-contrasenia/token-
 import {DialogTable} from './components/reportes/reportes.component';
 import {DialogTable2} from './components/reportes/reportes.component';
 import {DialogTable3} from './components/reportes/reportes.component';
+import {DialogTable4} from './components/reportes/reportes.component';
 //import { AgregarUsuarioComponent } from './components/agregar-usuario/agregar-usuario.component';
 import { FiltroBitacoraPipe } from './pipes/filtro-bitacora.pipe';
 //import { RegistrosCalendarioComponent } from './components/registros-calendario/registros-calendario.component';
@@ -89,6 +90,7 @@ export function getBaseUrl() {
     DialogTable,
     DialogTable2,
     DialogTable3,
+    DialogTable4,
     CambiocontraseniaComponent,
     PermisosComponent,
     RegistrosCalendarioComponent,
