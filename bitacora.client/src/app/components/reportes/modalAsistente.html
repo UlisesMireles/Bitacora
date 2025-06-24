@@ -11,12 +11,15 @@
     <div [innerHTML]="dataArray[1]" style="line-height: 1.6;"></div>
   </div>
 
- <button class="btn-copiar" (click)="copiarTexto()" >
+  <div *ngIf="dataArray[1] && dataArray[1] !== 'Espere un momento...'">
+    <button class="btn-copiar" (click)="copiarTexto()">
       <mat-icon [ngClass]="copiado ? 'icono-copiado' : ''">
         {{ copiado ? 'check' : 'content_copy' }}
       </mat-icon>
     </button>
+
     <button class="btn-copiar" (click)="leerRespuesta()">
       <mat-icon>{{ leyendo ? 'stop' : 'volume_up' }}</mat-icon>
-  </button>
+    </button>
+</div>
 </mat-dialog-content>

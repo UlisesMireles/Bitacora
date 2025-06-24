@@ -1935,6 +1935,11 @@ export class ReportesComponent implements OnInit {
   abrirAnalisisPersona(idUsuario: number, usuario: any) {
     this.datosReporte = { idUser: idUsuario, fechaIni: this.lunesRepo, fechaFin: this.domingoRepo };
     this.nombreUsuario = usuario;
+     const dialogRef = this.dialog.open(DialogTable4, {
+      width: window.innerWidth > 1300 ? '70vw' : '70vw',
+      height: window.innerWidth > 1300 ? '62vh' : '70vh',
+      data: ['Cargando información...', 'Espere un momento...']
+    });
     this.serviceReportes.getConsultaDetalleUsuario(this.datosReporte).subscribe(res => {
       this.resultDetallePersona = res.lista;
       var cant = res.lista.length;
@@ -1979,25 +1984,14 @@ export class ReportesComponent implements OnInit {
       idEmpresa: 0,
       esPreguntaFrecuente: false,
     };
-     this.openIaService.Asistente(body).subscribe({
+    this.openIaService.Asistente(body).subscribe({
       next: res => {
         this.respuestaAsistente = this.limpiarRespuesta(res.respuesta || 'No se recibió respuesta.');
-        if (window.innerWidth > 1300) {
-        const dialogRef = this.dialog.open(DialogTable4, {
-          width: '70vw',
-          height: '62vh',
-          data: [pregunta, this.respuestaAsistente]
-        });
-      } else {
-        const dialogRef = this.dialog.open(DialogTable4, {
-          width: '70vw',
-          height: '70vh',
-          data: [pregunta, this.respuestaAsistente]
-        });
-      }
+
+        dialogRef.componentInstance.dataArray = [pregunta, this.respuestaAsistente];
       },
       error: err => {
-        this.respuestaAsistente = 'Error al consultar al asistente: ' + err.message;
+        dialogRef.componentInstance.dataArray = ['Error', 'Error al consultar al asistente: ' + err.message];
       }
     });
     
