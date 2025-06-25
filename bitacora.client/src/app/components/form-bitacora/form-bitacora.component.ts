@@ -363,10 +363,11 @@ export class FormBitacoraComponent implements OnInit, OnDestroy {
       this.fechaSel=true;
     }
   }
-  proyectoSeleccion(event : Event){
+  proyectoSeleccion(event : number){
 
-    
-    var index = this.proyectos.indexOf(this.proyectos.find(x => x.id == event));
+    const proyecto = this.proyectos.find(x => x?.id == event);
+
+    var index = this.proyectos.indexOf(proyecto);
     if(index!=-1){
       this.titleProy = this.proyectos[index].nombre
     }
@@ -376,7 +377,17 @@ export class FormBitacoraComponent implements OnInit, OnDestroy {
     //const actividad = this.formBitacora.get('actividad');
     const evento = this.eventoSeleccionado;
     const proyectoText=this.formBitacora.get('proyectoText');
-    if(Number(event)>0){
+    if (proyecto) {
+      this.titleProy = proyecto.nombre;
+      this.proyectoSel = true;
+      this.mostrarFase = true;
+      this.eventoSeleccionado = undefined;
+      proyectoText!.setValidators(null);
+      console.log("ID del proyecto seleccionado:", proyecto.id);
+      this.filtrarEtapas(proyecto.id);
+      this.filtrarActividades(proyecto.id);
+  
+   /* if(Number(event)>0){
       this.proyectoSel=true;
       this.mostrarFase = true;
       //this.formBitacora.get('fase').enable();
@@ -389,9 +400,10 @@ export class FormBitacoraComponent implements OnInit, OnDestroy {
       //actividad.setValidators([Validators.required]);
       //fase.setValidators([Validators.required]);
       proyectoText!.setValidators(null);
-
+      console.log(this.proyectos[index].id);
+      console.log("index" + index);
       this.filtrarEtapas(this.proyectos[index].id);
-      this.filtrarActividades(this.proyectos[index].id);
+      this.filtrarActividades(this.proyectos[index].id);*/
 
     }else{
       this.proyectoSeleccionado = undefined;
@@ -1023,6 +1035,7 @@ export class FormBitacoraComponent implements OnInit, OnDestroy {
     if(this.histExpandido == true && Globals.movil==false){
       this.expandirRegistro();
     }
+
     this.registroEditar = registro;
     var dateParts = registro.fecha.split("/");
 
@@ -1198,5 +1211,4 @@ export class FormBitacoraComponent implements OnInit, OnDestroy {
     //console.log(hours +':'+ minutes);
 
   }
-  
 }

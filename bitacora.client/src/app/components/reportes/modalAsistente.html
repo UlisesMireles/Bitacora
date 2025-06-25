@@ -1,0 +1,25 @@
+<mat-dialog-content>
+  <div style="position: relative; padding-right: 10px; color: black;" class="float-end">
+    <mat-icon style="cursor: pointer;" (click)="cerrar()">close</mat-icon>
+  </div>
+
+  <h4 class="modal-title text-center" style="font-size: 16px; color:black">
+    <b>Análisis de reporte por persona con IA</b>
+  </h4>
+
+  <div style="margin-top: 20px; color: black;">
+    <div [innerHTML]="dataArray[1]" style="line-height: 1.6;"></div>
+  </div>
+
+  <div *ngIf="dataArray[1] && dataArray[1] !== 'Espere un momento...'">
+    <button class="btn-copiar" (click)="copiarTexto()">
+      <mat-icon [ngClass]="copiado ? 'icono-copiado' : ''">
+        {{ copiado ? 'check' : 'content_copy' }}
+      </mat-icon>
+    </button>
+
+    <button class="btn-copiar" (click)="leerRespuesta()">
+      <mat-icon>{{ leyendo ? 'stop' : 'volume_up' }}</mat-icon>
+    </button>
+</div>
+</mat-dialog-content>

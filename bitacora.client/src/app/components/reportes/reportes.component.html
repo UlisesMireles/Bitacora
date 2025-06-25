@@ -376,6 +376,7 @@
             <th mat-sort-header="unidadPersonaSort">Unidad de Negocio</th>
             <th mat-sort-header="horasPersonaSort">Horas</th>
             <th style="text-align: center;">Detalle</th>
+            <th style="text-align: center;">Analisis</th>
 
           </tr>
         </thead>
@@ -387,17 +388,26 @@
 
           <tr *ngFor="let persona of reportePersona">
 
-            <td style="width: 25%;" [ngStyle]="{'color':persona.estatus == 0 ? 'red' : 'black' }">{{persona.usuario}}
+            <td style="width: 20%;" [ngStyle]="{'color':persona.estatus == 0 ? 'red' : 'black' }">{{persona.usuario}}
             </td>
-            <td style="width: 25%;">{{persona.unidad}}</td>
-            <td style="width: 25%;">{{persona.horas}}</td>
-            <td *ngIf="persona.horas > 0" style="text-align:center !important; width: 25%;">
+            <td style="width: 20%;">{{persona.unidad}}</td>
+            <td style="width: 20%;">{{persona.horas}}</td>
+            <td *ngIf="persona.horas > 0" style="text-align:center !important; width: 20;">
               <mat-icon style="cursor: pointer;" (click)="abrirDetallePersona(persona.idUser, persona.usuario)"
                 matSuffix>remove_red_eye</mat-icon>
             </td>
+            <td *ngIf="persona.horas > 0" style="text-align:center !important; width: 20;">
+              <mat-icon style="cursor: pointer;" (click)="abrirAnalisisPersona(persona.idUser, persona.usuario)" 
+                matSuffix>smart_toy</mat-icon>
+            </td>
+            
             <td *ngIf="persona.horas == 0" style="text-align:center;">
               <mat-icon style="cursor: not-allowed;color: #ccc;" matSuffix>remove_red_eye</mat-icon>
+            </td> 
+            <td *ngIf="persona.horas == 0" style="text-align:center;">
+              <mat-icon style="cursor: not-allowed;color: #ccc;" matSuffix>smart_toy</mat-icon>
             </td>
+
           </tr>
         </tbody>
       </table>

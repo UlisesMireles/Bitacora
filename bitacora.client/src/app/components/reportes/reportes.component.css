@@ -561,3 +561,22 @@ div.modal-backdrop.fade.show{
   -webkit-overflow-scrolling: touch;
   overflow-x: auto;
 }
+.btn-copiar {
+  align-self: flex-start;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  padding: 1px;
+  border-radius: 4px;
+}
+
+.btn-copiar mat-icon {
+    font-size: 22px;
+  line-height: 20px;
+  margin-left: 0px;
+  color: #666; 
+}
+
+.icono-copiado {
+  color: #256F45 !important; 
+}
