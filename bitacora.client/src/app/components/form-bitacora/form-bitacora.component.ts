@@ -1023,6 +1023,7 @@ export class FormBitacoraComponent implements OnInit, OnDestroy {
     if(this.histExpandido == true && Globals.movil==false){
       this.expandirRegistro();
     }
+
     this.registroEditar = registro;
     var dateParts = registro.fecha.split("/");
 
@@ -1198,5 +1199,4 @@ export class FormBitacoraComponent implements OnInit, OnDestroy {
     //console.log(hours +':'+ minutes);
 
   }
-  
 }
