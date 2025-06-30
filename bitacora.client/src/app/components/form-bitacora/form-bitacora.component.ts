@@ -9,7 +9,7 @@ import $ from 'jquery';
 import moment from 'moment';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { ToastrService } from 'ngx-toastr';
-import { ReplaySubject, Subject } from 'rxjs';
+import { ReplaySubject, Subject, Subscription } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 import { environment } from '../../../environments/environment';
 import { RegistroBitacora } from '../../models/registroBitacora';
@@ -116,7 +116,7 @@ export class FormBitacoraComponent implements OnInit, OnDestroy {
     const day = d.getDay();
     return day !==0 && day !==6;
   }
-  @ViewChild("fasef", {static: false}) Etapa!: MatSelect 
+  @ViewChild("fasef", {static: false}) Etapa!: MatSelect
   @ViewChild("proyectoS", {static: false}) Proyecto!: MatSelect
   @ViewChild("actividadf", {static: false}) Actividad!: MatSelect
   @ViewChild("eventof", { static: false }) Evento!: MatSelect
@@ -136,8 +136,8 @@ export class FormBitacoraComponent implements OnInit, OnDestroy {
         this.Evento.open();
       }
     }
-    
-    
+
+
   }
   ngAfterViewChecked()
   {
@@ -148,7 +148,7 @@ export class FormBitacoraComponent implements OnInit, OnDestroy {
   }
   constructor(private spinner: NgxSpinnerService, private cdRef: ChangeDetectorRef, private toastr: ToastrService, private http: HttpClient,
     private fb: FormBuilder, private router: Router, private bitacoraService: BitacoraService, private authenticationService: AuthenticationService) {
-    
+
 
     //this.router.onSameUrlNavigation ='reload';
     this.router.routeReuseStrategy.shouldReuseRoute = function(){
@@ -165,7 +165,7 @@ export class FormBitacoraComponent implements OnInit, OnDestroy {
     var mes=parseInt(this.fechaAct.format('M'));
     var dia=parseInt(this.fechaAct.format('D'));
     var año=(this.fechaAct.year())
-    
+
     this.maxDate = new Date(new Date(año,mes-1,dia).setHours(0,0,0,0));
 
 
@@ -182,7 +182,7 @@ export class FormBitacoraComponent implements OnInit, OnDestroy {
       }
 
     }
-    
+
 
     this.fechaEditar = moment(this.lunes).subtract(7,'d');
     var mesSuma=parseInt(moment(this.lunes).format('M'));
@@ -192,15 +192,15 @@ export class FormBitacoraComponent implements OnInit, OnDestroy {
     var mesmin=parseInt(this.fechaEditar.format('M'));
     var diamin=parseInt(this.fechaEditar.format('D'));
     var añomin=(this.fechaEditar.year())
-    
+
     this.minDate = new Date(new Date(añomin,mesmin-1,diamin).setHours(0,0,0,0));
 
 
     this.formBitacora = this.fb.group({
       fecha:['',Validators.required],
-      
+
       proyectoText:['',null],
-      
+
       //actividad:['',null],
       //evento:['',Validators.required],
       detalle:['',Validators.required],
@@ -214,6 +214,9 @@ export class FormBitacoraComponent implements OnInit, OnDestroy {
   @HostListener('window:resize', ['$event'])
     onResize(event : Event) :void {
       this.resize();
+      setTimeout(() => {
+        this.restaurarEstadoLocalStorage();
+      }, 100);
   }
   ngAfterViewInit(){
     this.resize();
@@ -240,13 +243,36 @@ export class FormBitacoraComponent implements OnInit, OnDestroy {
 
   }
   ngOnInit() {
+    this.formBitacora.valueChanges.subscribe(() => {
+    this.guardarEstadoLocalStorage();
+    });
+
     this.idUsuario = Number(localStorage.getItem("currentUser"));
+      this.recuperarProyectos(this.idUsuario).add(() => {
+    this.recuperarEtapas().add(() => {
+      this.recuperarActividades().add(() => {
+        this.restaurarEstadoLocalStorage();
+      });
+    });
+  });
     this.recuperarProyectos(this.idUsuario);
     this.recuperarActividades();
     this.recuperarEtapas();
     this.recuperarRegistros();
     this.fechaMinima = new Date(new Date(this.fechaEditar.format('LLLL')).setHours(0,0,0,0));
-    this.fechaDatePicker = new Date(new Date().setHours(0,0,0,0));
+    const fechaGuardada = localStorage.getItem('fechaBitacora');
+    const form = localStorage.getItem('formBitacora');
+    if (form) {
+      const parsedForm = JSON.parse(form);
+      this.formBitacora.patchValue(parsedForm);
+
+      // Asegúrate que la fecha se restaure correctamente
+      if (parsedForm.fecha) {
+        this.fechaDatePicker = new Date(parsedForm.fecha);
+        this.formBitacora.controls['fecha'].setValue(this.fechaDatePicker);
+      }
+    }
+
     this.filtroProyecto.valueChanges.pipe(takeUntil(this._onDestroy))
     .subscribe(()=>{
       this.filtraProyectos();
@@ -263,6 +289,7 @@ export class FormBitacoraComponent implements OnInit, OnDestroy {
     .subscribe(()=>{
       this.filtraEventos();
     })
+    this.restaurarEstadoLocalStorage();
   }
 
   filtraProyectos(){
@@ -272,7 +299,7 @@ export class FormBitacoraComponent implements OnInit, OnDestroy {
     let busqueda = this.filtroProyecto.value.normalize('NFD')
     .replace(/([aeio])\u0301|(u)[\u0301\u0308]/gi,"$1$2")
     .normalize();
-   
+
     if(!busqueda){
       this.proyectosFiltrados.next(this.proyectos.slice());
       return;
@@ -356,12 +383,12 @@ export class FormBitacoraComponent implements OnInit, OnDestroy {
     return Globals.movil;
   }
   fechaSeleccion(event:MatDatepickerInputEvent<Date>){
-    if(event.value!=null){
-      this.fechaSel=false;
-    }
-    else{
-      this.fechaSel=true;
-    }
+  if (event.value != null) {
+    this.fechaSel = false;
+    localStorage.setItem('fechaBitacora', event.value.toISOString());
+  } else {
+    this.fechaSel = true;
+  }
   }
   proyectoSeleccion(event : number){
 
@@ -383,10 +410,10 @@ export class FormBitacoraComponent implements OnInit, OnDestroy {
       this.mostrarFase = true;
       this.eventoSeleccionado = undefined;
       proyectoText!.setValidators(null);
-      console.log("ID del proyecto seleccionado:", proyecto.id);
+      //console.log("ID del proyecto seleccionado:", proyecto.id);
       this.filtrarEtapas(proyecto.id);
       this.filtrarActividades(proyecto.id);
-  
+
    /* if(Number(event)>0){
       this.proyectoSel=true;
       this.mostrarFase = true;
@@ -395,7 +422,7 @@ export class FormBitacoraComponent implements OnInit, OnDestroy {
       // // //this.etapaSeleccionada = undefined;
       this.eventoSeleccionado = undefined;
       //this.formBitacora.get('evento').setValue('');
-   
+
       //evento.setValidators(null);
       //actividad.setValidators([Validators.required]);
       //fase.setValidators([Validators.required]);
@@ -411,11 +438,11 @@ export class FormBitacoraComponent implements OnInit, OnDestroy {
       this.mostrarFase = false;
       //this.formBitacora.get('fase').disable();
       //this.formBitacora.get('fase').setValue('');
-      
+
       this.etapaSeleccionada = undefined;
       this.actividadSeleccionada = undefined;
       //this.formBitacora.get('actividad').setValue('');
-  
+
       //fase.setValidators(null);
       //actividad.setValidators(null);
       //evento.setValidators([Validators.required]);
@@ -430,7 +457,7 @@ export class FormBitacoraComponent implements OnInit, OnDestroy {
   filtrarEtapas(idProyecto: number): void {
     this.relacionesEtapasProyecto = this.relacionEtapasEstatus.filter(estatus => this.relacionProyectos.some(p => p.idProyecto == idProyecto && estatus.idEstatus == p.idEstatusProceso));
     this.etapasFiltradas.subscribe((etapas) => {
-      const etapasFiltradas = etapas.filter(etapa => 
+      const etapasFiltradas = etapas.filter(etapa =>
         this.relacionesEtapasProyecto.some(estatus => estatus.idEtapa === etapa.id)
       );
       this.etapasFiltradasEstatus.next(etapasFiltradas);
@@ -441,7 +468,7 @@ export class FormBitacoraComponent implements OnInit, OnDestroy {
   filtrarActividades(idProyecto: number): void {
     this.relacionesActividadesProyecto = this.relacionActividadesEstatus.filter(estatus => this.relacionProyectos.some(p => p.idProyecto == idProyecto && estatus.idEstatus == p.idEstatusProceso));
     this.actividadesFiltradas.subscribe((actividades) => {
-      const actividadesFiltradas = actividades.filter(actividad => 
+      const actividadesFiltradas = actividades.filter(actividad =>
         this.relacionesActividadesProyecto.some(estatus => estatus.idActividad === actividad.id)
       );
       this.actividadesFiltradasEstatus.next(actividadesFiltradas);
@@ -473,7 +500,7 @@ export class FormBitacoraComponent implements OnInit, OnDestroy {
         this.titleEvento = this.eventosExtra[index].nombre
       }
     }
-    
+
     if(event.value!=''){
       this.actividadSel=false;
     }else{
@@ -498,8 +525,8 @@ export class FormBitacoraComponent implements OnInit, OnDestroy {
       this.duracionSel=false;
     }
   }
- 
-  recuperarProyectos(idUsuario : any){
+
+  recuperarProyectos(idUsuario : any): Subscription{
     var datos = { idUser: idUsuario };
     var params = new HttpParams().set('idUser',datos.idUser);
     return this.http.get<any>(this.baseUrl + "api/Bitacora/GetProyectos/{id?}",{params})
@@ -533,7 +560,7 @@ export class FormBitacoraComponent implements OnInit, OnDestroy {
   }
 
 
-  recuperarEtapas(){
+  recuperarEtapas(): Subscription{
     return this.http.get<any>(this.baseUrl + "api/Bitacora/GetEtapas/{id?}")
     .subscribe(result=>{
       this.fases=result.etapas;
@@ -543,7 +570,7 @@ export class FormBitacoraComponent implements OnInit, OnDestroy {
       //console.log(error)
     })
   }
-  recuperarActividades(){
+  recuperarActividades() : Subscription{
     return this.http.get<any>(this.baseUrl + "api/Bitacora/GetActividades/{id?}")
     .subscribe(result=>{
       for (let index = 0; index < result.actividades.length; index++) {
@@ -555,7 +582,7 @@ export class FormBitacoraComponent implements OnInit, OnDestroy {
           this.eventosExtra.push(result.actividades[index]);
           this.eventosFiltrados.next(this.eventosExtra.slice());
         }
-        
+
       }
     }, error=>{
       //console.log(error)
@@ -591,6 +618,7 @@ export class FormBitacoraComponent implements OnInit, OnDestroy {
 
     this.edicionRegistro = false;
     this.mostrarFase = false;
+    this.limpiarLocalStorage();
   }
   //guardarRegistro(value : any){
   //  this.campos="";
@@ -867,6 +895,7 @@ export class FormBitacoraComponent implements OnInit, OnDestroy {
       this.registroEditar=null;
       this.limpiarForm();
       this.recuperarRegistros();
+      this.limpiarLocalStorage();
       this.editar = false;
     }, err =>{
           this.spinner.hide();
@@ -878,13 +907,13 @@ export class FormBitacoraComponent implements OnInit, OnDestroy {
   }
   insertarBitacora(value: any){
     this.spinner.show();
-   
+
     var etapa = value.fase;
     var actividad = this.actividadSeleccionada;
     var proyecto = this.proyectoSeleccionado;
     //console.log(actividad)
-   
-   
+
+
     if( proyecto==null || proyecto==""){
       actividad = this.eventoSeleccionado;
     }
@@ -894,12 +923,13 @@ export class FormBitacoraComponent implements OnInit, OnDestroy {
         duracion:value.duracion, fechaRegistro:new Date()};
         return this.http.post<any>(this.baseUrl + "api/Bitacora/InsertaBitacora/{id?}",datos)
         .subscribe(result=>{
-          if(result>0){          
+          if(result>0){
             this.titulo = "Registro Guardado";
             this.mensaje = "Tu registro se ha guardado correctamente"
             this.toastr.success(this.mensaje, this.titulo);
             this.limpiarForm();
             this.recuperarRegistros();
+            this.limpiarLocalStorage();
           }
           else{
             this.titulo = "Error";
@@ -916,29 +946,29 @@ export class FormBitacoraComponent implements OnInit, OnDestroy {
         })
    }
 
-   recuperarRegistros(){    
-      this.spinner.show();    
+   recuperarRegistros(){
+      this.spinner.show();
     this.bitacoraService.recuperarRegistros(localStorage.getItem('currentUser')).subscribe(
-      res=>{  
+      res=>{
         this.registrosBitacora = res.listaBitacora;
         this.numRegistrosBitacora = res.listaBitacora.length;
         if(this.numRegistrosBitacora>0){
-          //console.log(this.registrosBitacora);
+        //console.log(this.registrosBitacora);
         this.sumaHoras=0;
         var fecha;
         for (let index = 0; index < this.numRegistrosBitacora; index++) {
           fecha= new Date(this.registrosBitacora[index].fecha);
 
-          
+
           var mes=parseInt(moment(fecha).format('M'));
           var dia=parseInt(moment(fecha).format('D'));
           var año=(moment(fecha).year());
           var fechaFormat = dia+"/"+(mes)+"/"+año;
           this.registrosBitacora[index].fecha = fechaFormat;
-   
-          
+
+
           if(fecha>=this.fechaSuma){
-         
+
             this.sumaHoras += this.registrosBitacora[index].duracion;
           }
 
@@ -949,14 +979,14 @@ export class FormBitacoraComponent implements OnInit, OnDestroy {
             this.registrosBitacora[index].editable=false;
           }
         }
-   
+
         if(Globals.movil == true && Globals.pagina==1){
 
           this.registrosBitacora[this.registroActual];
           this.llenaDatos(this.registrosBitacora[this.registroActual]);
-          
+
           this.esEditable = this.registrosBitacora[this.registroActual].editable;
-          
+
         }
         }
         this.spinner.hide();
@@ -969,7 +999,7 @@ export class FormBitacoraComponent implements OnInit, OnDestroy {
       }
     );
    }
-   
+
    expandirHistorial(){
     if($('.historial').hasClass('col-lg-9')){
       $('.historial').removeClass("col-lg-9").addClass("col-lg-12");
@@ -1029,7 +1059,7 @@ export class FormBitacoraComponent implements OnInit, OnDestroy {
               var formatedDate = new Date(dateItems[yearIndex],month,dateItems[dayIndex]);
               return formatedDate;
   }
-  
+
   llenaDatos(registro : any){
     //console.log(registro)
     if(this.histExpandido == true && Globals.movil==false){
@@ -1040,7 +1070,7 @@ export class FormBitacoraComponent implements OnInit, OnDestroy {
     var dateParts = registro.fecha.split("/");
 
 // month is 0-based, that's why we need dataParts[1] - 1
-    var fecha = new Date(+dateParts[2], dateParts[1] - 1, +dateParts[0]); 
+    var fecha = new Date(+dateParts[2], dateParts[1] - 1, +dateParts[0]);
     //this.fechaDatePicker=new Date(registro.fecha);
     //var fecha = moment(registro.fecha);
     this.fechaDatePicker=new Date(fecha.setHours(0,0,0,0));
@@ -1061,13 +1091,13 @@ export class FormBitacoraComponent implements OnInit, OnDestroy {
       //this.formBitacora.controls['eventoCtrl'].setValue(registro.idEtapa);
       this.proyectoId = registro.idProyecto;
       this.proyectoSeleccion(registro.idProyecto);
-      
+
     this.etapaSeleccionada = registro.idEtapa;
-    
+
       this.eventoSeleccionado = registro.idActividad;
     }
-      
-    
+
+
     this.formBitacora.controls['detalle'].setValue(registro.descripcion);
     this.formBitacora.controls['duracion'].setValue(registro.duracion);
     if(this.pagina==1 && this.movil==true){
@@ -1079,19 +1109,18 @@ export class FormBitacoraComponent implements OnInit, OnDestroy {
     }
     this.spinner.hide();
   }
-  anteriorRegistro(){
+  anteriorRegistro() {
+    if (this.registroActual === 0) return; // Detener si ya estás en el primero
+
     this.limpiarForm();
-    this.editar=false;
-    if(this.registroActual>0){
-      this.registroActual = this.registroActual-1;
-      this.actualMostrar=this.actualMostrar-1;
-      //console.log(this.registrosBitacora[this.registroActual]);
-      this.llenaDatos(this.registrosBitacora[this.registroActual]);
-      this.esEditable = this.registrosBitacora[this.registroActual].editable;
-      this.formBitacora.controls['proyectoText'].setValue(this.registrosBitacora[this.registroActual].proyecto);
-    }
-    
+    this.editar = false;
+    this.registroActual--;
+    this.actualMostrar--;
+    this.llenaDatos(this.registrosBitacora[this.registroActual]);
+    this.esEditable = this.registrosBitacora[this.registroActual].editable;
+    this.formBitacora.controls['proyectoText'].setValue(this.registrosBitacora[this.registroActual].proyecto);
   }
+
   verificarDisabled(){
     if(this.formBitacora.get('fecha')!.enabled){
       $('.fechaIn').css({"background-color":"white","border-radius":" 0px"});
@@ -1133,21 +1162,20 @@ export class FormBitacoraComponent implements OnInit, OnDestroy {
       $('.duracionIn').css({"background-color":"gainsboro","border-radius":" 0px;"});
     }
   }
-  siguienteRegistro(){
-    this.limpiarForm();
-    this.editar=false;
-    if(this.registroActual<this.numRegistrosBitacora-1){
-      this.registroActual = this.registroActual+1;
-      this.actualMostrar=this.actualMostrar+1;
-      //console.log(this.registrosBitacora[this.registroActual]);
+    siguienteRegistro() {
+      if (this.registroActual >= this.numRegistrosBitacora - 1) return; // Detener si ya estás en el último
+
+      this.limpiarForm();
+      this.editar = false;
+      this.registroActual++;
+      this.actualMostrar++;
       this.llenaDatos(this.registrosBitacora[this.registroActual]);
       this.esEditable = this.registrosBitacora[this.registroActual].editable;
       this.formBitacora.controls['proyectoText'].setValue(this.registrosBitacora[this.registroActual].proyecto);
-
     }
-  }
+
   mostrarDatos(registro : any){
-   
+
     this.registroEditar = registro;
     this.fechaDatePicker=new Date(registro.fecha);
     this.formBitacora.controls['fecha'].setValue(registro.Fecha);
@@ -1174,10 +1202,10 @@ export class FormBitacoraComponent implements OnInit, OnDestroy {
     if(this.movil==true){
       this.verificarDisabled();
     }
-    
+
   }
   cancelar(){
-   
+
     this.editar=false;
     this.formBitacora.get('fecha')!.enable();
     this.formBitacora.get('proyectoText')!.enable();
@@ -1185,20 +1213,20 @@ export class FormBitacoraComponent implements OnInit, OnDestroy {
     this.formBitacora.get('duracion')!.enable();
     this.llenaDatos(this.registrosBitacora[this.registroActual]);
   }
-  
+
   timeStringToFloat(time: any) {
      var hoursMinutes = time.split(/[.:]/);
      if(hoursMinutes[1].length<2){
        hoursMinutes[1]= hoursMinutes[1]+'0';
      }
       var hours = parseInt(hoursMinutes[0], 10);
-       var minutes = hoursMinutes[1] ? parseInt(hoursMinutes[1], 10) : 0; 
+       var minutes = hoursMinutes[1] ? parseInt(hoursMinutes[1], 10) : 0;
        //console.log("decimal a horas min")
-    
+
     var hormin = hours + minutes / 60;
     //console.log(hormin)
     this.floatToString(hormin.toString());
-  } 
+  }
   floatToString(time :any){
     var time = time.toString();
     var hoursMinutes = time.split(/[.:]/);
@@ -1211,4 +1239,63 @@ export class FormBitacoraComponent implements OnInit, OnDestroy {
     //console.log(hours +':'+ minutes);
 
   }
+  guardarEstadoLocalStorage() {
+  localStorage.setItem('formBitacora', JSON.stringify(this.formBitacora.value));
+
+  const variables = {
+    proyectoSeleccionado: this.proyectoSeleccionado,
+    etapaSeleccionada: this.etapaSeleccionada,
+    actividadSeleccionada: this.actividadSeleccionada,
+    eventoSeleccionado: this.eventoSeleccionado,
+    titleProy: this.titleProy,
+    titleEtapa: this.titleEtapa,
+    titleEvento: this.titleEvento,
+    titleActividad: this.titleActividad
+  };
+
+  localStorage.setItem('variablesBitacora', JSON.stringify(variables));
+}
+restaurarEstadoLocalStorage() {
+  const form = localStorage.getItem('formBitacora');
+  const vars = localStorage.getItem('variablesBitacora');
+
+  if (form) {
+    console.log(form);
+    this.formBitacora.patchValue(JSON.parse(form));
+  }
+
+  if (vars) {
+    const v = JSON.parse(vars);
+
+    this.proyectoSeleccionado = v.proyectoSeleccionado;
+    this.etapaSeleccionada = v.etapaSeleccionada;
+    this.actividadSeleccionada = v.actividadSeleccionada;
+    this.eventoSeleccionado = v.eventoSeleccionado;
+
+    this.titleProy = v.titleProy;
+    this.titleEtapa = v.titleEtapa;
+    this.titleEvento = v.titleEvento;
+    this.titleActividad = v.titleActividad;
+
+    if (this.proyectoSeleccionado) {
+      this.proyectoSel = true;
+      this.mostrarFase = true;
+
+      this.filtrarEtapas(this.proyectoSeleccionado);
+      this.filtrarActividades(this.proyectoSeleccionado);
+
+      // Ejecutar después del render para evitar limpiar los selects
+      setTimeout(() => {
+        this.proyectoSeleccion(this.proyectoSeleccionado);
+      }, 200); // espera suficiente para que se cargue data
+    }
+  }
+}
+limpiarLocalStorage() {
+  localStorage.removeItem('formBitacora');
+  localStorage.removeItem('variablesBitacora');
+  localStorage.removeItem('fechaBitacora');  // si usas esta también para la fecha
+}
+
+
 }
