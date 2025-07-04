@@ -73,6 +73,10 @@ namespace Bitacora.Controllers
         [HttpPost("[action]/{id}")]
         public int InsertaBitacora(BitacoraH datos)
         {
+            var fechaLocal = datos.Fecha.ToLocalTime();
+            var fechaRegistroLocal = datos.FechaRegistro.HasValue ? datos.FechaRegistro.Value.ToLocalTime() : (DateTime?)null;
+            datos.FechaRegistro = fechaRegistroLocal;
+            datos.Fecha = fechaLocal;
             var Bitacora = _BitacoraLogic.InsertaBitacora(datos);
             return Bitacora;
         }
