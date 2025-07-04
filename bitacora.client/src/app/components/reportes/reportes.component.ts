@@ -1967,6 +1967,18 @@ export class ReportesComponent implements OnInit {
           horas: item.horas,
           actividad: item.actividad
         }));
+      var fechaInicio = new Date(this.lunesRepo);
+      var mes = parseInt(moment(fechaInicio).format('M'));
+      var dia = parseInt(moment(fechaInicio).format('D'));
+      var año = (moment(fechaInicio).year());
+      var fechaFormatInicio = dia + "/" + (mes) + "/" + año;
+
+      var fechaFin = new Date(this.domingoRepo);
+      var mesFin = parseInt(moment(fechaFin).format('M'));
+      var diaFin = parseInt(moment(fechaFin).format('D'));
+      var añoFin = (moment(fechaFin).year());
+      var fechaFormatFin = diaFin + "/" + (mesFin) + "/" + añoFin;
+
     const pregunta = `Información de la oportunidad:\n\n${this.lista.map((item: any) => `Fecha: ${item.fecha}, Proyecto: ${item.proyecto}, Horas: ${item.horas}, Actividad: ${item.actividad}`).join('\n')}`;
 
     const body: ConsultaAsistenteDto = {
@@ -1987,8 +1999,7 @@ export class ReportesComponent implements OnInit {
     this.openIaService.Asistente(body).subscribe({
       next: res => {
         this.respuestaAsistente = this.limpiarRespuesta(res.respuesta || 'No se recibió respuesta.');
-
-        dialogRef.componentInstance.dataArray = [pregunta, this.respuestaAsistente];
+        dialogRef.componentInstance.dataArray = [pregunta, this.respuestaAsistente, usuario, fechaFormatInicio, fechaFormatFin];
       },
       error: err => {
         dialogRef.componentInstance.dataArray = ['Error', 'Error al consultar al asistente: ' + err.message];
@@ -3844,6 +3855,10 @@ export class DialogTable4 {
   }
   cerrar(): void {
     this.dialogRef.close();
+     if (this.leyendo) {
+      window.speechSynthesis.cancel();
+      this.leyendo = false;
+    }
   }
   
 
@@ -3934,6 +3949,15 @@ export class DialogTable4 {
       utterance.pitch = 1;
       utterance.volume = 1;
 
+      const vocesDisponibles = window.speechSynthesis.getVoices();
+      const vozElegida = vocesDisponibles.find(voz =>
+        voz.name === "Microsoft Dalia Online (Natural) - Spanish (Mexico)"
+      );
+
+      if (vozElegida) {
+        utterance.voice = vozElegida;
+      }
+
       this.leyendo = true;
 
       utterance.onend = () => {
@@ -3948,6 +3972,9 @@ export class DialogTable4 {
       window.speechSynthesis.speak(utterance);
     }
   }
+
+
+
   alCerrarDialogo(): void {
     this.maximizedRespuesta = false;
 
