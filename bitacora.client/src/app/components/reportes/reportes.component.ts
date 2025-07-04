@@ -3855,6 +3855,10 @@ export class DialogTable4 {
   }
   cerrar(): void {
     this.dialogRef.close();
+     if (this.leyendo) {
+      window.speechSynthesis.cancel();
+      this.leyendo = false;
+    }
   }
   
 
@@ -3945,6 +3949,15 @@ export class DialogTable4 {
       utterance.pitch = 1;
       utterance.volume = 1;
 
+      const vocesDisponibles = window.speechSynthesis.getVoices();
+      const vozElegida = vocesDisponibles.find(voz =>
+        voz.name === "Microsoft Dalia Online (Natural) - Spanish (Mexico)"
+      );
+
+      if (vozElegida) {
+        utterance.voice = vozElegida;
+      }
+
       this.leyendo = true;
 
       utterance.onend = () => {
@@ -3959,6 +3972,9 @@ export class DialogTable4 {
       window.speechSynthesis.speak(utterance);
     }
   }
+
+
+
   alCerrarDialogo(): void {
     this.maximizedRespuesta = false;
 
