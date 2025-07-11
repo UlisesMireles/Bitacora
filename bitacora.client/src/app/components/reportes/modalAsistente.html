@@ -1,12 +1,15 @@
+<h4 mat-dialog-title class="text-center" style="font-size: 16px; color:black">
+  <b>Análisis de reporte de {{dataArray[2]}}</b>
+  <mat-icon class="float-end" style="cursor: pointer; position: absolute; right: 18px; top: 22px;" (click)="cerrar()">close</mat-icon><br>
+  <b>Del día {{dataArray[3]}} al {{dataArray[4]}}</b>
+</h4>
+ 
 <mat-dialog-content>
-  <div style="position: relative; padding-right: 10px; color: black;" class="float-end">
-    <mat-icon style="cursor: pointer;" (click)="cerrar()">close</mat-icon>
-  </div>
 
-  <h4 class="modal-title text-center" style="font-size: 16px; color:black">
+  <!--<h4 class="modal-title text-center" style="font-size: 16px; color:black">
     <b>Análisis de reporte de {{dataArray[2]}}</b><br>
     <b>Del día {{dataArray[3]}} al {{dataArray[4]}}</b>
-  </h4>
+  </h4>-->
 
   <div style="margin-top: 20px; color: black;">
     <div [innerHTML]="dataArray[1]" style="line-height: 1.6;"></div>

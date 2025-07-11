@@ -363,18 +363,27 @@ export class FormBitacoraComponent implements OnInit, OnDestroy {
     }
     let busqueda = this.filtroEvento.value.normalize('NFD')
     .replace(/([aeio])\u0301|(u)[\u0301\u0308]/gi,"$1$2")
-    .normalize();
+      .normalize();
+    
     if(!busqueda){
       this.eventosFiltrados.next(this.eventosExtra.slice());
+      const eventosUnicos = this.eventosExtra.filter(
+        (evento, index, self) =>
+          index === self.findIndex(e => e.id === evento.id)
+      );
+
+      this.eventosFiltrados.next(eventosUnicos);
+      console.log(this.eventosFiltrados);
       return;
     }
     else{
       busqueda = busqueda.toLowerCase();
     }
-
+    
     this.eventosFiltrados.next(
       this.eventosExtra.filter(evento=>this.acentos(evento.nombre.toLowerCase()).indexOf(busqueda) > -1)
     );
+    
   }
   get pagina(){
     return Globals.pagina;
@@ -570,7 +579,8 @@ export class FormBitacoraComponent implements OnInit, OnDestroy {
       //console.log(error)
     })
   }
-  recuperarActividades() : Subscription{
+  recuperarActividades(): Subscription{
+    this.eventosExtra = [];
     return this.http.get<any>(this.baseUrl + "api/Bitacora/GetActividades/{id?}")
     .subscribe(result=>{
       for (let index = 0; index < result.actividades.length; index++) {

@@ -1,4 +1,4 @@
 export const environment = {
   production: true,
-  baseURL: "https://localhost:7127/"
+  baseURL: "https://bitacora.eisei.net.mx/Bitacora/"
 };

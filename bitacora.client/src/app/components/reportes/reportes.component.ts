@@ -386,6 +386,8 @@ export class ReportesComponent implements OnInit {
     private serviceReportes: ReportesService, private descargaService: DescargaService, private nom35Service: Nom035Service,
   private openIaService: OpenIaService) {
 
+    window.speechSynthesis.cancel();
+
       document.addEventListener('hide.bs.modal', () => {
         if (document.activeElement) {
           (document.activeElement as HTMLElement).blur();
@@ -1215,16 +1217,17 @@ export class ReportesComponent implements OnInit {
     let busqueda = this.filtroUsuario.value.normalize('NFD')
       .replace(/([aeio])\u0301|(u)[\u0301\u0308]/gi, "$1$2")
       .normalize();
-    if (!busqueda) {
-      this.UsuariosFiltrados.next(this.usuarios.slice());
-      return;
-    }
-    else {
-      busqueda = busqueda.toLowerCase();
-    }
-    this.UsuariosFiltrados.next(
-      this.usuarios.filter(u => this.acentos(u.usuario.toLowerCase()).indexOf(busqueda) > -1)
+    let listaFiltrada = !busqueda
+      ? this.usuarios.slice()
+      : this.usuarios.filter(u => this.acentos(u.usuario.toLowerCase()).indexOf(busqueda.toLowerCase()) > -1);
+
+    // Elimina duplicados por usuario
+    const usuariosUnicos = listaFiltrada.filter(
+      (usuario, index, self) =>
+        index === self.findIndex(u => u.usuario === usuario.usuario)
     );
+
+    this.UsuariosFiltrados.next(usuariosUnicos);
   }
 
   acentos(text: string) {
@@ -2414,6 +2417,7 @@ export class ReportesComponent implements OnInit {
     var datos = { idUnidad: unidad.toString() }    
       this.serviceReportes.getConsultaUsuarios(datos).subscribe(res => {
         this.usuariosFiltro = res;
+        console.log(this.usuariosFiltro)
       }, err => { }//console.log(err)
       );
   }
@@ -3942,11 +3946,11 @@ export class DialogTable4 {
       }
 
       const textoPlano = getPlainText(tempElement).trim();
-
-      const utterance = new SpeechSynthesisUtterance(textoPlano);
+      const textoFinal = ' ' + textoPlano;
+      const utterance = new SpeechSynthesisUtterance("  " + textoFinal);
       utterance.lang = 'es-MX';
-      utterance.rate = 1;
-      utterance.pitch = 1;
+      utterance.rate = 1.3;
+      utterance.pitch = 1.2;
       utterance.volume = 1;
 
       const vocesDisponibles = window.speechSynthesis.getVoices();
@@ -3958,18 +3962,28 @@ export class DialogTable4 {
         utterance.voice = vozElegida;
       }
 
-      this.leyendo = true;
 
       utterance.onend = () => {
         this.leyendo = false;
       };
-
+      utterance.onboundary = (event) => {
+        // event.charIndex: posición del carácter actual
+        // event.name: tipo de boundary ('word' o 'sentence')
+        // event.charLength: longitud del fragmento
+        console.log('Boundary:', event.name, 'en posición', event.charIndex, 'longitud', event.charLength);
+      };
       utterance.onerror = () => {
         this.leyendo = false;
       };
+      window.speechSynthesis.cancel();
 
-      window.speechSynthesis.cancel(); 
-      window.speechSynthesis.speak(utterance);
+      if (window.speechSynthesis.getVoices().length > 0) {
+        setTimeout(() => {
+          this.leyendo = true;
+          console.log(utterance);
+          window.speechSynthesis.speak(utterance);
+        }, 500);
+      } 
     }
   }
 
