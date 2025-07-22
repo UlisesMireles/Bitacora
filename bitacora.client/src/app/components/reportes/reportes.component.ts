@@ -341,7 +341,7 @@ export class ReportesComponent implements OnInit {
   valorFiltroDetalle = "";
   _id = 0;
   _email = "";
-  lista = [];
+  lista: any[] = [];
   respuestaAsistente: string = '';
   resize() {
     var hei = window.innerHeight;
@@ -1964,7 +1964,8 @@ export class ReportesComponent implements OnInit {
         var fechaFormatReg = diaReg + "/" + (mesReg) + "/" + añoReg;
         res.lista[index].fechaRegistro = fechaFormatReg;
       }
-        this.lista = res.lista.map((item: any) => ({
+      this.lista = res.lista.map((item: any) => ({
+          idProyecto: item.idProyecto,
           fecha: item.fecha,
           proyecto: item.proyecto,
           horas: item.horas,
@@ -1982,7 +1983,31 @@ export class ReportesComponent implements OnInit {
       var añoFin = (moment(fechaFin).year());
       var fechaFormatFin = diaFin + "/" + (mesFin) + "/" + añoFin;
 
-    const pregunta = `Información de la oportunidad:\n\n${this.lista.map((item: any) => `Fecha: ${item.fecha}, Proyecto: ${item.proyecto}, Horas: ${item.horas}, Actividad: ${item.actividad}`).join('\n')}`;
+
+      const sumaHorasPorProyecto: { [id: number]: number } = {};
+      this.lista.forEach((item: any) => {
+        if (!sumaHorasPorProyecto[item.idProyecto]) {
+          sumaHorasPorProyecto[item.idProyecto] = 0;
+        }
+        sumaHorasPorProyecto[item.idProyecto] += item.horas;
+      });
+
+      // Agregar sumaHoras a cada fila
+      this.lista = this.lista.map((item: any) => ({
+        ...item,
+        sumaHoras: sumaHorasPorProyecto[item.idProyecto]
+      }));
+
+      const pregunta = `Información de la oportunidad:\n\n${this.lista.slice() 
+        .sort((a, b) => {
+          if (b.sumaHoras !== a.sumaHoras) {
+            return b.sumaHoras - a.sumaHoras;
+          }
+          // Si sumaHoras es igual, por idProyecto descendente
+          return b.idProyecto - a.idProyecto;
+        }).map((item: any) =>
+        `Fecha: ${item.fecha}, idProyecto: ${item.idProyecto}, Proyecto: ${item.proyecto}, Horas: ${item.horas}, Actividad: ${item.actividad}, SumaHoras: ${item.sumaHoras}`
+      ).join('\n')}`;
 
     const body: ConsultaAsistenteDto = {
       exitoso: true,
@@ -1998,7 +2023,8 @@ export class ReportesComponent implements OnInit {
       idTipoUsuario: 0,
       idEmpresa: 0,
       esPreguntaFrecuente: false,
-    };
+      };
+      console.log(this.lista);
     this.openIaService.Asistente(body).subscribe({
       next: res => {
         this.respuestaAsistente = this.limpiarRespuesta(res.respuesta || 'No se recibió respuesta.');
@@ -3962,6 +3988,7 @@ export class DialogTable4 {
         utterance.voice = vozElegida;
       }
 
+      this.leyendo = true;
 
       utterance.onend = () => {
         this.leyendo = false;
@@ -3979,7 +4006,6 @@ export class DialogTable4 {
 
       if (window.speechSynthesis.getVoices().length > 0) {
         setTimeout(() => {
-          this.leyendo = true;
           console.log(utterance);
           window.speechSynthesis.speak(utterance);
         }, 500);

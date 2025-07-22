@@ -83,8 +83,8 @@ namespace BitacoraLogic.Utils.Asistentes
             {
                 model = configuracion.Modelo,
                 messages = messages,
-                temperature = 0.7,
-                max_tokens = 900
+                temperature = 0.6,
+                max_tokens = 1300
             };
 
             var chatRespuestaOpenIA = await OpenIAFunciones.ChatCompletionAsync(configuracion.Llave, requestBody);
