@@ -13,7 +13,7 @@ table {
     margin: 0 auto;
 }
 body{
-    background-color: #EAEAEA; 
+    background-color: #EAEAEA;
     font-size: 14px;
 }
 .navmenu{
@@ -21,45 +21,37 @@ body{
 }
 
 .user-menu {
-    width: 18%;
     float: right;
-    text-align: right;
-    padding-top: 7px;
-    padding-right: 3.8%;
+    position: relative;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    height: 50px;
 }
 
 .user-menu > a {
+    display: flex;
+    align-items: center;
+    gap: 5px;
     color: rgb(204, 204, 204) !important;
-    font-size: 10px;
+    font-size: 12px;
     text-transform: uppercase;
     font-weight: bold;
-    line-height: 30px;
-    padding-top: 10px;
-    padding-bottom: 8px;
-    padding-right: 10px;
-    margin: 1px;
     text-decoration: none;
+    padding: 8px 10px;
+    height: 100%;
 }
-
 .dropdown-user-menu {
     display: none;
-    right: -16px;
-    left: auto;
-    border-top-width: 0px;
+    position: absolute;
+    top: 100%;
+    right: 0;
     width: 280px;
     height: 230px;
-    box-shadow: none;
-    position: absolute;
-    top: 125%;
     z-index: 1000;
-    min-width: 160px;   
-    margin-right: 20px;
-    font-size: 14px;
-    text-align: left;
     background-color: rgb(210, 214, 222);
-    border-color: rgb(238, 238, 238);
-    padding: 1px;
     list-style: none;
+    padding: 0;
 }
 
 .perfilUser:hover{
@@ -144,7 +136,7 @@ div.user-image {
     padding-left: 19px;
 }
 .navbar-light .navbar-nav .nav-link {
-    color: #CCCCCC; 
+    color: #CCCCCC;
     font-family: 'Raleway', sans-serif;
     font-size: 12px;
     font-weight: bold;
@@ -188,7 +180,7 @@ a{
 .sideNavP{
     top: 0px!important;
     bottom: 0px;
-   
+
     transform: none;
     visibility: visible;
 }
@@ -232,7 +224,7 @@ ul.ex {
     padding-right: 22%;
 }
 label {
-     margin-bottom: 0rem; 
+     margin-bottom: 0rem;
 }
 .pad0{
     padding:0px!important;
@@ -292,11 +284,11 @@ color:white!important;
 
 .subMenu:hover{
     background-color: #F5F5F5;
-   
+
 }
 .subMenu:hover>a{
     background-color: #F5F5F5;
-  
+
 }
 .logoeisei-lg {
     width: 15%;
