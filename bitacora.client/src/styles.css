@@ -51,7 +51,7 @@ header .content-wrapper {
 }
 
 .table-responsive {
-    max-height: 55vh;
+    max-height: 58vh;
     overflow-y: auto;
     overflow-x: hidden;
 }

@@ -13,5 +13,6 @@ namespace BitacoraModels
         public string Unidad { get; set; }
         public decimal Horas { get; set; }
         public int Estatus { get; set; }
+        public DateTime Fecha { get; set; }
     }
 }

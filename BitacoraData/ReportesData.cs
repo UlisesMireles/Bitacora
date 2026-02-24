@@ -436,7 +436,8 @@ namespace BitacoraData
                                      IdUnidad = e.IdUnidad,
                                      Unidad = un.Nombre,
                                      Horas = b.Duracion,
-                                     Estatus = e.EstatusERT == 6 || e.EstatusERT == 4 ? 0 : 1
+                                     Estatus = e.EstatusERT == 6 || e.EstatusERT == 4 ? 0 : 1,
+                                     Fecha = b.Fecha
                                  }).Distinct().ToList();
 
 
