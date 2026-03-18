@@ -3,6 +3,7 @@ import { Component, Inject, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { ToastrService } from 'ngx-toastr';
+import { environment } from '../../../environments/environment';
 
 @Component({
   selector: 'app-olvidaste-contrasenia',
@@ -17,8 +18,9 @@ export class OlvidasteContraseniaComponent implements OnInit {
   titulo: any;
   mensaje: any;
   form: any;
+  baseUrl: string = environment.baseURL;
 
-  constructor(private formBuilder:FormBuilder,private toastr:ToastrService, private http:HttpClient,@Inject("BASE_URL") private baseUrl:string,private dialog:MatDialog) { }
+  constructor(private formBuilder:FormBuilder,private toastr:ToastrService, private http:HttpClient,private dialog:MatDialog) { }
 
   ngOnInit() {
     this.form=this.formBuilder.group({

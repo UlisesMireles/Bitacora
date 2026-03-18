@@ -6,7 +6,8 @@ builder.Services.AddCors(options =>
 {
     options.AddPolicy("AllowSpecificOrigins", policy =>
     {
-        policy.WithOrigins("https://127.0.0.1:4200", "https://localhost:4200", "http://192.168.0.117:9090/Bitacora", "https://bitacora.eisei.net.mx/Bitacora")
+        policy.WithOrigins("https://127.0.0.1:4200", "https://localhost:4200", "http://192.168.0.117:9090/Bitacora", "https://bitacora.eisei.net.mx/Bitacora",
+            "https://bitacora.eisei.net.mx/Bitacora/#/")
             .AllowAnyHeader()
             .AllowAnyMethod()
             .AllowCredentials();

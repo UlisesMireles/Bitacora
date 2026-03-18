@@ -11,6 +11,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { Globals } from '../../services/globals';
 import { Nom035Service } from '../../services/nom035.service';
 import { OlvidasteContraseniaComponent } from '../olvidaste-contrasenia/olvidaste-contrasenia.component';
+import { environment } from '../../../environments/environment';
 
 declare let $: any;
 
@@ -29,6 +30,7 @@ export class LoginComponent implements OnInit {
   showErrorMessage: boolean = false;
   titulo: any;
   mensaje: any;
+  baseUrl: string = environment.baseURL;
 
   @HostListener('window:resize', ['$event'])
   onResize(event: any) {
@@ -36,7 +38,7 @@ export class LoginComponent implements OnInit {
   }
   constructor(public dialog: MatDialog, private toastr: ToastrService, private formBuilder: FormBuilder, private route: ActivatedRoute,
     private router: Router, private authenticationService: AuthenticationService, private userIdle: UserIdleService,
-    private http: HttpClient, @Inject("BASE_URL") private baseUrl: string,private authenticationServiceNom035:Nom035Service) {
+    private http: HttpClient,private authenticationServiceNom035:Nom035Service) {
     if (this.authenticationService.currentUserValue) {
       this.authenticationService.logout();
 
